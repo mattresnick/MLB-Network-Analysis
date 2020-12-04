@@ -1,0 +1,595 @@
+,winner,loser,score
+0,Alfredo Aceves,Koji Uehara,6
+1,Alfredo Simon,Anibal Sanchez,5
+2,Anibal Sanchez,Alfredo Simon,5
+3,Alfredo Simon,Dan Haren,9
+4,Alfredo Simon,Edward Mujica,0
+5,Alfredo Simon,Hiroki Kuroda,0
+6,Alfredo Simon,Hisashi Iwakuma,0
+7,Alfredo Simon,Jorge De La Rosa,5
+8,Jorge De La Rosa,Alfredo Simon,5
+9,Alfredo Simon,Koji Uehara,0
+10,Alfredo Simon,Ryan Mattheus,1
+11,Alfredo Simon,Tim Hudson,6
+12,Anibal Sanchez,Alfredo Simon,5
+13,Alfredo Simon,Anibal Sanchez,5
+14,Anibal Sanchez,Brandon Gomes,10
+15,Anibal Sanchez,Brandon League,0
+16,Anibal Sanchez,Brandon McCarthy,0
+17,Anibal Sanchez,Clay Buchholz,0
+18,Anibal Sanchez,Dan Haren,0
+19,Anibal Sanchez,Dane De La Rosa,0
+20,Anibal Sanchez,Edward Mujica,6
+21,Anibal Sanchez,Freddy Garcia,0
+22,Anibal Sanchez,Greg Holland,2
+23,Anibal Sanchez,Guillermo Moscoso,0
+24,Anibal Sanchez,Hiroki Kuroda,0
+25,Anibal Sanchez,Hisashi Iwakuma,0
+26,Anibal Sanchez,Jeff Samardzija,0
+27,Anibal Sanchez,Joel Peralta,2
+28,Anibal Sanchez,Jorge De La Rosa,15
+29,Anibal Sanchez,Jose Valverde,2
+30,Anibal Sanchez,Jose Veras,10
+31,Anibal Sanchez,Kevin Gausman,0
+32,Anibal Sanchez,Kevin Gregg,5
+33,Kevin Gregg,Anibal Sanchez,5
+34,Anibal Sanchez,Koji Uehara,0
+35,Anibal Sanchez,Mike Pelfrey,14
+36,Anibal Sanchez,Ricky Nolasco,12
+37,Anibal Sanchez,Ryan Dempster,0
+38,Anibal Sanchez,Sam Freeman,5
+39,Sam Freeman,Anibal Sanchez,5
+40,Anibal Sanchez,Ubaldo Jimenez,0
+41,Blake Parker,Edward Mujica,0
+42,Blake Parker,Jeff Samardzija,0
+43,Blake Parker,Jorge De La Rosa,11
+44,Jorge De La Rosa,Blake Parker,11
+45,Blake Parker,Koji Uehara,2
+46,Blake Parker,Ricky Nolasco,0
+47,Brad Brach,Jeff Samardzija,0
+48,Brad Brach,Jonathan Papelbon,0
+49,Brad Brach,Ryan Dempster,0
+50,Brandon Gomes,Anibal Sanchez,0
+51,Brandon Gomes,Hiroki Kuroda,6
+52,Brandon Gomes,Joel Peralta,9
+53,Brandon Gomes,Koji Uehara,0
+54,Brandon Gomes,Ryan Dempster,5
+55,Brandon Gomes,Ubaldo Jimenez,0
+56,Brandon League,Anibal Sanchez,8
+57,Brandon League,Dan Haren,0
+58,Brandon League,Edward Mujica,6
+59,Brandon League,Freddy Garcia,0
+60,Brandon League,Hiroki Kuroda,0
+61,Brandon League,Jake Westbrook,5
+62,Jake Westbrook,Brandon League,5
+63,Brandon League,Jeff Samardzija,3
+64,Brandon League,Jorge De La Rosa,13
+65,Brandon League,Ricky Nolasco,13
+66,Brandon League,Rob Wooten,15
+67,Brandon League,Ryan Dempster,10
+68,Ryan Dempster,Brandon League,10
+69,Brandon League,Ubaldo Jimenez,2
+70,Brandon League,Wilton Lopez,9
+71,Brandon McCarthy,Anibal Sanchez,5
+72,Brandon McCarthy,Hiroki Kuroda,0
+73,Brandon McCarthy,Jorge De La Rosa,5
+74,Jorge De La Rosa,Brandon McCarthy,5
+75,Brandon McCarthy,Josh Lueke,5
+76,Josh Lueke,Brandon McCarthy,5
+77,Brandon Morrow,Dan Haren,9
+78,Brandon Morrow,Hiroki Kuroda,0
+79,Brandon Morrow,Joel Peralta,0
+80,Brandon Morrow,Josh Lueke,6
+81,Brandon Morrow,Koji Uehara,0
+82,Burke Badenhop,Dan Haren,0
+83,Burke Badenhop,Edward Mujica,0
+84,Burke Badenhop,Jake Westbrook,0
+85,Burke Badenhop,Jorge De La Rosa,5
+86,Jorge De La Rosa,Burke Badenhop,5
+87,Burke Badenhop,Ubaldo Jimenez,0
+88,Charlie Morton,Dan Haren,0
+89,Charlie Morton,Edward Mujica,0
+90,Charlie Morton,Freddy Garcia,0
+91,Charlie Morton,Hiroki Kuroda,0
+92,Charlie Morton,Jake Westbrook,0
+93,Charlie Morton,Jonathan Papelbon,1
+94,Charlie Morton,Ricky Nolasco,0
+95,Chien-Ming Wang,Hisashi Iwakuma,0
+96,Chien-Ming Wang,Ubaldo Jimenez,0
+97,Clay Buchholz,Anibal Sanchez,1
+98,Clay Buchholz,Hiroki Kuroda,0
+99,Clay Buchholz,Hisashi Iwakuma,1
+100,Clay Buchholz,Joel Peralta,0
+101,Clay Buchholz,Jorge De La Rosa,2
+102,Clay Buchholz,Mike Pelfrey,1
+103,Clay Buchholz,Ryan Dempster,0
+104,Clay Buchholz,Ubaldo Jimenez,0
+105,Dan Haren,Alfredo Simon,0
+106,Dan Haren,Anibal Sanchez,16
+107,Dan Haren,Brandon League,3
+108,Dan Haren,Brandon Morrow,0
+109,Dan Haren,Burke Badenhop,10
+110,Dan Haren,Charlie Morton,8
+111,Dan Haren,Edward Mujica,19
+112,Dan Haren,Erik Bedard,1
+113,Dan Haren,Hiroki Kuroda,0
+114,Dan Haren,Hisashi Iwakuma,25
+115,Dan Haren,J.J. Putz,1
+116,Dan Haren,Jake Westbrook,0
+117,Dan Haren,Jeff Samardzija,0
+118,Dan Haren,Joel Peralta,0
+119,Dan Haren,Jonathan Papelbon,7
+120,Dan Haren,Jorge De La Rosa,41
+121,Dan Haren,Josh Lueke,0
+122,Dan Haren,Koji Uehara,0
+123,Dan Haren,Ricky Nolasco,9
+124,Dan Haren,Ryan Dempster,0
+125,Dan Haren,Tyler Clippard,1
+126,Dan Haren,Ubaldo Jimenez,21
+127,Dane De La Rosa,Anibal Sanchez,3
+128,Dane De La Rosa,Hiroki Kuroda,0
+129,Dane De La Rosa,Hisashi Iwakuma,1
+130,Dane De La Rosa,Jeff Samardzija,0
+131,Dane De La Rosa,Joel Peralta,6
+132,Joel Peralta,Dane De La Rosa,6
+133,Dane De La Rosa,Koji Uehara,0
+134,Dane De La Rosa,Ryan Dempster,0
+135,Dane De La Rosa,Ubaldo Jimenez,10
+136,Ubaldo Jimenez,Dane De La Rosa,10
+137,David Aardsma,Hisashi Iwakuma,3
+138,David Aardsma,J.J. Putz,5
+139,J.J. Putz,David Aardsma,5
+140,David Aardsma,Jorge De La Rosa,0
+141,Edward Mujica,Alfredo Simon,4
+142,Edward Mujica,Anibal Sanchez,0
+143,Edward Mujica,Blake Parker,2
+144,Edward Mujica,Brandon League,0
+145,Edward Mujica,Burke Badenhop,2
+146,Edward Mujica,Charlie Morton,10
+147,Edward Mujica,Dan Haren,0
+148,Edward Mujica,Erik Bedard,0
+149,Edward Mujica,Frank Francisco,0
+150,Edward Mujica,Freddy Garcia,0
+151,Edward Mujica,Hisashi Iwakuma,0
+152,Edward Mujica,J.J. Putz,0
+153,Edward Mujica,Jake Westbrook,1
+154,Edward Mujica,Jeff Samardzija,0
+155,Edward Mujica,Joel Peralta,0
+156,Edward Mujica,Jonathan Papelbon,26
+157,Edward Mujica,Jorge De La Rosa,10
+158,Edward Mujica,Josh Lueke,0
+159,Edward Mujica,Kevin Gregg,2
+160,Edward Mujica,Koji Uehara,0
+161,Edward Mujica,Ricky Nolasco,9
+162,Edward Mujica,Ryan Mattheus,0
+163,Edward Mujica,Sam Freeman,2
+164,Edward Mujica,Tim Hudson,8
+165,Edward Mujica,Ubaldo Jimenez,0
+166,Edward Mujica,Wilton Lopez,0
+167,Edward Mujica,Yu Darvish,0
+168,Edward Mujica,Zach Putnam,1
+169,Zach Putnam,Edward Mujica,1
+170,Erik Bedard,Dan Haren,0
+171,Erik Bedard,Edward Mujica,1
+172,Erik Bedard,Hiroki Kuroda,0
+173,Erik Bedard,Hisashi Iwakuma,0
+174,Erik Bedard,Jeff Samardzija,0
+175,Erik Bedard,Joel Peralta,0
+176,Erik Bedard,Jorge De La Rosa,4
+177,Erik Bedard,Ryan Dempster,0
+178,Erik Bedard,Ubaldo Jimenez,8
+179,Ubaldo Jimenez,Erik Bedard,8
+180,Frank Francisco,Edward Mujica,8
+181,Frank Francisco,Jeff Samardzija,0
+182,Freddy Garcia,Anibal Sanchez,27
+183,Freddy Garcia,Brandon League,5
+184,Freddy Garcia,Charlie Morton,7
+185,Freddy Garcia,Edward Mujica,9
+186,Freddy Garcia,Hiroki Kuroda,0
+187,Freddy Garcia,Hisashi Iwakuma,0
+188,Freddy Garcia,J.J. Putz,0
+189,Freddy Garcia,Jeff Samardzija,0
+190,Freddy Garcia,Joel Peralta,0
+191,Freddy Garcia,Jorge De La Rosa,0
+192,Freddy Garcia,Josh Lueke,0
+193,Freddy Garcia,Tim Hudson,6
+194,Greg Holland,Anibal Sanchez,0
+195,Greg Holland,Hisashi Iwakuma,9
+196,Greg Holland,Jeff Samardzija,0
+197,Greg Holland,Joel Peralta,5
+198,Joel Peralta,Greg Holland,5
+199,Greg Holland,Jose Veras,5
+200,Jose Veras,Greg Holland,5
+201,Greg Holland,Josh Lueke,0
+202,Greg Holland,Ryan Dempster,0
+203,Greg Holland,Ubaldo Jimenez,0
+204,Guillermo Moscoso,Anibal Sanchez,5
+205,Guillermo Moscoso,Hiroki Kuroda,0
+206,Guillermo Moscoso,Kevin Gausman,4
+207,Hiroki Kuroda,Alfredo Simon,8
+208,Hiroki Kuroda,Anibal Sanchez,17
+209,Hiroki Kuroda,Brandon Gomes,0
+210,Hiroki Kuroda,Brandon League,11
+211,Hiroki Kuroda,Brandon McCarthy,7
+212,Hiroki Kuroda,Brandon Morrow,2
+213,Hiroki Kuroda,Charlie Morton,4
+214,Hiroki Kuroda,Clay Buchholz,6
+215,Hiroki Kuroda,Dan Haren,25
+216,Hiroki Kuroda,Dane De La Rosa,11
+217,Hiroki Kuroda,Erik Bedard,4
+218,Hiroki Kuroda,Freddy Garcia,53
+219,Hiroki Kuroda,Guillermo Moscoso,13
+220,Hiroki Kuroda,Hisashi Iwakuma,0
+221,Hiroki Kuroda,J.J. Putz,0
+222,Hiroki Kuroda,Jeff Samardzija,0
+223,Hiroki Kuroda,Joel Peralta,59
+224,Hiroki Kuroda,Jorge De Leon,0
+225,Hiroki Kuroda,Jose Valverde,6
+226,Hiroki Kuroda,Jose Veras,37
+227,Hiroki Kuroda,Josh Lueke,11
+228,Hiroki Kuroda,Kevin Gausman,36
+229,Hiroki Kuroda,Koji Uehara,0
+230,Hiroki Kuroda,Mike Pelfrey,23
+231,Hiroki Kuroda,Ricky Nolasco,22
+232,Hiroki Kuroda,Ryan Dempster,1
+233,Hiroki Kuroda,Ubaldo Jimenez,0
+234,Hiroki Kuroda,Yu Darvish,5
+235,Hisashi Iwakuma,Alfredo Simon,21
+236,Hisashi Iwakuma,Anibal Sanchez,49
+237,Hisashi Iwakuma,Chien-Ming Wang,6
+238,Hisashi Iwakuma,Clay Buchholz,0
+239,Hisashi Iwakuma,Dan Haren,0
+240,Hisashi Iwakuma,Dane De La Rosa,0
+241,Hisashi Iwakuma,David Aardsma,0
+242,Hisashi Iwakuma,Edward Mujica,2
+243,Hisashi Iwakuma,Erik Bedard,9
+244,Hisashi Iwakuma,Freddy Garcia,8
+245,Hisashi Iwakuma,Greg Holland,0
+246,Hisashi Iwakuma,Hiroki Kuroda,15
+247,Hisashi Iwakuma,Jeff Samardzija,0
+248,Hisashi Iwakuma,Joel Peralta,0
+249,Hisashi Iwakuma,Jorge De La Rosa,18
+250,Hisashi Iwakuma,Jorge De Leon,13
+251,Hisashi Iwakuma,Jose Veras,5
+252,Hisashi Iwakuma,Josh Lueke,0
+253,Hisashi Iwakuma,Kevin Gausman,0
+254,Hisashi Iwakuma,Kevin Gregg,10
+255,Hisashi Iwakuma,Koji Uehara,0
+256,Hisashi Iwakuma,Manny Parra,0
+257,Hisashi Iwakuma,Mike Pelfrey,16
+258,Hisashi Iwakuma,Ricky Nolasco,12
+259,Hisashi Iwakuma,Ryan Dempster,0
+260,Hisashi Iwakuma,Ryan Mattheus,0
+261,Hisashi Iwakuma,Taijuan Walker,3
+262,Hisashi Iwakuma,Ubaldo Jimenez,31
+263,Hisashi Iwakuma,Wilton Lopez,0
+264,Hisashi Iwakuma,Yu Darvish,6
+265,J.J. Putz,Dan Haren,0
+266,J.J. Putz,David Aardsma,5
+267,David Aardsma,J.J. Putz,5
+268,J.J. Putz,Edward Mujica,26
+269,J.J. Putz,Freddy Garcia,4
+270,J.J. Putz,Hiroki Kuroda,2
+271,J.J. Putz,Jeff Samardzija,0
+272,J.J. Putz,Joel Peralta,0
+273,J.J. Putz,Jonathan Papelbon,1
+274,J.J. Putz,Jorge De La Rosa,15
+275,J.J. Putz,Ryan Dempster,0
+276,J.J. Putz,Tim Hudson,2
+277,Jake Westbrook,Brandon League,5
+278,Brandon League,Jake Westbrook,5
+279,Jake Westbrook,Burke Badenhop,2
+280,Jake Westbrook,Charlie Morton,3
+281,Jake Westbrook,Dan Haren,2
+282,Jake Westbrook,Edward Mujica,0
+283,Jake Westbrook,Jeff Samardzija,0
+284,Jake Westbrook,Jorge De La Rosa,13
+285,Jake Westbrook,Koji Uehara,5
+286,Koji Uehara,Jake Westbrook,5
+287,Jake Westbrook,Ricky Nolasco,5
+288,Ricky Nolasco,Jake Westbrook,5
+289,Jake Westbrook,Sam Freeman,5
+290,Sam Freeman,Jake Westbrook,5
+291,Jake Westbrook,Ubaldo Jimenez,0
+292,Jeff Samardzija,Anibal Sanchez,55
+293,Jeff Samardzija,Blake Parker,5
+294,Jeff Samardzija,Brad Brach,3
+295,Jeff Samardzija,Brandon League,0
+296,Jeff Samardzija,Dan Haren,75
+297,Jeff Samardzija,Dane De La Rosa,13
+298,Jeff Samardzija,Edward Mujica,104
+299,Jeff Samardzija,Erik Bedard,15
+300,Jeff Samardzija,Frank Francisco,10
+301,Jeff Samardzija,Freddy Garcia,6
+302,Jeff Samardzija,Greg Holland,12
+303,Jeff Samardzija,Hiroki Kuroda,7
+304,Jeff Samardzija,Hisashi Iwakuma,22
+305,Jeff Samardzija,J.J. Putz,26
+306,Jeff Samardzija,Jake Westbrook,21
+307,Jeff Samardzija,Joel Peralta,14
+308,Jeff Samardzija,Jonathan Papelbon,33
+309,Jeff Samardzija,Jorge De La Rosa,93
+310,Jeff Samardzija,Kevin Gregg,25
+311,Jeff Samardzija,Koji Uehara,18
+312,Jeff Samardzija,Michael Bowden,15
+313,Jeff Samardzija,Ricky Nolasco,43
+314,Jeff Samardzija,Rob Wooten,29
+315,Jeff Samardzija,Ryan Dempster,23
+316,Jeff Samardzija,Sam Freeman,37
+317,Jeff Samardzija,Tim Hudson,44
+318,Jeff Samardzija,Ubaldo Jimenez,12
+319,Jeff Samardzija,Wilton Lopez,23
+320,Joel Peralta,Anibal Sanchez,0
+321,Joel Peralta,Brandon Gomes,0
+322,Joel Peralta,Brandon Morrow,12
+323,Joel Peralta,Clay Buchholz,12
+324,Joel Peralta,Dan Haren,17
+325,Joel Peralta,Dane De La Rosa,6
+326,Dane De La Rosa,Joel Peralta,6
+327,Joel Peralta,Edward Mujica,4
+328,Joel Peralta,Erik Bedard,12
+329,Joel Peralta,Freddy Garcia,10
+330,Joel Peralta,Greg Holland,5
+331,Greg Holland,Joel Peralta,5
+332,Joel Peralta,Hiroki Kuroda,0
+333,Joel Peralta,Hisashi Iwakuma,15
+334,Joel Peralta,J.J. Putz,1
+335,Joel Peralta,Jeff Samardzija,0
+336,Joel Peralta,Jorge De La Rosa,11
+337,Joel Peralta,Josh Lueke,2
+338,Joel Peralta,Kevin Gausman,0
+339,Joel Peralta,Kevin Gregg,0
+340,Joel Peralta,Koji Uehara,0
+341,Joel Peralta,Mike Pelfrey,17
+342,Joel Peralta,Ricky Nolasco,1
+343,Joel Peralta,Ryan Dempster,0
+344,Joel Peralta,Ubaldo Jimenez,0
+345,Joel Peralta,Wilton Lopez,0
+346,Jonathan Papelbon,Brad Brach,3
+347,Jonathan Papelbon,Charlie Morton,0
+348,Jonathan Papelbon,Dan Haren,0
+349,Jonathan Papelbon,Edward Mujica,0
+350,Jonathan Papelbon,J.J. Putz,0
+351,Jonathan Papelbon,Jeff Samardzija,0
+352,Jonathan Papelbon,Jorge De La Rosa,12
+353,Jonathan Papelbon,Koji Uehara,0
+354,Jonathan Papelbon,Ricky Nolasco,0
+355,Jonathan Papelbon,Rob Wooten,11
+356,Jonathan Papelbon,Tim Hudson,3
+357,Jorge De La Rosa,Alfredo Simon,5
+358,Alfredo Simon,Jorge De La Rosa,5
+359,Jorge De La Rosa,Anibal Sanchez,0
+360,Jorge De La Rosa,Blake Parker,11
+361,Blake Parker,Jorge De La Rosa,11
+362,Jorge De La Rosa,Brandon League,0
+363,Jorge De La Rosa,Brandon McCarthy,5
+364,Brandon McCarthy,Jorge De La Rosa,5
+365,Jorge De La Rosa,Burke Badenhop,5
+366,Burke Badenhop,Jorge De La Rosa,5
+367,Jorge De La Rosa,Clay Buchholz,0
+368,Jorge De La Rosa,Dan Haren,0
+369,Jorge De La Rosa,David Aardsma,3
+370,Jorge De La Rosa,Edward Mujica,0
+371,Jorge De La Rosa,Erik Bedard,0
+372,Jorge De La Rosa,Freddy Garcia,5
+373,Jorge De La Rosa,Hisashi Iwakuma,0
+374,Jorge De La Rosa,J.J. Putz,0
+375,Jorge De La Rosa,Jake Westbrook,0
+376,Jorge De La Rosa,Jeff Samardzija,0
+377,Jorge De La Rosa,Joel Peralta,0
+378,Jorge De La Rosa,Jonathan Papelbon,0
+379,Jorge De La Rosa,Kevin Gregg,3
+380,Jorge De La Rosa,Koji Uehara,0
+381,Jorge De La Rosa,Ricky Nolasco,8
+382,Jorge De La Rosa,Ryan Dempster,0
+383,Jorge De La Rosa,Sam Freeman,6
+384,Jorge De La Rosa,Tim Hudson,5
+385,Jorge De La Rosa,Ubaldo Jimenez,0
+386,Jorge De La Rosa,Wilton Lopez,0
+387,Jorge De Leon,Hiroki Kuroda,3
+388,Jorge De Leon,Hisashi Iwakuma,0
+389,Jorge De Leon,Koji Uehara,0
+390,Jorge De Leon,Ubaldo Jimenez,0
+391,Jose Valverde,Anibal Sanchez,0
+392,Jose Valverde,Hiroki Kuroda,0
+393,Jose Valverde,Koji Uehara,10
+394,Koji Uehara,Jose Valverde,10
+395,Jose Valverde,Mike Pelfrey,3
+396,Jose Valverde,Ryan Dempster,5
+397,Ryan Dempster,Jose Valverde,5
+398,Jose Veras,Anibal Sanchez,0
+399,Jose Veras,Greg Holland,5
+400,Greg Holland,Jose Veras,5
+401,Jose Veras,Hiroki Kuroda,0
+402,Jose Veras,Hisashi Iwakuma,0
+403,Jose Veras,Koji Uehara,0
+404,Jose Veras,Mike Pelfrey,3
+405,Josh Lueke,Brandon McCarthy,5
+406,Brandon McCarthy,Josh Lueke,5
+407,Josh Lueke,Brandon Morrow,0
+408,Josh Lueke,Dan Haren,16
+409,Josh Lueke,Edward Mujica,23
+410,Josh Lueke,Freddy Garcia,5
+411,Josh Lueke,Greg Holland,5
+412,Josh Lueke,Hiroki Kuroda,0
+413,Josh Lueke,Hisashi Iwakuma,9
+414,Josh Lueke,Joel Peralta,0
+415,Josh Lueke,Kevin Gausman,5
+416,Kevin Gausman,Josh Lueke,5
+417,Kevin Gausman,Anibal Sanchez,15
+418,Kevin Gausman,Guillermo Moscoso,0
+419,Kevin Gausman,Hiroki Kuroda,0
+420,Kevin Gausman,Hisashi Iwakuma,25
+421,Kevin Gausman,Joel Peralta,9
+422,Kevin Gausman,Josh Lueke,5
+423,Josh Lueke,Kevin Gausman,5
+424,Kevin Gausman,Koji Uehara,0
+425,Kevin Gausman,Ryan Dempster,0
+426,Kevin Gausman,Ubaldo Jimenez,17
+427,Kevin Gregg,Anibal Sanchez,5
+428,Anibal Sanchez,Kevin Gregg,5
+429,Kevin Gregg,Edward Mujica,0
+430,Kevin Gregg,Hisashi Iwakuma,0
+431,Kevin Gregg,Jeff Samardzija,0
+432,Kevin Gregg,Joel Peralta,4
+433,Kevin Gregg,Jorge De La Rosa,0
+434,Kevin Gregg,Sam Freeman,4
+435,Kevin Gregg,Ubaldo Jimenez,0
+436,Koji Uehara,Alfredo Aceves,0
+437,Koji Uehara,Alfredo Simon,8
+438,Koji Uehara,Anibal Sanchez,29
+439,Koji Uehara,Blake Parker,0
+440,Koji Uehara,Brandon Gomes,8
+441,Koji Uehara,Brandon Morrow,21
+442,Koji Uehara,Dan Haren,31
+443,Koji Uehara,Dane De La Rosa,13
+444,Koji Uehara,Edward Mujica,8
+445,Koji Uehara,Hiroki Kuroda,15
+446,Koji Uehara,Hisashi Iwakuma,5
+447,Koji Uehara,Jake Westbrook,5
+448,Jake Westbrook,Koji Uehara,5
+449,Koji Uehara,Jeff Samardzija,0
+450,Koji Uehara,Joel Peralta,36
+451,Koji Uehara,Jonathan Papelbon,4
+452,Koji Uehara,Jorge De La Rosa,50
+453,Koji Uehara,Jorge De Leon,5
+454,Koji Uehara,Jose Valverde,10
+455,Jose Valverde,Koji Uehara,10
+456,Koji Uehara,Jose Veras,13
+457,Koji Uehara,Kevin Gausman,25
+458,Koji Uehara,Mike Pelfrey,23
+459,Koji Uehara,Ricky Nolasco,8
+460,Koji Uehara,Ryan Dempster,33
+461,Koji Uehara,Ubaldo Jimenez,20
+462,Koji Uehara,Wilton Lopez,22
+463,Manny Parra,Hisashi Iwakuma,2
+464,Michael Bowden,Jeff Samardzija,0
+465,Michael Bowden,Ricky Nolasco,0
+466,Mike Pelfrey,Anibal Sanchez,0
+467,Mike Pelfrey,Clay Buchholz,0
+468,Mike Pelfrey,Hiroki Kuroda,0
+469,Mike Pelfrey,Hisashi Iwakuma,0
+470,Mike Pelfrey,Joel Peralta,0
+471,Mike Pelfrey,Jose Valverde,0
+472,Mike Pelfrey,Jose Veras,0
+473,Mike Pelfrey,Koji Uehara,0
+474,Mike Pelfrey,Ryan Dempster,0
+475,Mike Pelfrey,Ubaldo Jimenez,0
+476,Ricky Nolasco,Anibal Sanchez,0
+477,Ricky Nolasco,Blake Parker,4
+478,Ricky Nolasco,Brandon League,0
+479,Ricky Nolasco,Charlie Morton,2
+480,Ricky Nolasco,Dan Haren,0
+481,Ricky Nolasco,Edward Mujica,0
+482,Ricky Nolasco,Hiroki Kuroda,0
+483,Ricky Nolasco,Hisashi Iwakuma,0
+484,Ricky Nolasco,Jake Westbrook,5
+485,Jake Westbrook,Ricky Nolasco,5
+486,Ricky Nolasco,Jeff Samardzija,0
+487,Ricky Nolasco,Joel Peralta,0
+488,Ricky Nolasco,Jonathan Papelbon,9
+489,Ricky Nolasco,Jorge De La Rosa,0
+490,Ricky Nolasco,Koji Uehara,0
+491,Ricky Nolasco,Michael Bowden,4
+492,Ricky Nolasco,Ryan Dempster,0
+493,Ricky Nolasco,Ryan Mattheus,0
+494,Ricky Nolasco,Tim Hudson,8
+495,Ricky Nolasco,Ubaldo Jimenez,0
+496,Ricky Nolasco,Wilton Lopez,2
+497,Rob Wooten,Brandon League,0
+498,Rob Wooten,Jeff Samardzija,0
+499,Rob Wooten,Jonathan Papelbon,0
+500,Rob Wooten,Ryan Mattheus,1
+501,Rob Wooten,Wilton Lopez,1
+502,Ryan Dempster,Anibal Sanchez,33
+503,Ryan Dempster,Brad Brach,1
+504,Ryan Dempster,Brandon Gomes,0
+505,Ryan Dempster,Brandon League,10
+506,Brandon League,Ryan Dempster,10
+507,Ryan Dempster,Clay Buchholz,8
+508,Ryan Dempster,Dan Haren,35
+509,Ryan Dempster,Dane De La Rosa,20
+510,Ryan Dempster,Erik Bedard,20
+511,Ryan Dempster,Greg Holland,29
+512,Ryan Dempster,Hiroki Kuroda,0
+513,Ryan Dempster,Hisashi Iwakuma,2
+514,Ryan Dempster,J.J. Putz,15
+515,Ryan Dempster,Jeff Samardzija,0
+516,Ryan Dempster,Joel Peralta,46
+517,Ryan Dempster,Jorge De La Rosa,24
+518,Ryan Dempster,Jose Valverde,5
+519,Jose Valverde,Ryan Dempster,5
+520,Ryan Dempster,Kevin Gausman,38
+521,Ryan Dempster,Koji Uehara,0
+522,Ryan Dempster,Mike Pelfrey,26
+523,Ryan Dempster,Ricky Nolasco,16
+524,Ryan Dempster,Ubaldo Jimenez,51
+525,Ryan Dempster,Wilton Lopez,4
+526,Ryan Dempster,Yu Darvish,12
+527,Ryan Mattheus,Alfredo Simon,0
+528,Ryan Mattheus,Edward Mujica,9
+529,Ryan Mattheus,Hisashi Iwakuma,4
+530,Ryan Mattheus,Ricky Nolasco,4
+531,Ryan Mattheus,Rob Wooten,0
+532,Sam Freeman,Anibal Sanchez,5
+533,Anibal Sanchez,Sam Freeman,5
+534,Sam Freeman,Edward Mujica,0
+535,Sam Freeman,Jake Westbrook,5
+536,Jake Westbrook,Sam Freeman,5
+537,Sam Freeman,Jeff Samardzija,0
+538,Sam Freeman,Jorge De La Rosa,0
+539,Sam Freeman,Kevin Gregg,0
+540,Taijuan Walker,Hisashi Iwakuma,0
+541,Tim Hudson,Alfredo Simon,0
+542,Tim Hudson,Edward Mujica,0
+543,Tim Hudson,Freddy Garcia,0
+544,Tim Hudson,J.J. Putz,0
+545,Tim Hudson,Jeff Samardzija,0
+546,Tim Hudson,Jonathan Papelbon,0
+547,Tim Hudson,Jorge De La Rosa,0
+548,Tim Hudson,Ricky Nolasco,0
+549,Tyler Clippard,Dan Haren,0
+550,Ubaldo Jimenez,Anibal Sanchez,37
+551,Ubaldo Jimenez,Brandon Gomes,5
+552,Ubaldo Jimenez,Brandon League,0
+553,Ubaldo Jimenez,Burke Badenhop,13
+554,Ubaldo Jimenez,Chien-Ming Wang,1
+555,Ubaldo Jimenez,Clay Buchholz,15
+556,Ubaldo Jimenez,Dan Haren,0
+557,Ubaldo Jimenez,Dane De La Rosa,10
+558,Dane De La Rosa,Ubaldo Jimenez,10
+559,Ubaldo Jimenez,Edward Mujica,1
+560,Ubaldo Jimenez,Erik Bedard,8
+561,Erik Bedard,Ubaldo Jimenez,8
+562,Ubaldo Jimenez,Greg Holland,1
+563,Ubaldo Jimenez,Hiroki Kuroda,12
+564,Ubaldo Jimenez,Hisashi Iwakuma,0
+565,Ubaldo Jimenez,Jake Westbrook,6
+566,Ubaldo Jimenez,Jeff Samardzija,0
+567,Ubaldo Jimenez,Joel Peralta,22
+568,Ubaldo Jimenez,Jorge De La Rosa,4
+569,Ubaldo Jimenez,Jorge De Leon,3
+570,Ubaldo Jimenez,Kevin Gausman,0
+571,Ubaldo Jimenez,Kevin Gregg,2
+572,Ubaldo Jimenez,Koji Uehara,0
+573,Ubaldo Jimenez,Mike Pelfrey,19
+574,Ubaldo Jimenez,Ricky Nolasco,7
+575,Ubaldo Jimenez,Ryan Dempster,0
+576,Ubaldo Jimenez,Yu Darvish,6
+577,Wilton Lopez,Brandon League,0
+578,Wilton Lopez,Edward Mujica,26
+579,Wilton Lopez,Hisashi Iwakuma,6
+580,Wilton Lopez,Jeff Samardzija,0
+581,Wilton Lopez,Joel Peralta,2
+582,Wilton Lopez,Jorge De La Rosa,5
+583,Wilton Lopez,Koji Uehara,0
+584,Wilton Lopez,Ricky Nolasco,0
+585,Wilton Lopez,Rob Wooten,0
+586,Wilton Lopez,Ryan Dempster,0
+587,Yu Darvish,Edward Mujica,4
+588,Yu Darvish,Hiroki Kuroda,0
+589,Yu Darvish,Hisashi Iwakuma,0
+590,Yu Darvish,Ryan Dempster,0
+591,Yu Darvish,Ubaldo Jimenez,0
+592,Zach Putnam,Edward Mujica,1
+593,Edward Mujica,Zach Putnam,1

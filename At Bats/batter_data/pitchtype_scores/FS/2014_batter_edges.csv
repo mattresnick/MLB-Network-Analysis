@@ -1,0 +1,401 @@
+,winner,loser,score
+0,A. j. Pierzynski,Daniel Nava,0
+1,A. j. Pierzynski,Jose Bautista,0
+2,Adam Eaton,Alejandro De aza,0
+3,Adam Eaton,Conor Gillaspie,0
+4,Adam Eaton,Mike Moustakas,3
+5,Mike Moustakas,Adam Eaton,3
+6,Adam Jones,Christian Vazquez,3
+7,Adam Jones,Ichiro Suzuki,1
+8,Adam Laroche,Charlie Blackmon,1
+9,Charlie Blackmon,Adam Laroche,1
+10,Adam Laroche,Chase Utley,8
+11,Adam Laroche,Curtis Granderson,0
+12,Adam Laroche,Daniel Murphy,9
+13,Daniel Murphy,Adam Laroche,9
+14,Adam Laroche,Justin Morneau,1
+15,Justin Morneau,Adam Laroche,1
+16,Adam Laroche,Starling Marte,6
+17,Adeiny Hechavarria,Garrett Jones,0
+18,Adrian Beltre,Alex Gordon,0
+19,Adrian Beltre,Alex Rios,1
+20,Alex Rios,Adrian Beltre,1
+21,Adrian Beltre,Garrett Jones,9
+22,Adrian Beltre,Ian Kinsler,8
+23,Adrian Beltre,Matt Adams,5
+24,Adrian Beltre,Miguel Cabrera,8
+25,Aj Pollock,Jayson Werth,0
+26,Aj Pollock,Yasmani Grandal,3
+27,Alejandro De aza,Adam Eaton,16
+28,Alejandro De aza,Alex Rios,8
+29,Alejandro De aza,Alexei Ramírez,1
+30,Alejandro De aza,Asdrubal Cabrera,9
+31,Asdrubal Cabrera,Alejandro De aza,9
+32,Alejandro De aza,Brad Miller,14
+33,Alejandro De aza,Brandon Moss,5
+34,Alejandro De aza,Chris Davis,4
+35,Alejandro De aza,Christian Vazquez,8
+36,Alejandro De aza,Conor Gillaspie,7
+37,Alejandro De aza,Daniel Nava,20
+38,Alejandro De aza,Eric Hosmer,2
+39,Alejandro De aza,James Loney,12
+40,Alejandro De aza,Jose Bautista,8
+41,Alejandro De aza,Jose Reyes,16
+42,Alejandro De aza,Juan Francisco,15
+43,Alejandro De aza,Michael Brantley,7
+44,Alejandro De aza,Nick Markakis,6
+45,Alejandro De aza,Ryan Hanigan,16
+46,Alejandro De aza,Shin-soo Choo,12
+47,Alejandro De aza,Xander Bogaerts,8
+48,Alex Gordon,Adrian Beltre,6
+49,Alex Gordon,Ian Kinsler,14
+50,Alex Gordon,Matt Adams,11
+51,Alex Gordon,Miguel Cabrera,14
+52,Alex Rios,Adrian Beltre,1
+53,Adrian Beltre,Alex Rios,1
+54,Alex Rios,Alejandro De aza,0
+55,Alex Rios,Daniel Nava,1
+56,Daniel Nava,Alex Rios,1
+57,Alex Rios,Jose Bautista,0
+58,Alexei Ramírez,Alejandro De aza,0
+59,Alexei Ramírez,Chase Headley,0
+60,Alexei Ramírez,Chris Davis,3
+61,Alexei Ramírez,Jose Bautista,5
+62,Alexei Ramírez,Juan Francisco,0
+63,Alexei Ramírez,Mark Teixeira,0
+64,Anthony Rizzo,Starlin Castro,2
+65,Asdrubal Cabrera,Alejandro De aza,9
+66,Alejandro De aza,Asdrubal Cabrera,9
+67,Asdrubal Cabrera,Dustin Ackley,6
+68,Asdrubal Cabrera,Matt Holliday,0
+69,Asdrubal Cabrera,Ryan Flaherty,3
+70,Asdrubal Cabrera,Steve Clevenger,6
+71,Austin Jackson,Chase Headley,3
+72,Ben Revere,Jayson Werth,0
+73,Ben Revere,Yasmani Grandal,3
+74,Yasmani Grandal,Ben Revere,3
+75,Billy Butler,Grady Sizemore,0
+76,Brad Miller,Alejandro De aza,0
+77,Brad Miller,Dustin Ackley,1
+78,Brandon Moss,Alejandro De aza,0
+79,Brandon Moss,Brian Mccann,7
+80,Brandon Moss,Jacoby Ellsbury,7
+81,Brandon Moss,James Loney,7
+82,Brandon Moss,Kelly Johnson,7
+83,Brandon Moss,Matthew Joyce,5
+84,Brandon Moss,Nick Markakis,0
+85,Brett Gardner,Jose Bautista,0
+86,Brett Lawrie,Brian Mccann,6
+87,Brett Lawrie,Jacoby Ellsbury,9
+88,Brett Lawrie,James Loney,6
+89,Brian Mccann,Brandon Moss,0
+90,Brian Mccann,Brett Lawrie,0
+91,Brian Mccann,Derek Jeter,6
+92,Brian Mccann,Ichiro Suzuki,10
+93,Brian Mccann,Jose Reyes,0
+94,Brian Mccann,Leonys Martín,13
+95,Brian Mccann,Nick Markakis,12
+96,Brian Mccann,Robinson Cano,5
+97,Brian Mccann,Salvador Perez,7
+98,Brian Mccann,Victor Martinez,11
+99,Brian Roberts,Nick Hundley,2
+100,Bryce Harper,Curtis Granderson,0
+101,Bryce Harper,José Abreu,9
+102,José Abreu,Bryce Harper,9
+103,Carlos Gomez,Nick Markakis,1
+104,Carlos Santana,David Murphy,8
+105,Carlos Santana,David Ortiz,14
+106,Carlos Santana,Mike Moustakas,14
+107,Casey Mcgehee,Daniel Nava,0
+108,Charlie Blackmon,Adam Laroche,1
+109,Adam Laroche,Charlie Blackmon,1
+110,Charlie Blackmon,Ike Davis,0
+111,Chase Headley,Alexei Ramírez,2
+112,Chase Headley,Austin Jackson,0
+113,Chase Headley,Grady Sizemore,0
+114,Chase Headley,Matt Adams,5
+115,Chase Headley,Mitch Moreland,8
+116,Chase Utley,Adam Laroche,0
+117,Chase Utley,Starling Marte,0
+118,Chris Coghlan,Corey Dickerson,0
+119,Chris Coghlan,Jhonny Peralta,0
+120,Chris Coghlan,Russell Martin,0
+121,Chris Colabello,Jose Bautista,1
+122,Chris Davis,Alejandro De aza,0
+123,Chris Davis,Alexei Ramírez,0
+124,Chris Davis,Eric Hosmer,0
+125,Chris Davis,Jose Reyes,3
+126,Jose Reyes,Chris Davis,3
+127,Chris Davis,Nick Markakis,0
+128,Chris Davis,Salvador Perez,0
+129,Chris Herrmann,Christian Vazquez,0
+130,Chris Iannetta,Dioner Navarro,2
+131,Chris Parmelee,Melky Cabrera,0
+132,Chris Parmelee,Michael Brantley,0
+133,Chris Parmelee,Yunel Escobar,0
+134,Christian Vazquez,Adam Jones,0
+135,Christian Vazquez,Alejandro De aza,0
+136,Christian Vazquez,Chris Herrmann,1
+137,Clint Barmes,Nick Hundley,3
+138,Nick Hundley,Clint Barmes,3
+139,Conor Gillaspie,Adam Eaton,6
+140,Conor Gillaspie,Alejandro De aza,0
+141,Conor Gillaspie,Jose Reyes,6
+142,Conor Gillaspie,Leonys Martín,1
+143,Conor Gillaspie,Michael Brantley,0
+144,Corey Dickerson,Chris Coghlan,3
+145,Corey Dickerson,Jhonny Peralta,3
+146,Curtis Granderson,Adam Laroche,3
+147,Curtis Granderson,Bryce Harper,2
+148,Curtis Granderson,Daniel Murphy,0
+149,Curtis Granderson,Ike Davis,0
+150,Daniel Descalso,Leonys Martín,0
+151,Daniel Murphy,Adam Laroche,9
+152,Adam Laroche,Daniel Murphy,9
+153,Daniel Murphy,Curtis Granderson,9
+154,Daniel Murphy,Jarrod Saltalamacchia,8
+155,Daniel Murphy,Miguel Montero,10
+156,Daniel Nava,A. j. Pierzynski,2
+157,Daniel Nava,Alejandro De aza,0
+158,Daniel Nava,Alex Rios,1
+159,Alex Rios,Daniel Nava,1
+160,Daniel Nava,Casey Mcgehee,3
+161,Daniel Nava,Evan Longoria,3
+162,Evan Longoria,Daniel Nava,3
+163,Daniel Nava,Jose Reyes,3
+164,Jose Reyes,Daniel Nava,3
+165,Daniel Nava,Leonys Martín,0
+166,Daniel Nava,Michael Brantley,0
+167,Daniel Nava,Nick Markakis,0
+168,Darwin Barney,David Peralta,3
+169,David Peralta,Darwin Barney,3
+170,David Murphy,Carlos Santana,0
+171,David Murphy,Mike Moustakas,1
+172,David Ortiz,Carlos Santana,0
+173,David Peralta,Darwin Barney,3
+174,Darwin Barney,David Peralta,3
+175,David Peralta,Kendrys Morales,1
+176,David Peralta,Martin Prado,3
+177,Martin Prado,David Peralta,3
+178,David Peralta,Starling Marte,1
+179,Denard Span,José Abreu,0
+180,Denard Span,Russell Martin,0
+181,Derek Jeter,Brian Mccann,0
+182,Dioner Navarro,Chris Iannetta,0
+183,Dustin Ackley,Asdrubal Cabrera,0
+184,Dustin Ackley,Brad Miller,0
+185,Emilio Bonifacio,Matt Adams,9
+186,Eric Hosmer,Alejandro De aza,0
+187,Eric Hosmer,Chris Davis,3
+188,Eric Hosmer,Jose Bautista,5
+189,Eric Hosmer,Juan Francisco,3
+190,Juan Francisco,Eric Hosmer,3
+191,Evan Longoria,Daniel Nava,3
+192,Daniel Nava,Evan Longoria,3
+193,Evan Longoria,James Loney,0
+194,Evan Longoria,Jose Reyes,3
+195,Jose Reyes,Evan Longoria,3
+196,Evan Longoria,Kolten Wong,3
+197,Kolten Wong,Evan Longoria,3
+198,Everth Cabrera,Yasiel Puig,4
+199,Garrett Jones,Adeiny Hechavarria,5
+200,Garrett Jones,Adrian Beltre,0
+201,Garrett Jones,Matt Holliday,0
+202,Gerardo Parra,Jhonny Peralta,0
+203,Gerardo Parra,Jon Jay,3
+204,Gerardo Parra,Martin Prado,6
+205,Gerardo Parra,Mike Moustakas,6
+206,Giancarlo Stanton,Jhonny Peralta,0
+207,Grady Sizemore,Billy Butler,2
+208,Grady Sizemore,Chase Headley,3
+209,Ian Kinsler,Adrian Beltre,0
+210,Ian Kinsler,Alex Gordon,0
+211,Ian Kinsler,Trevor Plouffe,6
+212,Ichiro Suzuki,Adam Jones,0
+213,Ichiro Suzuki,Brian Mccann,0
+214,Ike Davis,Charlie Blackmon,3
+215,Ike Davis,Curtis Granderson,1
+216,Ike Davis,Jon Jay,0
+217,Jacoby Ellsbury,Brandon Moss,0
+218,Jacoby Ellsbury,Brett Lawrie,0
+219,James Loney,Alejandro De aza,0
+220,James Loney,Brandon Moss,0
+221,James Loney,Brett Lawrie,0
+222,James Loney,Evan Longoria,2
+223,James Loney,Michael Brantley,3
+224,James Loney,Shin-soo Choo,3
+225,Shin-soo Choo,James Loney,3
+226,Jarrod Saltalamacchia,Daniel Murphy,0
+227,Jason Kipnis,Leonys Martín,0
+228,Jayson Werth,Aj Pollock,3
+229,Jayson Werth,Ben Revere,6
+230,Jayson Werth,Marlon Byrd,6
+231,Jhonny Peralta,Chris Coghlan,3
+232,Jhonny Peralta,Corey Dickerson,0
+233,Jhonny Peralta,Gerardo Parra,5
+234,Jhonny Peralta,Giancarlo Stanton,1
+235,Jhonny Peralta,Mark Trumbo,1
+236,Jhonny Peralta,Matt Adams,7
+237,Jhonny Peralta,Russell Martin,6
+238,Jon Jay,Gerardo Parra,0
+239,Jon Jay,Ike Davis,3
+240,Jon Jay,Jonathan Lucroy,3
+241,Jon Jay,Russell Martin,0
+242,Jonathan Lucroy,Jon Jay,0
+243,Jonathan Lucroy,Russell Martin,0
+244,Jose Bautista,A. j. Pierzynski,8
+245,Jose Bautista,Alejandro De aza,0
+246,Jose Bautista,Alex Rios,1
+247,Jose Bautista,Alexei Ramírez,0
+248,Jose Bautista,Brett Gardner,8
+249,Jose Bautista,Chris Colabello,0
+250,Jose Bautista,Eric Hosmer,0
+251,Jose Bautista,Jose Reyes,1
+252,Jose Reyes,Alejandro De aza,0
+253,Jose Reyes,Brian Mccann,1
+254,Jose Reyes,Chris Davis,3
+255,Chris Davis,Jose Reyes,3
+256,Jose Reyes,Conor Gillaspie,0
+257,Jose Reyes,Daniel Nava,3
+258,Daniel Nava,Jose Reyes,3
+259,Jose Reyes,Evan Longoria,3
+260,Evan Longoria,Jose Reyes,3
+261,Jose Reyes,Jose Bautista,0
+262,Jose Reyes,Juan Francisco,0
+263,Jose Reyes,Wil Myers,2
+264,José Abreu,Bryce Harper,9
+265,Bryce Harper,José Abreu,9
+266,José Abreu,Denard Span,6
+267,José Abreu,Leonys Martín,1
+268,Juan Francisco,Alejandro De aza,0
+269,Juan Francisco,Alexei Ramírez,1
+270,Juan Francisco,Eric Hosmer,3
+271,Eric Hosmer,Juan Francisco,3
+272,Juan Francisco,Jose Reyes,3
+273,Juan Francisco,Mark Teixeira,0
+274,Juan Francisco,Shin-soo Choo,3
+275,Justin Bour,Matt Holliday,0
+276,Justin Morneau,Adam Laroche,1
+277,Adam Laroche,Justin Morneau,1
+278,Kelly Johnson,Brandon Moss,0
+279,Kendrys Morales,David Peralta,0
+280,Kendrys Morales,Paul Goldschmidt,1
+281,Kolten Wong,Evan Longoria,3
+282,Evan Longoria,Kolten Wong,3
+283,Leonys Martín,Brian Mccann,0
+284,Leonys Martín,Conor Gillaspie,0
+285,Leonys Martín,Daniel Descalso,1
+286,Leonys Martín,Daniel Nava,3
+287,Leonys Martín,Jason Kipnis,1
+288,Leonys Martín,José Abreu,0
+289,Leonys Martín,Matt Holliday,0
+290,Leonys Martín,Salvador Perez,0
+291,Logan Morrison,Mark Teixeira,0
+292,Lonnie Chisenhall,Mark Teixeira,0
+293,Luis Valbuena,Scooter Gennett,1
+294,Mark Teixeira,Alexei Ramírez,8
+295,Mark Teixeira,Juan Francisco,1
+296,Mark Teixeira,Logan Morrison,9
+297,Mark Teixeira,Lonnie Chisenhall,4
+298,Mark Trumbo,Jhonny Peralta,0
+299,Marlon Byrd,Jayson Werth,0
+300,Marlon Byrd,Yasmani Grandal,3
+301,Yasmani Grandal,Marlon Byrd,3
+302,Martin Prado,David Peralta,3
+303,David Peralta,Martin Prado,3
+304,Martin Prado,Gerardo Parra,0
+305,Martin Prado,Paul Goldschmidt,3
+306,Martin Prado,Yasiel Puig,0
+307,Matt Adams,Adrian Beltre,0
+308,Matt Adams,Alex Gordon,0
+309,Matt Adams,Chase Headley,0
+310,Matt Adams,Emilio Bonifacio,0
+311,Matt Adams,Jhonny Peralta,0
+312,Matt Holliday,Asdrubal Cabrera,7
+313,Matt Holliday,Garrett Jones,1
+314,Matt Holliday,Justin Bour,7
+315,Matt Holliday,Leonys Martín,7
+316,Matthew Joyce,Brandon Moss,0
+317,Melky Cabrera,Chris Parmelee,3
+318,Melky Cabrera,Nick Markakis,7
+319,Melky Cabrera,Wil Myers,0
+320,Michael Brantley,Alejandro De aza,0
+321,Michael Brantley,Chris Parmelee,3
+322,Michael Brantley,Conor Gillaspie,3
+323,Michael Brantley,Daniel Nava,6
+324,Michael Brantley,James Loney,0
+325,Michael Brantley,Mike Moustakas,4
+326,Miguel Cabrera,Adrian Beltre,0
+327,Miguel Cabrera,Alex Gordon,0
+328,Miguel Cabrera,Salvador Perez,0
+329,Miguel Montero,Daniel Murphy,0
+330,Miguel Montero,Yasiel Puig,0
+331,Mike Morse,Yasiel Puig,1
+332,Yasiel Puig,Mike Morse,1
+333,Mike Moustakas,Adam Eaton,3
+334,Adam Eaton,Mike Moustakas,3
+335,Mike Moustakas,Carlos Santana,0
+336,Mike Moustakas,David Murphy,0
+337,Mike Moustakas,Gerardo Parra,0
+338,Mike Moustakas,Michael Brantley,0
+339,Mitch Moreland,Chase Headley,0
+340,Neil Walker,Russell Martin,0
+341,Nick Hundley,Brian Roberts,0
+342,Nick Hundley,Clint Barmes,3
+343,Clint Barmes,Nick Hundley,3
+344,Nick Markakis,Alejandro De aza,0
+345,Nick Markakis,Brandon Moss,15
+346,Nick Markakis,Brian Mccann,0
+347,Nick Markakis,Carlos Gomez,0
+348,Nick Markakis,Chris Davis,2
+349,Nick Markakis,Daniel Nava,3
+350,Nick Markakis,Melky Cabrera,0
+351,Nick Markakis,Salvador Perez,0
+352,Nick Markakis,Yoenis Céspedes,0
+353,Paul Goldschmidt,Kendrys Morales,0
+354,Paul Goldschmidt,Martin Prado,0
+355,Robinson Cano,Brian Mccann,0
+356,Russell Martin,Chris Coghlan,8
+357,Russell Martin,Denard Span,8
+358,Russell Martin,Jhonny Peralta,0
+359,Russell Martin,Jon Jay,2
+360,Russell Martin,Jonathan Lucroy,5
+361,Russell Martin,Neil Walker,8
+362,Ryan Flaherty,Asdrubal Cabrera,0
+363,Ryan Hanigan,Alejandro De aza,0
+364,Salvador Perez,Brian Mccann,0
+365,Salvador Perez,Chris Davis,8
+366,Salvador Perez,Leonys Martín,5
+367,Salvador Perez,Miguel Cabrera,8
+368,Salvador Perez,Nick Markakis,5
+369,Scooter Gennett,Luis Valbuena,0
+370,Shin-soo Choo,Alejandro De aza,0
+371,Shin-soo Choo,James Loney,3
+372,James Loney,Shin-soo Choo,3
+373,Shin-soo Choo,Juan Francisco,0
+374,Starlin Castro,Anthony Rizzo,0
+375,Starling Marte,Adam Laroche,0
+376,Starling Marte,Chase Utley,2
+377,Starling Marte,David Peralta,0
+378,Steve Clevenger,Asdrubal Cabrera,0
+379,Trevor Plouffe,Ian Kinsler,0
+380,Victor Martinez,Brian Mccann,0
+381,Wil Myers,Jose Reyes,0
+382,Wil Myers,Melky Cabrera,1
+383,Xander Bogaerts,Alejandro De aza,0
+384,Yasiel Puig,Everth Cabrera,0
+385,Yasiel Puig,Martin Prado,1
+386,Yasiel Puig,Miguel Montero,1
+387,Yasiel Puig,Mike Morse,1
+388,Mike Morse,Yasiel Puig,1
+389,Yasiel Puig,Yasmani Grandal,3
+390,Yasmani Grandal,Yasiel Puig,3
+391,Yasmani Grandal,Aj Pollock,0
+392,Yasmani Grandal,Ben Revere,3
+393,Ben Revere,Yasmani Grandal,3
+394,Yasmani Grandal,Marlon Byrd,3
+395,Marlon Byrd,Yasmani Grandal,3
+396,Yasmani Grandal,Yasiel Puig,3
+397,Yasiel Puig,Yasmani Grandal,3
+398,Yoenis Céspedes,Nick Markakis,1
+399,Yunel Escobar,Chris Parmelee,2

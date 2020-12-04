@@ -1,0 +1,4291 @@
+,winner,loser,score
+0,A. j. Pierzynski,Adam Dunn,0
+1,A. j. Pierzynski,Adam Lind,0
+2,A. j. Pierzynski,Adrian Beltre,0
+3,A. j. Pierzynski,Albert Pujols,0
+4,A. j. Pierzynski,Alcides Escobar,0
+5,A. j. Pierzynski,Alejandro De aza,0
+6,A. j. Pierzynski,Alex Gordon,0
+7,A. j. Pierzynski,Alex Rodriguez,0
+8,A. j. Pierzynski,Andres Torres,0
+9,A. j. Pierzynski,Aramis Ramirez,0
+10,A. j. Pierzynski,B. j. Upton,0
+11,A. j. Pierzynski,Brent Lillibridge,0
+12,A. j. Pierzynski,Brett Gardner,0
+13,A. j. Pierzynski,Brett Lawrie,0
+14,A. j. Pierzynski,Brian Mccann,0
+15,A. j. Pierzynski,Chad Tracy,0
+16,A. j. Pierzynski,Chipper Jones,0
+17,A. j. Pierzynski,Chris Carter,0
+18,A. j. Pierzynski,Chris Davis,0
+19,A. j. Pierzynski,Chris Iannetta,0
+20,A. j. Pierzynski,Colby Rasmus,0
+21,A. j. Pierzynski,Corey Hart,0
+22,A. j. Pierzynski,Curtis Granderson,0
+23,A. j. Pierzynski,Daniel Murphy,0
+24,A. j. Pierzynski,Danny Espinosa,0
+25,A. j. Pierzynski,David Murphy,0
+26,A. j. Pierzynski,David Wright,0
+27,A. j. Pierzynski,Dayán Viciedo,0
+28,A. j. Pierzynski,Desmond Jennings,0
+29,A. j. Pierzynski,Eduardo Escobar,0
+30,A. j. Pierzynski,Eric Hosmer,0
+31,A. j. Pierzynski,Erick Aybar,0
+32,A. j. Pierzynski,Gaby Sanchez,0
+33,A. j. Pierzynski,Garrett Jones,0
+34,A. j. Pierzynski,Geovany Soto,0
+35,A. j. Pierzynski,Ichiro Suzuki,0
+36,A. j. Pierzynski,Ike Davis,0
+37,A. j. Pierzynski,J. p. Arencibia,0
+38,A. j. Pierzynski,Jeff Mathis,0
+39,A. j. Pierzynski,Jesus Montero,0
+40,A. j. Pierzynski,Jhonny Peralta,0
+41,A. j. Pierzynski,Josh Donaldson,0
+42,A. j. Pierzynski,Josh Hamilton,0
+43,A. j. Pierzynski,Kendrys Morales,0
+44,A. j. Pierzynski,Kirk Nieuwenhuis,0
+45,A. j. Pierzynski,Manny Machado,0
+46,A. j. Pierzynski,Mark Reynolds,0
+47,A. j. Pierzynski,Mark Trumbo,0
+48,A. j. Pierzynski,Martin Prado,0
+49,A. j. Pierzynski,Matt Wieters,0
+50,A. j. Pierzynski,Michael Brantley,0
+51,A. j. Pierzynski,Mike Moustakas,0
+52,A. j. Pierzynski,Mike Napoli,0
+53,A. j. Pierzynski,Mike Trout,0
+54,A. j. Pierzynski,Nelson Cruz,0
+55,A. j. Pierzynski,Nori Aoki,0
+56,A. j. Pierzynski,Nyjer Morgan,0
+57,A. j. Pierzynski,Placido Polanco,0
+58,A. j. Pierzynski,Rick Ankiel,0
+59,A. j. Pierzynski,Robinson Cano,0
+60,A. j. Pierzynski,Steve Lombardozzi,0
+61,A. j. Pierzynski,Torii Hunter,0
+62,A. j. Pierzynski,Will Middlebrooks,0
+63,A. j. Pierzynski,Wilson Ramos,0
+64,A. j. Pierzynski,Yoenis Céspedes,0
+65,Adam Dunn,A. j. Pierzynski,0
+66,Adam Dunn,Adam Lind,0
+67,Adam Dunn,Adrian Beltre,0
+68,Adam Dunn,Albert Pujols,0
+69,Adam Dunn,Alcides Escobar,0
+70,Adam Dunn,Alejandro De aza,0
+71,Adam Dunn,Alex Gordon,0
+72,Adam Dunn,Alex Rodriguez,0
+73,Adam Dunn,Andres Torres,0
+74,Adam Dunn,Aramis Ramirez,0
+75,Adam Dunn,B. j. Upton,0
+76,Adam Dunn,Brent Lillibridge,0
+77,Adam Dunn,Brett Gardner,0
+78,Adam Dunn,Brett Lawrie,0
+79,Adam Dunn,Brian Mccann,0
+80,Adam Dunn,Chad Tracy,0
+81,Adam Dunn,Chipper Jones,0
+82,Adam Dunn,Chris Carter,0
+83,Adam Dunn,Chris Davis,0
+84,Adam Dunn,Chris Iannetta,0
+85,Adam Dunn,Colby Rasmus,0
+86,Adam Dunn,Corey Hart,0
+87,Adam Dunn,Curtis Granderson,0
+88,Adam Dunn,Daniel Murphy,0
+89,Adam Dunn,Danny Espinosa,0
+90,Adam Dunn,David Murphy,0
+91,Adam Dunn,David Wright,0
+92,Adam Dunn,Dayán Viciedo,0
+93,Adam Dunn,Desmond Jennings,0
+94,Adam Dunn,Eduardo Escobar,0
+95,Adam Dunn,Eric Hosmer,0
+96,Adam Dunn,Erick Aybar,0
+97,Adam Dunn,Gaby Sanchez,0
+98,Adam Dunn,Garrett Jones,0
+99,Adam Dunn,Geovany Soto,0
+100,Adam Dunn,Ichiro Suzuki,0
+101,Adam Dunn,Ike Davis,0
+102,Adam Dunn,J. p. Arencibia,0
+103,Adam Dunn,Jeff Mathis,0
+104,Adam Dunn,Jesus Montero,0
+105,Adam Dunn,Jhonny Peralta,0
+106,Adam Dunn,Josh Donaldson,0
+107,Adam Dunn,Josh Hamilton,0
+108,Adam Dunn,Kendrys Morales,0
+109,Adam Dunn,Kirk Nieuwenhuis,0
+110,Adam Dunn,Manny Machado,0
+111,Adam Dunn,Mark Reynolds,0
+112,Adam Dunn,Mark Trumbo,1
+113,Adam Dunn,Martin Prado,0
+114,Adam Dunn,Matt Wieters,0
+115,Adam Dunn,Michael Brantley,0
+116,Adam Dunn,Mike Moustakas,0
+117,Adam Dunn,Mike Napoli,0
+118,Adam Dunn,Mike Trout,0
+119,Adam Dunn,Nelson Cruz,0
+120,Adam Dunn,Nori Aoki,0
+121,Adam Dunn,Nyjer Morgan,0
+122,Adam Dunn,Placido Polanco,0
+123,Adam Dunn,Rick Ankiel,0
+124,Adam Dunn,Robinson Cano,0
+125,Adam Dunn,Steve Lombardozzi,0
+126,Adam Dunn,Torii Hunter,0
+127,Adam Dunn,Will Middlebrooks,0
+128,Adam Dunn,Wilson Ramos,0
+129,Adam Dunn,Yoenis Céspedes,0
+130,Adam Lind,A. j. Pierzynski,0
+131,Adam Lind,Adam Dunn,0
+132,Adam Lind,Adrian Beltre,0
+133,Adam Lind,Albert Pujols,0
+134,Adam Lind,Alcides Escobar,0
+135,Adam Lind,Alejandro De aza,0
+136,Adam Lind,Alex Gordon,0
+137,Adam Lind,Alex Rodriguez,0
+138,Adam Lind,Andres Torres,0
+139,Adam Lind,Aramis Ramirez,0
+140,Adam Lind,B. j. Upton,0
+141,Adam Lind,Brent Lillibridge,0
+142,Adam Lind,Brett Gardner,0
+143,Adam Lind,Brett Lawrie,0
+144,Adam Lind,Brian Mccann,0
+145,Adam Lind,Chad Tracy,0
+146,Adam Lind,Chipper Jones,0
+147,Adam Lind,Chris Carter,0
+148,Adam Lind,Chris Davis,0
+149,Adam Lind,Chris Iannetta,0
+150,Adam Lind,Colby Rasmus,0
+151,Adam Lind,Corey Hart,0
+152,Adam Lind,Curtis Granderson,0
+153,Adam Lind,Daniel Murphy,0
+154,Adam Lind,Danny Espinosa,0
+155,Adam Lind,David Murphy,0
+156,Adam Lind,David Wright,0
+157,Adam Lind,Dayán Viciedo,0
+158,Adam Lind,Desmond Jennings,0
+159,Adam Lind,Eduardo Escobar,0
+160,Adam Lind,Eric Hosmer,0
+161,Adam Lind,Erick Aybar,0
+162,Adam Lind,Gaby Sanchez,0
+163,Adam Lind,Garrett Jones,0
+164,Adam Lind,Geovany Soto,0
+165,Adam Lind,Ichiro Suzuki,0
+166,Adam Lind,Ike Davis,0
+167,Adam Lind,J. p. Arencibia,0
+168,Adam Lind,Jeff Mathis,0
+169,Adam Lind,Jesus Montero,0
+170,Adam Lind,Jhonny Peralta,0
+171,Adam Lind,Josh Donaldson,0
+172,Adam Lind,Josh Hamilton,0
+173,Adam Lind,Kendrys Morales,0
+174,Adam Lind,Kirk Nieuwenhuis,0
+175,Adam Lind,Manny Machado,0
+176,Adam Lind,Mark Reynolds,0
+177,Adam Lind,Mark Trumbo,0
+178,Adam Lind,Martin Prado,0
+179,Adam Lind,Matt Wieters,0
+180,Adam Lind,Michael Brantley,0
+181,Adam Lind,Mike Moustakas,0
+182,Adam Lind,Mike Napoli,0
+183,Adam Lind,Mike Trout,0
+184,Adam Lind,Nelson Cruz,0
+185,Adam Lind,Nori Aoki,0
+186,Adam Lind,Nyjer Morgan,0
+187,Adam Lind,Placido Polanco,0
+188,Adam Lind,Rick Ankiel,0
+189,Adam Lind,Robinson Cano,0
+190,Adam Lind,Steve Lombardozzi,0
+191,Adam Lind,Torii Hunter,0
+192,Adam Lind,Will Middlebrooks,0
+193,Adam Lind,Wilson Ramos,0
+194,Adam Lind,Yoenis Céspedes,0
+195,Adrian Beltre,A. j. Pierzynski,0
+196,Adrian Beltre,Adam Dunn,0
+197,Adrian Beltre,Adam Lind,0
+198,Adrian Beltre,Albert Pujols,0
+199,Adrian Beltre,Alcides Escobar,0
+200,Adrian Beltre,Alejandro De aza,0
+201,Adrian Beltre,Alex Gordon,0
+202,Adrian Beltre,Alex Rodriguez,0
+203,Adrian Beltre,Andres Torres,0
+204,Adrian Beltre,Aramis Ramirez,0
+205,Adrian Beltre,B. j. Upton,0
+206,Adrian Beltre,Brent Lillibridge,0
+207,Adrian Beltre,Brett Gardner,0
+208,Adrian Beltre,Brett Lawrie,0
+209,Adrian Beltre,Brian Mccann,0
+210,Adrian Beltre,Chad Tracy,0
+211,Adrian Beltre,Chipper Jones,0
+212,Adrian Beltre,Chris Carter,0
+213,Adrian Beltre,Chris Davis,0
+214,Adrian Beltre,Chris Iannetta,0
+215,Adrian Beltre,Colby Rasmus,0
+216,Adrian Beltre,Corey Hart,0
+217,Adrian Beltre,Curtis Granderson,0
+218,Adrian Beltre,Daniel Murphy,0
+219,Adrian Beltre,Danny Espinosa,0
+220,Adrian Beltre,David Murphy,0
+221,Adrian Beltre,David Wright,0
+222,Adrian Beltre,Dayán Viciedo,0
+223,Adrian Beltre,Desmond Jennings,0
+224,Adrian Beltre,Eduardo Escobar,0
+225,Adrian Beltre,Eric Hosmer,0
+226,Adrian Beltre,Erick Aybar,0
+227,Adrian Beltre,Gaby Sanchez,0
+228,Adrian Beltre,Garrett Jones,0
+229,Adrian Beltre,Geovany Soto,0
+230,Adrian Beltre,Ichiro Suzuki,0
+231,Adrian Beltre,Ike Davis,0
+232,Adrian Beltre,J. p. Arencibia,0
+233,Adrian Beltre,Jeff Mathis,0
+234,Adrian Beltre,Jesus Montero,0
+235,Adrian Beltre,Jhonny Peralta,0
+236,Adrian Beltre,Josh Donaldson,0
+237,Adrian Beltre,Josh Hamilton,0
+238,Adrian Beltre,Kendrys Morales,0
+239,Adrian Beltre,Kirk Nieuwenhuis,0
+240,Adrian Beltre,Manny Machado,0
+241,Adrian Beltre,Mark Reynolds,0
+242,Adrian Beltre,Mark Trumbo,0
+243,Adrian Beltre,Martin Prado,0
+244,Adrian Beltre,Matt Wieters,0
+245,Adrian Beltre,Michael Brantley,0
+246,Adrian Beltre,Mike Moustakas,0
+247,Adrian Beltre,Mike Napoli,0
+248,Adrian Beltre,Mike Trout,0
+249,Adrian Beltre,Nelson Cruz,0
+250,Adrian Beltre,Nori Aoki,0
+251,Adrian Beltre,Nyjer Morgan,0
+252,Adrian Beltre,Placido Polanco,0
+253,Adrian Beltre,Rick Ankiel,0
+254,Adrian Beltre,Robinson Cano,0
+255,Adrian Beltre,Steve Lombardozzi,0
+256,Adrian Beltre,Torii Hunter,0
+257,Adrian Beltre,Will Middlebrooks,0
+258,Adrian Beltre,Wilson Ramos,0
+259,Adrian Beltre,Yoenis Céspedes,0
+260,Albert Pujols,A. j. Pierzynski,0
+261,Albert Pujols,Adam Dunn,0
+262,Albert Pujols,Adam Lind,0
+263,Albert Pujols,Adrian Beltre,0
+264,Albert Pujols,Alcides Escobar,0
+265,Albert Pujols,Alejandro De aza,0
+266,Albert Pujols,Alex Gordon,0
+267,Albert Pujols,Alex Rodriguez,0
+268,Albert Pujols,Andres Torres,0
+269,Albert Pujols,Aramis Ramirez,0
+270,Albert Pujols,B. j. Upton,0
+271,Albert Pujols,Brent Lillibridge,0
+272,Albert Pujols,Brett Gardner,0
+273,Albert Pujols,Brett Lawrie,0
+274,Albert Pujols,Brian Mccann,0
+275,Albert Pujols,Chad Tracy,0
+276,Albert Pujols,Chipper Jones,0
+277,Albert Pujols,Chris Carter,0
+278,Albert Pujols,Chris Davis,0
+279,Albert Pujols,Chris Iannetta,0
+280,Albert Pujols,Colby Rasmus,0
+281,Albert Pujols,Corey Hart,0
+282,Albert Pujols,Curtis Granderson,0
+283,Albert Pujols,Daniel Murphy,0
+284,Albert Pujols,Danny Espinosa,0
+285,Albert Pujols,David Murphy,0
+286,Albert Pujols,David Wright,0
+287,Albert Pujols,Dayán Viciedo,0
+288,Albert Pujols,Desmond Jennings,0
+289,Albert Pujols,Eduardo Escobar,0
+290,Albert Pujols,Eric Hosmer,0
+291,Albert Pujols,Erick Aybar,0
+292,Albert Pujols,Gaby Sanchez,0
+293,Albert Pujols,Garrett Jones,0
+294,Albert Pujols,Geovany Soto,0
+295,Albert Pujols,Ichiro Suzuki,0
+296,Albert Pujols,Ike Davis,0
+297,Albert Pujols,J. p. Arencibia,0
+298,Albert Pujols,Jeff Mathis,0
+299,Albert Pujols,Jesus Montero,0
+300,Albert Pujols,Jhonny Peralta,0
+301,Albert Pujols,Josh Donaldson,0
+302,Albert Pujols,Josh Hamilton,0
+303,Albert Pujols,Kendrys Morales,0
+304,Albert Pujols,Kirk Nieuwenhuis,0
+305,Albert Pujols,Manny Machado,0
+306,Albert Pujols,Mark Reynolds,0
+307,Albert Pujols,Mark Trumbo,0
+308,Albert Pujols,Martin Prado,0
+309,Albert Pujols,Matt Wieters,0
+310,Albert Pujols,Michael Brantley,0
+311,Albert Pujols,Mike Moustakas,0
+312,Albert Pujols,Mike Napoli,0
+313,Albert Pujols,Mike Trout,0
+314,Albert Pujols,Nelson Cruz,0
+315,Albert Pujols,Nori Aoki,0
+316,Albert Pujols,Nyjer Morgan,0
+317,Albert Pujols,Placido Polanco,0
+318,Albert Pujols,Rick Ankiel,0
+319,Albert Pujols,Robinson Cano,0
+320,Albert Pujols,Steve Lombardozzi,0
+321,Albert Pujols,Torii Hunter,0
+322,Albert Pujols,Will Middlebrooks,0
+323,Albert Pujols,Wilson Ramos,0
+324,Albert Pujols,Yoenis Céspedes,0
+325,Alcides Escobar,A. j. Pierzynski,0
+326,Alcides Escobar,Adam Dunn,0
+327,Alcides Escobar,Adam Lind,0
+328,Alcides Escobar,Adrian Beltre,0
+329,Alcides Escobar,Albert Pujols,0
+330,Alcides Escobar,Alejandro De aza,0
+331,Alcides Escobar,Alex Gordon,0
+332,Alcides Escobar,Alex Rodriguez,0
+333,Alcides Escobar,Andres Torres,0
+334,Alcides Escobar,Aramis Ramirez,0
+335,Alcides Escobar,B. j. Upton,0
+336,Alcides Escobar,Brent Lillibridge,0
+337,Alcides Escobar,Brett Gardner,0
+338,Alcides Escobar,Brett Lawrie,0
+339,Alcides Escobar,Brian Mccann,0
+340,Alcides Escobar,Chad Tracy,0
+341,Alcides Escobar,Chipper Jones,0
+342,Alcides Escobar,Chris Carter,0
+343,Alcides Escobar,Chris Davis,0
+344,Alcides Escobar,Chris Iannetta,0
+345,Alcides Escobar,Colby Rasmus,0
+346,Alcides Escobar,Corey Hart,0
+347,Alcides Escobar,Curtis Granderson,0
+348,Alcides Escobar,Daniel Murphy,0
+349,Alcides Escobar,Danny Espinosa,0
+350,Alcides Escobar,David Murphy,0
+351,Alcides Escobar,David Wright,0
+352,Alcides Escobar,Dayán Viciedo,0
+353,Alcides Escobar,Desmond Jennings,0
+354,Alcides Escobar,Eduardo Escobar,0
+355,Alcides Escobar,Eric Hosmer,0
+356,Alcides Escobar,Erick Aybar,0
+357,Alcides Escobar,Gaby Sanchez,0
+358,Alcides Escobar,Garrett Jones,0
+359,Alcides Escobar,Geovany Soto,0
+360,Alcides Escobar,Ichiro Suzuki,0
+361,Alcides Escobar,Ike Davis,0
+362,Alcides Escobar,J. p. Arencibia,0
+363,Alcides Escobar,Jeff Mathis,0
+364,Alcides Escobar,Jesus Montero,0
+365,Alcides Escobar,Jhonny Peralta,0
+366,Alcides Escobar,Josh Donaldson,0
+367,Alcides Escobar,Josh Hamilton,0
+368,Alcides Escobar,Kendrys Morales,0
+369,Alcides Escobar,Kirk Nieuwenhuis,0
+370,Alcides Escobar,Manny Machado,0
+371,Alcides Escobar,Mark Reynolds,0
+372,Alcides Escobar,Mark Trumbo,0
+373,Alcides Escobar,Martin Prado,0
+374,Alcides Escobar,Matt Wieters,0
+375,Alcides Escobar,Michael Brantley,0
+376,Alcides Escobar,Mike Moustakas,0
+377,Alcides Escobar,Mike Napoli,0
+378,Alcides Escobar,Mike Trout,0
+379,Alcides Escobar,Nelson Cruz,0
+380,Alcides Escobar,Nori Aoki,0
+381,Alcides Escobar,Nyjer Morgan,0
+382,Alcides Escobar,Placido Polanco,0
+383,Alcides Escobar,Rick Ankiel,0
+384,Alcides Escobar,Robinson Cano,0
+385,Alcides Escobar,Steve Lombardozzi,0
+386,Alcides Escobar,Torii Hunter,0
+387,Alcides Escobar,Will Middlebrooks,0
+388,Alcides Escobar,Wilson Ramos,0
+389,Alcides Escobar,Yoenis Céspedes,0
+390,Alejandro De aza,A. j. Pierzynski,0
+391,Alejandro De aza,Adam Dunn,0
+392,Alejandro De aza,Adam Lind,0
+393,Alejandro De aza,Adrian Beltre,0
+394,Alejandro De aza,Albert Pujols,0
+395,Alejandro De aza,Alcides Escobar,0
+396,Alejandro De aza,Alex Gordon,0
+397,Alejandro De aza,Alex Rodriguez,0
+398,Alejandro De aza,Andres Torres,0
+399,Alejandro De aza,Aramis Ramirez,0
+400,Alejandro De aza,B. j. Upton,0
+401,Alejandro De aza,Brent Lillibridge,0
+402,Alejandro De aza,Brett Gardner,0
+403,Alejandro De aza,Brett Lawrie,0
+404,Alejandro De aza,Brian Mccann,0
+405,Alejandro De aza,Chad Tracy,0
+406,Alejandro De aza,Chipper Jones,0
+407,Alejandro De aza,Chris Carter,0
+408,Alejandro De aza,Chris Davis,0
+409,Alejandro De aza,Chris Iannetta,0
+410,Alejandro De aza,Colby Rasmus,0
+411,Alejandro De aza,Corey Hart,0
+412,Alejandro De aza,Curtis Granderson,0
+413,Alejandro De aza,Daniel Murphy,0
+414,Alejandro De aza,Danny Espinosa,0
+415,Alejandro De aza,David Murphy,0
+416,Alejandro De aza,David Wright,0
+417,Alejandro De aza,Dayán Viciedo,0
+418,Alejandro De aza,Desmond Jennings,0
+419,Alejandro De aza,Eduardo Escobar,0
+420,Alejandro De aza,Eric Hosmer,0
+421,Alejandro De aza,Erick Aybar,0
+422,Alejandro De aza,Gaby Sanchez,0
+423,Alejandro De aza,Garrett Jones,0
+424,Alejandro De aza,Geovany Soto,0
+425,Alejandro De aza,Ichiro Suzuki,0
+426,Alejandro De aza,Ike Davis,0
+427,Alejandro De aza,J. p. Arencibia,0
+428,Alejandro De aza,Jeff Mathis,0
+429,Alejandro De aza,Jesus Montero,0
+430,Alejandro De aza,Jhonny Peralta,0
+431,Alejandro De aza,Josh Donaldson,0
+432,Alejandro De aza,Josh Hamilton,0
+433,Alejandro De aza,Kendrys Morales,0
+434,Alejandro De aza,Kirk Nieuwenhuis,0
+435,Alejandro De aza,Manny Machado,0
+436,Alejandro De aza,Mark Reynolds,0
+437,Alejandro De aza,Mark Trumbo,1
+438,Alejandro De aza,Martin Prado,0
+439,Alejandro De aza,Matt Wieters,0
+440,Alejandro De aza,Michael Brantley,0
+441,Alejandro De aza,Mike Moustakas,0
+442,Alejandro De aza,Mike Napoli,0
+443,Alejandro De aza,Mike Trout,0
+444,Alejandro De aza,Nelson Cruz,0
+445,Alejandro De aza,Nori Aoki,0
+446,Alejandro De aza,Nyjer Morgan,0
+447,Alejandro De aza,Placido Polanco,0
+448,Alejandro De aza,Rick Ankiel,0
+449,Alejandro De aza,Robinson Cano,0
+450,Alejandro De aza,Steve Lombardozzi,0
+451,Alejandro De aza,Torii Hunter,0
+452,Alejandro De aza,Will Middlebrooks,0
+453,Alejandro De aza,Wilson Ramos,0
+454,Alejandro De aza,Yoenis Céspedes,0
+455,Alex Gordon,A. j. Pierzynski,0
+456,Alex Gordon,Adam Dunn,0
+457,Alex Gordon,Adam Lind,0
+458,Alex Gordon,Adrian Beltre,0
+459,Alex Gordon,Albert Pujols,0
+460,Alex Gordon,Alcides Escobar,0
+461,Alex Gordon,Alejandro De aza,0
+462,Alex Gordon,Alex Rodriguez,0
+463,Alex Gordon,Andres Torres,0
+464,Alex Gordon,Aramis Ramirez,0
+465,Alex Gordon,B. j. Upton,0
+466,Alex Gordon,Brent Lillibridge,0
+467,Alex Gordon,Brett Gardner,0
+468,Alex Gordon,Brett Lawrie,0
+469,Alex Gordon,Brian Mccann,0
+470,Alex Gordon,Chad Tracy,0
+471,Alex Gordon,Chipper Jones,0
+472,Alex Gordon,Chris Carter,0
+473,Alex Gordon,Chris Davis,0
+474,Alex Gordon,Chris Iannetta,0
+475,Alex Gordon,Colby Rasmus,0
+476,Alex Gordon,Corey Hart,0
+477,Alex Gordon,Curtis Granderson,0
+478,Alex Gordon,Daniel Murphy,0
+479,Alex Gordon,Danny Espinosa,0
+480,Alex Gordon,David Murphy,0
+481,Alex Gordon,David Wright,0
+482,Alex Gordon,Dayán Viciedo,0
+483,Alex Gordon,Desmond Jennings,0
+484,Alex Gordon,Eduardo Escobar,0
+485,Alex Gordon,Eric Hosmer,0
+486,Alex Gordon,Erick Aybar,0
+487,Alex Gordon,Gaby Sanchez,0
+488,Alex Gordon,Garrett Jones,0
+489,Alex Gordon,Geovany Soto,0
+490,Alex Gordon,Ichiro Suzuki,0
+491,Alex Gordon,Ike Davis,0
+492,Alex Gordon,J. p. Arencibia,0
+493,Alex Gordon,Jeff Mathis,0
+494,Alex Gordon,Jesus Montero,0
+495,Alex Gordon,Jhonny Peralta,0
+496,Alex Gordon,Josh Donaldson,0
+497,Alex Gordon,Josh Hamilton,0
+498,Alex Gordon,Kendrys Morales,0
+499,Alex Gordon,Kirk Nieuwenhuis,0
+500,Alex Gordon,Manny Machado,0
+501,Alex Gordon,Mark Reynolds,0
+502,Alex Gordon,Mark Trumbo,0
+503,Alex Gordon,Martin Prado,0
+504,Alex Gordon,Matt Wieters,0
+505,Alex Gordon,Michael Brantley,0
+506,Alex Gordon,Mike Moustakas,0
+507,Alex Gordon,Mike Napoli,0
+508,Alex Gordon,Mike Trout,0
+509,Alex Gordon,Nelson Cruz,0
+510,Alex Gordon,Nori Aoki,0
+511,Alex Gordon,Nyjer Morgan,0
+512,Alex Gordon,Placido Polanco,0
+513,Alex Gordon,Rick Ankiel,0
+514,Alex Gordon,Robinson Cano,0
+515,Alex Gordon,Steve Lombardozzi,0
+516,Alex Gordon,Torii Hunter,0
+517,Alex Gordon,Will Middlebrooks,0
+518,Alex Gordon,Wilson Ramos,0
+519,Alex Gordon,Yoenis Céspedes,0
+520,Alex Rodriguez,A. j. Pierzynski,0
+521,Alex Rodriguez,Adam Dunn,0
+522,Alex Rodriguez,Adam Lind,0
+523,Alex Rodriguez,Adrian Beltre,0
+524,Alex Rodriguez,Albert Pujols,0
+525,Alex Rodriguez,Alcides Escobar,0
+526,Alex Rodriguez,Alejandro De aza,0
+527,Alex Rodriguez,Alex Gordon,0
+528,Alex Rodriguez,Andres Torres,0
+529,Alex Rodriguez,Aramis Ramirez,0
+530,Alex Rodriguez,B. j. Upton,0
+531,Alex Rodriguez,Brent Lillibridge,0
+532,Alex Rodriguez,Brett Gardner,0
+533,Alex Rodriguez,Brett Lawrie,0
+534,Alex Rodriguez,Brian Mccann,0
+535,Alex Rodriguez,Chad Tracy,0
+536,Alex Rodriguez,Chipper Jones,0
+537,Alex Rodriguez,Chris Carter,0
+538,Alex Rodriguez,Chris Davis,0
+539,Alex Rodriguez,Chris Iannetta,0
+540,Alex Rodriguez,Colby Rasmus,0
+541,Alex Rodriguez,Corey Hart,0
+542,Alex Rodriguez,Curtis Granderson,0
+543,Alex Rodriguez,Daniel Murphy,0
+544,Alex Rodriguez,Danny Espinosa,0
+545,Alex Rodriguez,David Murphy,0
+546,Alex Rodriguez,David Wright,0
+547,Alex Rodriguez,Dayán Viciedo,0
+548,Alex Rodriguez,Desmond Jennings,0
+549,Alex Rodriguez,Eduardo Escobar,0
+550,Alex Rodriguez,Eric Hosmer,0
+551,Alex Rodriguez,Erick Aybar,0
+552,Alex Rodriguez,Gaby Sanchez,0
+553,Alex Rodriguez,Garrett Jones,0
+554,Alex Rodriguez,Geovany Soto,0
+555,Alex Rodriguez,Ichiro Suzuki,0
+556,Alex Rodriguez,Ike Davis,0
+557,Alex Rodriguez,J. p. Arencibia,0
+558,Alex Rodriguez,Jeff Mathis,0
+559,Alex Rodriguez,Jesus Montero,0
+560,Alex Rodriguez,Jhonny Peralta,0
+561,Alex Rodriguez,Josh Donaldson,0
+562,Alex Rodriguez,Josh Hamilton,0
+563,Alex Rodriguez,Kendrys Morales,0
+564,Alex Rodriguez,Kirk Nieuwenhuis,0
+565,Alex Rodriguez,Manny Machado,0
+566,Alex Rodriguez,Mark Reynolds,0
+567,Alex Rodriguez,Mark Trumbo,0
+568,Alex Rodriguez,Martin Prado,0
+569,Alex Rodriguez,Matt Wieters,0
+570,Alex Rodriguez,Michael Brantley,0
+571,Alex Rodriguez,Mike Moustakas,0
+572,Alex Rodriguez,Mike Napoli,0
+573,Alex Rodriguez,Mike Trout,0
+574,Alex Rodriguez,Nelson Cruz,0
+575,Alex Rodriguez,Nori Aoki,0
+576,Alex Rodriguez,Nyjer Morgan,0
+577,Alex Rodriguez,Placido Polanco,0
+578,Alex Rodriguez,Rick Ankiel,0
+579,Alex Rodriguez,Robinson Cano,0
+580,Alex Rodriguez,Steve Lombardozzi,0
+581,Alex Rodriguez,Torii Hunter,0
+582,Alex Rodriguez,Will Middlebrooks,0
+583,Alex Rodriguez,Wilson Ramos,0
+584,Alex Rodriguez,Yoenis Céspedes,0
+585,Andres Torres,A. j. Pierzynski,0
+586,Andres Torres,Adam Dunn,0
+587,Andres Torres,Adam Lind,0
+588,Andres Torres,Adrian Beltre,0
+589,Andres Torres,Albert Pujols,0
+590,Andres Torres,Alcides Escobar,0
+591,Andres Torres,Alejandro De aza,0
+592,Andres Torres,Alex Gordon,0
+593,Andres Torres,Alex Rodriguez,0
+594,Andres Torres,Aramis Ramirez,0
+595,Andres Torres,B. j. Upton,0
+596,Andres Torres,Brent Lillibridge,0
+597,Andres Torres,Brett Gardner,0
+598,Andres Torres,Brett Lawrie,0
+599,Andres Torres,Brian Mccann,0
+600,Andres Torres,Chad Tracy,0
+601,Andres Torres,Chipper Jones,0
+602,Andres Torres,Chris Carter,0
+603,Andres Torres,Chris Davis,0
+604,Andres Torres,Chris Iannetta,0
+605,Andres Torres,Colby Rasmus,0
+606,Andres Torres,Corey Hart,0
+607,Andres Torres,Curtis Granderson,0
+608,Andres Torres,Daniel Murphy,0
+609,Andres Torres,Danny Espinosa,0
+610,Andres Torres,David Murphy,0
+611,Andres Torres,David Wright,0
+612,Andres Torres,Dayán Viciedo,0
+613,Andres Torres,Desmond Jennings,0
+614,Andres Torres,Eduardo Escobar,0
+615,Andres Torres,Eric Hosmer,0
+616,Andres Torres,Erick Aybar,0
+617,Andres Torres,Gaby Sanchez,0
+618,Andres Torres,Garrett Jones,0
+619,Andres Torres,Geovany Soto,0
+620,Andres Torres,Ichiro Suzuki,0
+621,Andres Torres,Ike Davis,0
+622,Andres Torres,J. p. Arencibia,0
+623,Andres Torres,Jeff Mathis,0
+624,Andres Torres,Jesus Montero,0
+625,Andres Torres,Jhonny Peralta,0
+626,Andres Torres,Josh Donaldson,0
+627,Andres Torres,Josh Hamilton,0
+628,Andres Torres,Kendrys Morales,0
+629,Andres Torres,Kirk Nieuwenhuis,0
+630,Andres Torres,Manny Machado,0
+631,Andres Torres,Mark Reynolds,0
+632,Andres Torres,Mark Trumbo,0
+633,Andres Torres,Martin Prado,0
+634,Andres Torres,Matt Wieters,0
+635,Andres Torres,Michael Brantley,0
+636,Andres Torres,Mike Moustakas,0
+637,Andres Torres,Mike Napoli,0
+638,Andres Torres,Mike Trout,0
+639,Andres Torres,Nelson Cruz,0
+640,Andres Torres,Nori Aoki,0
+641,Andres Torres,Nyjer Morgan,0
+642,Andres Torres,Placido Polanco,0
+643,Andres Torres,Rick Ankiel,0
+644,Andres Torres,Robinson Cano,0
+645,Andres Torres,Steve Lombardozzi,0
+646,Andres Torres,Torii Hunter,0
+647,Andres Torres,Will Middlebrooks,0
+648,Andres Torres,Wilson Ramos,0
+649,Andres Torres,Yoenis Céspedes,0
+650,Aramis Ramirez,A. j. Pierzynski,0
+651,Aramis Ramirez,Adam Dunn,0
+652,Aramis Ramirez,Adam Lind,0
+653,Aramis Ramirez,Adrian Beltre,0
+654,Aramis Ramirez,Albert Pujols,0
+655,Aramis Ramirez,Alcides Escobar,0
+656,Aramis Ramirez,Alejandro De aza,0
+657,Aramis Ramirez,Alex Gordon,0
+658,Aramis Ramirez,Alex Rodriguez,0
+659,Aramis Ramirez,Andres Torres,0
+660,Aramis Ramirez,B. j. Upton,0
+661,Aramis Ramirez,Brent Lillibridge,0
+662,Aramis Ramirez,Brett Gardner,0
+663,Aramis Ramirez,Brett Lawrie,0
+664,Aramis Ramirez,Brian Mccann,0
+665,Aramis Ramirez,Chad Tracy,0
+666,Aramis Ramirez,Chipper Jones,0
+667,Aramis Ramirez,Chris Carter,0
+668,Aramis Ramirez,Chris Davis,0
+669,Aramis Ramirez,Chris Iannetta,0
+670,Aramis Ramirez,Colby Rasmus,0
+671,Aramis Ramirez,Corey Hart,0
+672,Aramis Ramirez,Curtis Granderson,0
+673,Aramis Ramirez,Daniel Murphy,0
+674,Aramis Ramirez,Danny Espinosa,0
+675,Aramis Ramirez,David Murphy,0
+676,Aramis Ramirez,David Wright,0
+677,Aramis Ramirez,Dayán Viciedo,0
+678,Aramis Ramirez,Desmond Jennings,0
+679,Aramis Ramirez,Eduardo Escobar,0
+680,Aramis Ramirez,Eric Hosmer,0
+681,Aramis Ramirez,Erick Aybar,0
+682,Aramis Ramirez,Gaby Sanchez,0
+683,Aramis Ramirez,Garrett Jones,0
+684,Aramis Ramirez,Geovany Soto,0
+685,Aramis Ramirez,Ichiro Suzuki,0
+686,Aramis Ramirez,Ike Davis,0
+687,Aramis Ramirez,J. p. Arencibia,0
+688,Aramis Ramirez,Jeff Mathis,0
+689,Aramis Ramirez,Jesus Montero,0
+690,Aramis Ramirez,Jhonny Peralta,0
+691,Aramis Ramirez,Josh Donaldson,0
+692,Aramis Ramirez,Josh Hamilton,0
+693,Aramis Ramirez,Kendrys Morales,0
+694,Aramis Ramirez,Kirk Nieuwenhuis,0
+695,Aramis Ramirez,Manny Machado,0
+696,Aramis Ramirez,Mark Reynolds,0
+697,Aramis Ramirez,Mark Trumbo,0
+698,Aramis Ramirez,Martin Prado,0
+699,Aramis Ramirez,Matt Wieters,0
+700,Aramis Ramirez,Michael Brantley,0
+701,Aramis Ramirez,Mike Moustakas,0
+702,Aramis Ramirez,Mike Napoli,0
+703,Aramis Ramirez,Mike Trout,0
+704,Aramis Ramirez,Nelson Cruz,0
+705,Aramis Ramirez,Nori Aoki,0
+706,Aramis Ramirez,Nyjer Morgan,6
+707,Aramis Ramirez,Placido Polanco,9
+708,Aramis Ramirez,Rick Ankiel,0
+709,Aramis Ramirez,Robinson Cano,0
+710,Aramis Ramirez,Steve Lombardozzi,0
+711,Aramis Ramirez,Torii Hunter,0
+712,Aramis Ramirez,Will Middlebrooks,9
+713,Aramis Ramirez,Wilson Ramos,0
+714,Aramis Ramirez,Yoenis Céspedes,0
+715,B. j. Upton,A. j. Pierzynski,0
+716,B. j. Upton,Adam Dunn,0
+717,B. j. Upton,Adam Lind,0
+718,B. j. Upton,Adrian Beltre,0
+719,B. j. Upton,Albert Pujols,0
+720,B. j. Upton,Alcides Escobar,0
+721,B. j. Upton,Alejandro De aza,0
+722,B. j. Upton,Alex Gordon,0
+723,B. j. Upton,Alex Rodriguez,0
+724,B. j. Upton,Andres Torres,0
+725,B. j. Upton,Aramis Ramirez,0
+726,B. j. Upton,Brent Lillibridge,0
+727,B. j. Upton,Brett Gardner,0
+728,B. j. Upton,Brett Lawrie,0
+729,B. j. Upton,Brian Mccann,0
+730,B. j. Upton,Chad Tracy,0
+731,B. j. Upton,Chipper Jones,0
+732,B. j. Upton,Chris Carter,0
+733,B. j. Upton,Chris Davis,0
+734,B. j. Upton,Chris Iannetta,0
+735,B. j. Upton,Colby Rasmus,0
+736,B. j. Upton,Corey Hart,0
+737,B. j. Upton,Curtis Granderson,0
+738,B. j. Upton,Daniel Murphy,0
+739,B. j. Upton,Danny Espinosa,0
+740,B. j. Upton,David Murphy,0
+741,B. j. Upton,David Wright,0
+742,B. j. Upton,Dayán Viciedo,0
+743,B. j. Upton,Desmond Jennings,0
+744,B. j. Upton,Eduardo Escobar,0
+745,B. j. Upton,Eric Hosmer,0
+746,B. j. Upton,Erick Aybar,0
+747,B. j. Upton,Gaby Sanchez,0
+748,B. j. Upton,Garrett Jones,0
+749,B. j. Upton,Geovany Soto,0
+750,B. j. Upton,Ichiro Suzuki,0
+751,B. j. Upton,Ike Davis,0
+752,B. j. Upton,J. p. Arencibia,0
+753,B. j. Upton,Jeff Mathis,0
+754,B. j. Upton,Jesus Montero,0
+755,B. j. Upton,Jhonny Peralta,0
+756,B. j. Upton,Josh Donaldson,0
+757,B. j. Upton,Josh Hamilton,0
+758,B. j. Upton,Kendrys Morales,0
+759,B. j. Upton,Kirk Nieuwenhuis,0
+760,B. j. Upton,Manny Machado,0
+761,B. j. Upton,Mark Reynolds,0
+762,B. j. Upton,Mark Trumbo,0
+763,B. j. Upton,Martin Prado,0
+764,B. j. Upton,Matt Wieters,0
+765,B. j. Upton,Michael Brantley,0
+766,B. j. Upton,Mike Moustakas,0
+767,B. j. Upton,Mike Napoli,0
+768,B. j. Upton,Mike Trout,0
+769,B. j. Upton,Nelson Cruz,0
+770,B. j. Upton,Nori Aoki,0
+771,B. j. Upton,Nyjer Morgan,0
+772,B. j. Upton,Placido Polanco,0
+773,B. j. Upton,Rick Ankiel,0
+774,B. j. Upton,Robinson Cano,0
+775,B. j. Upton,Steve Lombardozzi,0
+776,B. j. Upton,Torii Hunter,0
+777,B. j. Upton,Will Middlebrooks,0
+778,B. j. Upton,Wilson Ramos,0
+779,B. j. Upton,Yoenis Céspedes,0
+780,Brent Lillibridge,A. j. Pierzynski,0
+781,Brent Lillibridge,Adam Dunn,0
+782,Brent Lillibridge,Adam Lind,0
+783,Brent Lillibridge,Adrian Beltre,0
+784,Brent Lillibridge,Albert Pujols,0
+785,Brent Lillibridge,Alcides Escobar,0
+786,Brent Lillibridge,Alejandro De aza,0
+787,Brent Lillibridge,Alex Gordon,0
+788,Brent Lillibridge,Alex Rodriguez,0
+789,Brent Lillibridge,Andres Torres,0
+790,Brent Lillibridge,Aramis Ramirez,0
+791,Brent Lillibridge,B. j. Upton,0
+792,Brent Lillibridge,Brett Gardner,0
+793,Brent Lillibridge,Brett Lawrie,0
+794,Brent Lillibridge,Brian Mccann,0
+795,Brent Lillibridge,Chad Tracy,0
+796,Brent Lillibridge,Chipper Jones,0
+797,Brent Lillibridge,Chris Carter,0
+798,Brent Lillibridge,Chris Davis,0
+799,Brent Lillibridge,Chris Iannetta,0
+800,Brent Lillibridge,Colby Rasmus,0
+801,Brent Lillibridge,Corey Hart,0
+802,Brent Lillibridge,Curtis Granderson,0
+803,Brent Lillibridge,Daniel Murphy,0
+804,Brent Lillibridge,Danny Espinosa,0
+805,Brent Lillibridge,David Murphy,0
+806,Brent Lillibridge,David Wright,0
+807,Brent Lillibridge,Dayán Viciedo,0
+808,Brent Lillibridge,Desmond Jennings,0
+809,Brent Lillibridge,Eduardo Escobar,0
+810,Brent Lillibridge,Eric Hosmer,0
+811,Brent Lillibridge,Erick Aybar,0
+812,Brent Lillibridge,Gaby Sanchez,0
+813,Brent Lillibridge,Garrett Jones,0
+814,Brent Lillibridge,Geovany Soto,0
+815,Brent Lillibridge,Ichiro Suzuki,0
+816,Brent Lillibridge,Ike Davis,0
+817,Brent Lillibridge,J. p. Arencibia,0
+818,Brent Lillibridge,Jeff Mathis,0
+819,Brent Lillibridge,Jesus Montero,0
+820,Brent Lillibridge,Jhonny Peralta,0
+821,Brent Lillibridge,Josh Donaldson,0
+822,Brent Lillibridge,Josh Hamilton,0
+823,Brent Lillibridge,Kendrys Morales,0
+824,Brent Lillibridge,Kirk Nieuwenhuis,0
+825,Brent Lillibridge,Manny Machado,0
+826,Brent Lillibridge,Mark Reynolds,0
+827,Brent Lillibridge,Mark Trumbo,1
+828,Brent Lillibridge,Martin Prado,0
+829,Brent Lillibridge,Matt Wieters,0
+830,Brent Lillibridge,Michael Brantley,0
+831,Brent Lillibridge,Mike Moustakas,0
+832,Brent Lillibridge,Mike Napoli,0
+833,Brent Lillibridge,Mike Trout,0
+834,Brent Lillibridge,Nelson Cruz,0
+835,Brent Lillibridge,Nori Aoki,0
+836,Brent Lillibridge,Nyjer Morgan,0
+837,Brent Lillibridge,Placido Polanco,0
+838,Brent Lillibridge,Rick Ankiel,0
+839,Brent Lillibridge,Robinson Cano,0
+840,Brent Lillibridge,Steve Lombardozzi,0
+841,Brent Lillibridge,Torii Hunter,0
+842,Brent Lillibridge,Will Middlebrooks,0
+843,Brent Lillibridge,Wilson Ramos,0
+844,Brent Lillibridge,Yoenis Céspedes,0
+845,Brett Gardner,A. j. Pierzynski,0
+846,Brett Gardner,Adam Dunn,0
+847,Brett Gardner,Adam Lind,0
+848,Brett Gardner,Adrian Beltre,0
+849,Brett Gardner,Albert Pujols,0
+850,Brett Gardner,Alcides Escobar,0
+851,Brett Gardner,Alejandro De aza,0
+852,Brett Gardner,Alex Gordon,0
+853,Brett Gardner,Alex Rodriguez,0
+854,Brett Gardner,Andres Torres,0
+855,Brett Gardner,Aramis Ramirez,0
+856,Brett Gardner,B. j. Upton,0
+857,Brett Gardner,Brent Lillibridge,0
+858,Brett Gardner,Brett Lawrie,0
+859,Brett Gardner,Brian Mccann,0
+860,Brett Gardner,Chad Tracy,0
+861,Brett Gardner,Chipper Jones,0
+862,Brett Gardner,Chris Carter,0
+863,Brett Gardner,Chris Davis,0
+864,Brett Gardner,Chris Iannetta,0
+865,Brett Gardner,Colby Rasmus,0
+866,Brett Gardner,Corey Hart,0
+867,Brett Gardner,Curtis Granderson,0
+868,Brett Gardner,Daniel Murphy,0
+869,Brett Gardner,Danny Espinosa,0
+870,Brett Gardner,David Murphy,0
+871,Brett Gardner,David Wright,0
+872,Brett Gardner,Dayán Viciedo,0
+873,Brett Gardner,Desmond Jennings,0
+874,Brett Gardner,Eduardo Escobar,0
+875,Brett Gardner,Eric Hosmer,0
+876,Brett Gardner,Erick Aybar,0
+877,Brett Gardner,Gaby Sanchez,0
+878,Brett Gardner,Garrett Jones,0
+879,Brett Gardner,Geovany Soto,0
+880,Brett Gardner,Ichiro Suzuki,0
+881,Brett Gardner,Ike Davis,0
+882,Brett Gardner,J. p. Arencibia,0
+883,Brett Gardner,Jeff Mathis,0
+884,Brett Gardner,Jesus Montero,0
+885,Brett Gardner,Jhonny Peralta,0
+886,Brett Gardner,Josh Donaldson,0
+887,Brett Gardner,Josh Hamilton,0
+888,Brett Gardner,Kendrys Morales,0
+889,Brett Gardner,Kirk Nieuwenhuis,0
+890,Brett Gardner,Manny Machado,0
+891,Brett Gardner,Mark Reynolds,0
+892,Brett Gardner,Mark Trumbo,0
+893,Brett Gardner,Martin Prado,0
+894,Brett Gardner,Matt Wieters,0
+895,Brett Gardner,Michael Brantley,0
+896,Brett Gardner,Mike Moustakas,0
+897,Brett Gardner,Mike Napoli,0
+898,Brett Gardner,Mike Trout,0
+899,Brett Gardner,Nelson Cruz,0
+900,Brett Gardner,Nori Aoki,0
+901,Brett Gardner,Nyjer Morgan,0
+902,Brett Gardner,Placido Polanco,0
+903,Brett Gardner,Rick Ankiel,0
+904,Brett Gardner,Robinson Cano,0
+905,Brett Gardner,Steve Lombardozzi,0
+906,Brett Gardner,Torii Hunter,0
+907,Brett Gardner,Will Middlebrooks,0
+908,Brett Gardner,Wilson Ramos,0
+909,Brett Gardner,Yoenis Céspedes,0
+910,Brett Lawrie,A. j. Pierzynski,0
+911,Brett Lawrie,Adam Dunn,0
+912,Brett Lawrie,Adam Lind,0
+913,Brett Lawrie,Adrian Beltre,0
+914,Brett Lawrie,Albert Pujols,0
+915,Brett Lawrie,Alcides Escobar,0
+916,Brett Lawrie,Alejandro De aza,0
+917,Brett Lawrie,Alex Gordon,0
+918,Brett Lawrie,Alex Rodriguez,0
+919,Brett Lawrie,Andres Torres,0
+920,Brett Lawrie,Aramis Ramirez,0
+921,Brett Lawrie,B. j. Upton,0
+922,Brett Lawrie,Brent Lillibridge,0
+923,Brett Lawrie,Brett Gardner,0
+924,Brett Lawrie,Brian Mccann,0
+925,Brett Lawrie,Chad Tracy,0
+926,Brett Lawrie,Chipper Jones,0
+927,Brett Lawrie,Chris Carter,0
+928,Brett Lawrie,Chris Davis,0
+929,Brett Lawrie,Chris Iannetta,0
+930,Brett Lawrie,Colby Rasmus,0
+931,Brett Lawrie,Corey Hart,0
+932,Brett Lawrie,Curtis Granderson,0
+933,Brett Lawrie,Daniel Murphy,0
+934,Brett Lawrie,Danny Espinosa,0
+935,Brett Lawrie,David Murphy,0
+936,Brett Lawrie,David Wright,0
+937,Brett Lawrie,Dayán Viciedo,0
+938,Brett Lawrie,Desmond Jennings,0
+939,Brett Lawrie,Eduardo Escobar,0
+940,Brett Lawrie,Eric Hosmer,0
+941,Brett Lawrie,Erick Aybar,0
+942,Brett Lawrie,Gaby Sanchez,0
+943,Brett Lawrie,Garrett Jones,0
+944,Brett Lawrie,Geovany Soto,0
+945,Brett Lawrie,Ichiro Suzuki,0
+946,Brett Lawrie,Ike Davis,0
+947,Brett Lawrie,J. p. Arencibia,0
+948,Brett Lawrie,Jeff Mathis,0
+949,Brett Lawrie,Jesus Montero,0
+950,Brett Lawrie,Jhonny Peralta,0
+951,Brett Lawrie,Josh Donaldson,0
+952,Brett Lawrie,Josh Hamilton,0
+953,Brett Lawrie,Kendrys Morales,0
+954,Brett Lawrie,Kirk Nieuwenhuis,0
+955,Brett Lawrie,Manny Machado,0
+956,Brett Lawrie,Mark Reynolds,0
+957,Brett Lawrie,Mark Trumbo,0
+958,Brett Lawrie,Martin Prado,0
+959,Brett Lawrie,Matt Wieters,0
+960,Brett Lawrie,Michael Brantley,0
+961,Brett Lawrie,Mike Moustakas,0
+962,Brett Lawrie,Mike Napoli,0
+963,Brett Lawrie,Mike Trout,0
+964,Brett Lawrie,Nelson Cruz,0
+965,Brett Lawrie,Nori Aoki,0
+966,Brett Lawrie,Nyjer Morgan,0
+967,Brett Lawrie,Placido Polanco,0
+968,Brett Lawrie,Rick Ankiel,0
+969,Brett Lawrie,Robinson Cano,0
+970,Brett Lawrie,Steve Lombardozzi,0
+971,Brett Lawrie,Torii Hunter,0
+972,Brett Lawrie,Will Middlebrooks,0
+973,Brett Lawrie,Wilson Ramos,0
+974,Brett Lawrie,Yoenis Céspedes,0
+975,Brian Mccann,A. j. Pierzynski,0
+976,Brian Mccann,Adam Dunn,0
+977,Brian Mccann,Adam Lind,0
+978,Brian Mccann,Adrian Beltre,0
+979,Brian Mccann,Albert Pujols,0
+980,Brian Mccann,Alcides Escobar,0
+981,Brian Mccann,Alejandro De aza,0
+982,Brian Mccann,Alex Gordon,0
+983,Brian Mccann,Alex Rodriguez,0
+984,Brian Mccann,Andres Torres,0
+985,Brian Mccann,Aramis Ramirez,0
+986,Brian Mccann,B. j. Upton,0
+987,Brian Mccann,Brent Lillibridge,0
+988,Brian Mccann,Brett Gardner,0
+989,Brian Mccann,Brett Lawrie,0
+990,Brian Mccann,Chad Tracy,0
+991,Brian Mccann,Chipper Jones,0
+992,Brian Mccann,Chris Carter,0
+993,Brian Mccann,Chris Davis,0
+994,Brian Mccann,Chris Iannetta,0
+995,Brian Mccann,Colby Rasmus,0
+996,Brian Mccann,Corey Hart,0
+997,Brian Mccann,Curtis Granderson,0
+998,Brian Mccann,Daniel Murphy,0
+999,Brian Mccann,Danny Espinosa,0
+1000,Brian Mccann,David Murphy,0
+1001,Brian Mccann,David Wright,0
+1002,Brian Mccann,Dayán Viciedo,0
+1003,Brian Mccann,Desmond Jennings,0
+1004,Brian Mccann,Eduardo Escobar,0
+1005,Brian Mccann,Eric Hosmer,0
+1006,Brian Mccann,Erick Aybar,0
+1007,Brian Mccann,Gaby Sanchez,0
+1008,Brian Mccann,Garrett Jones,0
+1009,Brian Mccann,Geovany Soto,0
+1010,Brian Mccann,Ichiro Suzuki,0
+1011,Brian Mccann,Ike Davis,0
+1012,Brian Mccann,J. p. Arencibia,0
+1013,Brian Mccann,Jeff Mathis,0
+1014,Brian Mccann,Jesus Montero,0
+1015,Brian Mccann,Jhonny Peralta,0
+1016,Brian Mccann,Josh Donaldson,0
+1017,Brian Mccann,Josh Hamilton,0
+1018,Brian Mccann,Kendrys Morales,0
+1019,Brian Mccann,Kirk Nieuwenhuis,0
+1020,Brian Mccann,Manny Machado,0
+1021,Brian Mccann,Mark Reynolds,0
+1022,Brian Mccann,Mark Trumbo,0
+1023,Brian Mccann,Martin Prado,0
+1024,Brian Mccann,Matt Wieters,0
+1025,Brian Mccann,Michael Brantley,0
+1026,Brian Mccann,Mike Moustakas,0
+1027,Brian Mccann,Mike Napoli,0
+1028,Brian Mccann,Mike Trout,0
+1029,Brian Mccann,Nelson Cruz,0
+1030,Brian Mccann,Nori Aoki,0
+1031,Brian Mccann,Nyjer Morgan,0
+1032,Brian Mccann,Placido Polanco,0
+1033,Brian Mccann,Rick Ankiel,0
+1034,Brian Mccann,Robinson Cano,0
+1035,Brian Mccann,Steve Lombardozzi,0
+1036,Brian Mccann,Torii Hunter,0
+1037,Brian Mccann,Will Middlebrooks,0
+1038,Brian Mccann,Wilson Ramos,0
+1039,Brian Mccann,Yoenis Céspedes,0
+1040,Chad Tracy,A. j. Pierzynski,0
+1041,Chad Tracy,Adam Dunn,0
+1042,Chad Tracy,Adam Lind,0
+1043,Chad Tracy,Adrian Beltre,0
+1044,Chad Tracy,Albert Pujols,0
+1045,Chad Tracy,Alcides Escobar,0
+1046,Chad Tracy,Alejandro De aza,0
+1047,Chad Tracy,Alex Gordon,0
+1048,Chad Tracy,Alex Rodriguez,0
+1049,Chad Tracy,Andres Torres,0
+1050,Chad Tracy,Aramis Ramirez,0
+1051,Chad Tracy,B. j. Upton,0
+1052,Chad Tracy,Brent Lillibridge,0
+1053,Chad Tracy,Brett Gardner,0
+1054,Chad Tracy,Brett Lawrie,0
+1055,Chad Tracy,Brian Mccann,0
+1056,Chad Tracy,Chipper Jones,0
+1057,Chad Tracy,Chris Carter,0
+1058,Chad Tracy,Chris Davis,0
+1059,Chad Tracy,Chris Iannetta,0
+1060,Chad Tracy,Colby Rasmus,0
+1061,Chad Tracy,Corey Hart,0
+1062,Chad Tracy,Curtis Granderson,0
+1063,Chad Tracy,Daniel Murphy,0
+1064,Chad Tracy,Danny Espinosa,0
+1065,Chad Tracy,David Murphy,0
+1066,Chad Tracy,David Wright,0
+1067,Chad Tracy,Dayán Viciedo,0
+1068,Chad Tracy,Desmond Jennings,0
+1069,Chad Tracy,Eduardo Escobar,0
+1070,Chad Tracy,Eric Hosmer,0
+1071,Chad Tracy,Erick Aybar,0
+1072,Chad Tracy,Gaby Sanchez,0
+1073,Chad Tracy,Garrett Jones,0
+1074,Chad Tracy,Geovany Soto,0
+1075,Chad Tracy,Ichiro Suzuki,0
+1076,Chad Tracy,Ike Davis,0
+1077,Chad Tracy,J. p. Arencibia,0
+1078,Chad Tracy,Jeff Mathis,0
+1079,Chad Tracy,Jesus Montero,0
+1080,Chad Tracy,Jhonny Peralta,0
+1081,Chad Tracy,Josh Donaldson,0
+1082,Chad Tracy,Josh Hamilton,0
+1083,Chad Tracy,Kendrys Morales,0
+1084,Chad Tracy,Kirk Nieuwenhuis,0
+1085,Chad Tracy,Manny Machado,0
+1086,Chad Tracy,Mark Reynolds,0
+1087,Chad Tracy,Mark Trumbo,0
+1088,Chad Tracy,Martin Prado,0
+1089,Chad Tracy,Matt Wieters,0
+1090,Chad Tracy,Michael Brantley,0
+1091,Chad Tracy,Mike Moustakas,0
+1092,Chad Tracy,Mike Napoli,0
+1093,Chad Tracy,Mike Trout,0
+1094,Chad Tracy,Nelson Cruz,0
+1095,Chad Tracy,Nori Aoki,0
+1096,Chad Tracy,Nyjer Morgan,0
+1097,Chad Tracy,Placido Polanco,0
+1098,Chad Tracy,Rick Ankiel,0
+1099,Chad Tracy,Robinson Cano,0
+1100,Chad Tracy,Steve Lombardozzi,0
+1101,Chad Tracy,Torii Hunter,0
+1102,Chad Tracy,Will Middlebrooks,0
+1103,Chad Tracy,Wilson Ramos,0
+1104,Chad Tracy,Yoenis Céspedes,0
+1105,Chipper Jones,A. j. Pierzynski,0
+1106,Chipper Jones,Adam Dunn,0
+1107,Chipper Jones,Adam Lind,0
+1108,Chipper Jones,Adrian Beltre,0
+1109,Chipper Jones,Albert Pujols,0
+1110,Chipper Jones,Alcides Escobar,0
+1111,Chipper Jones,Alejandro De aza,0
+1112,Chipper Jones,Alex Gordon,0
+1113,Chipper Jones,Alex Rodriguez,0
+1114,Chipper Jones,Andres Torres,0
+1115,Chipper Jones,Aramis Ramirez,0
+1116,Chipper Jones,B. j. Upton,0
+1117,Chipper Jones,Brent Lillibridge,0
+1118,Chipper Jones,Brett Gardner,0
+1119,Chipper Jones,Brett Lawrie,0
+1120,Chipper Jones,Brian Mccann,0
+1121,Chipper Jones,Chad Tracy,0
+1122,Chipper Jones,Chris Carter,0
+1123,Chipper Jones,Chris Davis,0
+1124,Chipper Jones,Chris Iannetta,0
+1125,Chipper Jones,Colby Rasmus,0
+1126,Chipper Jones,Corey Hart,0
+1127,Chipper Jones,Curtis Granderson,0
+1128,Chipper Jones,Daniel Murphy,0
+1129,Chipper Jones,Danny Espinosa,1
+1130,Chipper Jones,David Murphy,0
+1131,Chipper Jones,David Wright,0
+1132,Chipper Jones,Dayán Viciedo,0
+1133,Chipper Jones,Desmond Jennings,0
+1134,Chipper Jones,Eduardo Escobar,0
+1135,Chipper Jones,Eric Hosmer,0
+1136,Chipper Jones,Erick Aybar,0
+1137,Chipper Jones,Gaby Sanchez,0
+1138,Chipper Jones,Garrett Jones,0
+1139,Chipper Jones,Geovany Soto,0
+1140,Chipper Jones,Ichiro Suzuki,0
+1141,Chipper Jones,Ike Davis,0
+1142,Chipper Jones,J. p. Arencibia,0
+1143,Chipper Jones,Jeff Mathis,0
+1144,Chipper Jones,Jesus Montero,0
+1145,Chipper Jones,Jhonny Peralta,0
+1146,Chipper Jones,Josh Donaldson,0
+1147,Chipper Jones,Josh Hamilton,0
+1148,Chipper Jones,Kendrys Morales,0
+1149,Chipper Jones,Kirk Nieuwenhuis,0
+1150,Chipper Jones,Manny Machado,0
+1151,Chipper Jones,Mark Reynolds,0
+1152,Chipper Jones,Mark Trumbo,0
+1153,Chipper Jones,Martin Prado,0
+1154,Chipper Jones,Matt Wieters,0
+1155,Chipper Jones,Michael Brantley,0
+1156,Chipper Jones,Mike Moustakas,0
+1157,Chipper Jones,Mike Napoli,0
+1158,Chipper Jones,Mike Trout,0
+1159,Chipper Jones,Nelson Cruz,0
+1160,Chipper Jones,Nori Aoki,0
+1161,Chipper Jones,Nyjer Morgan,0
+1162,Chipper Jones,Placido Polanco,0
+1163,Chipper Jones,Rick Ankiel,0
+1164,Chipper Jones,Robinson Cano,0
+1165,Chipper Jones,Steve Lombardozzi,0
+1166,Chipper Jones,Torii Hunter,0
+1167,Chipper Jones,Will Middlebrooks,0
+1168,Chipper Jones,Wilson Ramos,0
+1169,Chipper Jones,Yoenis Céspedes,0
+1170,Chris Carter,A. j. Pierzynski,0
+1171,Chris Carter,Adam Dunn,0
+1172,Chris Carter,Adam Lind,0
+1173,Chris Carter,Adrian Beltre,0
+1174,Chris Carter,Albert Pujols,0
+1175,Chris Carter,Alcides Escobar,0
+1176,Chris Carter,Alejandro De aza,0
+1177,Chris Carter,Alex Gordon,0
+1178,Chris Carter,Alex Rodriguez,0
+1179,Chris Carter,Andres Torres,0
+1180,Chris Carter,Aramis Ramirez,0
+1181,Chris Carter,B. j. Upton,0
+1182,Chris Carter,Brent Lillibridge,0
+1183,Chris Carter,Brett Gardner,0
+1184,Chris Carter,Brett Lawrie,0
+1185,Chris Carter,Brian Mccann,0
+1186,Chris Carter,Chad Tracy,0
+1187,Chris Carter,Chipper Jones,0
+1188,Chris Carter,Chris Davis,0
+1189,Chris Carter,Chris Iannetta,0
+1190,Chris Carter,Colby Rasmus,0
+1191,Chris Carter,Corey Hart,0
+1192,Chris Carter,Curtis Granderson,0
+1193,Chris Carter,Daniel Murphy,0
+1194,Chris Carter,Danny Espinosa,0
+1195,Chris Carter,David Murphy,0
+1196,Chris Carter,David Wright,0
+1197,Chris Carter,Dayán Viciedo,0
+1198,Chris Carter,Desmond Jennings,0
+1199,Chris Carter,Eduardo Escobar,0
+1200,Chris Carter,Eric Hosmer,0
+1201,Chris Carter,Erick Aybar,0
+1202,Chris Carter,Gaby Sanchez,0
+1203,Chris Carter,Garrett Jones,0
+1204,Chris Carter,Geovany Soto,0
+1205,Chris Carter,Ichiro Suzuki,0
+1206,Chris Carter,Ike Davis,0
+1207,Chris Carter,J. p. Arencibia,0
+1208,Chris Carter,Jeff Mathis,0
+1209,Chris Carter,Jesus Montero,0
+1210,Chris Carter,Jhonny Peralta,0
+1211,Chris Carter,Josh Donaldson,0
+1212,Chris Carter,Josh Hamilton,0
+1213,Chris Carter,Kendrys Morales,0
+1214,Chris Carter,Kirk Nieuwenhuis,0
+1215,Chris Carter,Manny Machado,0
+1216,Chris Carter,Mark Reynolds,0
+1217,Chris Carter,Mark Trumbo,0
+1218,Chris Carter,Martin Prado,0
+1219,Chris Carter,Matt Wieters,0
+1220,Chris Carter,Michael Brantley,0
+1221,Chris Carter,Mike Moustakas,0
+1222,Chris Carter,Mike Napoli,0
+1223,Chris Carter,Mike Trout,0
+1224,Chris Carter,Nelson Cruz,0
+1225,Chris Carter,Nori Aoki,0
+1226,Chris Carter,Nyjer Morgan,0
+1227,Chris Carter,Placido Polanco,0
+1228,Chris Carter,Rick Ankiel,0
+1229,Chris Carter,Robinson Cano,0
+1230,Chris Carter,Steve Lombardozzi,0
+1231,Chris Carter,Torii Hunter,0
+1232,Chris Carter,Will Middlebrooks,0
+1233,Chris Carter,Wilson Ramos,0
+1234,Chris Carter,Yoenis Céspedes,0
+1235,Chris Davis,A. j. Pierzynski,0
+1236,Chris Davis,Adam Dunn,0
+1237,Chris Davis,Adam Lind,0
+1238,Chris Davis,Adrian Beltre,0
+1239,Chris Davis,Albert Pujols,0
+1240,Chris Davis,Alcides Escobar,0
+1241,Chris Davis,Alejandro De aza,0
+1242,Chris Davis,Alex Gordon,0
+1243,Chris Davis,Alex Rodriguez,0
+1244,Chris Davis,Andres Torres,0
+1245,Chris Davis,Aramis Ramirez,0
+1246,Chris Davis,B. j. Upton,0
+1247,Chris Davis,Brent Lillibridge,0
+1248,Chris Davis,Brett Gardner,0
+1249,Chris Davis,Brett Lawrie,0
+1250,Chris Davis,Brian Mccann,0
+1251,Chris Davis,Chad Tracy,0
+1252,Chris Davis,Chipper Jones,0
+1253,Chris Davis,Chris Carter,0
+1254,Chris Davis,Chris Iannetta,0
+1255,Chris Davis,Colby Rasmus,0
+1256,Chris Davis,Corey Hart,0
+1257,Chris Davis,Curtis Granderson,0
+1258,Chris Davis,Daniel Murphy,0
+1259,Chris Davis,Danny Espinosa,0
+1260,Chris Davis,David Murphy,0
+1261,Chris Davis,David Wright,0
+1262,Chris Davis,Dayán Viciedo,0
+1263,Chris Davis,Desmond Jennings,0
+1264,Chris Davis,Eduardo Escobar,0
+1265,Chris Davis,Eric Hosmer,0
+1266,Chris Davis,Erick Aybar,0
+1267,Chris Davis,Gaby Sanchez,0
+1268,Chris Davis,Garrett Jones,0
+1269,Chris Davis,Geovany Soto,0
+1270,Chris Davis,Ichiro Suzuki,0
+1271,Chris Davis,Ike Davis,0
+1272,Chris Davis,J. p. Arencibia,0
+1273,Chris Davis,Jeff Mathis,0
+1274,Chris Davis,Jesus Montero,0
+1275,Chris Davis,Jhonny Peralta,0
+1276,Chris Davis,Josh Donaldson,0
+1277,Chris Davis,Josh Hamilton,0
+1278,Chris Davis,Kendrys Morales,0
+1279,Chris Davis,Kirk Nieuwenhuis,0
+1280,Chris Davis,Manny Machado,0
+1281,Chris Davis,Mark Reynolds,0
+1282,Chris Davis,Mark Trumbo,0
+1283,Chris Davis,Martin Prado,0
+1284,Chris Davis,Matt Wieters,0
+1285,Chris Davis,Michael Brantley,0
+1286,Chris Davis,Mike Moustakas,0
+1287,Chris Davis,Mike Napoli,0
+1288,Chris Davis,Mike Trout,0
+1289,Chris Davis,Nelson Cruz,0
+1290,Chris Davis,Nori Aoki,0
+1291,Chris Davis,Nyjer Morgan,0
+1292,Chris Davis,Placido Polanco,0
+1293,Chris Davis,Rick Ankiel,0
+1294,Chris Davis,Robinson Cano,0
+1295,Chris Davis,Steve Lombardozzi,0
+1296,Chris Davis,Torii Hunter,0
+1297,Chris Davis,Will Middlebrooks,0
+1298,Chris Davis,Wilson Ramos,0
+1299,Chris Davis,Yoenis Céspedes,0
+1300,Chris Iannetta,A. j. Pierzynski,0
+1301,Chris Iannetta,Adam Dunn,6
+1302,Chris Iannetta,Adam Lind,0
+1303,Chris Iannetta,Adrian Beltre,0
+1304,Chris Iannetta,Albert Pujols,0
+1305,Chris Iannetta,Alcides Escobar,0
+1306,Chris Iannetta,Alejandro De aza,6
+1307,Chris Iannetta,Alex Gordon,0
+1308,Chris Iannetta,Alex Rodriguez,0
+1309,Chris Iannetta,Andres Torres,0
+1310,Chris Iannetta,Aramis Ramirez,0
+1311,Chris Iannetta,B. j. Upton,0
+1312,Chris Iannetta,Brent Lillibridge,6
+1313,Chris Iannetta,Brett Gardner,0
+1314,Chris Iannetta,Brett Lawrie,0
+1315,Chris Iannetta,Brian Mccann,0
+1316,Chris Iannetta,Chad Tracy,0
+1317,Chris Iannetta,Chipper Jones,0
+1318,Chris Iannetta,Chris Carter,0
+1319,Chris Iannetta,Chris Davis,0
+1320,Chris Iannetta,Colby Rasmus,0
+1321,Chris Iannetta,Corey Hart,0
+1322,Chris Iannetta,Curtis Granderson,0
+1323,Chris Iannetta,Daniel Murphy,0
+1324,Chris Iannetta,Danny Espinosa,0
+1325,Chris Iannetta,David Murphy,0
+1326,Chris Iannetta,David Wright,0
+1327,Chris Iannetta,Dayán Viciedo,6
+1328,Chris Iannetta,Desmond Jennings,3
+1329,Chris Iannetta,Eduardo Escobar,0
+1330,Chris Iannetta,Eric Hosmer,3
+1331,Chris Iannetta,Erick Aybar,0
+1332,Chris Iannetta,Gaby Sanchez,0
+1333,Chris Iannetta,Garrett Jones,0
+1334,Chris Iannetta,Geovany Soto,0
+1335,Chris Iannetta,Ichiro Suzuki,0
+1336,Chris Iannetta,Ike Davis,0
+1337,Chris Iannetta,J. p. Arencibia,0
+1338,Chris Iannetta,Jeff Mathis,0
+1339,Chris Iannetta,Jesus Montero,0
+1340,Chris Iannetta,Jhonny Peralta,0
+1341,Chris Iannetta,Josh Donaldson,0
+1342,Chris Iannetta,Josh Hamilton,6
+1343,Chris Iannetta,Kendrys Morales,0
+1344,Chris Iannetta,Kirk Nieuwenhuis,0
+1345,Chris Iannetta,Manny Machado,6
+1346,Chris Iannetta,Mark Reynolds,3
+1347,Chris Iannetta,Mark Trumbo,7
+1348,Chris Iannetta,Martin Prado,0
+1349,Chris Iannetta,Matt Wieters,0
+1350,Chris Iannetta,Michael Brantley,0
+1351,Chris Iannetta,Mike Moustakas,0
+1352,Chris Iannetta,Mike Napoli,0
+1353,Chris Iannetta,Mike Trout,6
+1354,Chris Iannetta,Nelson Cruz,6
+1355,Chris Iannetta,Nori Aoki,0
+1356,Chris Iannetta,Nyjer Morgan,0
+1357,Chris Iannetta,Placido Polanco,0
+1358,Chris Iannetta,Rick Ankiel,0
+1359,Chris Iannetta,Robinson Cano,0
+1360,Chris Iannetta,Steve Lombardozzi,0
+1361,Chris Iannetta,Torii Hunter,0
+1362,Chris Iannetta,Will Middlebrooks,0
+1363,Chris Iannetta,Wilson Ramos,0
+1364,Chris Iannetta,Yoenis Céspedes,0
+1365,Colby Rasmus,A. j. Pierzynski,0
+1366,Colby Rasmus,Adam Dunn,0
+1367,Colby Rasmus,Adam Lind,0
+1368,Colby Rasmus,Adrian Beltre,0
+1369,Colby Rasmus,Albert Pujols,0
+1370,Colby Rasmus,Alcides Escobar,0
+1371,Colby Rasmus,Alejandro De aza,0
+1372,Colby Rasmus,Alex Gordon,0
+1373,Colby Rasmus,Alex Rodriguez,0
+1374,Colby Rasmus,Andres Torres,0
+1375,Colby Rasmus,Aramis Ramirez,0
+1376,Colby Rasmus,B. j. Upton,0
+1377,Colby Rasmus,Brent Lillibridge,0
+1378,Colby Rasmus,Brett Gardner,0
+1379,Colby Rasmus,Brett Lawrie,0
+1380,Colby Rasmus,Brian Mccann,0
+1381,Colby Rasmus,Chad Tracy,0
+1382,Colby Rasmus,Chipper Jones,0
+1383,Colby Rasmus,Chris Carter,0
+1384,Colby Rasmus,Chris Davis,0
+1385,Colby Rasmus,Chris Iannetta,0
+1386,Colby Rasmus,Corey Hart,0
+1387,Colby Rasmus,Curtis Granderson,0
+1388,Colby Rasmus,Daniel Murphy,0
+1389,Colby Rasmus,Danny Espinosa,0
+1390,Colby Rasmus,David Murphy,0
+1391,Colby Rasmus,David Wright,0
+1392,Colby Rasmus,Dayán Viciedo,0
+1393,Colby Rasmus,Desmond Jennings,0
+1394,Colby Rasmus,Eduardo Escobar,0
+1395,Colby Rasmus,Eric Hosmer,0
+1396,Colby Rasmus,Erick Aybar,0
+1397,Colby Rasmus,Gaby Sanchez,0
+1398,Colby Rasmus,Garrett Jones,0
+1399,Colby Rasmus,Geovany Soto,0
+1400,Colby Rasmus,Ichiro Suzuki,0
+1401,Colby Rasmus,Ike Davis,0
+1402,Colby Rasmus,J. p. Arencibia,0
+1403,Colby Rasmus,Jeff Mathis,0
+1404,Colby Rasmus,Jesus Montero,0
+1405,Colby Rasmus,Jhonny Peralta,0
+1406,Colby Rasmus,Josh Donaldson,0
+1407,Colby Rasmus,Josh Hamilton,0
+1408,Colby Rasmus,Kendrys Morales,0
+1409,Colby Rasmus,Kirk Nieuwenhuis,0
+1410,Colby Rasmus,Manny Machado,0
+1411,Colby Rasmus,Mark Reynolds,0
+1412,Colby Rasmus,Mark Trumbo,0
+1413,Colby Rasmus,Martin Prado,0
+1414,Colby Rasmus,Matt Wieters,0
+1415,Colby Rasmus,Michael Brantley,0
+1416,Colby Rasmus,Mike Moustakas,0
+1417,Colby Rasmus,Mike Napoli,0
+1418,Colby Rasmus,Mike Trout,0
+1419,Colby Rasmus,Nelson Cruz,0
+1420,Colby Rasmus,Nori Aoki,0
+1421,Colby Rasmus,Nyjer Morgan,0
+1422,Colby Rasmus,Placido Polanco,0
+1423,Colby Rasmus,Rick Ankiel,0
+1424,Colby Rasmus,Robinson Cano,0
+1425,Colby Rasmus,Steve Lombardozzi,0
+1426,Colby Rasmus,Torii Hunter,0
+1427,Colby Rasmus,Will Middlebrooks,0
+1428,Colby Rasmus,Wilson Ramos,0
+1429,Colby Rasmus,Yoenis Céspedes,0
+1430,Corey Hart,A. j. Pierzynski,0
+1431,Corey Hart,Adam Dunn,0
+1432,Corey Hart,Adam Lind,0
+1433,Corey Hart,Adrian Beltre,0
+1434,Corey Hart,Albert Pujols,0
+1435,Corey Hart,Alcides Escobar,0
+1436,Corey Hart,Alejandro De aza,0
+1437,Corey Hart,Alex Gordon,0
+1438,Corey Hart,Alex Rodriguez,0
+1439,Corey Hart,Andres Torres,0
+1440,Corey Hart,Aramis Ramirez,0
+1441,Corey Hart,B. j. Upton,0
+1442,Corey Hart,Brent Lillibridge,0
+1443,Corey Hart,Brett Gardner,0
+1444,Corey Hart,Brett Lawrie,0
+1445,Corey Hart,Brian Mccann,0
+1446,Corey Hart,Chad Tracy,0
+1447,Corey Hart,Chipper Jones,0
+1448,Corey Hart,Chris Carter,0
+1449,Corey Hart,Chris Davis,0
+1450,Corey Hart,Chris Iannetta,0
+1451,Corey Hart,Colby Rasmus,0
+1452,Corey Hart,Curtis Granderson,0
+1453,Corey Hart,Daniel Murphy,0
+1454,Corey Hart,Danny Espinosa,0
+1455,Corey Hart,David Murphy,0
+1456,Corey Hart,David Wright,0
+1457,Corey Hart,Dayán Viciedo,0
+1458,Corey Hart,Desmond Jennings,0
+1459,Corey Hart,Eduardo Escobar,0
+1460,Corey Hart,Eric Hosmer,0
+1461,Corey Hart,Erick Aybar,0
+1462,Corey Hart,Gaby Sanchez,0
+1463,Corey Hart,Garrett Jones,0
+1464,Corey Hart,Geovany Soto,0
+1465,Corey Hart,Ichiro Suzuki,0
+1466,Corey Hart,Ike Davis,0
+1467,Corey Hart,J. p. Arencibia,0
+1468,Corey Hart,Jeff Mathis,0
+1469,Corey Hart,Jesus Montero,0
+1470,Corey Hart,Jhonny Peralta,0
+1471,Corey Hart,Josh Donaldson,0
+1472,Corey Hart,Josh Hamilton,0
+1473,Corey Hart,Kendrys Morales,0
+1474,Corey Hart,Kirk Nieuwenhuis,0
+1475,Corey Hart,Manny Machado,0
+1476,Corey Hart,Mark Reynolds,0
+1477,Corey Hart,Mark Trumbo,0
+1478,Corey Hart,Martin Prado,0
+1479,Corey Hart,Matt Wieters,0
+1480,Corey Hart,Michael Brantley,0
+1481,Corey Hart,Mike Moustakas,0
+1482,Corey Hart,Mike Napoli,0
+1483,Corey Hart,Mike Trout,0
+1484,Corey Hart,Nelson Cruz,0
+1485,Corey Hart,Nori Aoki,0
+1486,Corey Hart,Nyjer Morgan,0
+1487,Corey Hart,Placido Polanco,0
+1488,Corey Hart,Rick Ankiel,0
+1489,Corey Hart,Robinson Cano,0
+1490,Corey Hart,Steve Lombardozzi,0
+1491,Corey Hart,Torii Hunter,0
+1492,Corey Hart,Will Middlebrooks,0
+1493,Corey Hart,Wilson Ramos,0
+1494,Corey Hart,Yoenis Céspedes,0
+1495,Curtis Granderson,A. j. Pierzynski,0
+1496,Curtis Granderson,Adam Dunn,0
+1497,Curtis Granderson,Adam Lind,0
+1498,Curtis Granderson,Adrian Beltre,0
+1499,Curtis Granderson,Albert Pujols,0
+1500,Curtis Granderson,Alcides Escobar,0
+1501,Curtis Granderson,Alejandro De aza,0
+1502,Curtis Granderson,Alex Gordon,0
+1503,Curtis Granderson,Alex Rodriguez,0
+1504,Curtis Granderson,Andres Torres,0
+1505,Curtis Granderson,Aramis Ramirez,0
+1506,Curtis Granderson,B. j. Upton,0
+1507,Curtis Granderson,Brent Lillibridge,0
+1508,Curtis Granderson,Brett Gardner,0
+1509,Curtis Granderson,Brett Lawrie,0
+1510,Curtis Granderson,Brian Mccann,0
+1511,Curtis Granderson,Chad Tracy,0
+1512,Curtis Granderson,Chipper Jones,0
+1513,Curtis Granderson,Chris Carter,0
+1514,Curtis Granderson,Chris Davis,0
+1515,Curtis Granderson,Chris Iannetta,0
+1516,Curtis Granderson,Colby Rasmus,0
+1517,Curtis Granderson,Corey Hart,0
+1518,Curtis Granderson,Daniel Murphy,0
+1519,Curtis Granderson,Danny Espinosa,0
+1520,Curtis Granderson,David Murphy,0
+1521,Curtis Granderson,David Wright,0
+1522,Curtis Granderson,Dayán Viciedo,0
+1523,Curtis Granderson,Desmond Jennings,0
+1524,Curtis Granderson,Eduardo Escobar,0
+1525,Curtis Granderson,Eric Hosmer,0
+1526,Curtis Granderson,Erick Aybar,0
+1527,Curtis Granderson,Gaby Sanchez,0
+1528,Curtis Granderson,Garrett Jones,0
+1529,Curtis Granderson,Geovany Soto,0
+1530,Curtis Granderson,Ichiro Suzuki,0
+1531,Curtis Granderson,Ike Davis,0
+1532,Curtis Granderson,J. p. Arencibia,0
+1533,Curtis Granderson,Jeff Mathis,0
+1534,Curtis Granderson,Jesus Montero,0
+1535,Curtis Granderson,Jhonny Peralta,0
+1536,Curtis Granderson,Josh Donaldson,0
+1537,Curtis Granderson,Josh Hamilton,0
+1538,Curtis Granderson,Kendrys Morales,0
+1539,Curtis Granderson,Kirk Nieuwenhuis,0
+1540,Curtis Granderson,Manny Machado,0
+1541,Curtis Granderson,Mark Reynolds,0
+1542,Curtis Granderson,Mark Trumbo,0
+1543,Curtis Granderson,Martin Prado,0
+1544,Curtis Granderson,Matt Wieters,0
+1545,Curtis Granderson,Michael Brantley,0
+1546,Curtis Granderson,Mike Moustakas,0
+1547,Curtis Granderson,Mike Napoli,0
+1548,Curtis Granderson,Mike Trout,0
+1549,Curtis Granderson,Nelson Cruz,0
+1550,Curtis Granderson,Nori Aoki,0
+1551,Curtis Granderson,Nyjer Morgan,0
+1552,Curtis Granderson,Placido Polanco,0
+1553,Curtis Granderson,Rick Ankiel,0
+1554,Curtis Granderson,Robinson Cano,0
+1555,Curtis Granderson,Steve Lombardozzi,0
+1556,Curtis Granderson,Torii Hunter,0
+1557,Curtis Granderson,Will Middlebrooks,0
+1558,Curtis Granderson,Wilson Ramos,0
+1559,Curtis Granderson,Yoenis Céspedes,0
+1560,Daniel Murphy,A. j. Pierzynski,0
+1561,Daniel Murphy,Adam Dunn,0
+1562,Daniel Murphy,Adam Lind,0
+1563,Daniel Murphy,Adrian Beltre,0
+1564,Daniel Murphy,Albert Pujols,0
+1565,Daniel Murphy,Alcides Escobar,0
+1566,Daniel Murphy,Alejandro De aza,0
+1567,Daniel Murphy,Alex Gordon,0
+1568,Daniel Murphy,Alex Rodriguez,0
+1569,Daniel Murphy,Andres Torres,0
+1570,Daniel Murphy,Aramis Ramirez,0
+1571,Daniel Murphy,B. j. Upton,0
+1572,Daniel Murphy,Brent Lillibridge,0
+1573,Daniel Murphy,Brett Gardner,0
+1574,Daniel Murphy,Brett Lawrie,0
+1575,Daniel Murphy,Brian Mccann,0
+1576,Daniel Murphy,Chad Tracy,0
+1577,Daniel Murphy,Chipper Jones,0
+1578,Daniel Murphy,Chris Carter,0
+1579,Daniel Murphy,Chris Davis,0
+1580,Daniel Murphy,Chris Iannetta,0
+1581,Daniel Murphy,Colby Rasmus,0
+1582,Daniel Murphy,Corey Hart,0
+1583,Daniel Murphy,Curtis Granderson,0
+1584,Daniel Murphy,Danny Espinosa,1
+1585,Daniel Murphy,David Murphy,0
+1586,Daniel Murphy,David Wright,0
+1587,Daniel Murphy,Dayán Viciedo,0
+1588,Daniel Murphy,Desmond Jennings,0
+1589,Daniel Murphy,Eduardo Escobar,0
+1590,Daniel Murphy,Eric Hosmer,0
+1591,Daniel Murphy,Erick Aybar,0
+1592,Daniel Murphy,Gaby Sanchez,0
+1593,Daniel Murphy,Garrett Jones,0
+1594,Daniel Murphy,Geovany Soto,0
+1595,Daniel Murphy,Ichiro Suzuki,0
+1596,Daniel Murphy,Ike Davis,0
+1597,Daniel Murphy,J. p. Arencibia,0
+1598,Daniel Murphy,Jeff Mathis,0
+1599,Daniel Murphy,Jesus Montero,0
+1600,Daniel Murphy,Jhonny Peralta,0
+1601,Daniel Murphy,Josh Donaldson,0
+1602,Daniel Murphy,Josh Hamilton,0
+1603,Daniel Murphy,Kendrys Morales,0
+1604,Daniel Murphy,Kirk Nieuwenhuis,0
+1605,Daniel Murphy,Manny Machado,0
+1606,Daniel Murphy,Mark Reynolds,0
+1607,Daniel Murphy,Mark Trumbo,0
+1608,Daniel Murphy,Martin Prado,0
+1609,Daniel Murphy,Matt Wieters,0
+1610,Daniel Murphy,Michael Brantley,0
+1611,Daniel Murphy,Mike Moustakas,0
+1612,Daniel Murphy,Mike Napoli,0
+1613,Daniel Murphy,Mike Trout,0
+1614,Daniel Murphy,Nelson Cruz,0
+1615,Daniel Murphy,Nori Aoki,0
+1616,Daniel Murphy,Nyjer Morgan,0
+1617,Daniel Murphy,Placido Polanco,0
+1618,Daniel Murphy,Rick Ankiel,0
+1619,Daniel Murphy,Robinson Cano,0
+1620,Daniel Murphy,Steve Lombardozzi,0
+1621,Daniel Murphy,Torii Hunter,0
+1622,Daniel Murphy,Will Middlebrooks,0
+1623,Daniel Murphy,Wilson Ramos,0
+1624,Daniel Murphy,Yoenis Céspedes,0
+1625,Danny Espinosa,A. j. Pierzynski,0
+1626,Danny Espinosa,Adam Dunn,0
+1627,Danny Espinosa,Adam Lind,0
+1628,Danny Espinosa,Adrian Beltre,0
+1629,Danny Espinosa,Albert Pujols,0
+1630,Danny Espinosa,Alcides Escobar,0
+1631,Danny Espinosa,Alejandro De aza,0
+1632,Danny Espinosa,Alex Gordon,0
+1633,Danny Espinosa,Alex Rodriguez,0
+1634,Danny Espinosa,Andres Torres,0
+1635,Danny Espinosa,Aramis Ramirez,0
+1636,Danny Espinosa,B. j. Upton,0
+1637,Danny Espinosa,Brent Lillibridge,0
+1638,Danny Espinosa,Brett Gardner,0
+1639,Danny Espinosa,Brett Lawrie,0
+1640,Danny Espinosa,Brian Mccann,0
+1641,Danny Espinosa,Chad Tracy,0
+1642,Danny Espinosa,Chipper Jones,0
+1643,Danny Espinosa,Chris Carter,0
+1644,Danny Espinosa,Chris Davis,0
+1645,Danny Espinosa,Chris Iannetta,0
+1646,Danny Espinosa,Colby Rasmus,0
+1647,Danny Espinosa,Corey Hart,0
+1648,Danny Espinosa,Curtis Granderson,0
+1649,Danny Espinosa,Daniel Murphy,0
+1650,Danny Espinosa,David Murphy,0
+1651,Danny Espinosa,David Wright,0
+1652,Danny Espinosa,Dayán Viciedo,0
+1653,Danny Espinosa,Desmond Jennings,0
+1654,Danny Espinosa,Eduardo Escobar,0
+1655,Danny Espinosa,Eric Hosmer,0
+1656,Danny Espinosa,Erick Aybar,0
+1657,Danny Espinosa,Gaby Sanchez,0
+1658,Danny Espinosa,Garrett Jones,0
+1659,Danny Espinosa,Geovany Soto,0
+1660,Danny Espinosa,Ichiro Suzuki,0
+1661,Danny Espinosa,Ike Davis,0
+1662,Danny Espinosa,J. p. Arencibia,0
+1663,Danny Espinosa,Jeff Mathis,0
+1664,Danny Espinosa,Jesus Montero,0
+1665,Danny Espinosa,Jhonny Peralta,0
+1666,Danny Espinosa,Josh Donaldson,0
+1667,Danny Espinosa,Josh Hamilton,0
+1668,Danny Espinosa,Kendrys Morales,0
+1669,Danny Espinosa,Kirk Nieuwenhuis,0
+1670,Danny Espinosa,Manny Machado,0
+1671,Danny Espinosa,Mark Reynolds,0
+1672,Danny Espinosa,Mark Trumbo,0
+1673,Danny Espinosa,Martin Prado,0
+1674,Danny Espinosa,Matt Wieters,0
+1675,Danny Espinosa,Michael Brantley,0
+1676,Danny Espinosa,Mike Moustakas,0
+1677,Danny Espinosa,Mike Napoli,0
+1678,Danny Espinosa,Mike Trout,0
+1679,Danny Espinosa,Nelson Cruz,0
+1680,Danny Espinosa,Nori Aoki,0
+1681,Danny Espinosa,Nyjer Morgan,0
+1682,Danny Espinosa,Placido Polanco,0
+1683,Danny Espinosa,Rick Ankiel,0
+1684,Danny Espinosa,Robinson Cano,0
+1685,Danny Espinosa,Steve Lombardozzi,0
+1686,Danny Espinosa,Torii Hunter,0
+1687,Danny Espinosa,Will Middlebrooks,0
+1688,Danny Espinosa,Wilson Ramos,0
+1689,Danny Espinosa,Yoenis Céspedes,0
+1690,David Murphy,A. j. Pierzynski,0
+1691,David Murphy,Adam Dunn,0
+1692,David Murphy,Adam Lind,0
+1693,David Murphy,Adrian Beltre,0
+1694,David Murphy,Albert Pujols,0
+1695,David Murphy,Alcides Escobar,0
+1696,David Murphy,Alejandro De aza,0
+1697,David Murphy,Alex Gordon,0
+1698,David Murphy,Alex Rodriguez,0
+1699,David Murphy,Andres Torres,0
+1700,David Murphy,Aramis Ramirez,0
+1701,David Murphy,B. j. Upton,0
+1702,David Murphy,Brent Lillibridge,0
+1703,David Murphy,Brett Gardner,0
+1704,David Murphy,Brett Lawrie,0
+1705,David Murphy,Brian Mccann,0
+1706,David Murphy,Chad Tracy,0
+1707,David Murphy,Chipper Jones,0
+1708,David Murphy,Chris Carter,0
+1709,David Murphy,Chris Davis,0
+1710,David Murphy,Chris Iannetta,0
+1711,David Murphy,Colby Rasmus,0
+1712,David Murphy,Corey Hart,0
+1713,David Murphy,Curtis Granderson,0
+1714,David Murphy,Daniel Murphy,0
+1715,David Murphy,Danny Espinosa,0
+1716,David Murphy,David Wright,0
+1717,David Murphy,Dayán Viciedo,0
+1718,David Murphy,Desmond Jennings,0
+1719,David Murphy,Eduardo Escobar,0
+1720,David Murphy,Eric Hosmer,0
+1721,David Murphy,Erick Aybar,0
+1722,David Murphy,Gaby Sanchez,0
+1723,David Murphy,Garrett Jones,0
+1724,David Murphy,Geovany Soto,0
+1725,David Murphy,Ichiro Suzuki,0
+1726,David Murphy,Ike Davis,0
+1727,David Murphy,J. p. Arencibia,0
+1728,David Murphy,Jeff Mathis,0
+1729,David Murphy,Jesus Montero,0
+1730,David Murphy,Jhonny Peralta,0
+1731,David Murphy,Josh Donaldson,0
+1732,David Murphy,Josh Hamilton,0
+1733,David Murphy,Kendrys Morales,0
+1734,David Murphy,Kirk Nieuwenhuis,0
+1735,David Murphy,Manny Machado,0
+1736,David Murphy,Mark Reynolds,0
+1737,David Murphy,Mark Trumbo,0
+1738,David Murphy,Martin Prado,0
+1739,David Murphy,Matt Wieters,0
+1740,David Murphy,Michael Brantley,0
+1741,David Murphy,Mike Moustakas,0
+1742,David Murphy,Mike Napoli,0
+1743,David Murphy,Mike Trout,0
+1744,David Murphy,Nelson Cruz,0
+1745,David Murphy,Nori Aoki,0
+1746,David Murphy,Nyjer Morgan,0
+1747,David Murphy,Placido Polanco,0
+1748,David Murphy,Rick Ankiel,0
+1749,David Murphy,Robinson Cano,0
+1750,David Murphy,Steve Lombardozzi,0
+1751,David Murphy,Torii Hunter,0
+1752,David Murphy,Will Middlebrooks,0
+1753,David Murphy,Wilson Ramos,0
+1754,David Murphy,Yoenis Céspedes,0
+1755,David Wright,A. j. Pierzynski,0
+1756,David Wright,Adam Dunn,0
+1757,David Wright,Adam Lind,0
+1758,David Wright,Adrian Beltre,0
+1759,David Wright,Albert Pujols,0
+1760,David Wright,Alcides Escobar,0
+1761,David Wright,Alejandro De aza,0
+1762,David Wright,Alex Gordon,0
+1763,David Wright,Alex Rodriguez,0
+1764,David Wright,Andres Torres,0
+1765,David Wright,Aramis Ramirez,0
+1766,David Wright,B. j. Upton,0
+1767,David Wright,Brent Lillibridge,0
+1768,David Wright,Brett Gardner,0
+1769,David Wright,Brett Lawrie,0
+1770,David Wright,Brian Mccann,0
+1771,David Wright,Chad Tracy,0
+1772,David Wright,Chipper Jones,0
+1773,David Wright,Chris Carter,0
+1774,David Wright,Chris Davis,0
+1775,David Wright,Chris Iannetta,0
+1776,David Wright,Colby Rasmus,0
+1777,David Wright,Corey Hart,0
+1778,David Wright,Curtis Granderson,0
+1779,David Wright,Daniel Murphy,0
+1780,David Wright,Danny Espinosa,0
+1781,David Wright,David Murphy,0
+1782,David Wright,Dayán Viciedo,0
+1783,David Wright,Desmond Jennings,0
+1784,David Wright,Eduardo Escobar,0
+1785,David Wright,Eric Hosmer,0
+1786,David Wright,Erick Aybar,0
+1787,David Wright,Gaby Sanchez,0
+1788,David Wright,Garrett Jones,0
+1789,David Wright,Geovany Soto,0
+1790,David Wright,Ichiro Suzuki,0
+1791,David Wright,Ike Davis,0
+1792,David Wright,J. p. Arencibia,0
+1793,David Wright,Jeff Mathis,0
+1794,David Wright,Jesus Montero,0
+1795,David Wright,Jhonny Peralta,0
+1796,David Wright,Josh Donaldson,0
+1797,David Wright,Josh Hamilton,0
+1798,David Wright,Kendrys Morales,0
+1799,David Wright,Kirk Nieuwenhuis,0
+1800,David Wright,Manny Machado,0
+1801,David Wright,Mark Reynolds,0
+1802,David Wright,Mark Trumbo,0
+1803,David Wright,Martin Prado,0
+1804,David Wright,Matt Wieters,0
+1805,David Wright,Michael Brantley,0
+1806,David Wright,Mike Moustakas,0
+1807,David Wright,Mike Napoli,0
+1808,David Wright,Mike Trout,0
+1809,David Wright,Nelson Cruz,0
+1810,David Wright,Nori Aoki,0
+1811,David Wright,Nyjer Morgan,0
+1812,David Wright,Placido Polanco,0
+1813,David Wright,Rick Ankiel,0
+1814,David Wright,Robinson Cano,0
+1815,David Wright,Steve Lombardozzi,0
+1816,David Wright,Torii Hunter,0
+1817,David Wright,Will Middlebrooks,0
+1818,David Wright,Wilson Ramos,0
+1819,David Wright,Yoenis Céspedes,0
+1820,Dayán Viciedo,A. j. Pierzynski,0
+1821,Dayán Viciedo,Adam Dunn,0
+1822,Dayán Viciedo,Adam Lind,0
+1823,Dayán Viciedo,Adrian Beltre,0
+1824,Dayán Viciedo,Albert Pujols,0
+1825,Dayán Viciedo,Alcides Escobar,0
+1826,Dayán Viciedo,Alejandro De aza,0
+1827,Dayán Viciedo,Alex Gordon,0
+1828,Dayán Viciedo,Alex Rodriguez,0
+1829,Dayán Viciedo,Andres Torres,0
+1830,Dayán Viciedo,Aramis Ramirez,0
+1831,Dayán Viciedo,B. j. Upton,0
+1832,Dayán Viciedo,Brent Lillibridge,0
+1833,Dayán Viciedo,Brett Gardner,0
+1834,Dayán Viciedo,Brett Lawrie,0
+1835,Dayán Viciedo,Brian Mccann,0
+1836,Dayán Viciedo,Chad Tracy,0
+1837,Dayán Viciedo,Chipper Jones,0
+1838,Dayán Viciedo,Chris Carter,0
+1839,Dayán Viciedo,Chris Davis,0
+1840,Dayán Viciedo,Chris Iannetta,0
+1841,Dayán Viciedo,Colby Rasmus,0
+1842,Dayán Viciedo,Corey Hart,0
+1843,Dayán Viciedo,Curtis Granderson,0
+1844,Dayán Viciedo,Daniel Murphy,0
+1845,Dayán Viciedo,Danny Espinosa,0
+1846,Dayán Viciedo,David Murphy,0
+1847,Dayán Viciedo,David Wright,0
+1848,Dayán Viciedo,Desmond Jennings,0
+1849,Dayán Viciedo,Eduardo Escobar,0
+1850,Dayán Viciedo,Eric Hosmer,0
+1851,Dayán Viciedo,Erick Aybar,0
+1852,Dayán Viciedo,Gaby Sanchez,0
+1853,Dayán Viciedo,Garrett Jones,0
+1854,Dayán Viciedo,Geovany Soto,0
+1855,Dayán Viciedo,Ichiro Suzuki,0
+1856,Dayán Viciedo,Ike Davis,0
+1857,Dayán Viciedo,J. p. Arencibia,0
+1858,Dayán Viciedo,Jeff Mathis,0
+1859,Dayán Viciedo,Jesus Montero,0
+1860,Dayán Viciedo,Jhonny Peralta,0
+1861,Dayán Viciedo,Josh Donaldson,0
+1862,Dayán Viciedo,Josh Hamilton,0
+1863,Dayán Viciedo,Kendrys Morales,0
+1864,Dayán Viciedo,Kirk Nieuwenhuis,0
+1865,Dayán Viciedo,Manny Machado,0
+1866,Dayán Viciedo,Mark Reynolds,0
+1867,Dayán Viciedo,Mark Trumbo,1
+1868,Dayán Viciedo,Martin Prado,0
+1869,Dayán Viciedo,Matt Wieters,0
+1870,Dayán Viciedo,Michael Brantley,0
+1871,Dayán Viciedo,Mike Moustakas,0
+1872,Dayán Viciedo,Mike Napoli,0
+1873,Dayán Viciedo,Mike Trout,0
+1874,Dayán Viciedo,Nelson Cruz,0
+1875,Dayán Viciedo,Nori Aoki,0
+1876,Dayán Viciedo,Nyjer Morgan,0
+1877,Dayán Viciedo,Placido Polanco,0
+1878,Dayán Viciedo,Rick Ankiel,0
+1879,Dayán Viciedo,Robinson Cano,0
+1880,Dayán Viciedo,Steve Lombardozzi,0
+1881,Dayán Viciedo,Torii Hunter,0
+1882,Dayán Viciedo,Will Middlebrooks,0
+1883,Dayán Viciedo,Wilson Ramos,0
+1884,Dayán Viciedo,Yoenis Céspedes,0
+1885,Desmond Jennings,A. j. Pierzynski,0
+1886,Desmond Jennings,Adam Dunn,3
+1887,Desmond Jennings,Adam Lind,0
+1888,Desmond Jennings,Adrian Beltre,0
+1889,Desmond Jennings,Albert Pujols,0
+1890,Desmond Jennings,Alcides Escobar,0
+1891,Desmond Jennings,Alejandro De aza,3
+1892,Desmond Jennings,Alex Gordon,0
+1893,Desmond Jennings,Alex Rodriguez,0
+1894,Desmond Jennings,Andres Torres,0
+1895,Desmond Jennings,Aramis Ramirez,0
+1896,Desmond Jennings,B. j. Upton,0
+1897,Desmond Jennings,Brent Lillibridge,3
+1898,Desmond Jennings,Brett Gardner,0
+1899,Desmond Jennings,Brett Lawrie,0
+1900,Desmond Jennings,Brian Mccann,0
+1901,Desmond Jennings,Chad Tracy,0
+1902,Desmond Jennings,Chipper Jones,0
+1903,Desmond Jennings,Chris Carter,0
+1904,Desmond Jennings,Chris Davis,0
+1905,Desmond Jennings,Chris Iannetta,0
+1906,Desmond Jennings,Colby Rasmus,0
+1907,Desmond Jennings,Corey Hart,0
+1908,Desmond Jennings,Curtis Granderson,0
+1909,Desmond Jennings,Daniel Murphy,0
+1910,Desmond Jennings,Danny Espinosa,0
+1911,Desmond Jennings,David Murphy,0
+1912,Desmond Jennings,David Wright,0
+1913,Desmond Jennings,Dayán Viciedo,3
+1914,Desmond Jennings,Eduardo Escobar,0
+1915,Desmond Jennings,Eric Hosmer,0
+1916,Desmond Jennings,Erick Aybar,0
+1917,Desmond Jennings,Gaby Sanchez,0
+1918,Desmond Jennings,Garrett Jones,0
+1919,Desmond Jennings,Geovany Soto,0
+1920,Desmond Jennings,Ichiro Suzuki,0
+1921,Desmond Jennings,Ike Davis,0
+1922,Desmond Jennings,J. p. Arencibia,0
+1923,Desmond Jennings,Jeff Mathis,0
+1924,Desmond Jennings,Jesus Montero,0
+1925,Desmond Jennings,Jhonny Peralta,0
+1926,Desmond Jennings,Josh Donaldson,0
+1927,Desmond Jennings,Josh Hamilton,3
+1928,Desmond Jennings,Kendrys Morales,0
+1929,Desmond Jennings,Kirk Nieuwenhuis,0
+1930,Desmond Jennings,Manny Machado,3
+1931,Desmond Jennings,Mark Reynolds,0
+1932,Desmond Jennings,Mark Trumbo,4
+1933,Desmond Jennings,Martin Prado,0
+1934,Desmond Jennings,Matt Wieters,0
+1935,Desmond Jennings,Michael Brantley,0
+1936,Desmond Jennings,Mike Moustakas,0
+1937,Desmond Jennings,Mike Napoli,0
+1938,Desmond Jennings,Mike Trout,3
+1939,Desmond Jennings,Nelson Cruz,3
+1940,Desmond Jennings,Nori Aoki,0
+1941,Desmond Jennings,Nyjer Morgan,0
+1942,Desmond Jennings,Placido Polanco,0
+1943,Desmond Jennings,Rick Ankiel,0
+1944,Desmond Jennings,Robinson Cano,0
+1945,Desmond Jennings,Steve Lombardozzi,0
+1946,Desmond Jennings,Torii Hunter,0
+1947,Desmond Jennings,Will Middlebrooks,0
+1948,Desmond Jennings,Wilson Ramos,0
+1949,Desmond Jennings,Yoenis Céspedes,0
+1950,Eduardo Escobar,A. j. Pierzynski,0
+1951,Eduardo Escobar,Adam Dunn,0
+1952,Eduardo Escobar,Adam Lind,0
+1953,Eduardo Escobar,Adrian Beltre,0
+1954,Eduardo Escobar,Albert Pujols,0
+1955,Eduardo Escobar,Alcides Escobar,0
+1956,Eduardo Escobar,Alejandro De aza,0
+1957,Eduardo Escobar,Alex Gordon,0
+1958,Eduardo Escobar,Alex Rodriguez,0
+1959,Eduardo Escobar,Andres Torres,0
+1960,Eduardo Escobar,Aramis Ramirez,0
+1961,Eduardo Escobar,B. j. Upton,0
+1962,Eduardo Escobar,Brent Lillibridge,0
+1963,Eduardo Escobar,Brett Gardner,0
+1964,Eduardo Escobar,Brett Lawrie,0
+1965,Eduardo Escobar,Brian Mccann,0
+1966,Eduardo Escobar,Chad Tracy,0
+1967,Eduardo Escobar,Chipper Jones,0
+1968,Eduardo Escobar,Chris Carter,0
+1969,Eduardo Escobar,Chris Davis,0
+1970,Eduardo Escobar,Chris Iannetta,0
+1971,Eduardo Escobar,Colby Rasmus,0
+1972,Eduardo Escobar,Corey Hart,0
+1973,Eduardo Escobar,Curtis Granderson,0
+1974,Eduardo Escobar,Daniel Murphy,0
+1975,Eduardo Escobar,Danny Espinosa,0
+1976,Eduardo Escobar,David Murphy,0
+1977,Eduardo Escobar,David Wright,0
+1978,Eduardo Escobar,Dayán Viciedo,0
+1979,Eduardo Escobar,Desmond Jennings,0
+1980,Eduardo Escobar,Eric Hosmer,0
+1981,Eduardo Escobar,Erick Aybar,0
+1982,Eduardo Escobar,Gaby Sanchez,0
+1983,Eduardo Escobar,Garrett Jones,0
+1984,Eduardo Escobar,Geovany Soto,0
+1985,Eduardo Escobar,Ichiro Suzuki,0
+1986,Eduardo Escobar,Ike Davis,0
+1987,Eduardo Escobar,J. p. Arencibia,0
+1988,Eduardo Escobar,Jeff Mathis,0
+1989,Eduardo Escobar,Jesus Montero,0
+1990,Eduardo Escobar,Jhonny Peralta,0
+1991,Eduardo Escobar,Josh Donaldson,0
+1992,Eduardo Escobar,Josh Hamilton,0
+1993,Eduardo Escobar,Kendrys Morales,0
+1994,Eduardo Escobar,Kirk Nieuwenhuis,0
+1995,Eduardo Escobar,Manny Machado,0
+1996,Eduardo Escobar,Mark Reynolds,0
+1997,Eduardo Escobar,Mark Trumbo,0
+1998,Eduardo Escobar,Martin Prado,0
+1999,Eduardo Escobar,Matt Wieters,0
+2000,Eduardo Escobar,Michael Brantley,0
+2001,Eduardo Escobar,Mike Moustakas,0
+2002,Eduardo Escobar,Mike Napoli,0
+2003,Eduardo Escobar,Mike Trout,0
+2004,Eduardo Escobar,Nelson Cruz,0
+2005,Eduardo Escobar,Nori Aoki,0
+2006,Eduardo Escobar,Nyjer Morgan,0
+2007,Eduardo Escobar,Placido Polanco,0
+2008,Eduardo Escobar,Rick Ankiel,0
+2009,Eduardo Escobar,Robinson Cano,0
+2010,Eduardo Escobar,Steve Lombardozzi,0
+2011,Eduardo Escobar,Torii Hunter,0
+2012,Eduardo Escobar,Will Middlebrooks,0
+2013,Eduardo Escobar,Wilson Ramos,0
+2014,Eduardo Escobar,Yoenis Céspedes,0
+2015,Eric Hosmer,A. j. Pierzynski,0
+2016,Eric Hosmer,Adam Dunn,3
+2017,Eric Hosmer,Adam Lind,0
+2018,Eric Hosmer,Adrian Beltre,0
+2019,Eric Hosmer,Albert Pujols,0
+2020,Eric Hosmer,Alcides Escobar,0
+2021,Eric Hosmer,Alejandro De aza,3
+2022,Eric Hosmer,Alex Gordon,0
+2023,Eric Hosmer,Alex Rodriguez,0
+2024,Eric Hosmer,Andres Torres,0
+2025,Eric Hosmer,Aramis Ramirez,0
+2026,Eric Hosmer,B. j. Upton,0
+2027,Eric Hosmer,Brent Lillibridge,3
+2028,Eric Hosmer,Brett Gardner,0
+2029,Eric Hosmer,Brett Lawrie,0
+2030,Eric Hosmer,Brian Mccann,0
+2031,Eric Hosmer,Chad Tracy,0
+2032,Eric Hosmer,Chipper Jones,0
+2033,Eric Hosmer,Chris Carter,0
+2034,Eric Hosmer,Chris Davis,0
+2035,Eric Hosmer,Chris Iannetta,0
+2036,Eric Hosmer,Colby Rasmus,0
+2037,Eric Hosmer,Corey Hart,0
+2038,Eric Hosmer,Curtis Granderson,0
+2039,Eric Hosmer,Daniel Murphy,0
+2040,Eric Hosmer,Danny Espinosa,0
+2041,Eric Hosmer,David Murphy,0
+2042,Eric Hosmer,David Wright,0
+2043,Eric Hosmer,Dayán Viciedo,3
+2044,Eric Hosmer,Desmond Jennings,0
+2045,Eric Hosmer,Eduardo Escobar,0
+2046,Eric Hosmer,Erick Aybar,0
+2047,Eric Hosmer,Gaby Sanchez,0
+2048,Eric Hosmer,Garrett Jones,0
+2049,Eric Hosmer,Geovany Soto,0
+2050,Eric Hosmer,Ichiro Suzuki,0
+2051,Eric Hosmer,Ike Davis,0
+2052,Eric Hosmer,J. p. Arencibia,0
+2053,Eric Hosmer,Jeff Mathis,0
+2054,Eric Hosmer,Jesus Montero,0
+2055,Eric Hosmer,Jhonny Peralta,0
+2056,Eric Hosmer,Josh Donaldson,0
+2057,Eric Hosmer,Josh Hamilton,3
+2058,Eric Hosmer,Kendrys Morales,0
+2059,Eric Hosmer,Kirk Nieuwenhuis,0
+2060,Eric Hosmer,Manny Machado,3
+2061,Eric Hosmer,Mark Reynolds,0
+2062,Eric Hosmer,Mark Trumbo,4
+2063,Eric Hosmer,Martin Prado,0
+2064,Eric Hosmer,Matt Wieters,0
+2065,Eric Hosmer,Michael Brantley,0
+2066,Eric Hosmer,Mike Moustakas,0
+2067,Eric Hosmer,Mike Napoli,0
+2068,Eric Hosmer,Mike Trout,3
+2069,Eric Hosmer,Nelson Cruz,3
+2070,Eric Hosmer,Nori Aoki,0
+2071,Eric Hosmer,Nyjer Morgan,0
+2072,Eric Hosmer,Placido Polanco,0
+2073,Eric Hosmer,Rick Ankiel,0
+2074,Eric Hosmer,Robinson Cano,0
+2075,Eric Hosmer,Steve Lombardozzi,0
+2076,Eric Hosmer,Torii Hunter,0
+2077,Eric Hosmer,Will Middlebrooks,0
+2078,Eric Hosmer,Wilson Ramos,0
+2079,Eric Hosmer,Yoenis Céspedes,0
+2080,Erick Aybar,A. j. Pierzynski,0
+2081,Erick Aybar,Adam Dunn,0
+2082,Erick Aybar,Adam Lind,0
+2083,Erick Aybar,Adrian Beltre,0
+2084,Erick Aybar,Albert Pujols,0
+2085,Erick Aybar,Alcides Escobar,0
+2086,Erick Aybar,Alejandro De aza,0
+2087,Erick Aybar,Alex Gordon,0
+2088,Erick Aybar,Alex Rodriguez,0
+2089,Erick Aybar,Andres Torres,0
+2090,Erick Aybar,Aramis Ramirez,0
+2091,Erick Aybar,B. j. Upton,0
+2092,Erick Aybar,Brent Lillibridge,0
+2093,Erick Aybar,Brett Gardner,0
+2094,Erick Aybar,Brett Lawrie,0
+2095,Erick Aybar,Brian Mccann,0
+2096,Erick Aybar,Chad Tracy,0
+2097,Erick Aybar,Chipper Jones,0
+2098,Erick Aybar,Chris Carter,0
+2099,Erick Aybar,Chris Davis,0
+2100,Erick Aybar,Chris Iannetta,0
+2101,Erick Aybar,Colby Rasmus,0
+2102,Erick Aybar,Corey Hart,0
+2103,Erick Aybar,Curtis Granderson,0
+2104,Erick Aybar,Daniel Murphy,0
+2105,Erick Aybar,Danny Espinosa,0
+2106,Erick Aybar,David Murphy,0
+2107,Erick Aybar,David Wright,0
+2108,Erick Aybar,Dayán Viciedo,0
+2109,Erick Aybar,Desmond Jennings,0
+2110,Erick Aybar,Eduardo Escobar,0
+2111,Erick Aybar,Eric Hosmer,0
+2112,Erick Aybar,Gaby Sanchez,0
+2113,Erick Aybar,Garrett Jones,0
+2114,Erick Aybar,Geovany Soto,0
+2115,Erick Aybar,Ichiro Suzuki,0
+2116,Erick Aybar,Ike Davis,0
+2117,Erick Aybar,J. p. Arencibia,0
+2118,Erick Aybar,Jeff Mathis,0
+2119,Erick Aybar,Jesus Montero,0
+2120,Erick Aybar,Jhonny Peralta,0
+2121,Erick Aybar,Josh Donaldson,0
+2122,Erick Aybar,Josh Hamilton,0
+2123,Erick Aybar,Kendrys Morales,0
+2124,Erick Aybar,Kirk Nieuwenhuis,0
+2125,Erick Aybar,Manny Machado,0
+2126,Erick Aybar,Mark Reynolds,0
+2127,Erick Aybar,Mark Trumbo,0
+2128,Erick Aybar,Martin Prado,0
+2129,Erick Aybar,Matt Wieters,0
+2130,Erick Aybar,Michael Brantley,0
+2131,Erick Aybar,Mike Moustakas,0
+2132,Erick Aybar,Mike Napoli,0
+2133,Erick Aybar,Mike Trout,0
+2134,Erick Aybar,Nelson Cruz,0
+2135,Erick Aybar,Nori Aoki,0
+2136,Erick Aybar,Nyjer Morgan,0
+2137,Erick Aybar,Placido Polanco,0
+2138,Erick Aybar,Rick Ankiel,0
+2139,Erick Aybar,Robinson Cano,0
+2140,Erick Aybar,Steve Lombardozzi,0
+2141,Erick Aybar,Torii Hunter,0
+2142,Erick Aybar,Will Middlebrooks,0
+2143,Erick Aybar,Wilson Ramos,0
+2144,Erick Aybar,Yoenis Céspedes,0
+2145,Gaby Sanchez,A. j. Pierzynski,0
+2146,Gaby Sanchez,Adam Dunn,0
+2147,Gaby Sanchez,Adam Lind,0
+2148,Gaby Sanchez,Adrian Beltre,0
+2149,Gaby Sanchez,Albert Pujols,0
+2150,Gaby Sanchez,Alcides Escobar,0
+2151,Gaby Sanchez,Alejandro De aza,0
+2152,Gaby Sanchez,Alex Gordon,0
+2153,Gaby Sanchez,Alex Rodriguez,0
+2154,Gaby Sanchez,Andres Torres,0
+2155,Gaby Sanchez,Aramis Ramirez,0
+2156,Gaby Sanchez,B. j. Upton,0
+2157,Gaby Sanchez,Brent Lillibridge,0
+2158,Gaby Sanchez,Brett Gardner,0
+2159,Gaby Sanchez,Brett Lawrie,0
+2160,Gaby Sanchez,Brian Mccann,0
+2161,Gaby Sanchez,Chad Tracy,0
+2162,Gaby Sanchez,Chipper Jones,0
+2163,Gaby Sanchez,Chris Carter,0
+2164,Gaby Sanchez,Chris Davis,0
+2165,Gaby Sanchez,Chris Iannetta,0
+2166,Gaby Sanchez,Colby Rasmus,0
+2167,Gaby Sanchez,Corey Hart,0
+2168,Gaby Sanchez,Curtis Granderson,0
+2169,Gaby Sanchez,Daniel Murphy,0
+2170,Gaby Sanchez,Danny Espinosa,0
+2171,Gaby Sanchez,David Murphy,0
+2172,Gaby Sanchez,David Wright,0
+2173,Gaby Sanchez,Dayán Viciedo,0
+2174,Gaby Sanchez,Desmond Jennings,0
+2175,Gaby Sanchez,Eduardo Escobar,0
+2176,Gaby Sanchez,Eric Hosmer,0
+2177,Gaby Sanchez,Erick Aybar,0
+2178,Gaby Sanchez,Garrett Jones,0
+2179,Gaby Sanchez,Geovany Soto,0
+2180,Gaby Sanchez,Ichiro Suzuki,0
+2181,Gaby Sanchez,Ike Davis,0
+2182,Gaby Sanchez,J. p. Arencibia,0
+2183,Gaby Sanchez,Jeff Mathis,0
+2184,Gaby Sanchez,Jesus Montero,0
+2185,Gaby Sanchez,Jhonny Peralta,0
+2186,Gaby Sanchez,Josh Donaldson,0
+2187,Gaby Sanchez,Josh Hamilton,0
+2188,Gaby Sanchez,Kendrys Morales,0
+2189,Gaby Sanchez,Kirk Nieuwenhuis,0
+2190,Gaby Sanchez,Manny Machado,0
+2191,Gaby Sanchez,Mark Reynolds,0
+2192,Gaby Sanchez,Mark Trumbo,0
+2193,Gaby Sanchez,Martin Prado,0
+2194,Gaby Sanchez,Matt Wieters,0
+2195,Gaby Sanchez,Michael Brantley,0
+2196,Gaby Sanchez,Mike Moustakas,0
+2197,Gaby Sanchez,Mike Napoli,0
+2198,Gaby Sanchez,Mike Trout,0
+2199,Gaby Sanchez,Nelson Cruz,0
+2200,Gaby Sanchez,Nori Aoki,0
+2201,Gaby Sanchez,Nyjer Morgan,6
+2202,Gaby Sanchez,Placido Polanco,9
+2203,Gaby Sanchez,Rick Ankiel,0
+2204,Gaby Sanchez,Robinson Cano,0
+2205,Gaby Sanchez,Steve Lombardozzi,0
+2206,Gaby Sanchez,Torii Hunter,0
+2207,Gaby Sanchez,Will Middlebrooks,9
+2208,Gaby Sanchez,Wilson Ramos,0
+2209,Gaby Sanchez,Yoenis Céspedes,0
+2210,Garrett Jones,A. j. Pierzynski,0
+2211,Garrett Jones,Adam Dunn,0
+2212,Garrett Jones,Adam Lind,0
+2213,Garrett Jones,Adrian Beltre,0
+2214,Garrett Jones,Albert Pujols,0
+2215,Garrett Jones,Alcides Escobar,0
+2216,Garrett Jones,Alejandro De aza,0
+2217,Garrett Jones,Alex Gordon,0
+2218,Garrett Jones,Alex Rodriguez,0
+2219,Garrett Jones,Andres Torres,0
+2220,Garrett Jones,Aramis Ramirez,0
+2221,Garrett Jones,B. j. Upton,0
+2222,Garrett Jones,Brent Lillibridge,0
+2223,Garrett Jones,Brett Gardner,0
+2224,Garrett Jones,Brett Lawrie,0
+2225,Garrett Jones,Brian Mccann,0
+2226,Garrett Jones,Chad Tracy,0
+2227,Garrett Jones,Chipper Jones,3
+2228,Garrett Jones,Chris Carter,0
+2229,Garrett Jones,Chris Davis,0
+2230,Garrett Jones,Chris Iannetta,0
+2231,Garrett Jones,Colby Rasmus,0
+2232,Garrett Jones,Corey Hart,0
+2233,Garrett Jones,Curtis Granderson,0
+2234,Garrett Jones,Daniel Murphy,3
+2235,Garrett Jones,Danny Espinosa,4
+2236,Garrett Jones,David Murphy,0
+2237,Garrett Jones,David Wright,0
+2238,Garrett Jones,Dayán Viciedo,0
+2239,Garrett Jones,Desmond Jennings,0
+2240,Garrett Jones,Eduardo Escobar,0
+2241,Garrett Jones,Eric Hosmer,0
+2242,Garrett Jones,Erick Aybar,0
+2243,Garrett Jones,Gaby Sanchez,0
+2244,Garrett Jones,Geovany Soto,0
+2245,Garrett Jones,Ichiro Suzuki,0
+2246,Garrett Jones,Ike Davis,0
+2247,Garrett Jones,J. p. Arencibia,0
+2248,Garrett Jones,Jeff Mathis,0
+2249,Garrett Jones,Jesus Montero,0
+2250,Garrett Jones,Jhonny Peralta,0
+2251,Garrett Jones,Josh Donaldson,0
+2252,Garrett Jones,Josh Hamilton,0
+2253,Garrett Jones,Kendrys Morales,0
+2254,Garrett Jones,Kirk Nieuwenhuis,0
+2255,Garrett Jones,Manny Machado,0
+2256,Garrett Jones,Mark Reynolds,0
+2257,Garrett Jones,Mark Trumbo,0
+2258,Garrett Jones,Martin Prado,0
+2259,Garrett Jones,Matt Wieters,0
+2260,Garrett Jones,Michael Brantley,0
+2261,Garrett Jones,Mike Moustakas,0
+2262,Garrett Jones,Mike Napoli,0
+2263,Garrett Jones,Mike Trout,0
+2264,Garrett Jones,Nelson Cruz,0
+2265,Garrett Jones,Nori Aoki,0
+2266,Garrett Jones,Nyjer Morgan,0
+2267,Garrett Jones,Placido Polanco,0
+2268,Garrett Jones,Rick Ankiel,0
+2269,Garrett Jones,Robinson Cano,0
+2270,Garrett Jones,Steve Lombardozzi,0
+2271,Garrett Jones,Torii Hunter,0
+2272,Garrett Jones,Will Middlebrooks,0
+2273,Garrett Jones,Wilson Ramos,3
+2274,Garrett Jones,Yoenis Céspedes,0
+2275,Geovany Soto,A. j. Pierzynski,0
+2276,Geovany Soto,Adam Dunn,0
+2277,Geovany Soto,Adam Lind,0
+2278,Geovany Soto,Adrian Beltre,0
+2279,Geovany Soto,Albert Pujols,0
+2280,Geovany Soto,Alcides Escobar,0
+2281,Geovany Soto,Alejandro De aza,0
+2282,Geovany Soto,Alex Gordon,0
+2283,Geovany Soto,Alex Rodriguez,0
+2284,Geovany Soto,Andres Torres,0
+2285,Geovany Soto,Aramis Ramirez,0
+2286,Geovany Soto,B. j. Upton,0
+2287,Geovany Soto,Brent Lillibridge,0
+2288,Geovany Soto,Brett Gardner,0
+2289,Geovany Soto,Brett Lawrie,0
+2290,Geovany Soto,Brian Mccann,0
+2291,Geovany Soto,Chad Tracy,0
+2292,Geovany Soto,Chipper Jones,0
+2293,Geovany Soto,Chris Carter,0
+2294,Geovany Soto,Chris Davis,0
+2295,Geovany Soto,Chris Iannetta,0
+2296,Geovany Soto,Colby Rasmus,0
+2297,Geovany Soto,Corey Hart,0
+2298,Geovany Soto,Curtis Granderson,0
+2299,Geovany Soto,Daniel Murphy,0
+2300,Geovany Soto,Danny Espinosa,0
+2301,Geovany Soto,David Murphy,0
+2302,Geovany Soto,David Wright,0
+2303,Geovany Soto,Dayán Viciedo,0
+2304,Geovany Soto,Desmond Jennings,0
+2305,Geovany Soto,Eduardo Escobar,0
+2306,Geovany Soto,Eric Hosmer,0
+2307,Geovany Soto,Erick Aybar,0
+2308,Geovany Soto,Gaby Sanchez,0
+2309,Geovany Soto,Garrett Jones,0
+2310,Geovany Soto,Ichiro Suzuki,0
+2311,Geovany Soto,Ike Davis,0
+2312,Geovany Soto,J. p. Arencibia,0
+2313,Geovany Soto,Jeff Mathis,0
+2314,Geovany Soto,Jesus Montero,0
+2315,Geovany Soto,Jhonny Peralta,0
+2316,Geovany Soto,Josh Donaldson,0
+2317,Geovany Soto,Josh Hamilton,0
+2318,Geovany Soto,Kendrys Morales,0
+2319,Geovany Soto,Kirk Nieuwenhuis,0
+2320,Geovany Soto,Manny Machado,0
+2321,Geovany Soto,Mark Reynolds,0
+2322,Geovany Soto,Mark Trumbo,0
+2323,Geovany Soto,Martin Prado,0
+2324,Geovany Soto,Matt Wieters,0
+2325,Geovany Soto,Michael Brantley,0
+2326,Geovany Soto,Mike Moustakas,0
+2327,Geovany Soto,Mike Napoli,0
+2328,Geovany Soto,Mike Trout,0
+2329,Geovany Soto,Nelson Cruz,0
+2330,Geovany Soto,Nori Aoki,0
+2331,Geovany Soto,Nyjer Morgan,0
+2332,Geovany Soto,Placido Polanco,0
+2333,Geovany Soto,Rick Ankiel,0
+2334,Geovany Soto,Robinson Cano,0
+2335,Geovany Soto,Steve Lombardozzi,0
+2336,Geovany Soto,Torii Hunter,0
+2337,Geovany Soto,Will Middlebrooks,0
+2338,Geovany Soto,Wilson Ramos,0
+2339,Geovany Soto,Yoenis Céspedes,0
+2340,Ichiro Suzuki,A. j. Pierzynski,0
+2341,Ichiro Suzuki,Adam Dunn,0
+2342,Ichiro Suzuki,Adam Lind,0
+2343,Ichiro Suzuki,Adrian Beltre,0
+2344,Ichiro Suzuki,Albert Pujols,0
+2345,Ichiro Suzuki,Alcides Escobar,0
+2346,Ichiro Suzuki,Alejandro De aza,0
+2347,Ichiro Suzuki,Alex Gordon,0
+2348,Ichiro Suzuki,Alex Rodriguez,0
+2349,Ichiro Suzuki,Andres Torres,0
+2350,Ichiro Suzuki,Aramis Ramirez,0
+2351,Ichiro Suzuki,B. j. Upton,0
+2352,Ichiro Suzuki,Brent Lillibridge,0
+2353,Ichiro Suzuki,Brett Gardner,0
+2354,Ichiro Suzuki,Brett Lawrie,0
+2355,Ichiro Suzuki,Brian Mccann,0
+2356,Ichiro Suzuki,Chad Tracy,0
+2357,Ichiro Suzuki,Chipper Jones,0
+2358,Ichiro Suzuki,Chris Carter,0
+2359,Ichiro Suzuki,Chris Davis,0
+2360,Ichiro Suzuki,Chris Iannetta,0
+2361,Ichiro Suzuki,Colby Rasmus,0
+2362,Ichiro Suzuki,Corey Hart,0
+2363,Ichiro Suzuki,Curtis Granderson,0
+2364,Ichiro Suzuki,Daniel Murphy,0
+2365,Ichiro Suzuki,Danny Espinosa,0
+2366,Ichiro Suzuki,David Murphy,0
+2367,Ichiro Suzuki,David Wright,0
+2368,Ichiro Suzuki,Dayán Viciedo,0
+2369,Ichiro Suzuki,Desmond Jennings,0
+2370,Ichiro Suzuki,Eduardo Escobar,0
+2371,Ichiro Suzuki,Eric Hosmer,0
+2372,Ichiro Suzuki,Erick Aybar,0
+2373,Ichiro Suzuki,Gaby Sanchez,0
+2374,Ichiro Suzuki,Garrett Jones,0
+2375,Ichiro Suzuki,Geovany Soto,0
+2376,Ichiro Suzuki,Ike Davis,0
+2377,Ichiro Suzuki,J. p. Arencibia,0
+2378,Ichiro Suzuki,Jeff Mathis,0
+2379,Ichiro Suzuki,Jesus Montero,0
+2380,Ichiro Suzuki,Jhonny Peralta,0
+2381,Ichiro Suzuki,Josh Donaldson,0
+2382,Ichiro Suzuki,Josh Hamilton,0
+2383,Ichiro Suzuki,Kendrys Morales,0
+2384,Ichiro Suzuki,Kirk Nieuwenhuis,0
+2385,Ichiro Suzuki,Manny Machado,0
+2386,Ichiro Suzuki,Mark Reynolds,0
+2387,Ichiro Suzuki,Mark Trumbo,0
+2388,Ichiro Suzuki,Martin Prado,0
+2389,Ichiro Suzuki,Matt Wieters,0
+2390,Ichiro Suzuki,Michael Brantley,0
+2391,Ichiro Suzuki,Mike Moustakas,0
+2392,Ichiro Suzuki,Mike Napoli,0
+2393,Ichiro Suzuki,Mike Trout,0
+2394,Ichiro Suzuki,Nelson Cruz,0
+2395,Ichiro Suzuki,Nori Aoki,0
+2396,Ichiro Suzuki,Nyjer Morgan,0
+2397,Ichiro Suzuki,Placido Polanco,0
+2398,Ichiro Suzuki,Rick Ankiel,0
+2399,Ichiro Suzuki,Robinson Cano,0
+2400,Ichiro Suzuki,Steve Lombardozzi,0
+2401,Ichiro Suzuki,Torii Hunter,0
+2402,Ichiro Suzuki,Will Middlebrooks,0
+2403,Ichiro Suzuki,Wilson Ramos,0
+2404,Ichiro Suzuki,Yoenis Céspedes,0
+2405,Ike Davis,A. j. Pierzynski,0
+2406,Ike Davis,Adam Dunn,0
+2407,Ike Davis,Adam Lind,0
+2408,Ike Davis,Adrian Beltre,0
+2409,Ike Davis,Albert Pujols,0
+2410,Ike Davis,Alcides Escobar,0
+2411,Ike Davis,Alejandro De aza,0
+2412,Ike Davis,Alex Gordon,0
+2413,Ike Davis,Alex Rodriguez,0
+2414,Ike Davis,Andres Torres,0
+2415,Ike Davis,Aramis Ramirez,0
+2416,Ike Davis,B. j. Upton,0
+2417,Ike Davis,Brent Lillibridge,0
+2418,Ike Davis,Brett Gardner,0
+2419,Ike Davis,Brett Lawrie,0
+2420,Ike Davis,Brian Mccann,0
+2421,Ike Davis,Chad Tracy,0
+2422,Ike Davis,Chipper Jones,0
+2423,Ike Davis,Chris Carter,0
+2424,Ike Davis,Chris Davis,0
+2425,Ike Davis,Chris Iannetta,0
+2426,Ike Davis,Colby Rasmus,0
+2427,Ike Davis,Corey Hart,0
+2428,Ike Davis,Curtis Granderson,0
+2429,Ike Davis,Daniel Murphy,0
+2430,Ike Davis,Danny Espinosa,0
+2431,Ike Davis,David Murphy,0
+2432,Ike Davis,David Wright,0
+2433,Ike Davis,Dayán Viciedo,0
+2434,Ike Davis,Desmond Jennings,0
+2435,Ike Davis,Eduardo Escobar,0
+2436,Ike Davis,Eric Hosmer,0
+2437,Ike Davis,Erick Aybar,0
+2438,Ike Davis,Gaby Sanchez,0
+2439,Ike Davis,Garrett Jones,0
+2440,Ike Davis,Geovany Soto,0
+2441,Ike Davis,Ichiro Suzuki,0
+2442,Ike Davis,J. p. Arencibia,0
+2443,Ike Davis,Jeff Mathis,0
+2444,Ike Davis,Jesus Montero,0
+2445,Ike Davis,Jhonny Peralta,0
+2446,Ike Davis,Josh Donaldson,0
+2447,Ike Davis,Josh Hamilton,0
+2448,Ike Davis,Kendrys Morales,0
+2449,Ike Davis,Kirk Nieuwenhuis,0
+2450,Ike Davis,Manny Machado,0
+2451,Ike Davis,Mark Reynolds,0
+2452,Ike Davis,Mark Trumbo,0
+2453,Ike Davis,Martin Prado,0
+2454,Ike Davis,Matt Wieters,0
+2455,Ike Davis,Michael Brantley,0
+2456,Ike Davis,Mike Moustakas,0
+2457,Ike Davis,Mike Napoli,0
+2458,Ike Davis,Mike Trout,0
+2459,Ike Davis,Nelson Cruz,0
+2460,Ike Davis,Nori Aoki,0
+2461,Ike Davis,Nyjer Morgan,0
+2462,Ike Davis,Placido Polanco,0
+2463,Ike Davis,Rick Ankiel,0
+2464,Ike Davis,Robinson Cano,0
+2465,Ike Davis,Steve Lombardozzi,0
+2466,Ike Davis,Torii Hunter,0
+2467,Ike Davis,Will Middlebrooks,0
+2468,Ike Davis,Wilson Ramos,0
+2469,Ike Davis,Yoenis Céspedes,0
+2470,J. p. Arencibia,A. j. Pierzynski,0
+2471,J. p. Arencibia,Adam Dunn,0
+2472,J. p. Arencibia,Adam Lind,0
+2473,J. p. Arencibia,Adrian Beltre,0
+2474,J. p. Arencibia,Albert Pujols,0
+2475,J. p. Arencibia,Alcides Escobar,0
+2476,J. p. Arencibia,Alejandro De aza,0
+2477,J. p. Arencibia,Alex Gordon,0
+2478,J. p. Arencibia,Alex Rodriguez,0
+2479,J. p. Arencibia,Andres Torres,0
+2480,J. p. Arencibia,Aramis Ramirez,0
+2481,J. p. Arencibia,B. j. Upton,0
+2482,J. p. Arencibia,Brent Lillibridge,0
+2483,J. p. Arencibia,Brett Gardner,0
+2484,J. p. Arencibia,Brett Lawrie,0
+2485,J. p. Arencibia,Brian Mccann,0
+2486,J. p. Arencibia,Chad Tracy,0
+2487,J. p. Arencibia,Chipper Jones,0
+2488,J. p. Arencibia,Chris Carter,0
+2489,J. p. Arencibia,Chris Davis,0
+2490,J. p. Arencibia,Chris Iannetta,0
+2491,J. p. Arencibia,Colby Rasmus,0
+2492,J. p. Arencibia,Corey Hart,0
+2493,J. p. Arencibia,Curtis Granderson,0
+2494,J. p. Arencibia,Daniel Murphy,0
+2495,J. p. Arencibia,Danny Espinosa,0
+2496,J. p. Arencibia,David Murphy,0
+2497,J. p. Arencibia,David Wright,0
+2498,J. p. Arencibia,Dayán Viciedo,0
+2499,J. p. Arencibia,Desmond Jennings,0
+2500,J. p. Arencibia,Eduardo Escobar,0
+2501,J. p. Arencibia,Eric Hosmer,0
+2502,J. p. Arencibia,Erick Aybar,0
+2503,J. p. Arencibia,Gaby Sanchez,0
+2504,J. p. Arencibia,Garrett Jones,0
+2505,J. p. Arencibia,Geovany Soto,0
+2506,J. p. Arencibia,Ichiro Suzuki,0
+2507,J. p. Arencibia,Ike Davis,0
+2508,J. p. Arencibia,Jeff Mathis,0
+2509,J. p. Arencibia,Jesus Montero,0
+2510,J. p. Arencibia,Jhonny Peralta,0
+2511,J. p. Arencibia,Josh Donaldson,0
+2512,J. p. Arencibia,Josh Hamilton,0
+2513,J. p. Arencibia,Kendrys Morales,0
+2514,J. p. Arencibia,Kirk Nieuwenhuis,0
+2515,J. p. Arencibia,Manny Machado,0
+2516,J. p. Arencibia,Mark Reynolds,0
+2517,J. p. Arencibia,Mark Trumbo,0
+2518,J. p. Arencibia,Martin Prado,0
+2519,J. p. Arencibia,Matt Wieters,0
+2520,J. p. Arencibia,Michael Brantley,0
+2521,J. p. Arencibia,Mike Moustakas,0
+2522,J. p. Arencibia,Mike Napoli,0
+2523,J. p. Arencibia,Mike Trout,0
+2524,J. p. Arencibia,Nelson Cruz,0
+2525,J. p. Arencibia,Nori Aoki,0
+2526,J. p. Arencibia,Nyjer Morgan,0
+2527,J. p. Arencibia,Placido Polanco,0
+2528,J. p. Arencibia,Rick Ankiel,0
+2529,J. p. Arencibia,Robinson Cano,0
+2530,J. p. Arencibia,Steve Lombardozzi,0
+2531,J. p. Arencibia,Torii Hunter,0
+2532,J. p. Arencibia,Will Middlebrooks,0
+2533,J. p. Arencibia,Wilson Ramos,0
+2534,J. p. Arencibia,Yoenis Céspedes,0
+2535,Jeff Mathis,A. j. Pierzynski,0
+2536,Jeff Mathis,Adam Dunn,0
+2537,Jeff Mathis,Adam Lind,0
+2538,Jeff Mathis,Adrian Beltre,0
+2539,Jeff Mathis,Albert Pujols,0
+2540,Jeff Mathis,Alcides Escobar,0
+2541,Jeff Mathis,Alejandro De aza,0
+2542,Jeff Mathis,Alex Gordon,0
+2543,Jeff Mathis,Alex Rodriguez,0
+2544,Jeff Mathis,Andres Torres,0
+2545,Jeff Mathis,Aramis Ramirez,0
+2546,Jeff Mathis,B. j. Upton,0
+2547,Jeff Mathis,Brent Lillibridge,0
+2548,Jeff Mathis,Brett Gardner,0
+2549,Jeff Mathis,Brett Lawrie,0
+2550,Jeff Mathis,Brian Mccann,0
+2551,Jeff Mathis,Chad Tracy,0
+2552,Jeff Mathis,Chipper Jones,0
+2553,Jeff Mathis,Chris Carter,0
+2554,Jeff Mathis,Chris Davis,0
+2555,Jeff Mathis,Chris Iannetta,0
+2556,Jeff Mathis,Colby Rasmus,0
+2557,Jeff Mathis,Corey Hart,0
+2558,Jeff Mathis,Curtis Granderson,0
+2559,Jeff Mathis,Daniel Murphy,0
+2560,Jeff Mathis,Danny Espinosa,0
+2561,Jeff Mathis,David Murphy,0
+2562,Jeff Mathis,David Wright,0
+2563,Jeff Mathis,Dayán Viciedo,0
+2564,Jeff Mathis,Desmond Jennings,0
+2565,Jeff Mathis,Eduardo Escobar,0
+2566,Jeff Mathis,Eric Hosmer,0
+2567,Jeff Mathis,Erick Aybar,0
+2568,Jeff Mathis,Gaby Sanchez,0
+2569,Jeff Mathis,Garrett Jones,0
+2570,Jeff Mathis,Geovany Soto,0
+2571,Jeff Mathis,Ichiro Suzuki,0
+2572,Jeff Mathis,Ike Davis,0
+2573,Jeff Mathis,J. p. Arencibia,0
+2574,Jeff Mathis,Jesus Montero,0
+2575,Jeff Mathis,Jhonny Peralta,0
+2576,Jeff Mathis,Josh Donaldson,0
+2577,Jeff Mathis,Josh Hamilton,0
+2578,Jeff Mathis,Kendrys Morales,0
+2579,Jeff Mathis,Kirk Nieuwenhuis,0
+2580,Jeff Mathis,Manny Machado,0
+2581,Jeff Mathis,Mark Reynolds,0
+2582,Jeff Mathis,Mark Trumbo,0
+2583,Jeff Mathis,Martin Prado,0
+2584,Jeff Mathis,Matt Wieters,0
+2585,Jeff Mathis,Michael Brantley,0
+2586,Jeff Mathis,Mike Moustakas,0
+2587,Jeff Mathis,Mike Napoli,0
+2588,Jeff Mathis,Mike Trout,0
+2589,Jeff Mathis,Nelson Cruz,0
+2590,Jeff Mathis,Nori Aoki,0
+2591,Jeff Mathis,Nyjer Morgan,0
+2592,Jeff Mathis,Placido Polanco,0
+2593,Jeff Mathis,Rick Ankiel,0
+2594,Jeff Mathis,Robinson Cano,0
+2595,Jeff Mathis,Steve Lombardozzi,0
+2596,Jeff Mathis,Torii Hunter,0
+2597,Jeff Mathis,Will Middlebrooks,0
+2598,Jeff Mathis,Wilson Ramos,0
+2599,Jeff Mathis,Yoenis Céspedes,0
+2600,Jesus Montero,A. j. Pierzynski,0
+2601,Jesus Montero,Adam Dunn,0
+2602,Jesus Montero,Adam Lind,0
+2603,Jesus Montero,Adrian Beltre,0
+2604,Jesus Montero,Albert Pujols,0
+2605,Jesus Montero,Alcides Escobar,0
+2606,Jesus Montero,Alejandro De aza,0
+2607,Jesus Montero,Alex Gordon,0
+2608,Jesus Montero,Alex Rodriguez,0
+2609,Jesus Montero,Andres Torres,0
+2610,Jesus Montero,Aramis Ramirez,0
+2611,Jesus Montero,B. j. Upton,0
+2612,Jesus Montero,Brent Lillibridge,0
+2613,Jesus Montero,Brett Gardner,0
+2614,Jesus Montero,Brett Lawrie,0
+2615,Jesus Montero,Brian Mccann,0
+2616,Jesus Montero,Chad Tracy,0
+2617,Jesus Montero,Chipper Jones,0
+2618,Jesus Montero,Chris Carter,0
+2619,Jesus Montero,Chris Davis,0
+2620,Jesus Montero,Chris Iannetta,0
+2621,Jesus Montero,Colby Rasmus,0
+2622,Jesus Montero,Corey Hart,0
+2623,Jesus Montero,Curtis Granderson,0
+2624,Jesus Montero,Daniel Murphy,0
+2625,Jesus Montero,Danny Espinosa,0
+2626,Jesus Montero,David Murphy,0
+2627,Jesus Montero,David Wright,0
+2628,Jesus Montero,Dayán Viciedo,0
+2629,Jesus Montero,Desmond Jennings,0
+2630,Jesus Montero,Eduardo Escobar,0
+2631,Jesus Montero,Eric Hosmer,0
+2632,Jesus Montero,Erick Aybar,0
+2633,Jesus Montero,Gaby Sanchez,0
+2634,Jesus Montero,Garrett Jones,0
+2635,Jesus Montero,Geovany Soto,0
+2636,Jesus Montero,Ichiro Suzuki,0
+2637,Jesus Montero,Ike Davis,0
+2638,Jesus Montero,J. p. Arencibia,0
+2639,Jesus Montero,Jeff Mathis,0
+2640,Jesus Montero,Jhonny Peralta,0
+2641,Jesus Montero,Josh Donaldson,0
+2642,Jesus Montero,Josh Hamilton,0
+2643,Jesus Montero,Kendrys Morales,0
+2644,Jesus Montero,Kirk Nieuwenhuis,0
+2645,Jesus Montero,Manny Machado,0
+2646,Jesus Montero,Mark Reynolds,0
+2647,Jesus Montero,Mark Trumbo,0
+2648,Jesus Montero,Martin Prado,0
+2649,Jesus Montero,Matt Wieters,0
+2650,Jesus Montero,Michael Brantley,0
+2651,Jesus Montero,Mike Moustakas,0
+2652,Jesus Montero,Mike Napoli,0
+2653,Jesus Montero,Mike Trout,0
+2654,Jesus Montero,Nelson Cruz,0
+2655,Jesus Montero,Nori Aoki,0
+2656,Jesus Montero,Nyjer Morgan,0
+2657,Jesus Montero,Placido Polanco,0
+2658,Jesus Montero,Rick Ankiel,0
+2659,Jesus Montero,Robinson Cano,0
+2660,Jesus Montero,Steve Lombardozzi,0
+2661,Jesus Montero,Torii Hunter,0
+2662,Jesus Montero,Will Middlebrooks,0
+2663,Jesus Montero,Wilson Ramos,0
+2664,Jesus Montero,Yoenis Céspedes,0
+2665,Jhonny Peralta,A. j. Pierzynski,0
+2666,Jhonny Peralta,Adam Dunn,0
+2667,Jhonny Peralta,Adam Lind,0
+2668,Jhonny Peralta,Adrian Beltre,0
+2669,Jhonny Peralta,Albert Pujols,0
+2670,Jhonny Peralta,Alcides Escobar,0
+2671,Jhonny Peralta,Alejandro De aza,0
+2672,Jhonny Peralta,Alex Gordon,0
+2673,Jhonny Peralta,Alex Rodriguez,0
+2674,Jhonny Peralta,Andres Torres,0
+2675,Jhonny Peralta,Aramis Ramirez,0
+2676,Jhonny Peralta,B. j. Upton,0
+2677,Jhonny Peralta,Brent Lillibridge,0
+2678,Jhonny Peralta,Brett Gardner,0
+2679,Jhonny Peralta,Brett Lawrie,0
+2680,Jhonny Peralta,Brian Mccann,0
+2681,Jhonny Peralta,Chad Tracy,0
+2682,Jhonny Peralta,Chipper Jones,0
+2683,Jhonny Peralta,Chris Carter,0
+2684,Jhonny Peralta,Chris Davis,0
+2685,Jhonny Peralta,Chris Iannetta,0
+2686,Jhonny Peralta,Colby Rasmus,0
+2687,Jhonny Peralta,Corey Hart,0
+2688,Jhonny Peralta,Curtis Granderson,0
+2689,Jhonny Peralta,Daniel Murphy,0
+2690,Jhonny Peralta,Danny Espinosa,0
+2691,Jhonny Peralta,David Murphy,0
+2692,Jhonny Peralta,David Wright,0
+2693,Jhonny Peralta,Dayán Viciedo,0
+2694,Jhonny Peralta,Desmond Jennings,0
+2695,Jhonny Peralta,Eduardo Escobar,0
+2696,Jhonny Peralta,Eric Hosmer,0
+2697,Jhonny Peralta,Erick Aybar,0
+2698,Jhonny Peralta,Gaby Sanchez,0
+2699,Jhonny Peralta,Garrett Jones,0
+2700,Jhonny Peralta,Geovany Soto,0
+2701,Jhonny Peralta,Ichiro Suzuki,0
+2702,Jhonny Peralta,Ike Davis,0
+2703,Jhonny Peralta,J. p. Arencibia,0
+2704,Jhonny Peralta,Jeff Mathis,0
+2705,Jhonny Peralta,Jesus Montero,0
+2706,Jhonny Peralta,Josh Donaldson,0
+2707,Jhonny Peralta,Josh Hamilton,0
+2708,Jhonny Peralta,Kendrys Morales,0
+2709,Jhonny Peralta,Kirk Nieuwenhuis,0
+2710,Jhonny Peralta,Manny Machado,0
+2711,Jhonny Peralta,Mark Reynolds,0
+2712,Jhonny Peralta,Mark Trumbo,0
+2713,Jhonny Peralta,Martin Prado,0
+2714,Jhonny Peralta,Matt Wieters,0
+2715,Jhonny Peralta,Michael Brantley,0
+2716,Jhonny Peralta,Mike Moustakas,0
+2717,Jhonny Peralta,Mike Napoli,0
+2718,Jhonny Peralta,Mike Trout,0
+2719,Jhonny Peralta,Nelson Cruz,0
+2720,Jhonny Peralta,Nori Aoki,0
+2721,Jhonny Peralta,Nyjer Morgan,0
+2722,Jhonny Peralta,Placido Polanco,0
+2723,Jhonny Peralta,Rick Ankiel,0
+2724,Jhonny Peralta,Robinson Cano,0
+2725,Jhonny Peralta,Steve Lombardozzi,0
+2726,Jhonny Peralta,Torii Hunter,0
+2727,Jhonny Peralta,Will Middlebrooks,0
+2728,Jhonny Peralta,Wilson Ramos,0
+2729,Jhonny Peralta,Yoenis Céspedes,0
+2730,Josh Donaldson,A. j. Pierzynski,0
+2731,Josh Donaldson,Adam Dunn,0
+2732,Josh Donaldson,Adam Lind,0
+2733,Josh Donaldson,Adrian Beltre,0
+2734,Josh Donaldson,Albert Pujols,0
+2735,Josh Donaldson,Alcides Escobar,0
+2736,Josh Donaldson,Alejandro De aza,0
+2737,Josh Donaldson,Alex Gordon,0
+2738,Josh Donaldson,Alex Rodriguez,0
+2739,Josh Donaldson,Andres Torres,0
+2740,Josh Donaldson,Aramis Ramirez,0
+2741,Josh Donaldson,B. j. Upton,0
+2742,Josh Donaldson,Brent Lillibridge,0
+2743,Josh Donaldson,Brett Gardner,0
+2744,Josh Donaldson,Brett Lawrie,0
+2745,Josh Donaldson,Brian Mccann,0
+2746,Josh Donaldson,Chad Tracy,0
+2747,Josh Donaldson,Chipper Jones,0
+2748,Josh Donaldson,Chris Carter,0
+2749,Josh Donaldson,Chris Davis,0
+2750,Josh Donaldson,Chris Iannetta,0
+2751,Josh Donaldson,Colby Rasmus,0
+2752,Josh Donaldson,Corey Hart,0
+2753,Josh Donaldson,Curtis Granderson,0
+2754,Josh Donaldson,Daniel Murphy,0
+2755,Josh Donaldson,Danny Espinosa,0
+2756,Josh Donaldson,David Murphy,0
+2757,Josh Donaldson,David Wright,0
+2758,Josh Donaldson,Dayán Viciedo,0
+2759,Josh Donaldson,Desmond Jennings,0
+2760,Josh Donaldson,Eduardo Escobar,0
+2761,Josh Donaldson,Eric Hosmer,0
+2762,Josh Donaldson,Erick Aybar,0
+2763,Josh Donaldson,Gaby Sanchez,0
+2764,Josh Donaldson,Garrett Jones,0
+2765,Josh Donaldson,Geovany Soto,0
+2766,Josh Donaldson,Ichiro Suzuki,0
+2767,Josh Donaldson,Ike Davis,0
+2768,Josh Donaldson,J. p. Arencibia,0
+2769,Josh Donaldson,Jeff Mathis,0
+2770,Josh Donaldson,Jesus Montero,0
+2771,Josh Donaldson,Jhonny Peralta,0
+2772,Josh Donaldson,Josh Hamilton,0
+2773,Josh Donaldson,Kendrys Morales,0
+2774,Josh Donaldson,Kirk Nieuwenhuis,0
+2775,Josh Donaldson,Manny Machado,0
+2776,Josh Donaldson,Mark Reynolds,0
+2777,Josh Donaldson,Mark Trumbo,0
+2778,Josh Donaldson,Martin Prado,0
+2779,Josh Donaldson,Matt Wieters,0
+2780,Josh Donaldson,Michael Brantley,0
+2781,Josh Donaldson,Mike Moustakas,0
+2782,Josh Donaldson,Mike Napoli,0
+2783,Josh Donaldson,Mike Trout,0
+2784,Josh Donaldson,Nelson Cruz,0
+2785,Josh Donaldson,Nori Aoki,0
+2786,Josh Donaldson,Nyjer Morgan,0
+2787,Josh Donaldson,Placido Polanco,0
+2788,Josh Donaldson,Rick Ankiel,0
+2789,Josh Donaldson,Robinson Cano,0
+2790,Josh Donaldson,Steve Lombardozzi,0
+2791,Josh Donaldson,Torii Hunter,0
+2792,Josh Donaldson,Will Middlebrooks,0
+2793,Josh Donaldson,Wilson Ramos,0
+2794,Josh Donaldson,Yoenis Céspedes,0
+2795,Josh Hamilton,A. j. Pierzynski,0
+2796,Josh Hamilton,Adam Dunn,0
+2797,Josh Hamilton,Adam Lind,0
+2798,Josh Hamilton,Adrian Beltre,0
+2799,Josh Hamilton,Albert Pujols,0
+2800,Josh Hamilton,Alcides Escobar,0
+2801,Josh Hamilton,Alejandro De aza,0
+2802,Josh Hamilton,Alex Gordon,0
+2803,Josh Hamilton,Alex Rodriguez,0
+2804,Josh Hamilton,Andres Torres,0
+2805,Josh Hamilton,Aramis Ramirez,0
+2806,Josh Hamilton,B. j. Upton,0
+2807,Josh Hamilton,Brent Lillibridge,0
+2808,Josh Hamilton,Brett Gardner,0
+2809,Josh Hamilton,Brett Lawrie,0
+2810,Josh Hamilton,Brian Mccann,0
+2811,Josh Hamilton,Chad Tracy,0
+2812,Josh Hamilton,Chipper Jones,0
+2813,Josh Hamilton,Chris Carter,0
+2814,Josh Hamilton,Chris Davis,0
+2815,Josh Hamilton,Chris Iannetta,0
+2816,Josh Hamilton,Colby Rasmus,0
+2817,Josh Hamilton,Corey Hart,0
+2818,Josh Hamilton,Curtis Granderson,0
+2819,Josh Hamilton,Daniel Murphy,0
+2820,Josh Hamilton,Danny Espinosa,0
+2821,Josh Hamilton,David Murphy,0
+2822,Josh Hamilton,David Wright,0
+2823,Josh Hamilton,Dayán Viciedo,0
+2824,Josh Hamilton,Desmond Jennings,0
+2825,Josh Hamilton,Eduardo Escobar,0
+2826,Josh Hamilton,Eric Hosmer,0
+2827,Josh Hamilton,Erick Aybar,0
+2828,Josh Hamilton,Gaby Sanchez,0
+2829,Josh Hamilton,Garrett Jones,0
+2830,Josh Hamilton,Geovany Soto,0
+2831,Josh Hamilton,Ichiro Suzuki,0
+2832,Josh Hamilton,Ike Davis,0
+2833,Josh Hamilton,J. p. Arencibia,0
+2834,Josh Hamilton,Jeff Mathis,0
+2835,Josh Hamilton,Jesus Montero,0
+2836,Josh Hamilton,Jhonny Peralta,0
+2837,Josh Hamilton,Josh Donaldson,0
+2838,Josh Hamilton,Kendrys Morales,0
+2839,Josh Hamilton,Kirk Nieuwenhuis,0
+2840,Josh Hamilton,Manny Machado,0
+2841,Josh Hamilton,Mark Reynolds,0
+2842,Josh Hamilton,Mark Trumbo,1
+2843,Josh Hamilton,Martin Prado,0
+2844,Josh Hamilton,Matt Wieters,0
+2845,Josh Hamilton,Michael Brantley,0
+2846,Josh Hamilton,Mike Moustakas,0
+2847,Josh Hamilton,Mike Napoli,0
+2848,Josh Hamilton,Mike Trout,0
+2849,Josh Hamilton,Nelson Cruz,0
+2850,Josh Hamilton,Nori Aoki,0
+2851,Josh Hamilton,Nyjer Morgan,0
+2852,Josh Hamilton,Placido Polanco,0
+2853,Josh Hamilton,Rick Ankiel,0
+2854,Josh Hamilton,Robinson Cano,0
+2855,Josh Hamilton,Steve Lombardozzi,0
+2856,Josh Hamilton,Torii Hunter,0
+2857,Josh Hamilton,Will Middlebrooks,0
+2858,Josh Hamilton,Wilson Ramos,0
+2859,Josh Hamilton,Yoenis Céspedes,0
+2860,Kendrys Morales,A. j. Pierzynski,0
+2861,Kendrys Morales,Adam Dunn,0
+2862,Kendrys Morales,Adam Lind,0
+2863,Kendrys Morales,Adrian Beltre,0
+2864,Kendrys Morales,Albert Pujols,0
+2865,Kendrys Morales,Alcides Escobar,0
+2866,Kendrys Morales,Alejandro De aza,0
+2867,Kendrys Morales,Alex Gordon,0
+2868,Kendrys Morales,Alex Rodriguez,0
+2869,Kendrys Morales,Andres Torres,0
+2870,Kendrys Morales,Aramis Ramirez,0
+2871,Kendrys Morales,B. j. Upton,0
+2872,Kendrys Morales,Brent Lillibridge,0
+2873,Kendrys Morales,Brett Gardner,0
+2874,Kendrys Morales,Brett Lawrie,0
+2875,Kendrys Morales,Brian Mccann,0
+2876,Kendrys Morales,Chad Tracy,0
+2877,Kendrys Morales,Chipper Jones,0
+2878,Kendrys Morales,Chris Carter,0
+2879,Kendrys Morales,Chris Davis,0
+2880,Kendrys Morales,Chris Iannetta,0
+2881,Kendrys Morales,Colby Rasmus,0
+2882,Kendrys Morales,Corey Hart,0
+2883,Kendrys Morales,Curtis Granderson,0
+2884,Kendrys Morales,Daniel Murphy,0
+2885,Kendrys Morales,Danny Espinosa,0
+2886,Kendrys Morales,David Murphy,0
+2887,Kendrys Morales,David Wright,0
+2888,Kendrys Morales,Dayán Viciedo,0
+2889,Kendrys Morales,Desmond Jennings,0
+2890,Kendrys Morales,Eduardo Escobar,0
+2891,Kendrys Morales,Eric Hosmer,0
+2892,Kendrys Morales,Erick Aybar,0
+2893,Kendrys Morales,Gaby Sanchez,0
+2894,Kendrys Morales,Garrett Jones,0
+2895,Kendrys Morales,Geovany Soto,0
+2896,Kendrys Morales,Ichiro Suzuki,0
+2897,Kendrys Morales,Ike Davis,0
+2898,Kendrys Morales,J. p. Arencibia,0
+2899,Kendrys Morales,Jeff Mathis,0
+2900,Kendrys Morales,Jesus Montero,0
+2901,Kendrys Morales,Jhonny Peralta,0
+2902,Kendrys Morales,Josh Donaldson,0
+2903,Kendrys Morales,Josh Hamilton,0
+2904,Kendrys Morales,Kirk Nieuwenhuis,0
+2905,Kendrys Morales,Manny Machado,0
+2906,Kendrys Morales,Mark Reynolds,0
+2907,Kendrys Morales,Mark Trumbo,0
+2908,Kendrys Morales,Martin Prado,0
+2909,Kendrys Morales,Matt Wieters,0
+2910,Kendrys Morales,Michael Brantley,0
+2911,Kendrys Morales,Mike Moustakas,0
+2912,Kendrys Morales,Mike Napoli,0
+2913,Kendrys Morales,Mike Trout,0
+2914,Kendrys Morales,Nelson Cruz,0
+2915,Kendrys Morales,Nori Aoki,0
+2916,Kendrys Morales,Nyjer Morgan,0
+2917,Kendrys Morales,Placido Polanco,0
+2918,Kendrys Morales,Rick Ankiel,0
+2919,Kendrys Morales,Robinson Cano,0
+2920,Kendrys Morales,Steve Lombardozzi,0
+2921,Kendrys Morales,Torii Hunter,0
+2922,Kendrys Morales,Will Middlebrooks,0
+2923,Kendrys Morales,Wilson Ramos,0
+2924,Kendrys Morales,Yoenis Céspedes,0
+2925,Kirk Nieuwenhuis,A. j. Pierzynski,0
+2926,Kirk Nieuwenhuis,Adam Dunn,0
+2927,Kirk Nieuwenhuis,Adam Lind,0
+2928,Kirk Nieuwenhuis,Adrian Beltre,0
+2929,Kirk Nieuwenhuis,Albert Pujols,0
+2930,Kirk Nieuwenhuis,Alcides Escobar,0
+2931,Kirk Nieuwenhuis,Alejandro De aza,0
+2932,Kirk Nieuwenhuis,Alex Gordon,0
+2933,Kirk Nieuwenhuis,Alex Rodriguez,0
+2934,Kirk Nieuwenhuis,Andres Torres,0
+2935,Kirk Nieuwenhuis,Aramis Ramirez,0
+2936,Kirk Nieuwenhuis,B. j. Upton,0
+2937,Kirk Nieuwenhuis,Brent Lillibridge,0
+2938,Kirk Nieuwenhuis,Brett Gardner,0
+2939,Kirk Nieuwenhuis,Brett Lawrie,0
+2940,Kirk Nieuwenhuis,Brian Mccann,0
+2941,Kirk Nieuwenhuis,Chad Tracy,0
+2942,Kirk Nieuwenhuis,Chipper Jones,0
+2943,Kirk Nieuwenhuis,Chris Carter,0
+2944,Kirk Nieuwenhuis,Chris Davis,0
+2945,Kirk Nieuwenhuis,Chris Iannetta,0
+2946,Kirk Nieuwenhuis,Colby Rasmus,0
+2947,Kirk Nieuwenhuis,Corey Hart,0
+2948,Kirk Nieuwenhuis,Curtis Granderson,0
+2949,Kirk Nieuwenhuis,Daniel Murphy,0
+2950,Kirk Nieuwenhuis,Danny Espinosa,0
+2951,Kirk Nieuwenhuis,David Murphy,0
+2952,Kirk Nieuwenhuis,David Wright,0
+2953,Kirk Nieuwenhuis,Dayán Viciedo,0
+2954,Kirk Nieuwenhuis,Desmond Jennings,0
+2955,Kirk Nieuwenhuis,Eduardo Escobar,0
+2956,Kirk Nieuwenhuis,Eric Hosmer,0
+2957,Kirk Nieuwenhuis,Erick Aybar,0
+2958,Kirk Nieuwenhuis,Gaby Sanchez,0
+2959,Kirk Nieuwenhuis,Garrett Jones,0
+2960,Kirk Nieuwenhuis,Geovany Soto,0
+2961,Kirk Nieuwenhuis,Ichiro Suzuki,0
+2962,Kirk Nieuwenhuis,Ike Davis,0
+2963,Kirk Nieuwenhuis,J. p. Arencibia,0
+2964,Kirk Nieuwenhuis,Jeff Mathis,0
+2965,Kirk Nieuwenhuis,Jesus Montero,0
+2966,Kirk Nieuwenhuis,Jhonny Peralta,0
+2967,Kirk Nieuwenhuis,Josh Donaldson,0
+2968,Kirk Nieuwenhuis,Josh Hamilton,0
+2969,Kirk Nieuwenhuis,Kendrys Morales,0
+2970,Kirk Nieuwenhuis,Manny Machado,0
+2971,Kirk Nieuwenhuis,Mark Reynolds,0
+2972,Kirk Nieuwenhuis,Mark Trumbo,0
+2973,Kirk Nieuwenhuis,Martin Prado,0
+2974,Kirk Nieuwenhuis,Matt Wieters,0
+2975,Kirk Nieuwenhuis,Michael Brantley,0
+2976,Kirk Nieuwenhuis,Mike Moustakas,0
+2977,Kirk Nieuwenhuis,Mike Napoli,0
+2978,Kirk Nieuwenhuis,Mike Trout,0
+2979,Kirk Nieuwenhuis,Nelson Cruz,0
+2980,Kirk Nieuwenhuis,Nori Aoki,0
+2981,Kirk Nieuwenhuis,Nyjer Morgan,0
+2982,Kirk Nieuwenhuis,Placido Polanco,0
+2983,Kirk Nieuwenhuis,Rick Ankiel,0
+2984,Kirk Nieuwenhuis,Robinson Cano,0
+2985,Kirk Nieuwenhuis,Steve Lombardozzi,0
+2986,Kirk Nieuwenhuis,Torii Hunter,0
+2987,Kirk Nieuwenhuis,Will Middlebrooks,0
+2988,Kirk Nieuwenhuis,Wilson Ramos,0
+2989,Kirk Nieuwenhuis,Yoenis Céspedes,0
+2990,Manny Machado,A. j. Pierzynski,0
+2991,Manny Machado,Adam Dunn,0
+2992,Manny Machado,Adam Lind,0
+2993,Manny Machado,Adrian Beltre,0
+2994,Manny Machado,Albert Pujols,0
+2995,Manny Machado,Alcides Escobar,0
+2996,Manny Machado,Alejandro De aza,0
+2997,Manny Machado,Alex Gordon,0
+2998,Manny Machado,Alex Rodriguez,0
+2999,Manny Machado,Andres Torres,0
+3000,Manny Machado,Aramis Ramirez,0
+3001,Manny Machado,B. j. Upton,0
+3002,Manny Machado,Brent Lillibridge,0
+3003,Manny Machado,Brett Gardner,0
+3004,Manny Machado,Brett Lawrie,0
+3005,Manny Machado,Brian Mccann,0
+3006,Manny Machado,Chad Tracy,0
+3007,Manny Machado,Chipper Jones,0
+3008,Manny Machado,Chris Carter,0
+3009,Manny Machado,Chris Davis,0
+3010,Manny Machado,Chris Iannetta,0
+3011,Manny Machado,Colby Rasmus,0
+3012,Manny Machado,Corey Hart,0
+3013,Manny Machado,Curtis Granderson,0
+3014,Manny Machado,Daniel Murphy,0
+3015,Manny Machado,Danny Espinosa,0
+3016,Manny Machado,David Murphy,0
+3017,Manny Machado,David Wright,0
+3018,Manny Machado,Dayán Viciedo,0
+3019,Manny Machado,Desmond Jennings,0
+3020,Manny Machado,Eduardo Escobar,0
+3021,Manny Machado,Eric Hosmer,0
+3022,Manny Machado,Erick Aybar,0
+3023,Manny Machado,Gaby Sanchez,0
+3024,Manny Machado,Garrett Jones,0
+3025,Manny Machado,Geovany Soto,0
+3026,Manny Machado,Ichiro Suzuki,0
+3027,Manny Machado,Ike Davis,0
+3028,Manny Machado,J. p. Arencibia,0
+3029,Manny Machado,Jeff Mathis,0
+3030,Manny Machado,Jesus Montero,0
+3031,Manny Machado,Jhonny Peralta,0
+3032,Manny Machado,Josh Donaldson,0
+3033,Manny Machado,Josh Hamilton,0
+3034,Manny Machado,Kendrys Morales,0
+3035,Manny Machado,Kirk Nieuwenhuis,0
+3036,Manny Machado,Mark Reynolds,0
+3037,Manny Machado,Mark Trumbo,1
+3038,Manny Machado,Martin Prado,0
+3039,Manny Machado,Matt Wieters,0
+3040,Manny Machado,Michael Brantley,0
+3041,Manny Machado,Mike Moustakas,0
+3042,Manny Machado,Mike Napoli,0
+3043,Manny Machado,Mike Trout,0
+3044,Manny Machado,Nelson Cruz,0
+3045,Manny Machado,Nori Aoki,0
+3046,Manny Machado,Nyjer Morgan,0
+3047,Manny Machado,Placido Polanco,0
+3048,Manny Machado,Rick Ankiel,0
+3049,Manny Machado,Robinson Cano,0
+3050,Manny Machado,Steve Lombardozzi,0
+3051,Manny Machado,Torii Hunter,0
+3052,Manny Machado,Will Middlebrooks,0
+3053,Manny Machado,Wilson Ramos,0
+3054,Manny Machado,Yoenis Céspedes,0
+3055,Mark Reynolds,A. j. Pierzynski,0
+3056,Mark Reynolds,Adam Dunn,3
+3057,Mark Reynolds,Adam Lind,0
+3058,Mark Reynolds,Adrian Beltre,0
+3059,Mark Reynolds,Albert Pujols,0
+3060,Mark Reynolds,Alcides Escobar,0
+3061,Mark Reynolds,Alejandro De aza,3
+3062,Mark Reynolds,Alex Gordon,0
+3063,Mark Reynolds,Alex Rodriguez,0
+3064,Mark Reynolds,Andres Torres,0
+3065,Mark Reynolds,Aramis Ramirez,0
+3066,Mark Reynolds,B. j. Upton,0
+3067,Mark Reynolds,Brent Lillibridge,3
+3068,Mark Reynolds,Brett Gardner,0
+3069,Mark Reynolds,Brett Lawrie,0
+3070,Mark Reynolds,Brian Mccann,0
+3071,Mark Reynolds,Chad Tracy,0
+3072,Mark Reynolds,Chipper Jones,0
+3073,Mark Reynolds,Chris Carter,0
+3074,Mark Reynolds,Chris Davis,0
+3075,Mark Reynolds,Chris Iannetta,0
+3076,Mark Reynolds,Colby Rasmus,0
+3077,Mark Reynolds,Corey Hart,0
+3078,Mark Reynolds,Curtis Granderson,0
+3079,Mark Reynolds,Daniel Murphy,0
+3080,Mark Reynolds,Danny Espinosa,0
+3081,Mark Reynolds,David Murphy,0
+3082,Mark Reynolds,David Wright,0
+3083,Mark Reynolds,Dayán Viciedo,3
+3084,Mark Reynolds,Desmond Jennings,0
+3085,Mark Reynolds,Eduardo Escobar,0
+3086,Mark Reynolds,Eric Hosmer,0
+3087,Mark Reynolds,Erick Aybar,0
+3088,Mark Reynolds,Gaby Sanchez,0
+3089,Mark Reynolds,Garrett Jones,0
+3090,Mark Reynolds,Geovany Soto,0
+3091,Mark Reynolds,Ichiro Suzuki,0
+3092,Mark Reynolds,Ike Davis,0
+3093,Mark Reynolds,J. p. Arencibia,0
+3094,Mark Reynolds,Jeff Mathis,0
+3095,Mark Reynolds,Jesus Montero,0
+3096,Mark Reynolds,Jhonny Peralta,0
+3097,Mark Reynolds,Josh Donaldson,0
+3098,Mark Reynolds,Josh Hamilton,3
+3099,Mark Reynolds,Kendrys Morales,0
+3100,Mark Reynolds,Kirk Nieuwenhuis,0
+3101,Mark Reynolds,Manny Machado,3
+3102,Mark Reynolds,Mark Trumbo,4
+3103,Mark Reynolds,Martin Prado,0
+3104,Mark Reynolds,Matt Wieters,0
+3105,Mark Reynolds,Michael Brantley,0
+3106,Mark Reynolds,Mike Moustakas,0
+3107,Mark Reynolds,Mike Napoli,0
+3108,Mark Reynolds,Mike Trout,3
+3109,Mark Reynolds,Nelson Cruz,3
+3110,Mark Reynolds,Nori Aoki,0
+3111,Mark Reynolds,Nyjer Morgan,0
+3112,Mark Reynolds,Placido Polanco,0
+3113,Mark Reynolds,Rick Ankiel,0
+3114,Mark Reynolds,Robinson Cano,0
+3115,Mark Reynolds,Steve Lombardozzi,0
+3116,Mark Reynolds,Torii Hunter,0
+3117,Mark Reynolds,Will Middlebrooks,0
+3118,Mark Reynolds,Wilson Ramos,0
+3119,Mark Reynolds,Yoenis Céspedes,0
+3120,Mark Trumbo,A. j. Pierzynski,0
+3121,Mark Trumbo,Adam Dunn,0
+3122,Mark Trumbo,Adam Lind,0
+3123,Mark Trumbo,Adrian Beltre,0
+3124,Mark Trumbo,Albert Pujols,0
+3125,Mark Trumbo,Alcides Escobar,0
+3126,Mark Trumbo,Alejandro De aza,0
+3127,Mark Trumbo,Alex Gordon,0
+3128,Mark Trumbo,Alex Rodriguez,0
+3129,Mark Trumbo,Andres Torres,0
+3130,Mark Trumbo,Aramis Ramirez,0
+3131,Mark Trumbo,B. j. Upton,0
+3132,Mark Trumbo,Brent Lillibridge,0
+3133,Mark Trumbo,Brett Gardner,0
+3134,Mark Trumbo,Brett Lawrie,0
+3135,Mark Trumbo,Brian Mccann,0
+3136,Mark Trumbo,Chad Tracy,0
+3137,Mark Trumbo,Chipper Jones,0
+3138,Mark Trumbo,Chris Carter,0
+3139,Mark Trumbo,Chris Davis,0
+3140,Mark Trumbo,Chris Iannetta,0
+3141,Mark Trumbo,Colby Rasmus,0
+3142,Mark Trumbo,Corey Hart,0
+3143,Mark Trumbo,Curtis Granderson,0
+3144,Mark Trumbo,Daniel Murphy,0
+3145,Mark Trumbo,Danny Espinosa,0
+3146,Mark Trumbo,David Murphy,0
+3147,Mark Trumbo,David Wright,0
+3148,Mark Trumbo,Dayán Viciedo,0
+3149,Mark Trumbo,Desmond Jennings,0
+3150,Mark Trumbo,Eduardo Escobar,0
+3151,Mark Trumbo,Eric Hosmer,0
+3152,Mark Trumbo,Erick Aybar,0
+3153,Mark Trumbo,Gaby Sanchez,0
+3154,Mark Trumbo,Garrett Jones,0
+3155,Mark Trumbo,Geovany Soto,0
+3156,Mark Trumbo,Ichiro Suzuki,0
+3157,Mark Trumbo,Ike Davis,0
+3158,Mark Trumbo,J. p. Arencibia,0
+3159,Mark Trumbo,Jeff Mathis,0
+3160,Mark Trumbo,Jesus Montero,0
+3161,Mark Trumbo,Jhonny Peralta,0
+3162,Mark Trumbo,Josh Donaldson,0
+3163,Mark Trumbo,Josh Hamilton,0
+3164,Mark Trumbo,Kendrys Morales,0
+3165,Mark Trumbo,Kirk Nieuwenhuis,0
+3166,Mark Trumbo,Manny Machado,0
+3167,Mark Trumbo,Mark Reynolds,0
+3168,Mark Trumbo,Martin Prado,0
+3169,Mark Trumbo,Matt Wieters,0
+3170,Mark Trumbo,Michael Brantley,0
+3171,Mark Trumbo,Mike Moustakas,0
+3172,Mark Trumbo,Mike Napoli,0
+3173,Mark Trumbo,Mike Trout,0
+3174,Mark Trumbo,Nelson Cruz,0
+3175,Mark Trumbo,Nori Aoki,0
+3176,Mark Trumbo,Nyjer Morgan,0
+3177,Mark Trumbo,Placido Polanco,0
+3178,Mark Trumbo,Rick Ankiel,0
+3179,Mark Trumbo,Robinson Cano,0
+3180,Mark Trumbo,Steve Lombardozzi,0
+3181,Mark Trumbo,Torii Hunter,0
+3182,Mark Trumbo,Will Middlebrooks,0
+3183,Mark Trumbo,Wilson Ramos,0
+3184,Mark Trumbo,Yoenis Céspedes,0
+3185,Martin Prado,A. j. Pierzynski,0
+3186,Martin Prado,Adam Dunn,0
+3187,Martin Prado,Adam Lind,0
+3188,Martin Prado,Adrian Beltre,0
+3189,Martin Prado,Albert Pujols,0
+3190,Martin Prado,Alcides Escobar,0
+3191,Martin Prado,Alejandro De aza,0
+3192,Martin Prado,Alex Gordon,0
+3193,Martin Prado,Alex Rodriguez,0
+3194,Martin Prado,Andres Torres,0
+3195,Martin Prado,Aramis Ramirez,0
+3196,Martin Prado,B. j. Upton,0
+3197,Martin Prado,Brent Lillibridge,0
+3198,Martin Prado,Brett Gardner,0
+3199,Martin Prado,Brett Lawrie,0
+3200,Martin Prado,Brian Mccann,0
+3201,Martin Prado,Chad Tracy,0
+3202,Martin Prado,Chipper Jones,0
+3203,Martin Prado,Chris Carter,0
+3204,Martin Prado,Chris Davis,0
+3205,Martin Prado,Chris Iannetta,0
+3206,Martin Prado,Colby Rasmus,0
+3207,Martin Prado,Corey Hart,0
+3208,Martin Prado,Curtis Granderson,0
+3209,Martin Prado,Daniel Murphy,0
+3210,Martin Prado,Danny Espinosa,0
+3211,Martin Prado,David Murphy,0
+3212,Martin Prado,David Wright,0
+3213,Martin Prado,Dayán Viciedo,0
+3214,Martin Prado,Desmond Jennings,0
+3215,Martin Prado,Eduardo Escobar,0
+3216,Martin Prado,Eric Hosmer,0
+3217,Martin Prado,Erick Aybar,0
+3218,Martin Prado,Gaby Sanchez,0
+3219,Martin Prado,Garrett Jones,0
+3220,Martin Prado,Geovany Soto,0
+3221,Martin Prado,Ichiro Suzuki,0
+3222,Martin Prado,Ike Davis,0
+3223,Martin Prado,J. p. Arencibia,0
+3224,Martin Prado,Jeff Mathis,0
+3225,Martin Prado,Jesus Montero,0
+3226,Martin Prado,Jhonny Peralta,0
+3227,Martin Prado,Josh Donaldson,0
+3228,Martin Prado,Josh Hamilton,0
+3229,Martin Prado,Kendrys Morales,0
+3230,Martin Prado,Kirk Nieuwenhuis,0
+3231,Martin Prado,Manny Machado,0
+3232,Martin Prado,Mark Reynolds,0
+3233,Martin Prado,Mark Trumbo,0
+3234,Martin Prado,Matt Wieters,0
+3235,Martin Prado,Michael Brantley,0
+3236,Martin Prado,Mike Moustakas,0
+3237,Martin Prado,Mike Napoli,0
+3238,Martin Prado,Mike Trout,0
+3239,Martin Prado,Nelson Cruz,0
+3240,Martin Prado,Nori Aoki,0
+3241,Martin Prado,Nyjer Morgan,0
+3242,Martin Prado,Placido Polanco,0
+3243,Martin Prado,Rick Ankiel,0
+3244,Martin Prado,Robinson Cano,0
+3245,Martin Prado,Steve Lombardozzi,0
+3246,Martin Prado,Torii Hunter,0
+3247,Martin Prado,Will Middlebrooks,0
+3248,Martin Prado,Wilson Ramos,0
+3249,Martin Prado,Yoenis Céspedes,0
+3250,Matt Wieters,A. j. Pierzynski,0
+3251,Matt Wieters,Adam Dunn,0
+3252,Matt Wieters,Adam Lind,0
+3253,Matt Wieters,Adrian Beltre,0
+3254,Matt Wieters,Albert Pujols,0
+3255,Matt Wieters,Alcides Escobar,0
+3256,Matt Wieters,Alejandro De aza,0
+3257,Matt Wieters,Alex Gordon,0
+3258,Matt Wieters,Alex Rodriguez,0
+3259,Matt Wieters,Andres Torres,0
+3260,Matt Wieters,Aramis Ramirez,0
+3261,Matt Wieters,B. j. Upton,0
+3262,Matt Wieters,Brent Lillibridge,0
+3263,Matt Wieters,Brett Gardner,0
+3264,Matt Wieters,Brett Lawrie,0
+3265,Matt Wieters,Brian Mccann,0
+3266,Matt Wieters,Chad Tracy,0
+3267,Matt Wieters,Chipper Jones,0
+3268,Matt Wieters,Chris Carter,0
+3269,Matt Wieters,Chris Davis,0
+3270,Matt Wieters,Chris Iannetta,0
+3271,Matt Wieters,Colby Rasmus,0
+3272,Matt Wieters,Corey Hart,0
+3273,Matt Wieters,Curtis Granderson,0
+3274,Matt Wieters,Daniel Murphy,0
+3275,Matt Wieters,Danny Espinosa,0
+3276,Matt Wieters,David Murphy,0
+3277,Matt Wieters,David Wright,0
+3278,Matt Wieters,Dayán Viciedo,0
+3279,Matt Wieters,Desmond Jennings,0
+3280,Matt Wieters,Eduardo Escobar,0
+3281,Matt Wieters,Eric Hosmer,0
+3282,Matt Wieters,Erick Aybar,0
+3283,Matt Wieters,Gaby Sanchez,0
+3284,Matt Wieters,Garrett Jones,0
+3285,Matt Wieters,Geovany Soto,0
+3286,Matt Wieters,Ichiro Suzuki,0
+3287,Matt Wieters,Ike Davis,0
+3288,Matt Wieters,J. p. Arencibia,0
+3289,Matt Wieters,Jeff Mathis,0
+3290,Matt Wieters,Jesus Montero,0
+3291,Matt Wieters,Jhonny Peralta,0
+3292,Matt Wieters,Josh Donaldson,0
+3293,Matt Wieters,Josh Hamilton,0
+3294,Matt Wieters,Kendrys Morales,0
+3295,Matt Wieters,Kirk Nieuwenhuis,0
+3296,Matt Wieters,Manny Machado,0
+3297,Matt Wieters,Mark Reynolds,0
+3298,Matt Wieters,Mark Trumbo,0
+3299,Matt Wieters,Martin Prado,0
+3300,Matt Wieters,Michael Brantley,0
+3301,Matt Wieters,Mike Moustakas,0
+3302,Matt Wieters,Mike Napoli,0
+3303,Matt Wieters,Mike Trout,0
+3304,Matt Wieters,Nelson Cruz,0
+3305,Matt Wieters,Nori Aoki,0
+3306,Matt Wieters,Nyjer Morgan,0
+3307,Matt Wieters,Placido Polanco,0
+3308,Matt Wieters,Rick Ankiel,0
+3309,Matt Wieters,Robinson Cano,0
+3310,Matt Wieters,Steve Lombardozzi,0
+3311,Matt Wieters,Torii Hunter,0
+3312,Matt Wieters,Will Middlebrooks,0
+3313,Matt Wieters,Wilson Ramos,0
+3314,Matt Wieters,Yoenis Céspedes,0
+3315,Michael Brantley,A. j. Pierzynski,0
+3316,Michael Brantley,Adam Dunn,0
+3317,Michael Brantley,Adam Lind,0
+3318,Michael Brantley,Adrian Beltre,0
+3319,Michael Brantley,Albert Pujols,0
+3320,Michael Brantley,Alcides Escobar,0
+3321,Michael Brantley,Alejandro De aza,0
+3322,Michael Brantley,Alex Gordon,0
+3323,Michael Brantley,Alex Rodriguez,0
+3324,Michael Brantley,Andres Torres,0
+3325,Michael Brantley,Aramis Ramirez,0
+3326,Michael Brantley,B. j. Upton,0
+3327,Michael Brantley,Brent Lillibridge,0
+3328,Michael Brantley,Brett Gardner,0
+3329,Michael Brantley,Brett Lawrie,0
+3330,Michael Brantley,Brian Mccann,0
+3331,Michael Brantley,Chad Tracy,0
+3332,Michael Brantley,Chipper Jones,0
+3333,Michael Brantley,Chris Carter,0
+3334,Michael Brantley,Chris Davis,0
+3335,Michael Brantley,Chris Iannetta,0
+3336,Michael Brantley,Colby Rasmus,0
+3337,Michael Brantley,Corey Hart,0
+3338,Michael Brantley,Curtis Granderson,0
+3339,Michael Brantley,Daniel Murphy,0
+3340,Michael Brantley,Danny Espinosa,0
+3341,Michael Brantley,David Murphy,0
+3342,Michael Brantley,David Wright,0
+3343,Michael Brantley,Dayán Viciedo,0
+3344,Michael Brantley,Desmond Jennings,0
+3345,Michael Brantley,Eduardo Escobar,0
+3346,Michael Brantley,Eric Hosmer,0
+3347,Michael Brantley,Erick Aybar,0
+3348,Michael Brantley,Gaby Sanchez,0
+3349,Michael Brantley,Garrett Jones,0
+3350,Michael Brantley,Geovany Soto,0
+3351,Michael Brantley,Ichiro Suzuki,0
+3352,Michael Brantley,Ike Davis,0
+3353,Michael Brantley,J. p. Arencibia,0
+3354,Michael Brantley,Jeff Mathis,0
+3355,Michael Brantley,Jesus Montero,0
+3356,Michael Brantley,Jhonny Peralta,0
+3357,Michael Brantley,Josh Donaldson,0
+3358,Michael Brantley,Josh Hamilton,0
+3359,Michael Brantley,Kendrys Morales,0
+3360,Michael Brantley,Kirk Nieuwenhuis,0
+3361,Michael Brantley,Manny Machado,0
+3362,Michael Brantley,Mark Reynolds,0
+3363,Michael Brantley,Mark Trumbo,0
+3364,Michael Brantley,Martin Prado,0
+3365,Michael Brantley,Matt Wieters,0
+3366,Michael Brantley,Mike Moustakas,0
+3367,Michael Brantley,Mike Napoli,0
+3368,Michael Brantley,Mike Trout,0
+3369,Michael Brantley,Nelson Cruz,0
+3370,Michael Brantley,Nori Aoki,0
+3371,Michael Brantley,Nyjer Morgan,0
+3372,Michael Brantley,Placido Polanco,0
+3373,Michael Brantley,Rick Ankiel,0
+3374,Michael Brantley,Robinson Cano,0
+3375,Michael Brantley,Steve Lombardozzi,0
+3376,Michael Brantley,Torii Hunter,0
+3377,Michael Brantley,Will Middlebrooks,0
+3378,Michael Brantley,Wilson Ramos,0
+3379,Michael Brantley,Yoenis Céspedes,0
+3380,Mike Moustakas,A. j. Pierzynski,0
+3381,Mike Moustakas,Adam Dunn,0
+3382,Mike Moustakas,Adam Lind,0
+3383,Mike Moustakas,Adrian Beltre,0
+3384,Mike Moustakas,Albert Pujols,0
+3385,Mike Moustakas,Alcides Escobar,0
+3386,Mike Moustakas,Alejandro De aza,0
+3387,Mike Moustakas,Alex Gordon,0
+3388,Mike Moustakas,Alex Rodriguez,0
+3389,Mike Moustakas,Andres Torres,0
+3390,Mike Moustakas,Aramis Ramirez,0
+3391,Mike Moustakas,B. j. Upton,0
+3392,Mike Moustakas,Brent Lillibridge,0
+3393,Mike Moustakas,Brett Gardner,0
+3394,Mike Moustakas,Brett Lawrie,0
+3395,Mike Moustakas,Brian Mccann,0
+3396,Mike Moustakas,Chad Tracy,0
+3397,Mike Moustakas,Chipper Jones,0
+3398,Mike Moustakas,Chris Carter,0
+3399,Mike Moustakas,Chris Davis,0
+3400,Mike Moustakas,Chris Iannetta,0
+3401,Mike Moustakas,Colby Rasmus,0
+3402,Mike Moustakas,Corey Hart,0
+3403,Mike Moustakas,Curtis Granderson,0
+3404,Mike Moustakas,Daniel Murphy,0
+3405,Mike Moustakas,Danny Espinosa,0
+3406,Mike Moustakas,David Murphy,0
+3407,Mike Moustakas,David Wright,0
+3408,Mike Moustakas,Dayán Viciedo,0
+3409,Mike Moustakas,Desmond Jennings,0
+3410,Mike Moustakas,Eduardo Escobar,0
+3411,Mike Moustakas,Eric Hosmer,0
+3412,Mike Moustakas,Erick Aybar,0
+3413,Mike Moustakas,Gaby Sanchez,0
+3414,Mike Moustakas,Garrett Jones,0
+3415,Mike Moustakas,Geovany Soto,0
+3416,Mike Moustakas,Ichiro Suzuki,0
+3417,Mike Moustakas,Ike Davis,0
+3418,Mike Moustakas,J. p. Arencibia,0
+3419,Mike Moustakas,Jeff Mathis,0
+3420,Mike Moustakas,Jesus Montero,0
+3421,Mike Moustakas,Jhonny Peralta,0
+3422,Mike Moustakas,Josh Donaldson,0
+3423,Mike Moustakas,Josh Hamilton,0
+3424,Mike Moustakas,Kendrys Morales,0
+3425,Mike Moustakas,Kirk Nieuwenhuis,0
+3426,Mike Moustakas,Manny Machado,0
+3427,Mike Moustakas,Mark Reynolds,0
+3428,Mike Moustakas,Mark Trumbo,0
+3429,Mike Moustakas,Martin Prado,0
+3430,Mike Moustakas,Matt Wieters,0
+3431,Mike Moustakas,Michael Brantley,0
+3432,Mike Moustakas,Mike Napoli,0
+3433,Mike Moustakas,Mike Trout,0
+3434,Mike Moustakas,Nelson Cruz,0
+3435,Mike Moustakas,Nori Aoki,0
+3436,Mike Moustakas,Nyjer Morgan,0
+3437,Mike Moustakas,Placido Polanco,0
+3438,Mike Moustakas,Rick Ankiel,0
+3439,Mike Moustakas,Robinson Cano,0
+3440,Mike Moustakas,Steve Lombardozzi,0
+3441,Mike Moustakas,Torii Hunter,0
+3442,Mike Moustakas,Will Middlebrooks,0
+3443,Mike Moustakas,Wilson Ramos,0
+3444,Mike Moustakas,Yoenis Céspedes,0
+3445,Mike Napoli,A. j. Pierzynski,0
+3446,Mike Napoli,Adam Dunn,0
+3447,Mike Napoli,Adam Lind,0
+3448,Mike Napoli,Adrian Beltre,0
+3449,Mike Napoli,Albert Pujols,0
+3450,Mike Napoli,Alcides Escobar,0
+3451,Mike Napoli,Alejandro De aza,0
+3452,Mike Napoli,Alex Gordon,0
+3453,Mike Napoli,Alex Rodriguez,0
+3454,Mike Napoli,Andres Torres,0
+3455,Mike Napoli,Aramis Ramirez,0
+3456,Mike Napoli,B. j. Upton,0
+3457,Mike Napoli,Brent Lillibridge,0
+3458,Mike Napoli,Brett Gardner,0
+3459,Mike Napoli,Brett Lawrie,0
+3460,Mike Napoli,Brian Mccann,0
+3461,Mike Napoli,Chad Tracy,0
+3462,Mike Napoli,Chipper Jones,0
+3463,Mike Napoli,Chris Carter,0
+3464,Mike Napoli,Chris Davis,0
+3465,Mike Napoli,Chris Iannetta,0
+3466,Mike Napoli,Colby Rasmus,0
+3467,Mike Napoli,Corey Hart,0
+3468,Mike Napoli,Curtis Granderson,0
+3469,Mike Napoli,Daniel Murphy,0
+3470,Mike Napoli,Danny Espinosa,0
+3471,Mike Napoli,David Murphy,0
+3472,Mike Napoli,David Wright,0
+3473,Mike Napoli,Dayán Viciedo,0
+3474,Mike Napoli,Desmond Jennings,0
+3475,Mike Napoli,Eduardo Escobar,0
+3476,Mike Napoli,Eric Hosmer,0
+3477,Mike Napoli,Erick Aybar,0
+3478,Mike Napoli,Gaby Sanchez,0
+3479,Mike Napoli,Garrett Jones,0
+3480,Mike Napoli,Geovany Soto,0
+3481,Mike Napoli,Ichiro Suzuki,0
+3482,Mike Napoli,Ike Davis,0
+3483,Mike Napoli,J. p. Arencibia,0
+3484,Mike Napoli,Jeff Mathis,0
+3485,Mike Napoli,Jesus Montero,0
+3486,Mike Napoli,Jhonny Peralta,0
+3487,Mike Napoli,Josh Donaldson,0
+3488,Mike Napoli,Josh Hamilton,0
+3489,Mike Napoli,Kendrys Morales,0
+3490,Mike Napoli,Kirk Nieuwenhuis,0
+3491,Mike Napoli,Manny Machado,0
+3492,Mike Napoli,Mark Reynolds,0
+3493,Mike Napoli,Mark Trumbo,0
+3494,Mike Napoli,Martin Prado,0
+3495,Mike Napoli,Matt Wieters,0
+3496,Mike Napoli,Michael Brantley,0
+3497,Mike Napoli,Mike Moustakas,0
+3498,Mike Napoli,Mike Trout,0
+3499,Mike Napoli,Nelson Cruz,0
+3500,Mike Napoli,Nori Aoki,0
+3501,Mike Napoli,Nyjer Morgan,0
+3502,Mike Napoli,Placido Polanco,0
+3503,Mike Napoli,Rick Ankiel,0
+3504,Mike Napoli,Robinson Cano,0
+3505,Mike Napoli,Steve Lombardozzi,0
+3506,Mike Napoli,Torii Hunter,0
+3507,Mike Napoli,Will Middlebrooks,0
+3508,Mike Napoli,Wilson Ramos,0
+3509,Mike Napoli,Yoenis Céspedes,0
+3510,Mike Trout,A. j. Pierzynski,0
+3511,Mike Trout,Adam Dunn,0
+3512,Mike Trout,Adam Lind,0
+3513,Mike Trout,Adrian Beltre,0
+3514,Mike Trout,Albert Pujols,0
+3515,Mike Trout,Alcides Escobar,0
+3516,Mike Trout,Alejandro De aza,0
+3517,Mike Trout,Alex Gordon,0
+3518,Mike Trout,Alex Rodriguez,0
+3519,Mike Trout,Andres Torres,0
+3520,Mike Trout,Aramis Ramirez,0
+3521,Mike Trout,B. j. Upton,0
+3522,Mike Trout,Brent Lillibridge,0
+3523,Mike Trout,Brett Gardner,0
+3524,Mike Trout,Brett Lawrie,0
+3525,Mike Trout,Brian Mccann,0
+3526,Mike Trout,Chad Tracy,0
+3527,Mike Trout,Chipper Jones,0
+3528,Mike Trout,Chris Carter,0
+3529,Mike Trout,Chris Davis,0
+3530,Mike Trout,Chris Iannetta,0
+3531,Mike Trout,Colby Rasmus,0
+3532,Mike Trout,Corey Hart,0
+3533,Mike Trout,Curtis Granderson,0
+3534,Mike Trout,Daniel Murphy,0
+3535,Mike Trout,Danny Espinosa,0
+3536,Mike Trout,David Murphy,0
+3537,Mike Trout,David Wright,0
+3538,Mike Trout,Dayán Viciedo,0
+3539,Mike Trout,Desmond Jennings,0
+3540,Mike Trout,Eduardo Escobar,0
+3541,Mike Trout,Eric Hosmer,0
+3542,Mike Trout,Erick Aybar,0
+3543,Mike Trout,Gaby Sanchez,0
+3544,Mike Trout,Garrett Jones,0
+3545,Mike Trout,Geovany Soto,0
+3546,Mike Trout,Ichiro Suzuki,0
+3547,Mike Trout,Ike Davis,0
+3548,Mike Trout,J. p. Arencibia,0
+3549,Mike Trout,Jeff Mathis,0
+3550,Mike Trout,Jesus Montero,0
+3551,Mike Trout,Jhonny Peralta,0
+3552,Mike Trout,Josh Donaldson,0
+3553,Mike Trout,Josh Hamilton,0
+3554,Mike Trout,Kendrys Morales,0
+3555,Mike Trout,Kirk Nieuwenhuis,0
+3556,Mike Trout,Manny Machado,0
+3557,Mike Trout,Mark Reynolds,0
+3558,Mike Trout,Mark Trumbo,1
+3559,Mike Trout,Martin Prado,0
+3560,Mike Trout,Matt Wieters,0
+3561,Mike Trout,Michael Brantley,0
+3562,Mike Trout,Mike Moustakas,0
+3563,Mike Trout,Mike Napoli,0
+3564,Mike Trout,Nelson Cruz,0
+3565,Mike Trout,Nori Aoki,0
+3566,Mike Trout,Nyjer Morgan,0
+3567,Mike Trout,Placido Polanco,0
+3568,Mike Trout,Rick Ankiel,0
+3569,Mike Trout,Robinson Cano,0
+3570,Mike Trout,Steve Lombardozzi,0
+3571,Mike Trout,Torii Hunter,0
+3572,Mike Trout,Will Middlebrooks,0
+3573,Mike Trout,Wilson Ramos,0
+3574,Mike Trout,Yoenis Céspedes,0
+3575,Nelson Cruz,A. j. Pierzynski,0
+3576,Nelson Cruz,Adam Dunn,0
+3577,Nelson Cruz,Adam Lind,0
+3578,Nelson Cruz,Adrian Beltre,0
+3579,Nelson Cruz,Albert Pujols,0
+3580,Nelson Cruz,Alcides Escobar,0
+3581,Nelson Cruz,Alejandro De aza,0
+3582,Nelson Cruz,Alex Gordon,0
+3583,Nelson Cruz,Alex Rodriguez,0
+3584,Nelson Cruz,Andres Torres,0
+3585,Nelson Cruz,Aramis Ramirez,0
+3586,Nelson Cruz,B. j. Upton,0
+3587,Nelson Cruz,Brent Lillibridge,0
+3588,Nelson Cruz,Brett Gardner,0
+3589,Nelson Cruz,Brett Lawrie,0
+3590,Nelson Cruz,Brian Mccann,0
+3591,Nelson Cruz,Chad Tracy,0
+3592,Nelson Cruz,Chipper Jones,0
+3593,Nelson Cruz,Chris Carter,0
+3594,Nelson Cruz,Chris Davis,0
+3595,Nelson Cruz,Chris Iannetta,0
+3596,Nelson Cruz,Colby Rasmus,0
+3597,Nelson Cruz,Corey Hart,0
+3598,Nelson Cruz,Curtis Granderson,0
+3599,Nelson Cruz,Daniel Murphy,0
+3600,Nelson Cruz,Danny Espinosa,0
+3601,Nelson Cruz,David Murphy,0
+3602,Nelson Cruz,David Wright,0
+3603,Nelson Cruz,Dayán Viciedo,0
+3604,Nelson Cruz,Desmond Jennings,0
+3605,Nelson Cruz,Eduardo Escobar,0
+3606,Nelson Cruz,Eric Hosmer,0
+3607,Nelson Cruz,Erick Aybar,0
+3608,Nelson Cruz,Gaby Sanchez,0
+3609,Nelson Cruz,Garrett Jones,0
+3610,Nelson Cruz,Geovany Soto,0
+3611,Nelson Cruz,Ichiro Suzuki,0
+3612,Nelson Cruz,Ike Davis,0
+3613,Nelson Cruz,J. p. Arencibia,0
+3614,Nelson Cruz,Jeff Mathis,0
+3615,Nelson Cruz,Jesus Montero,0
+3616,Nelson Cruz,Jhonny Peralta,0
+3617,Nelson Cruz,Josh Donaldson,0
+3618,Nelson Cruz,Josh Hamilton,0
+3619,Nelson Cruz,Kendrys Morales,0
+3620,Nelson Cruz,Kirk Nieuwenhuis,0
+3621,Nelson Cruz,Manny Machado,0
+3622,Nelson Cruz,Mark Reynolds,0
+3623,Nelson Cruz,Mark Trumbo,1
+3624,Nelson Cruz,Martin Prado,0
+3625,Nelson Cruz,Matt Wieters,0
+3626,Nelson Cruz,Michael Brantley,0
+3627,Nelson Cruz,Mike Moustakas,0
+3628,Nelson Cruz,Mike Napoli,0
+3629,Nelson Cruz,Mike Trout,0
+3630,Nelson Cruz,Nori Aoki,0
+3631,Nelson Cruz,Nyjer Morgan,0
+3632,Nelson Cruz,Placido Polanco,0
+3633,Nelson Cruz,Rick Ankiel,0
+3634,Nelson Cruz,Robinson Cano,0
+3635,Nelson Cruz,Steve Lombardozzi,0
+3636,Nelson Cruz,Torii Hunter,0
+3637,Nelson Cruz,Will Middlebrooks,0
+3638,Nelson Cruz,Wilson Ramos,0
+3639,Nelson Cruz,Yoenis Céspedes,0
+3640,Nori Aoki,A. j. Pierzynski,0
+3641,Nori Aoki,Adam Dunn,0
+3642,Nori Aoki,Adam Lind,0
+3643,Nori Aoki,Adrian Beltre,0
+3644,Nori Aoki,Albert Pujols,0
+3645,Nori Aoki,Alcides Escobar,0
+3646,Nori Aoki,Alejandro De aza,0
+3647,Nori Aoki,Alex Gordon,0
+3648,Nori Aoki,Alex Rodriguez,0
+3649,Nori Aoki,Andres Torres,0
+3650,Nori Aoki,Aramis Ramirez,0
+3651,Nori Aoki,B. j. Upton,0
+3652,Nori Aoki,Brent Lillibridge,0
+3653,Nori Aoki,Brett Gardner,0
+3654,Nori Aoki,Brett Lawrie,0
+3655,Nori Aoki,Brian Mccann,0
+3656,Nori Aoki,Chad Tracy,0
+3657,Nori Aoki,Chipper Jones,0
+3658,Nori Aoki,Chris Carter,0
+3659,Nori Aoki,Chris Davis,0
+3660,Nori Aoki,Chris Iannetta,0
+3661,Nori Aoki,Colby Rasmus,0
+3662,Nori Aoki,Corey Hart,0
+3663,Nori Aoki,Curtis Granderson,0
+3664,Nori Aoki,Daniel Murphy,0
+3665,Nori Aoki,Danny Espinosa,0
+3666,Nori Aoki,David Murphy,0
+3667,Nori Aoki,David Wright,0
+3668,Nori Aoki,Dayán Viciedo,0
+3669,Nori Aoki,Desmond Jennings,0
+3670,Nori Aoki,Eduardo Escobar,0
+3671,Nori Aoki,Eric Hosmer,0
+3672,Nori Aoki,Erick Aybar,0
+3673,Nori Aoki,Gaby Sanchez,0
+3674,Nori Aoki,Garrett Jones,0
+3675,Nori Aoki,Geovany Soto,0
+3676,Nori Aoki,Ichiro Suzuki,0
+3677,Nori Aoki,Ike Davis,0
+3678,Nori Aoki,J. p. Arencibia,0
+3679,Nori Aoki,Jeff Mathis,0
+3680,Nori Aoki,Jesus Montero,0
+3681,Nori Aoki,Jhonny Peralta,0
+3682,Nori Aoki,Josh Donaldson,0
+3683,Nori Aoki,Josh Hamilton,0
+3684,Nori Aoki,Kendrys Morales,0
+3685,Nori Aoki,Kirk Nieuwenhuis,0
+3686,Nori Aoki,Manny Machado,0
+3687,Nori Aoki,Mark Reynolds,0
+3688,Nori Aoki,Mark Trumbo,0
+3689,Nori Aoki,Martin Prado,0
+3690,Nori Aoki,Matt Wieters,0
+3691,Nori Aoki,Michael Brantley,0
+3692,Nori Aoki,Mike Moustakas,0
+3693,Nori Aoki,Mike Napoli,0
+3694,Nori Aoki,Mike Trout,0
+3695,Nori Aoki,Nelson Cruz,0
+3696,Nori Aoki,Nyjer Morgan,0
+3697,Nori Aoki,Placido Polanco,0
+3698,Nori Aoki,Rick Ankiel,0
+3699,Nori Aoki,Robinson Cano,0
+3700,Nori Aoki,Steve Lombardozzi,0
+3701,Nori Aoki,Torii Hunter,0
+3702,Nori Aoki,Will Middlebrooks,0
+3703,Nori Aoki,Wilson Ramos,0
+3704,Nori Aoki,Yoenis Céspedes,0
+3705,Nyjer Morgan,A. j. Pierzynski,0
+3706,Nyjer Morgan,Adam Dunn,0
+3707,Nyjer Morgan,Adam Lind,0
+3708,Nyjer Morgan,Adrian Beltre,0
+3709,Nyjer Morgan,Albert Pujols,0
+3710,Nyjer Morgan,Alcides Escobar,0
+3711,Nyjer Morgan,Alejandro De aza,0
+3712,Nyjer Morgan,Alex Gordon,0
+3713,Nyjer Morgan,Alex Rodriguez,0
+3714,Nyjer Morgan,Andres Torres,0
+3715,Nyjer Morgan,Aramis Ramirez,0
+3716,Nyjer Morgan,B. j. Upton,0
+3717,Nyjer Morgan,Brent Lillibridge,0
+3718,Nyjer Morgan,Brett Gardner,0
+3719,Nyjer Morgan,Brett Lawrie,0
+3720,Nyjer Morgan,Brian Mccann,0
+3721,Nyjer Morgan,Chad Tracy,0
+3722,Nyjer Morgan,Chipper Jones,0
+3723,Nyjer Morgan,Chris Carter,0
+3724,Nyjer Morgan,Chris Davis,0
+3725,Nyjer Morgan,Chris Iannetta,0
+3726,Nyjer Morgan,Colby Rasmus,0
+3727,Nyjer Morgan,Corey Hart,0
+3728,Nyjer Morgan,Curtis Granderson,0
+3729,Nyjer Morgan,Daniel Murphy,0
+3730,Nyjer Morgan,Danny Espinosa,0
+3731,Nyjer Morgan,David Murphy,0
+3732,Nyjer Morgan,David Wright,0
+3733,Nyjer Morgan,Dayán Viciedo,0
+3734,Nyjer Morgan,Desmond Jennings,0
+3735,Nyjer Morgan,Eduardo Escobar,0
+3736,Nyjer Morgan,Eric Hosmer,0
+3737,Nyjer Morgan,Erick Aybar,0
+3738,Nyjer Morgan,Gaby Sanchez,0
+3739,Nyjer Morgan,Garrett Jones,0
+3740,Nyjer Morgan,Geovany Soto,0
+3741,Nyjer Morgan,Ichiro Suzuki,0
+3742,Nyjer Morgan,Ike Davis,0
+3743,Nyjer Morgan,J. p. Arencibia,0
+3744,Nyjer Morgan,Jeff Mathis,0
+3745,Nyjer Morgan,Jesus Montero,0
+3746,Nyjer Morgan,Jhonny Peralta,0
+3747,Nyjer Morgan,Josh Donaldson,0
+3748,Nyjer Morgan,Josh Hamilton,0
+3749,Nyjer Morgan,Kendrys Morales,0
+3750,Nyjer Morgan,Kirk Nieuwenhuis,0
+3751,Nyjer Morgan,Manny Machado,0
+3752,Nyjer Morgan,Mark Reynolds,0
+3753,Nyjer Morgan,Mark Trumbo,0
+3754,Nyjer Morgan,Martin Prado,0
+3755,Nyjer Morgan,Matt Wieters,0
+3756,Nyjer Morgan,Michael Brantley,0
+3757,Nyjer Morgan,Mike Moustakas,0
+3758,Nyjer Morgan,Mike Napoli,0
+3759,Nyjer Morgan,Mike Trout,0
+3760,Nyjer Morgan,Nelson Cruz,0
+3761,Nyjer Morgan,Nori Aoki,0
+3762,Nyjer Morgan,Placido Polanco,3
+3763,Nyjer Morgan,Rick Ankiel,0
+3764,Nyjer Morgan,Robinson Cano,0
+3765,Nyjer Morgan,Steve Lombardozzi,0
+3766,Nyjer Morgan,Torii Hunter,0
+3767,Nyjer Morgan,Will Middlebrooks,3
+3768,Nyjer Morgan,Wilson Ramos,0
+3769,Nyjer Morgan,Yoenis Céspedes,0
+3770,Placido Polanco,A. j. Pierzynski,0
+3771,Placido Polanco,Adam Dunn,0
+3772,Placido Polanco,Adam Lind,0
+3773,Placido Polanco,Adrian Beltre,0
+3774,Placido Polanco,Albert Pujols,0
+3775,Placido Polanco,Alcides Escobar,0
+3776,Placido Polanco,Alejandro De aza,0
+3777,Placido Polanco,Alex Gordon,0
+3778,Placido Polanco,Alex Rodriguez,0
+3779,Placido Polanco,Andres Torres,0
+3780,Placido Polanco,Aramis Ramirez,0
+3781,Placido Polanco,B. j. Upton,0
+3782,Placido Polanco,Brent Lillibridge,0
+3783,Placido Polanco,Brett Gardner,0
+3784,Placido Polanco,Brett Lawrie,0
+3785,Placido Polanco,Brian Mccann,0
+3786,Placido Polanco,Chad Tracy,0
+3787,Placido Polanco,Chipper Jones,0
+3788,Placido Polanco,Chris Carter,0
+3789,Placido Polanco,Chris Davis,0
+3790,Placido Polanco,Chris Iannetta,0
+3791,Placido Polanco,Colby Rasmus,0
+3792,Placido Polanco,Corey Hart,0
+3793,Placido Polanco,Curtis Granderson,0
+3794,Placido Polanco,Daniel Murphy,0
+3795,Placido Polanco,Danny Espinosa,0
+3796,Placido Polanco,David Murphy,0
+3797,Placido Polanco,David Wright,0
+3798,Placido Polanco,Dayán Viciedo,0
+3799,Placido Polanco,Desmond Jennings,0
+3800,Placido Polanco,Eduardo Escobar,0
+3801,Placido Polanco,Eric Hosmer,0
+3802,Placido Polanco,Erick Aybar,0
+3803,Placido Polanco,Gaby Sanchez,0
+3804,Placido Polanco,Garrett Jones,0
+3805,Placido Polanco,Geovany Soto,0
+3806,Placido Polanco,Ichiro Suzuki,0
+3807,Placido Polanco,Ike Davis,0
+3808,Placido Polanco,J. p. Arencibia,0
+3809,Placido Polanco,Jeff Mathis,0
+3810,Placido Polanco,Jesus Montero,0
+3811,Placido Polanco,Jhonny Peralta,0
+3812,Placido Polanco,Josh Donaldson,0
+3813,Placido Polanco,Josh Hamilton,0
+3814,Placido Polanco,Kendrys Morales,0
+3815,Placido Polanco,Kirk Nieuwenhuis,0
+3816,Placido Polanco,Manny Machado,0
+3817,Placido Polanco,Mark Reynolds,0
+3818,Placido Polanco,Mark Trumbo,0
+3819,Placido Polanco,Martin Prado,0
+3820,Placido Polanco,Matt Wieters,0
+3821,Placido Polanco,Michael Brantley,0
+3822,Placido Polanco,Mike Moustakas,0
+3823,Placido Polanco,Mike Napoli,0
+3824,Placido Polanco,Mike Trout,0
+3825,Placido Polanco,Nelson Cruz,0
+3826,Placido Polanco,Nori Aoki,0
+3827,Placido Polanco,Nyjer Morgan,0
+3828,Placido Polanco,Rick Ankiel,0
+3829,Placido Polanco,Robinson Cano,0
+3830,Placido Polanco,Steve Lombardozzi,0
+3831,Placido Polanco,Torii Hunter,0
+3832,Placido Polanco,Will Middlebrooks,0
+3833,Placido Polanco,Wilson Ramos,0
+3834,Placido Polanco,Yoenis Céspedes,0
+3835,Rick Ankiel,A. j. Pierzynski,0
+3836,Rick Ankiel,Adam Dunn,0
+3837,Rick Ankiel,Adam Lind,0
+3838,Rick Ankiel,Adrian Beltre,0
+3839,Rick Ankiel,Albert Pujols,0
+3840,Rick Ankiel,Alcides Escobar,0
+3841,Rick Ankiel,Alejandro De aza,0
+3842,Rick Ankiel,Alex Gordon,0
+3843,Rick Ankiel,Alex Rodriguez,0
+3844,Rick Ankiel,Andres Torres,0
+3845,Rick Ankiel,Aramis Ramirez,0
+3846,Rick Ankiel,B. j. Upton,0
+3847,Rick Ankiel,Brent Lillibridge,0
+3848,Rick Ankiel,Brett Gardner,0
+3849,Rick Ankiel,Brett Lawrie,0
+3850,Rick Ankiel,Brian Mccann,0
+3851,Rick Ankiel,Chad Tracy,0
+3852,Rick Ankiel,Chipper Jones,0
+3853,Rick Ankiel,Chris Carter,0
+3854,Rick Ankiel,Chris Davis,0
+3855,Rick Ankiel,Chris Iannetta,0
+3856,Rick Ankiel,Colby Rasmus,0
+3857,Rick Ankiel,Corey Hart,0
+3858,Rick Ankiel,Curtis Granderson,0
+3859,Rick Ankiel,Daniel Murphy,0
+3860,Rick Ankiel,Danny Espinosa,0
+3861,Rick Ankiel,David Murphy,0
+3862,Rick Ankiel,David Wright,0
+3863,Rick Ankiel,Dayán Viciedo,0
+3864,Rick Ankiel,Desmond Jennings,0
+3865,Rick Ankiel,Eduardo Escobar,0
+3866,Rick Ankiel,Eric Hosmer,0
+3867,Rick Ankiel,Erick Aybar,0
+3868,Rick Ankiel,Gaby Sanchez,0
+3869,Rick Ankiel,Garrett Jones,0
+3870,Rick Ankiel,Geovany Soto,0
+3871,Rick Ankiel,Ichiro Suzuki,0
+3872,Rick Ankiel,Ike Davis,0
+3873,Rick Ankiel,J. p. Arencibia,0
+3874,Rick Ankiel,Jeff Mathis,0
+3875,Rick Ankiel,Jesus Montero,0
+3876,Rick Ankiel,Jhonny Peralta,0
+3877,Rick Ankiel,Josh Donaldson,0
+3878,Rick Ankiel,Josh Hamilton,0
+3879,Rick Ankiel,Kendrys Morales,0
+3880,Rick Ankiel,Kirk Nieuwenhuis,0
+3881,Rick Ankiel,Manny Machado,0
+3882,Rick Ankiel,Mark Reynolds,0
+3883,Rick Ankiel,Mark Trumbo,0
+3884,Rick Ankiel,Martin Prado,0
+3885,Rick Ankiel,Matt Wieters,0
+3886,Rick Ankiel,Michael Brantley,0
+3887,Rick Ankiel,Mike Moustakas,0
+3888,Rick Ankiel,Mike Napoli,0
+3889,Rick Ankiel,Mike Trout,0
+3890,Rick Ankiel,Nelson Cruz,0
+3891,Rick Ankiel,Nori Aoki,0
+3892,Rick Ankiel,Nyjer Morgan,0
+3893,Rick Ankiel,Placido Polanco,0
+3894,Rick Ankiel,Robinson Cano,0
+3895,Rick Ankiel,Steve Lombardozzi,0
+3896,Rick Ankiel,Torii Hunter,0
+3897,Rick Ankiel,Will Middlebrooks,0
+3898,Rick Ankiel,Wilson Ramos,0
+3899,Rick Ankiel,Yoenis Céspedes,0
+3900,Robinson Cano,A. j. Pierzynski,0
+3901,Robinson Cano,Adam Dunn,0
+3902,Robinson Cano,Adam Lind,0
+3903,Robinson Cano,Adrian Beltre,0
+3904,Robinson Cano,Albert Pujols,0
+3905,Robinson Cano,Alcides Escobar,0
+3906,Robinson Cano,Alejandro De aza,0
+3907,Robinson Cano,Alex Gordon,0
+3908,Robinson Cano,Alex Rodriguez,0
+3909,Robinson Cano,Andres Torres,0
+3910,Robinson Cano,Aramis Ramirez,0
+3911,Robinson Cano,B. j. Upton,0
+3912,Robinson Cano,Brent Lillibridge,0
+3913,Robinson Cano,Brett Gardner,0
+3914,Robinson Cano,Brett Lawrie,0
+3915,Robinson Cano,Brian Mccann,0
+3916,Robinson Cano,Chad Tracy,0
+3917,Robinson Cano,Chipper Jones,0
+3918,Robinson Cano,Chris Carter,0
+3919,Robinson Cano,Chris Davis,0
+3920,Robinson Cano,Chris Iannetta,0
+3921,Robinson Cano,Colby Rasmus,0
+3922,Robinson Cano,Corey Hart,0
+3923,Robinson Cano,Curtis Granderson,0
+3924,Robinson Cano,Daniel Murphy,0
+3925,Robinson Cano,Danny Espinosa,0
+3926,Robinson Cano,David Murphy,0
+3927,Robinson Cano,David Wright,0
+3928,Robinson Cano,Dayán Viciedo,0
+3929,Robinson Cano,Desmond Jennings,0
+3930,Robinson Cano,Eduardo Escobar,0
+3931,Robinson Cano,Eric Hosmer,0
+3932,Robinson Cano,Erick Aybar,0
+3933,Robinson Cano,Gaby Sanchez,0
+3934,Robinson Cano,Garrett Jones,0
+3935,Robinson Cano,Geovany Soto,0
+3936,Robinson Cano,Ichiro Suzuki,0
+3937,Robinson Cano,Ike Davis,0
+3938,Robinson Cano,J. p. Arencibia,0
+3939,Robinson Cano,Jeff Mathis,0
+3940,Robinson Cano,Jesus Montero,0
+3941,Robinson Cano,Jhonny Peralta,0
+3942,Robinson Cano,Josh Donaldson,0
+3943,Robinson Cano,Josh Hamilton,0
+3944,Robinson Cano,Kendrys Morales,0
+3945,Robinson Cano,Kirk Nieuwenhuis,0
+3946,Robinson Cano,Manny Machado,0
+3947,Robinson Cano,Mark Reynolds,0
+3948,Robinson Cano,Mark Trumbo,0
+3949,Robinson Cano,Martin Prado,0
+3950,Robinson Cano,Matt Wieters,0
+3951,Robinson Cano,Michael Brantley,0
+3952,Robinson Cano,Mike Moustakas,0
+3953,Robinson Cano,Mike Napoli,0
+3954,Robinson Cano,Mike Trout,0
+3955,Robinson Cano,Nelson Cruz,0
+3956,Robinson Cano,Nori Aoki,0
+3957,Robinson Cano,Nyjer Morgan,0
+3958,Robinson Cano,Placido Polanco,0
+3959,Robinson Cano,Rick Ankiel,0
+3960,Robinson Cano,Steve Lombardozzi,0
+3961,Robinson Cano,Torii Hunter,0
+3962,Robinson Cano,Will Middlebrooks,0
+3963,Robinson Cano,Wilson Ramos,0
+3964,Robinson Cano,Yoenis Céspedes,0
+3965,Steve Lombardozzi,A. j. Pierzynski,0
+3966,Steve Lombardozzi,Adam Dunn,0
+3967,Steve Lombardozzi,Adam Lind,0
+3968,Steve Lombardozzi,Adrian Beltre,0
+3969,Steve Lombardozzi,Albert Pujols,0
+3970,Steve Lombardozzi,Alcides Escobar,0
+3971,Steve Lombardozzi,Alejandro De aza,0
+3972,Steve Lombardozzi,Alex Gordon,0
+3973,Steve Lombardozzi,Alex Rodriguez,0
+3974,Steve Lombardozzi,Andres Torres,0
+3975,Steve Lombardozzi,Aramis Ramirez,0
+3976,Steve Lombardozzi,B. j. Upton,0
+3977,Steve Lombardozzi,Brent Lillibridge,0
+3978,Steve Lombardozzi,Brett Gardner,0
+3979,Steve Lombardozzi,Brett Lawrie,0
+3980,Steve Lombardozzi,Brian Mccann,0
+3981,Steve Lombardozzi,Chad Tracy,0
+3982,Steve Lombardozzi,Chipper Jones,0
+3983,Steve Lombardozzi,Chris Carter,0
+3984,Steve Lombardozzi,Chris Davis,0
+3985,Steve Lombardozzi,Chris Iannetta,0
+3986,Steve Lombardozzi,Colby Rasmus,0
+3987,Steve Lombardozzi,Corey Hart,0
+3988,Steve Lombardozzi,Curtis Granderson,0
+3989,Steve Lombardozzi,Daniel Murphy,0
+3990,Steve Lombardozzi,Danny Espinosa,0
+3991,Steve Lombardozzi,David Murphy,0
+3992,Steve Lombardozzi,David Wright,0
+3993,Steve Lombardozzi,Dayán Viciedo,0
+3994,Steve Lombardozzi,Desmond Jennings,0
+3995,Steve Lombardozzi,Eduardo Escobar,0
+3996,Steve Lombardozzi,Eric Hosmer,0
+3997,Steve Lombardozzi,Erick Aybar,0
+3998,Steve Lombardozzi,Gaby Sanchez,0
+3999,Steve Lombardozzi,Garrett Jones,0
+4000,Steve Lombardozzi,Geovany Soto,0
+4001,Steve Lombardozzi,Ichiro Suzuki,0
+4002,Steve Lombardozzi,Ike Davis,0
+4003,Steve Lombardozzi,J. p. Arencibia,0
+4004,Steve Lombardozzi,Jeff Mathis,0
+4005,Steve Lombardozzi,Jesus Montero,0
+4006,Steve Lombardozzi,Jhonny Peralta,0
+4007,Steve Lombardozzi,Josh Donaldson,0
+4008,Steve Lombardozzi,Josh Hamilton,0
+4009,Steve Lombardozzi,Kendrys Morales,0
+4010,Steve Lombardozzi,Kirk Nieuwenhuis,0
+4011,Steve Lombardozzi,Manny Machado,0
+4012,Steve Lombardozzi,Mark Reynolds,0
+4013,Steve Lombardozzi,Mark Trumbo,0
+4014,Steve Lombardozzi,Martin Prado,0
+4015,Steve Lombardozzi,Matt Wieters,0
+4016,Steve Lombardozzi,Michael Brantley,0
+4017,Steve Lombardozzi,Mike Moustakas,0
+4018,Steve Lombardozzi,Mike Napoli,0
+4019,Steve Lombardozzi,Mike Trout,0
+4020,Steve Lombardozzi,Nelson Cruz,0
+4021,Steve Lombardozzi,Nori Aoki,0
+4022,Steve Lombardozzi,Nyjer Morgan,0
+4023,Steve Lombardozzi,Placido Polanco,0
+4024,Steve Lombardozzi,Rick Ankiel,0
+4025,Steve Lombardozzi,Robinson Cano,0
+4026,Steve Lombardozzi,Torii Hunter,0
+4027,Steve Lombardozzi,Will Middlebrooks,0
+4028,Steve Lombardozzi,Wilson Ramos,0
+4029,Steve Lombardozzi,Yoenis Céspedes,0
+4030,Torii Hunter,A. j. Pierzynski,0
+4031,Torii Hunter,Adam Dunn,0
+4032,Torii Hunter,Adam Lind,0
+4033,Torii Hunter,Adrian Beltre,0
+4034,Torii Hunter,Albert Pujols,0
+4035,Torii Hunter,Alcides Escobar,0
+4036,Torii Hunter,Alejandro De aza,0
+4037,Torii Hunter,Alex Gordon,0
+4038,Torii Hunter,Alex Rodriguez,0
+4039,Torii Hunter,Andres Torres,0
+4040,Torii Hunter,Aramis Ramirez,0
+4041,Torii Hunter,B. j. Upton,0
+4042,Torii Hunter,Brent Lillibridge,0
+4043,Torii Hunter,Brett Gardner,0
+4044,Torii Hunter,Brett Lawrie,0
+4045,Torii Hunter,Brian Mccann,0
+4046,Torii Hunter,Chad Tracy,0
+4047,Torii Hunter,Chipper Jones,0
+4048,Torii Hunter,Chris Carter,0
+4049,Torii Hunter,Chris Davis,0
+4050,Torii Hunter,Chris Iannetta,0
+4051,Torii Hunter,Colby Rasmus,0
+4052,Torii Hunter,Corey Hart,0
+4053,Torii Hunter,Curtis Granderson,0
+4054,Torii Hunter,Daniel Murphy,0
+4055,Torii Hunter,Danny Espinosa,0
+4056,Torii Hunter,David Murphy,0
+4057,Torii Hunter,David Wright,0
+4058,Torii Hunter,Dayán Viciedo,0
+4059,Torii Hunter,Desmond Jennings,0
+4060,Torii Hunter,Eduardo Escobar,0
+4061,Torii Hunter,Eric Hosmer,0
+4062,Torii Hunter,Erick Aybar,0
+4063,Torii Hunter,Gaby Sanchez,0
+4064,Torii Hunter,Garrett Jones,0
+4065,Torii Hunter,Geovany Soto,0
+4066,Torii Hunter,Ichiro Suzuki,0
+4067,Torii Hunter,Ike Davis,0
+4068,Torii Hunter,J. p. Arencibia,0
+4069,Torii Hunter,Jeff Mathis,0
+4070,Torii Hunter,Jesus Montero,0
+4071,Torii Hunter,Jhonny Peralta,0
+4072,Torii Hunter,Josh Donaldson,0
+4073,Torii Hunter,Josh Hamilton,0
+4074,Torii Hunter,Kendrys Morales,0
+4075,Torii Hunter,Kirk Nieuwenhuis,0
+4076,Torii Hunter,Manny Machado,0
+4077,Torii Hunter,Mark Reynolds,0
+4078,Torii Hunter,Mark Trumbo,0
+4079,Torii Hunter,Martin Prado,0
+4080,Torii Hunter,Matt Wieters,0
+4081,Torii Hunter,Michael Brantley,0
+4082,Torii Hunter,Mike Moustakas,0
+4083,Torii Hunter,Mike Napoli,0
+4084,Torii Hunter,Mike Trout,0
+4085,Torii Hunter,Nelson Cruz,0
+4086,Torii Hunter,Nori Aoki,0
+4087,Torii Hunter,Nyjer Morgan,0
+4088,Torii Hunter,Placido Polanco,0
+4089,Torii Hunter,Rick Ankiel,0
+4090,Torii Hunter,Robinson Cano,0
+4091,Torii Hunter,Steve Lombardozzi,0
+4092,Torii Hunter,Will Middlebrooks,0
+4093,Torii Hunter,Wilson Ramos,0
+4094,Torii Hunter,Yoenis Céspedes,0
+4095,Will Middlebrooks,A. j. Pierzynski,0
+4096,Will Middlebrooks,Adam Dunn,0
+4097,Will Middlebrooks,Adam Lind,0
+4098,Will Middlebrooks,Adrian Beltre,0
+4099,Will Middlebrooks,Albert Pujols,0
+4100,Will Middlebrooks,Alcides Escobar,0
+4101,Will Middlebrooks,Alejandro De aza,0
+4102,Will Middlebrooks,Alex Gordon,0
+4103,Will Middlebrooks,Alex Rodriguez,0
+4104,Will Middlebrooks,Andres Torres,0
+4105,Will Middlebrooks,Aramis Ramirez,0
+4106,Will Middlebrooks,B. j. Upton,0
+4107,Will Middlebrooks,Brent Lillibridge,0
+4108,Will Middlebrooks,Brett Gardner,0
+4109,Will Middlebrooks,Brett Lawrie,0
+4110,Will Middlebrooks,Brian Mccann,0
+4111,Will Middlebrooks,Chad Tracy,0
+4112,Will Middlebrooks,Chipper Jones,0
+4113,Will Middlebrooks,Chris Carter,0
+4114,Will Middlebrooks,Chris Davis,0
+4115,Will Middlebrooks,Chris Iannetta,0
+4116,Will Middlebrooks,Colby Rasmus,0
+4117,Will Middlebrooks,Corey Hart,0
+4118,Will Middlebrooks,Curtis Granderson,0
+4119,Will Middlebrooks,Daniel Murphy,0
+4120,Will Middlebrooks,Danny Espinosa,0
+4121,Will Middlebrooks,David Murphy,0
+4122,Will Middlebrooks,David Wright,0
+4123,Will Middlebrooks,Dayán Viciedo,0
+4124,Will Middlebrooks,Desmond Jennings,0
+4125,Will Middlebrooks,Eduardo Escobar,0
+4126,Will Middlebrooks,Eric Hosmer,0
+4127,Will Middlebrooks,Erick Aybar,0
+4128,Will Middlebrooks,Gaby Sanchez,0
+4129,Will Middlebrooks,Garrett Jones,0
+4130,Will Middlebrooks,Geovany Soto,0
+4131,Will Middlebrooks,Ichiro Suzuki,0
+4132,Will Middlebrooks,Ike Davis,0
+4133,Will Middlebrooks,J. p. Arencibia,0
+4134,Will Middlebrooks,Jeff Mathis,0
+4135,Will Middlebrooks,Jesus Montero,0
+4136,Will Middlebrooks,Jhonny Peralta,0
+4137,Will Middlebrooks,Josh Donaldson,0
+4138,Will Middlebrooks,Josh Hamilton,0
+4139,Will Middlebrooks,Kendrys Morales,0
+4140,Will Middlebrooks,Kirk Nieuwenhuis,0
+4141,Will Middlebrooks,Manny Machado,0
+4142,Will Middlebrooks,Mark Reynolds,0
+4143,Will Middlebrooks,Mark Trumbo,0
+4144,Will Middlebrooks,Martin Prado,0
+4145,Will Middlebrooks,Matt Wieters,0
+4146,Will Middlebrooks,Michael Brantley,0
+4147,Will Middlebrooks,Mike Moustakas,0
+4148,Will Middlebrooks,Mike Napoli,0
+4149,Will Middlebrooks,Mike Trout,0
+4150,Will Middlebrooks,Nelson Cruz,0
+4151,Will Middlebrooks,Nori Aoki,0
+4152,Will Middlebrooks,Nyjer Morgan,0
+4153,Will Middlebrooks,Placido Polanco,0
+4154,Will Middlebrooks,Rick Ankiel,0
+4155,Will Middlebrooks,Robinson Cano,0
+4156,Will Middlebrooks,Steve Lombardozzi,0
+4157,Will Middlebrooks,Torii Hunter,0
+4158,Will Middlebrooks,Wilson Ramos,0
+4159,Will Middlebrooks,Yoenis Céspedes,0
+4160,Wilson Ramos,A. j. Pierzynski,0
+4161,Wilson Ramos,Adam Dunn,0
+4162,Wilson Ramos,Adam Lind,0
+4163,Wilson Ramos,Adrian Beltre,0
+4164,Wilson Ramos,Albert Pujols,0
+4165,Wilson Ramos,Alcides Escobar,0
+4166,Wilson Ramos,Alejandro De aza,0
+4167,Wilson Ramos,Alex Gordon,0
+4168,Wilson Ramos,Alex Rodriguez,0
+4169,Wilson Ramos,Andres Torres,0
+4170,Wilson Ramos,Aramis Ramirez,0
+4171,Wilson Ramos,B. j. Upton,0
+4172,Wilson Ramos,Brent Lillibridge,0
+4173,Wilson Ramos,Brett Gardner,0
+4174,Wilson Ramos,Brett Lawrie,0
+4175,Wilson Ramos,Brian Mccann,0
+4176,Wilson Ramos,Chad Tracy,0
+4177,Wilson Ramos,Chipper Jones,0
+4178,Wilson Ramos,Chris Carter,0
+4179,Wilson Ramos,Chris Davis,0
+4180,Wilson Ramos,Chris Iannetta,0
+4181,Wilson Ramos,Colby Rasmus,0
+4182,Wilson Ramos,Corey Hart,0
+4183,Wilson Ramos,Curtis Granderson,0
+4184,Wilson Ramos,Daniel Murphy,0
+4185,Wilson Ramos,Danny Espinosa,1
+4186,Wilson Ramos,David Murphy,0
+4187,Wilson Ramos,David Wright,0
+4188,Wilson Ramos,Dayán Viciedo,0
+4189,Wilson Ramos,Desmond Jennings,0
+4190,Wilson Ramos,Eduardo Escobar,0
+4191,Wilson Ramos,Eric Hosmer,0
+4192,Wilson Ramos,Erick Aybar,0
+4193,Wilson Ramos,Gaby Sanchez,0
+4194,Wilson Ramos,Garrett Jones,0
+4195,Wilson Ramos,Geovany Soto,0
+4196,Wilson Ramos,Ichiro Suzuki,0
+4197,Wilson Ramos,Ike Davis,0
+4198,Wilson Ramos,J. p. Arencibia,0
+4199,Wilson Ramos,Jeff Mathis,0
+4200,Wilson Ramos,Jesus Montero,0
+4201,Wilson Ramos,Jhonny Peralta,0
+4202,Wilson Ramos,Josh Donaldson,0
+4203,Wilson Ramos,Josh Hamilton,0
+4204,Wilson Ramos,Kendrys Morales,0
+4205,Wilson Ramos,Kirk Nieuwenhuis,0
+4206,Wilson Ramos,Manny Machado,0
+4207,Wilson Ramos,Mark Reynolds,0
+4208,Wilson Ramos,Mark Trumbo,0
+4209,Wilson Ramos,Martin Prado,0
+4210,Wilson Ramos,Matt Wieters,0
+4211,Wilson Ramos,Michael Brantley,0
+4212,Wilson Ramos,Mike Moustakas,0
+4213,Wilson Ramos,Mike Napoli,0
+4214,Wilson Ramos,Mike Trout,0
+4215,Wilson Ramos,Nelson Cruz,0
+4216,Wilson Ramos,Nori Aoki,0
+4217,Wilson Ramos,Nyjer Morgan,0
+4218,Wilson Ramos,Placido Polanco,0
+4219,Wilson Ramos,Rick Ankiel,0
+4220,Wilson Ramos,Robinson Cano,0
+4221,Wilson Ramos,Steve Lombardozzi,0
+4222,Wilson Ramos,Torii Hunter,0
+4223,Wilson Ramos,Will Middlebrooks,0
+4224,Wilson Ramos,Yoenis Céspedes,0
+4225,Yoenis Céspedes,A. j. Pierzynski,0
+4226,Yoenis Céspedes,Adam Dunn,0
+4227,Yoenis Céspedes,Adam Lind,0
+4228,Yoenis Céspedes,Adrian Beltre,0
+4229,Yoenis Céspedes,Albert Pujols,0
+4230,Yoenis Céspedes,Alcides Escobar,0
+4231,Yoenis Céspedes,Alejandro De aza,0
+4232,Yoenis Céspedes,Alex Gordon,0
+4233,Yoenis Céspedes,Alex Rodriguez,0
+4234,Yoenis Céspedes,Andres Torres,0
+4235,Yoenis Céspedes,Aramis Ramirez,0
+4236,Yoenis Céspedes,B. j. Upton,0
+4237,Yoenis Céspedes,Brent Lillibridge,0
+4238,Yoenis Céspedes,Brett Gardner,0
+4239,Yoenis Céspedes,Brett Lawrie,0
+4240,Yoenis Céspedes,Brian Mccann,0
+4241,Yoenis Céspedes,Chad Tracy,0
+4242,Yoenis Céspedes,Chipper Jones,0
+4243,Yoenis Céspedes,Chris Carter,0
+4244,Yoenis Céspedes,Chris Davis,0
+4245,Yoenis Céspedes,Chris Iannetta,0
+4246,Yoenis Céspedes,Colby Rasmus,0
+4247,Yoenis Céspedes,Corey Hart,0
+4248,Yoenis Céspedes,Curtis Granderson,0
+4249,Yoenis Céspedes,Daniel Murphy,0
+4250,Yoenis Céspedes,Danny Espinosa,0
+4251,Yoenis Céspedes,David Murphy,0
+4252,Yoenis Céspedes,David Wright,0
+4253,Yoenis Céspedes,Dayán Viciedo,0
+4254,Yoenis Céspedes,Desmond Jennings,0
+4255,Yoenis Céspedes,Eduardo Escobar,0
+4256,Yoenis Céspedes,Eric Hosmer,0
+4257,Yoenis Céspedes,Erick Aybar,0
+4258,Yoenis Céspedes,Gaby Sanchez,0
+4259,Yoenis Céspedes,Garrett Jones,0
+4260,Yoenis Céspedes,Geovany Soto,0
+4261,Yoenis Céspedes,Ichiro Suzuki,0
+4262,Yoenis Céspedes,Ike Davis,0
+4263,Yoenis Céspedes,J. p. Arencibia,0
+4264,Yoenis Céspedes,Jeff Mathis,0
+4265,Yoenis Céspedes,Jesus Montero,0
+4266,Yoenis Céspedes,Jhonny Peralta,0
+4267,Yoenis Céspedes,Josh Donaldson,0
+4268,Yoenis Céspedes,Josh Hamilton,0
+4269,Yoenis Céspedes,Kendrys Morales,0
+4270,Yoenis Céspedes,Kirk Nieuwenhuis,0
+4271,Yoenis Céspedes,Manny Machado,0
+4272,Yoenis Céspedes,Mark Reynolds,0
+4273,Yoenis Céspedes,Mark Trumbo,0
+4274,Yoenis Céspedes,Martin Prado,0
+4275,Yoenis Céspedes,Matt Wieters,0
+4276,Yoenis Céspedes,Michael Brantley,0
+4277,Yoenis Céspedes,Mike Moustakas,0
+4278,Yoenis Céspedes,Mike Napoli,0
+4279,Yoenis Céspedes,Mike Trout,0
+4280,Yoenis Céspedes,Nelson Cruz,0
+4281,Yoenis Céspedes,Nori Aoki,0
+4282,Yoenis Céspedes,Nyjer Morgan,0
+4283,Yoenis Céspedes,Placido Polanco,0
+4284,Yoenis Céspedes,Rick Ankiel,0
+4285,Yoenis Céspedes,Robinson Cano,0
+4286,Yoenis Céspedes,Steve Lombardozzi,0
+4287,Yoenis Céspedes,Torii Hunter,0
+4288,Yoenis Céspedes,Will Middlebrooks,0
+4289,Yoenis Céspedes,Wilson Ramos,0
