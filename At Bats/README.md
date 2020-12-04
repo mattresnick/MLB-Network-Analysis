@@ -1,7 +1,9 @@
 # At Bat Networks
 
 This folder contains all code pertaining to the procurement, processing, and analysis of at-bat data
-and networks. I'll detail the overview for the functionality of each file below.
+and networks. It also contains all generated data in the folders, so bear this in mind if you decide 
+to clone the repository (~6.5 GB total). I'll detail the overview for the functionality of each code 
+file below.
 
 ## at_bat_scaper.py
 This code makes use of the baseball scraper package to retreive the relevant play-level data for analysis.
