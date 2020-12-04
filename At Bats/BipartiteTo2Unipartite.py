@@ -115,7 +115,7 @@ def forceNoParallel(savename, filename='', df=None):
     player_edges_df.to_csv(savename)
 
 
-'''
+
 for year in range(2009,2020):
     print ('\n'+str(year))
     
@@ -176,7 +176,6 @@ for year in range(2009,2020):
             new_filename = './pitcher_data/pitchtype_scores/'+pt+'/'+savename2
             forceNoParallel(savename=new_filename,filename=save_dir+savename2)
 
-'''
 
 inn_dir = './general_data/inning/'
 for year in range(2009,2020):

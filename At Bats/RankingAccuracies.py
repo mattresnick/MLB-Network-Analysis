@@ -56,9 +56,6 @@ def getAccuracy(raw_ranks, ranks, A, test_edges,a=0.01,b=20, auc=True):
 '''
 Get ranks + accuracies by year for each of batters and pitchers for each rank type.
 '''
-
-'''
-accs = []
 for year in range(2009,2020):
     for group in ['batter','pitcher']:
         
@@ -101,15 +98,13 @@ for year in range(2009,2020):
         else:
             write_df = pd.DataFrame([results], columns=col_list)
             write_df.to_csv(writedir+writefile)
-'''
+
         
 
 
 
 '''
 Get ranks + accuracies by year for each of batters and pitchers for frequency scores.
-'''
-
 '''
 for year in range(2009,2020):
     for group in ['batter','pitcher']:
@@ -155,7 +150,7 @@ for year in range(2009,2020):
             write_df.to_csv(writedir+writefile)
         
 
-'''
+
 
 
 
@@ -163,8 +158,6 @@ for year in range(2009,2020):
 
 '''
 Get ranks + accuracies by year for each of batters and pitchers for pitch type.
-'''
-
 '''
 pitch_types=['CH','CU','FC','FF','FS','FT','SI','SL']
 
@@ -208,7 +201,7 @@ for pt in pitch_types:
                 else:
                     write_df = pd.DataFrame([results], columns=col_list)
                     write_df.to_csv(writedir+writefile)
-'''
+
 
 
 
