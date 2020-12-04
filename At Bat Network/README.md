@@ -29,4 +29,25 @@ rankings. It is a collection of functions rather than a standalone, runnable fil
 
 ## RankingAccuracies.py
 This code actually processes the rankings for the various networks and calculates the performance of 
-each against a held-out set (via 5-fold cross validation).
+each against a held-out set (via 5-fold cross validation). The name implies accuracy as the metric we
+use, but it actually also produces AUC, which we primarily report instead due to a slight class imbalance
+in the data.
+
+## RankingLevels.py
+Similar to the above code, but produces scaled ranks, used for analysis of skill complexity levels.
+
+## DegreeAnalysis.py
+Produces plots for cumulative degree distributions for batter and pitcher networks over the years for 
+both in and out degrees.
+
+## SkillMobility.py
+A few different functions and driver code for determining skill mobility in the skill space of both
+batters and pitchers. It will also plot the results.
+
+## AUCPlots.py
+This code plots the various edge-prediction results. These plots look pretty nasty, but we cared more 
+about the general statistics to include in the reports, so these plots were only really for us. But
+the statistics themselves are also generated here.
+
+## LevelPlots.py
+Similar to AUCPlots, but for skill complexity results rather than edge-prediction results.
