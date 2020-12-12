@@ -7,5 +7,7 @@ the write-up, and only consists of extra information and plots that was not esse
 may have been of interest.
 
 If you have questions about reading/running the code, please reach out via email.
+
 At-bat code and analysis: Matt
+
 Trade code and analysis: Yifan
