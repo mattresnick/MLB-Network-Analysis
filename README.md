@@ -35,7 +35,7 @@ Minimal example:
 
 ### 2. Install Dependencies
 
-Ensure you have the required Python packages (original environment requirements + `baseball_scraper`, `networkx`, `SpringRank`, `birankpy`, `pandas`, `numpy`, `scipy`). Create a virtual environment if desired.
+Ensure you have the required Python packages (see `requirements.txt`). Create a virtual environment if desired.
 
 ### 3. Run the Pipeline
 
@@ -44,33 +44,89 @@ From the project root (PowerShell on Windows):
 python run_config.py --config config/example_minimal.json
 ```
 
-### 4. Outputs
+### 4. Outputs & Artifacts
 
-Results are written under the directory specified by `pipeline.paths.output_dir` (default `outputs/`). The pipeline auto-generates missing edge files for requested `score_types` (handmade, frequency, pitch_type, inning) directly from raw at-bat data, then builds unipartite player-vs-player edge lists and computes SpringRank.
+Results are written under the directory specified by `pipeline.paths.output_dir` (default `outputs/`). The pipeline auto-generates missing edge files for requested `score_types` (handmade, frequency, pitch_type, inning) directly from raw at-bat data; then builds unipartite player-vs-player edge lists and computes SpringRank.
 
-For each year and group (batter/pitcher) you will see (example for handmade):
+Multi-format output: specify `pipeline.output.formats` (any of `csv`, `parquet`, `json`). Files are produced with matching extensions. Core artifacts include:
 
-- `handmade/<group>/<year>_springrank.csv` : Raw SpringRank ordering.
-- `handmade/<group>/<year>_springrank_scaled.csv` : Scaled ranks (if `scale_ranks` true).
-- `summary_top_players.csv` : Aggregated top N (configurable via `ranking.top_n`).
+Per year / condition / group:
+- `<score_type>/<group>[/<pitch_type>|/<inning>]/<year>_springrank.*` raw SpringRank
+- `<year>_springrank_scaled.*` scaled rank (if enabled)
+
+Aggregates:
+- `summary_top_players.*` top N summary across all processed spans
+- `levels_by_year.*` scalar range for scaled ranks (if enabled)
+- `validation_report.*` nodes/edges/density per graph
+- `mobility_report.*` quartile transition mobility (optional)
+- `anomalies_report.*` anomalous rank deltas (optional)
+- `rolling_summary.*` rolling window span metadata (optional)
+
+Caching: A manifest (`outputs/manifest.json`) stores file signatures and config signature; unchanged inputs are skipped on subsequent runs.
 
 ### 5. Extending / Notes
 
-Auto edge generation is now supported for all listed score types. The scraper automatically downloads raw at-bat data for requested seasons if missing, unless `scrape.force` is true (then it re-downloads). Season 2020 is excluded by default unless `allow_2020: true` is set under `pipeline`.
+Key capabilities now implemented:
 
-### 6. Tests
+- Auto edge generation (handmade, frequency, pitch_type, inning)
+- Handedness filters (`filters.stand`, `filters.p_throws`)
+- SpringRank only (deprecated PageRank/BiRank paths removed from new pipeline)
+- Scaled ranks and levels aggregation (`levels_by_year`)
+- Multi-format outputs (CSV / Parquet / JSON)
+- Caching with file + config signatures
+- Mobility analysis (quartile transitions) `analysis.mobility.enabled`
+- Anomaly detection (YOY large scaled rank deltas) `analysis.anomalies.*`
+- Rolling window rankings `analysis.rolling.enabled` with `windows`
+- CLI subcommands (`scrape`, `edges`, `rank`, `full`)
+- FastAPI microservice (rank & player endpoints)
+- Docker image & CI workflow
 
-Lightweight config validation tests can be run with:
+Season 2020 is excluded by default unless `allow_2020: true`.
+
+### 6. CLI Usage
+
 ```
-python tests_config.py
+python cli.py --config config/example_full.json scrape   # just scrape
+python cli.py --config config/example_full.json edges    # build edges/unipartite
+python cli.py --config config/example_full.json rank     # compute rankings only
+python cli.py --config config/example_full.json full     # full pipeline
 ```
 
-### 7. Roadmap
+### 7. FastAPI Service
 
-- Additional filter application (stand / p_throws) to be extended to edge generation (placeholder parsed now).
-- Caching & incremental updates for future new seasons.
-- Provide Parquet / JSON output formats.
-- Performance tuning for large multi-condition runs.
+Run locally (after generating outputs):
+```
+uvicorn api:app --reload
+```
+Endpoints: `/ranks`, `/top`, `/player/{name}`, `/mobility`, `/anomalies`, `/health`.
 
-Feel free to open an issue or PR with improvements.
+### 8. Docker
+
+Build & run API (serving existing `outputs/`):
+```
+docker build -t mlb-net .
+docker run -p 8000:8000 -v %CD%/outputs:/app/outputs mlb-net
+```
+(On Linux/Mac replace `%CD%` with `$(pwd)`.)
+
+### 9. CI
+
+GitHub Actions workflow runs lint (syntax compile) and pytest (if tests exist) on pushes / PRs to main lines.
+
+### 10. Tests
+
+Lightweight tests (expand as needed):
+```
+pytest -q
+```
+
+### 11. Roadmap / Future Enhancements
+
+- Streamlit UI integration for config upload & execution
+- Parallel ranking computation
+- Expanded anomaly strategies (z-score, rolling volatility)
+- Additional player metadata enrichment
+- Automated weekly data update job
+
+Contributions welcome – open an issue or PR.
 
