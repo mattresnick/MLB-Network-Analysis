@@ -1,0 +1,28 @@
+{
+  "pipeline": {
+    "years": {"start": 2015, "end": 2019},
+    "allow_2020": false,
+    "dry_run": false,
+    "score_types": ["handmade", "frequency", "pitch_type", "inning"],
+    "pitch_types": ["CH","CU","FC","FF","FS","FT","SI","SL"],
+    "innings": [1,2,3,4,5,6,7,8,9],
+    "filters": {"stand": ["L","R"], "p_throws": ["L","R"]},
+    "ranking": {"top_n": 25, "scale_ranks": true, "output_levels": true},
+    "scrape": {"force": false},
+    "paths": {
+      "raw_data_dir": "At Bats/general_data",
+      "batter_dir": "At Bats/batter_data",
+      "pitcher_dir": "At Bats/pitcher_data",
+      "intermediate_dir": "At Bats/intermediate_results",
+      "output_dir": "outputs"
+    },
+    "output": {
+      "formats": ["csv", "parquet", "json"],
+      "include_edge_lists": true,
+      "include_rank_tables": true,
+      "include_scaled_rank_tables": true
+      },
+      "caching": {"enabled": true, "manifest": "outputs/manifest.json"}
+  },
+  "logging": {"level": "INFO", "progress": true}
+}
