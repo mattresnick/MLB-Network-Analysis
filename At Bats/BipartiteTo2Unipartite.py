@@ -1,205 +1,151 @@
+﻿"""Utilities to convert batter/pitcher bipartite edges into unipartite graphs."""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Optional, Tuple
+
 import numpy as np
-import networkx as nx
-import os
 import pandas as pd
 
 
+def split_by_winner(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    batter_edges = df[df.who_won == "batter"][['winner', 'loser', 'score']].copy()
+    pitcher_edges = df[df.who_won == "pitcher"][['winner', 'loser', 'score']].copy()
+    return batter_edges, pitcher_edges
 
 
-def to2Unipartite(filename,savename1='',savename2=''):
-    year=filename[:4]
-    
-    df = pd.pandas.read_csv(filename)
-    
-    # Save batter-sided edges.
-    bwe = df[df.who_won == 'batter']
-    bwe = bwe.loc[:,('winner','loser','score')]
-    batters = np.unique(bwe.loc[:,('winner')].to_numpy())
-    
-    bwe = bwe.sort_values(by=['winner', 'loser'])
-    bwe_arr = bwe.to_numpy()
-    
-    # Save pitcher-sided edges.
-    pwe = df[df.who_won == 'pitcher']
-    pwe = pwe.loc[:,('winner','loser','score')]
-    pitchers = np.unique(pwe.loc[:,('winner')].to_numpy())
-    
-    pwe = pwe.sort_values(by=['winner', 'loser'])
-    pwe_arr = pwe.to_numpy()
-    
-    # Fill in the remaining names.
-    pitchers = np.unique(np.hstack((pitchers,np.unique(bwe.loc[:,('loser')].to_numpy()))))
-    batters = np.unique(np.hstack((batters,np.unique(pwe.loc[:,('loser')].to_numpy()))))
-    
-    # Calculate group edges and save to file if filename provided.
-    getGroupEdges(bwe_arr, batters, savename1)
-    getGroupEdges(pwe_arr, pitchers, savename2)
-    
-    
-    
+def compute_unipartite_edges(group_df: pd.DataFrame) -> pd.DataFrame:
+    """Mirror the original nested-loop logic while returning a DataFrame."""
+
+    winners = np.unique(group_df['winner'].to_numpy())
+    losers = np.unique(group_df['loser'].to_numpy())
+    players = np.unique(np.hstack((winners, losers)))
+
+    group_df = group_df.sort_values(by=['winner', 'loser'])
+    group_array = group_df.to_numpy()
+
+    player_edgelist = []
+    for idx_a, player_a in enumerate(players):
+        player_a_edges = group_array[group_array[:, 0] == player_a]
+
+        for idx_b, player_b in enumerate(players):
+            if idx_a == idx_b:
+                continue
+
+            player_b_edges = group_array[group_array[:, 0] == player_b]
+
+            common_opponents = np.intersect1d(player_a_edges[:, 1], player_b_edges[:, 1])
+            if len(common_opponents) == 0:
+                continue
+
+            a_mask = np.isin(player_a_edges[:, 1], common_opponents)
+            b_mask = np.isin(player_b_edges[:, 1], common_opponents)
+
+            a_scores = player_a_edges[a_mask][:, 2]
+            b_scores = (-1) * player_b_edges[b_mask][:, 2]
+
+            score_diffs = a_scores + b_scores
+            relu_diffs = np.where(score_diffs >= 0, score_diffs, 0)
+            total_score = float(np.sum(relu_diffs))
+
+            if total_score > 0:
+                player_edgelist.append([player_a, player_b, total_score])
+
+    return pd.DataFrame(player_edgelist, columns=['winner', 'loser', 'score'])
 
 
-def getGroupEdges(gwe_arr, group_players, savename=''):
-    total_iter = len(group_players)**2
-    current_iter = 0
-    player_edgelist=[]
-    for i, player1 in enumerate(group_players):
-        player1_array_base = gwe_arr[gwe_arr[:,0]==player1]
-        
-        for j, player2 in enumerate(group_players):
-            
-            current_iter+=1
-            if current_iter%100==0:
-                progress = '%s / %s' % (str(current_iter),str(total_iter))
-                print('\r{:60}'.format('Progress: '+progress),end='')
-            
-            if i!=j:
-                # Slice out data for both players.
-                player1_array = player1_array_base.copy()
-                player2_array = gwe_arr[gwe_arr[:,0]==player2]
-                
-                # Select only scores for player 2's other group players which player 1 saw.
-                player2_array = player2_array[[i for i,p in enumerate(player2_array[:,1]) if p in player1_array[:,1]]]
-                
-                # Select only scores for player 1's other group players which player 2 saw.
-                player1_array = player1_array[[i for i,p in enumerate(player1_array[:,1]) if p in player2_array[:,1]]]
-                
-                # We want to subtract by adding a negative.
-                player2_array[:,2] = player2_array[:,2]*(-1)
-                
-                # Assuming the winners and losers are sorted lexicographically, we 
-                # can simply sum the scores element-wise.
-                score_diffs = np.add(player1_array[:,2], player2_array[:,2])
-                
-                # Make negative differences zero.
-                relu_diffs = np.where(score_diffs>=0, score_diffs, 0)
-                
-                # Sum up scores for all other group players matchups to be the edge weight.
-                total_score = np.sum(relu_diffs)
-                
-                player_edgelist.append([player1,player2,total_score])
-    print()
-    player_edges_df = pd.DataFrame(player_edgelist, columns = ['winner', 'loser', 'score'])
-    
-    player_edges_df.to_csv(savename)
+def force_no_parallel(df: pd.DataFrame) -> pd.DataFrame:
+    edge_array = df[['winner', 'loser', 'score']].to_numpy()
+    reduced_edges = []
+    visited = set()
 
+    for winner, loser, score in edge_array:
+        key = (winner, loser)
+        if key in visited:
+            continue
 
-def forceNoParallel(savename, filename='', df=None):
-    if len(filename)>0:
-        df = pd.pandas.read_csv(filename)
-    edge_list = df.to_numpy()[:,1:]
-    edge_list = np.array([e for e in edge_list if e[2]!=0])
-    
-    reduced_edgelist=[]
-    for i,edge in enumerate(edge_list):
-        print('\r{:60}'.format('Edge #'+str(i+1)+'/'+str(len(edge_list))),end='')
-        
-        player2_edges = edge_list[edge_list[:,0]==edge[1]]
-        player2_edges = player2_edges[player2_edges[:,1]==edge[0]]
-        
-        if len(player2_edges)>0:
-            
-            #print (str(edge)+' - '+str(player2_edges[0]))
-            
-            new_score = edge[2]-player2_edges[0][2]
-            
-            if edge[2]>player2_edges[0][2]:
-                reduced_edgelist.append([edge[0],edge[1],new_score])
-            elif edge[2]<player2_edges[0][2]:
-                reduced_edgelist.append([edge[0],edge[1],0])
+        reciprocal_mask = (df['winner'] == loser) & (df['loser'] == winner)
+        reciprocal_exists = reciprocal_mask.any()
+
+        if reciprocal_exists:
+            reciprocal_score = df.loc[reciprocal_mask, 'score'].iloc[0]
+            if score > reciprocal_score:
+                reduced_edges.append([winner, loser, float(score - reciprocal_score)])
+            elif score < reciprocal_score:
+                reduced_edges.append([winner, loser, 0.0])
             else:
-                reduced_edgelist.append(edge)
-                reduced_edgelist.append(player2_edges[0])
-                
-    player_edges_df = pd.DataFrame(reduced_edgelist, columns = ['winner', 'loser', 'score'])
-    player_edges_df.to_csv(savename)
+                reduced_edges.append([winner, loser, float(score)])
+                reduced_edges.append([loser, winner, float(reciprocal_score)])
+            visited.add((loser, winner))
+        else:
+            reduced_edges.append([winner, loser, float(score)])
+
+        visited.add(key)
+
+    return pd.DataFrame(reduced_edges, columns=['winner', 'loser', 'score'])
 
 
+def convert_bipartite(
+    df: pd.DataFrame,
+    *,
+    apply_parallel_reduction: bool = True,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    batter_group, pitcher_group = split_by_winner(df)
+    batter_unipartite = compute_unipartite_edges(batter_group)
+    pitcher_unipartite = compute_unipartite_edges(pitcher_group)
 
-for year in range(2009,2020):
-    print ('\n'+str(year))
-    
-    filename='./general_data/handmade/'+str(year)+'_edges_only.csv'
-    
-    savename1=str(year)+'_batter_edges.csv'
-    savename2=str(year)+'_pitcher_edges.csv'
-    
-    to2Unipartite(filename,savename1,savename2)
-    
-    new_filename = './batter_data/handmade_scores/'+savename1
-    forceNoParallel(savename=new_filename,filename=savename1)
-    
-    filename=str(year)+'_pitcher_edges.csv'
-    new_filename = './pitcher_data/handmade_scores/'+savename2
-    forceNoParallel(savename=new_filename,filename=savename2)
+    if apply_parallel_reduction:
+        batter_unipartite = force_no_parallel(batter_unipartite)
+        pitcher_unipartite = force_no_parallel(pitcher_unipartite)
+
+    return batter_unipartite, pitcher_unipartite
 
 
+def convert_and_save(
+    input_path: Path,
+    *,
+    batter_output: Optional[Path] = None,
+    pitcher_output: Optional[Path] = None,
+    apply_parallel_reduction: bool = True,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    df = pd.read_csv(input_path)
+    batter_df, pitcher_df = convert_bipartite(df, apply_parallel_reduction=apply_parallel_reduction)
 
-for year in range(2009,2020):
-    print ('\n'+str(year))
-    
-    filename='./general_data/frequency/'+str(year)+'_edges_only.csv'
-    
-    save_dir = './intermediate_results/frequency/'
-    savename1=str(year)+'_batter_edges.csv'
-    savename2=str(year)+'_pitcher_edges.csv'
-    
-    to2Unipartite(filename,save_dir+savename1,save_dir+savename2)
-    
-    new_filename = './batter_data/frequency_scores/'+savename1
-    forceNoParallel(savename=new_filename,filename=save_dir+savename1)
-    
-    filename=str(year)+'_pitcher_edges.csv'
-    new_filename = './pitcher_data/frequency_scores/'+savename2
-    forceNoParallel(savename=new_filename,filename=save_dir+savename2)
+    if batter_output:
+        batter_output.parent.mkdir(parents=True, exist_ok=True)
+        batter_df.to_csv(batter_output, index=False)
+    if pitcher_output:
+        pitcher_output.parent.mkdir(parents=True, exist_ok=True)
+        pitcher_df.to_csv(pitcher_output, index=False)
 
-
-pt_dir = './general_data/pitch_type/'
-for year in range(2009,2020):
-    
-    for pt in os.listdir(pt_dir):
-        if pt[-4:]!='.csv':
-            print ('\n'+str(year) + ' ('+pt+')')
-            
-            filename=pt_dir+pt+'/'+str(year)+'_edges_only.csv'
-            
-            save_dir = './intermediate_results/pitch_type/'+pt+'/'
-            savename1=str(year)+'_batter_edges.csv'
-            savename2=str(year)+'_pitcher_edges.csv'
-            
-            to2Unipartite(filename,save_dir+savename1,save_dir+savename2)
-            
-            new_filename = './batter_data/pitchtype_scores/'+pt+'/'+savename1
-            forceNoParallel(savename=new_filename,filename=save_dir+savename1)
-            
-            filename=str(year)+'_pitcher_edges.csv'
-            new_filename = './pitcher_data/pitchtype_scores/'+pt+'/'+savename2
-            forceNoParallel(savename=new_filename,filename=save_dir+savename2)
+    return batter_df, pitcher_df
 
 
-inn_dir = './general_data/inning/'
-for year in range(2009,2020):
-    print ('\n'+str(year))
-    for inn in os.listdir(inn_dir):
-        if inn[-4:]!='.csv' and inn!='10':
-            
-            print ('\n'+str(year) + ' ('+inn+')')
-            
-            filename=inn_dir+inn+'/'+str(year)+'_edges_only.csv'
-            
-            save_dir = './intermediate_results/inning/'+inn+'/'
-            savename1=str(year)+'_batter_edges.csv'
-            savename2=str(year)+'_pitcher_edges.csv'
-            
-            to2Unipartite(filename,save_dir+savename1,save_dir+savename2)
-            
-            new_filename = './batter_data/inning_scores/'+inn+'/'+savename1
-            forceNoParallel(savename=new_filename,filename=save_dir+savename1)
-            
-            filename=str(year)+'_pitcher_edges.csv'
-            new_filename = './pitcher_data/inning_scores/'+inn+'/'+savename2
-            forceNoParallel(savename=new_filename,filename=save_dir+savename2)
+def _parse_args():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Convert bipartite edges to unipartite graphs")
+    parser.add_argument("input", type=Path, help="CSV produced by add_edgeinfo.generate_edge_tables")
+    parser.add_argument("--batter-output", type=Path, help="Where to save the batter graph edges")
+    parser.add_argument("--pitcher-output", type=Path, help="Where to save the pitcher graph edges")
+    parser.add_argument(
+        "--skip-parallel-reduction",
+        action="store_true",
+        help="Keep reciprocal edges instead of collapsing them",
+    )
+    return parser.parse_args()
 
 
+def main():
+    args = _parse_args()
+    convert_and_save(
+        args.input,
+        batter_output=args.batter_output,
+        pitcher_output=args.pitcher_output,
+        apply_parallel_reduction=not args.skip_parallel_reduction,
+    )
 
 
+if __name__ == "__main__":
+    main()

@@ -1,207 +1,256 @@
-import numpy as np
-import networkx as nx
+﻿"""Helpers for translating raw at-bat data into weighted edges.
+
+Historically this module executed large batch jobs when imported. The
+functions below keep that behaviour opt-in so that the interactive
+interface can compose smaller, parameterised workflows.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, Optional
+from collections.abc import Iterable
+
 import pandas as pd
-import os
+
+
+@dataclass(frozen=True)
+class ScoringScheme:
+    batter: Dict[str, float]
+    pitcher: Dict[str, float]
 
 
 class Scorer:
-    def __init__(self, b_scoring, p_scoring):
-        self.b_dict = b_scoring
-        self.p_dict = p_scoring
-        
-    def scoreEvent(self, in_str):
-        batter,pitcher,event = in_str.split(',')
-        
-        # Batter-sided scoring.
-        if event in list(self.b_dict.keys()):
-            s = self.b_dict[event]
-            
-        # Pitcher-sided scoring.
-        elif event in list(self.p_dict.keys()):
-            s = (-1)*self.p_dict[event]
-            
-        # Some other event.
+    def __init__(self, scoring: ScoringScheme):
+        self.b_dict = scoring.batter
+        self.p_dict = scoring.pitcher
+
+    def score_event(self, batter: str, pitcher: str, event: str):
+        """Return winner/loser/score metadata for a single event.
+
+        A positive score indicates the batter "won" the plate appearance.
+        Negative scores are flipped so that the returned score is always
+        positive while the who_won flag captures the perspective.
+        """
+
+        if event in self.b_dict:
+            score = self.b_dict[event]
+            winner, loser, who_won = batter, pitcher, "batter"
+        elif event in self.p_dict:
+            score = self.p_dict[event]
+            winner, loser, who_won = pitcher, batter, "pitcher"
         else:
-            return 0
-        
-        if s<0: return [pitcher, batter, np.abs(s),'pitcher']
-        else: return [batter, pitcher,s,'batter']
+            return None
+
+        return winner, loser, float(abs(score)), who_won
 
 
-# Add edge data to AB data.
-def addEdgeInfotoRaw(filename, scorer):
-    print (filename)
-    #filename='at_bat_data_2019.csv'
-    df = pd.pandas.read_csv(filename)
-    
-    df.loc[:,('edge_comb')] = df.loc[:,('batter_name', 'player_name','events')].agg(','.join, axis=1)
-    df['edge_info'] = [scorer.scoreEvent(quad) for quad in df['edge_comb']]
-    
-    df = df[df.edge_info != 0]
-    
-    df.loc[:,('winner')] = [val[0] for val in df['edge_info']]
-    df.loc[:,('loser')] = [val[1] for val in df['edge_info']]
-    df.loc[:,('score')] = [val[2] for val in df['edge_info']]
-    df.loc[:,('who_won')] = [val[3] for val in df['edge_info']]
-    
-    del df['edge_comb']
-    del df['edge_info']
-    df.to_csv(filename, index=False)
+HANDCRAFTED_SCORES = ScoringScheme(
+    batter={
+        "hit_by_pitch": 1,
+        "walk": 2,
+        "single": 3,
+        "double": 6,
+        "triple": 9,
+        "home_run": 12,
+    },
+    pitcher={
+        "fielders_choice": 1,
+        "fielders_choice_out": 1,
+        "other_out": 1,
+        "field_out": 1,
+        "force_out": 2,
+        "grounded_into_double_play": 2,
+        "strikeout": 6,
+    },
+)
 
-# Create files with just edge info.
-def onlyEdges(filename, savename, pt=False, inn=False):
-    print (filename)
-    df = pd.pandas.read_csv(filename)
-    
-    if pt:
-        edge_only_df = df.loc[:,('pitch_type','winner','loser','score', 'who_won')]
-        edge_only_df = edge_only_df.groupby(['pitch_type','winner', 'loser', 'who_won']).sum()
-    elif inn:
-        edge_only_df = df.loc[:,('inning','winner','loser','score', 'who_won')]
-        edge_only_df = edge_only_df.groupby(['inning','winner', 'loser', 'who_won']).sum()
+
+def result_frequency(df: pd.DataFrame, scoring: Dict[str, float]) -> Dict[str, float]:
+    """Scale base scores by their frequency within *df*."""
+
+    events = df["events"].dropna()
+    total_results = len(events)
+    if total_results == 0:
+        return {key: 0.0 for key in scoring}
+
+    scaled: Dict[str, float] = {}
+    for event, base_score in scoring.items():
+        event_count = (events == event).sum()
+        scaled[event] = base_score * (event_count / total_results)
+    return scaled
+
+
+def build_edge_dataframe(
+    df: pd.DataFrame,
+    scorer: Scorer,
+    *,
+    drop_zero_scores: bool = True,
+) -> pd.DataFrame:
+    """Add winner/loser metadata to *df* using the provided *scorer*."""
+
+    working = df.copy()
+    pitcher_col = "pitcher_name" if "pitcher_name" in working.columns else "player_name"
+
+    edge_payload = working[["batter_name", pitcher_col, "events"]].apply(
+        lambda row: scorer.score_event(row[0], row[1], row[2]), axis=1
+    )
+
+    working["edge_info"] = edge_payload
+    if drop_zero_scores:
+        working = working[working["edge_info"].notna()].copy()
+
+    working["winner"] = working["edge_info"].apply(lambda v: v[0])
+    working["loser"] = working["edge_info"].apply(lambda v: v[1])
+    working["score"] = working["edge_info"].apply(lambda v: v[2])
+    working["who_won"] = working["edge_info"].apply(lambda v: v[3])
+
+    working = working.drop(columns=["edge_info"])
+    return working
+
+
+def aggregate_edges(
+    df: pd.DataFrame,
+    *,
+    slicer: Optional[str] = None,
+    filters: Optional[Dict[str, Iterable]] = None,
+) -> pd.DataFrame:
+    """Collapse plate appearances into a weighted edge list.
+
+    Parameters
+    ----------
+    df:
+        DataFrame returned by :func:uild_edge_dataframe.
+    slicer:
+        Optional column to retain during aggregation (e.g. `"pitch_type"` or
+        `"inning"`). When provided we keep one CSV per distinct slicer value in
+        the downstream pipeline.
+    """
+
+    group_fields = []
+    if slicer:
+        group_fields.append(slicer)
+    group_fields.extend(["winner", "loser", "who_won"])
+
+    grouped = (
+        df.groupby(group_fields, as_index=False)["score"].sum().sort_values(group_fields)
+    )
+    return grouped
+
+
+def load_raw_data(path: Path) -> pd.DataFrame:
+    df = pd.read_csv(path)
+    # Clean up legacy index columns if present.
+    if "Unnamed: 0" in df.columns:
+        df = df.drop(columns=["Unnamed: 0"])
+    return df
+
+
+def get_scorer(
+    mode: str,
+    *,
+    df_for_frequency: Optional[pd.DataFrame] = None,
+    base_scheme: ScoringScheme = HANDCRAFTED_SCORES,
+) -> Scorer:
+    mode = mode.lower()
+    if mode == "handcrafted":
+        return Scorer(base_scheme)
+    if mode == "frequency":
+        if df_for_frequency is None:
+            raise ValueError("Frequency-based scoring requires a dataframe")
+        batter_scores = result_frequency(df_for_frequency, base_scheme.batter)
+        pitcher_scores = result_frequency(df_for_frequency, base_scheme.pitcher)
+        return Scorer(ScoringScheme(batter=batter_scores, pitcher=pitcher_scores))
+    raise ValueError(f"Unknown scoring mode '{mode}'")
+
+
+def save_edge_files(
+    df: pd.DataFrame,
+    *,
+    output_dir: Path,
+    slicer: Optional[str] = None,
+    filters: Optional[Dict[str, Iterable]] = None,
+    prefix: str = "edges",
+) -> Dict[str, Path]:
+    """Persist aggregated edges keyed by slicer value.
+
+    Returns a mapping of slicer values (or 'all') to CSV file paths.
+    """
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    saved: Dict[str, Path] = {}
+
+    if slicer is None:
+        filename = output_dir / f"{prefix}_only.csv"
+        df.to_csv(filename, index=False)
+        saved["all"] = filename
+        return saved
+
+    for value, subset in df.groupby(slicer):
+        filename = output_dir / f"{value}_{prefix}.csv"
+        subset.to_csv(filename, index=False)
+        saved[str(value)] = filename
+    return saved
+
+
+def generate_edge_tables(
+    data_paths: Iterable[Path],
+    *,
+    scoring: str = "handcrafted",
+    slicer: Optional[str] = None,
+    filters: Optional[Dict[str, Iterable]] = None,
+) -> pd.DataFrame:
+    """Combine multiple season files into a single aggregated edge table."""
+
+    dataframes = [load_raw_data(path) for path in data_paths]
+    concat_df = pd.concat(dataframes, ignore_index=True)
+    scorer = get_scorer(scoring, df_for_frequency=concat_df if scoring == "frequency" else None)
+    edged = build_edge_dataframe(concat_df, scorer)
+    aggregated = aggregate_edges(edged, slicer=slicer)
+    return aggregated
+
+
+def _parse_args():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Add edge metadata to at-bat CSVs")
+    parser.add_argument("inputs", nargs="+", type=Path, help="At-bat CSV files to process")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        required=True,
+        help="Output CSV file or directory when --slicer is provided",
+    )
+    parser.add_argument(
+        "--scoring",
+        choices=["handcrafted", "frequency"],
+        default="handcrafted",
+        help="Scoring heuristic to apply",
+    )
+    parser.add_argument(
+        "--slicer",
+        type=str,
+        help="Optional column to retain while aggregating (e.g. pitch_type)",
+    )
+
+    return parser.parse_args()
+
+
+def main():
+    args = _parse_args()
+    aggregated = generate_edge_tables(args.inputs, scoring=args.scoring, slicer=args.slicer)
+
+    output_path = args.output
+    if args.slicer:
+        if not output_path.exists() or output_path.is_file():
+            output_path.mkdir(parents=True, exist_ok=True)
+        save_edge_files(aggregated, output_dir=output_path, slicer=args.slicer)
     else:
-        edge_only_df = df.loc[:,('winner','loser','score', 'who_won')]
-        edge_only_df = edge_only_df.groupby(['winner', 'loser', 'who_won']).sum()
-    
-    edge_only_df.to_csv(savename)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        aggregated.to_csv(output_path, index=False)
 
 
-# Get frequency of AB result types.
-def resultFrequency(filename, group_wins_scoring, group='batter'):
-    df = pd.pandas.read_csv(filename)
-    all_results = df['events'].to_numpy()
-    
-    group_wins_results = list(group_wins_scoring.keys())
-    
-    # Count total appearances of each result.
-    group_scoring = {}
-    for result in group_wins_results:
-        total = len(all_results[all_results==result])
-        group_scoring[result] = total
-    
-    # Count total appearances of all results together.
-    total_results = 0
-    for val in list(group_scoring.values()):
-        total_results+=val
-    
-    # Divide aggregate total by result total. Rarer events = bigger score.
-    for item in group_scoring.items():
-        scale = group_wins_scoring[item[0]]
-        group_scoring[item[0]] = scale*(item[1]/total_results)
-    
-    return group_scoring
-    
-    
-
-
-
-'''
-# Scores for batter-sided AB wins.
-base_batter_scoring = {'hit_by_pitch':1,
-                       'walk':2,
-                       'single':2,
-                       'double':7,
-                       'triple':75,
-                       'home_run':20}
-
-# Scores for pitcher-sided AB wins.
-base_pitcher_scoring = {'fielders_choice':1,
-                       'fielders_choice_out':1,
-                       'other_out':1,
-                       'field_out':1,
-                       'force_out':2,
-                       'grounded_into_double_play':2,
-                       'strikeout':6}
-
-
-
-# Scores by frequency of occurance.
-for year in range(2009,2020):
-    print (year)
-    
-    filename='./general_data/at_bat_data_'+str(year)+'.csv'
-    savename = './general_data/frequency/'+str(year)+'_edges_only.csv'
-    
-    batter_scoring = resultFrequency(filename, 
-                                     base_batter_scoring, 
-                                     group='batter')
-    
-    pitcher_scoring = resultFrequency(filename, 
-                                     base_pitcher_scoring, 
-                                     group='pitcher')
-    
-    
-    scorer = Scorer(batter_scoring, pitcher_scoring)
-    addEdgeInfotoRaw(filename, scorer)
-    onlyEdges(filename, savename)
-
-'''
-
-
-
-
-
-# Scores for batter-sided AB wins.
-base_batter_scoring = {'hit_by_pitch':1,
-                       'walk':2,
-                       'single':3,
-                       'double':6,
-                       'triple':9,
-                       'home_run':12}
-
-# Scores for pitcher-sided AB wins.
-base_pitcher_scoring = {'fielders_choice':1,
-                       'fielders_choice_out':1,
-                       'other_out':1,
-                       'field_out':1,
-                       'force_out':2,
-                       'grounded_into_double_play':2,
-                       'strikeout':6}
-
-
-
-'''
-# Handcrafted scores.
-for year in range(2009,2020):
-    print (year)
-    
-    filename='./general_data/at_bat_data_'+str(year)+'.csv'
-    savename = './general_data/handmade/'+str(year)+'_edges_only.csv'
-    
-    scorer = Scorer(base_batter_scoring, base_pitcher_scoring)
-    addEdgeInfotoRaw(filename, scorer)
-    onlyEdges(filename,savename)
-
-
-
-
-
-# Handcrafted scores with pitch type included.
-for year in range(2009,2020):
-    print (year)
-    
-    filename='./general_data/at_bat_data_'+str(year)+'.csv'
-    savename = './general_data/pitch_type/'+str(year)+'_edges_only.csv'
-    
-    scorer = Scorer(base_batter_scoring, base_pitcher_scoring)
-    addEdgeInfotoRaw(filename, scorer)
-    onlyEdges(filename,savename,pt=True)
-
-
-'''
-
-
-# Handcrafted scores with inning included.
-for year in range(2009,2020):
-    print (year)
-    
-    filename='./general_data/at_bat_data_'+str(year)+'.csv'
-    savename = './general_data/inning/'+str(year)+'_edges_only.csv'
-    
-    scorer = Scorer(base_batter_scoring, base_pitcher_scoring)
-    addEdgeInfotoRaw(filename, scorer)
-    onlyEdges(filename,savename,inn=True)
-
-
-
+if __name__ == "__main__":  # pragma: no cover - convenience CLI
+    main()
 
