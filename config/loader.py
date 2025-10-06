@@ -113,14 +113,6 @@ def load_config(path: str) -> Dict[str,Any]:
     log_level = logging_cfg.get('level','INFO')
     progress = _bool(logging_cfg.get('progress'), True)
 
-    # Analysis block (mobility/anomalies placeholders)
-    analysis_cfg = pipeline.get('analysis', {}) or {}
-    mobility_cfg = analysis_cfg.get('mobility', {}) or {}
-    mobility_enabled = _bool(mobility_cfg.get('enabled'), False)
-    # Additional analysis toggles (future): anomalies, rolling windows etc.
-    anomalies_cfg = analysis_cfg.get('anomalies', {}) or {}
-    anomalies_enabled = _bool(anomalies_cfg.get('enabled'), False)
-
     cfg = {
         'years': years,
         'score_types': score_types,
@@ -150,11 +142,7 @@ def load_config(path: str) -> Dict[str,Any]:
             'manifest': caching_manifest
         },
         'logging': {'level': log_level, 'progress': progress},
-        'allow_2020': allow_2020,
-        'analysis': {
-            'mobility': {'enabled': mobility_enabled},
-            'anomalies': {'enabled': anomalies_enabled}
-        }
+        'allow_2020': allow_2020
     }
     return cfg
 

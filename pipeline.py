@@ -7,7 +7,6 @@ from __future__ import annotations
 import os
 import json
 import time
-import hashlib
 from typing import Dict, Any, List, Tuple
 import pandas as pd
 import numpy as np
@@ -306,40 +305,6 @@ def _save_manifest(path: str, manifest: Dict[str,Any]):
     with open(path,'w',encoding='utf-8') as f:
         json.dump(manifest, f, indent=2)
 
-def _hash_file(path: str) -> str:
-    h = hashlib.sha256()
-    try:
-        with open(path,'rb') as f:
-            while True:
-                chunk = f.read(8192)
-                if not chunk:
-                    break
-                h.update(chunk)
-        return h.hexdigest()
-    except FileNotFoundError:
-        return ''
-
-def _file_signature(path: str) -> str:
-    try:
-        st = os.stat(path)
-        return f"{int(st.st_mtime)}:{st.st_size}"
-    except FileNotFoundError:
-        return ''
-
-def _config_signature(cfg: Dict[str,Any]) -> str:
-    # Use stable subset impacting ranking outputs
-    subset = {
-        'years': cfg.get('years'),
-        'score_types': cfg.get('score_types'),
-        'pitch_types': cfg.get('pitch_types'),
-        'innings': cfg.get('innings'),
-        'filters': cfg.get('filters'),
-        'ranking': cfg.get('ranking'),
-        'analysis': cfg.get('analysis',{}).get('mobility',{}).get('enabled', False)
-    }
-    data = json.dumps(subset, sort_keys=True)
-    return hashlib.sha256(data.encode('utf-8')).hexdigest()[:16]
-
 def run_pipeline(cfg: Dict[str,Any]):
     years = cfg['years']
     force = cfg['scrape']['force']
@@ -352,9 +317,6 @@ def run_pipeline(cfg: Dict[str,Any]):
     caching_enabled = cfg.get('caching', {}).get('enabled', False)
     manifest_path = cfg.get('caching', {}).get('manifest', os.path.join(output_dir,'manifest.json'))
     manifest = _load_manifest(manifest_path) if caching_enabled else {"runs":{}}
-    manifest.setdefault('signatures', {})
-    cfg_sig = _config_signature(cfg)
-    manifest['signatures']['last_config'] = cfg_sig
 
     if progress: print(f"[pipeline] Years: {years} (dry_run={dry_run})")
     ensure_scraped(years, raw_data_dir, force, progress)
@@ -446,12 +408,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                         if not os.path.isfile(edge_path):
                             continue
                         cache_key = cache_prefix+f":{pt}"
-                        file_sig = _file_signature(edge_path)
                         if caching_enabled and cache_key in manifest['runs']:
-                            prev = manifest['runs'][cache_key]
-                            if prev.get('file_sig') == file_sig and prev.get('config_sig') == cfg_sig:
-                                if progress: print(f"[cache] skip {cache_key}")
-                                continue
+                            if progress: print(f"[cache] skip {cache_key}")
+                            continue
                         t0 = time.time()
                         G,A,node_list,_,_ = make_graph_from_edge_csv(edge_path, validation_folds=cfg['validation_folds'])
                         raw_r, sorted_r = spring_rank(A, node_list)
@@ -466,7 +425,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                             levels_records.append([st, group, pt, y, max(scaled)-min(scaled)])
                         validation_rows.append([st, group, pt, y, len(node_list), A.count_nonzero(), float(A.count_nonzero())/(len(node_list)**2 if len(node_list)>0 else 1)])
                         if caching_enabled:
-                            manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list), 'file_sig': file_sig, 'config_sig': cfg_sig}
+                            manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list)}
                         results_summary.append(pd.DataFrame(sorted_r, columns=['Player','Rank']).head(top_n).assign(Year=y, Group=group, ScoreType=st, PitchType=pt))
                     continue
                 elif st == 'inning':
@@ -475,12 +434,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                         if not os.path.isfile(edge_path):
                             continue
                         cache_key = cache_prefix+f":inn{inn}"
-                        file_sig = _file_signature(edge_path)
                         if caching_enabled and cache_key in manifest['runs']:
-                            prev = manifest['runs'][cache_key]
-                            if prev.get('file_sig') == file_sig and prev.get('config_sig') == cfg_sig:
-                                if progress: print(f"[cache] skip {cache_key}")
-                                continue
+                            if progress: print(f"[cache] skip {cache_key}")
+                            continue
                         t0 = time.time()
                         G,A,node_list,_,_ = make_graph_from_edge_csv(edge_path, validation_folds=cfg['validation_folds'])
                         raw_r, sorted_r = spring_rank(A, node_list)
@@ -495,7 +451,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                             levels_records.append([st, group, inn, y, max(scaled)-min(scaled)])
                         validation_rows.append([st, group, f"inning_{inn}", y, len(node_list), A.count_nonzero(), float(A.count_nonzero())/(len(node_list)**2 if len(node_list)>0 else 1)])
                         if caching_enabled:
-                            manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list), 'file_sig': file_sig, 'config_sig': cfg_sig}
+                            manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list)}
                         results_summary.append(pd.DataFrame(sorted_r, columns=['Player','Rank']).head(top_n).assign(Year=y, Group=group, ScoreType=st, Inning=inn))
                     continue
                 else:
@@ -508,12 +464,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                 if not os.path.isfile(edge_path):
                     continue
                 cache_key = cache_prefix
-                file_sig = _file_signature(edge_path)
                 if caching_enabled and cache_key in manifest['runs']:
-                    prev = manifest['runs'][cache_key]
-                    if prev.get('file_sig') == file_sig and prev.get('config_sig') == cfg_sig:
-                        if progress: print(f"[cache] skip {cache_key}")
-                        continue
+                    if progress: print(f"[cache] skip {cache_key}")
+                    continue
                 t0 = time.time()
                 G,A,node_list,_,_ = make_graph_from_edge_csv(edge_path, validation_folds=cfg['validation_folds'])
                 raw_r, sorted_r = spring_rank(A, node_list)
@@ -528,7 +481,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                     levels_records.append([st, group, None, y, max(scaled)-min(scaled)])
                 validation_rows.append([st, group, None, y, len(node_list), A.count_nonzero(), float(A.count_nonzero())/(len(node_list)**2 if len(node_list)>0 else 1)])
                 if caching_enabled:
-                    manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list), 'file_sig': file_sig, 'config_sig': cfg_sig}
+                    manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list)}
                 results_summary.append(pd.DataFrame(sorted_r, columns=['Player','Rank']).head(top_n).assign(Year=y, Group=group, ScoreType=st))
 
     if results_summary:
@@ -543,78 +496,6 @@ def run_pipeline(cfg: Dict[str,Any]):
         val_df = pd.DataFrame(validation_rows, columns=['ScoreType','Group','Condition','Year','Nodes','Edges','Density'])
         _write_multi(val_df, os.path.join(output_dir,'validation_report'), formats)
         if progress: print("[pipeline] validation_report written")
-    # Mobility Metrics (quartile transitions) if enabled and scaled ranks produced
-    if cfg.get('analysis',{}).get('mobility',{}).get('enabled') and cfg['ranking']['scale_ranks']:
-        mobility_rows = []
-        # For each score_type/group/condition track scaled rank files across years
-        def load_scaled(base_dir: str, years: List[int]) -> Dict[int,pd.DataFrame]:
-            out = {}
-            for y in years:
-                path_csv = base_dir + f"/{y}_springrank_scaled.csv"
-                path_parquet = base_dir + f"/{y}_springrank_scaled.parquet"
-                path_json = base_dir + f"/{y}_springrank_scaled.json"
-                if os.path.isfile(path_csv):
-                    out[y] = pd.read_csv(path_csv)
-                elif os.path.isfile(path_parquet):
-                    try:
-                        out[y] = pd.read_parquet(path_parquet)
-                    except Exception:
-                        continue
-                elif os.path.isfile(path_json):
-                    out[y] = pd.read_json(path_json)
-            return out
-        def compute_mobility(df_prev: pd.DataFrame, df_curr: pd.DataFrame, y_prev: int, y_curr: int, score_type: str, group: str, condition: Any):
-            if df_prev is None or df_curr is None: return
-            # Merge on Player
-            mprev = df_prev[['Player','ScaledRank']].rename(columns={'ScaledRank':'ScaledRankPrev'})
-            mcurr = df_curr[['Player','ScaledRank']].rename(columns={'ScaledRank':'ScaledRankCurr'})
-            merged = mprev.merge(mcurr, on='Player')
-            if merged.empty: return
-            # Assign quartiles (Q1 = top 25%) based on rank ordering (higher is better)
-            merged['QuartilePrev'] = pd.qcut(merged['ScaledRankPrev'].rank(method='first', ascending=False), 4, labels=[1,2,3,4])
-            merged['QuartileCurr'] = pd.qcut(merged['ScaledRankCurr'].rank(method='first', ascending=False), 4, labels=[1,2,3,4])
-            # Mobility event counts
-            up_any = (merged['QuartileCurr'] < merged['QuartilePrev']).sum()
-            down_any = (merged['QuartileCurr'] > merged['QuartilePrev']).sum()
-            same = (merged['QuartileCurr'] == merged['QuartilePrev']).sum()
-            total = len(merged)
-            moved_2_or_more = ( (merged['QuartilePrev'] - merged['QuartileCurr']).abs() >= 2 ).sum()
-            mobility_rows.append([
-                score_type, group, condition, y_prev, y_curr,
-                total, up_any, down_any, same, moved_2_or_more,
-                round(up_any/total if total else 0,4),
-                round(down_any/total if total else 0,4),
-                round(moved_2_or_more/total if total else 0,4)
-            ])
-        for st in score_types:
-            if st in ('handmade','frequency'):
-                for group in ['batter','pitcher']:
-                    base_dir = os.path.join(output_dir, st, group)
-                    scaled_years = load_scaled(base_dir, years)
-                    sorted_years = sorted(scaled_years.keys())
-                    for i in range(1, len(sorted_years)):
-                        compute_mobility(scaled_years[sorted_years[i-1]], scaled_years[sorted_years[i]], sorted_years[i-1], sorted_years[i], st, group, None)
-            elif st == 'pitch_type':
-                for group in ['batter','pitcher']:
-                    for pt in (pitch_types or ALLOWED_PITCH_TYPES):
-                        base_dir = os.path.join(output_dir, st, group, pt)
-                        scaled_years = load_scaled(base_dir, years)
-                        sorted_years = sorted(scaled_years.keys())
-                        for i in range(1, len(sorted_years)):
-                            compute_mobility(scaled_years[sorted_years[i-1]], scaled_years[sorted_years[i]], sorted_years[i-1], sorted_years[i], st, group, pt)
-            elif st == 'inning':
-                for group in ['batter','pitcher']:
-                    for inn in innings:
-                        base_dir = os.path.join(output_dir, st, group, str(inn))
-                        scaled_years = load_scaled(base_dir, years)
-                        sorted_years = sorted(scaled_years.keys())
-                        for i in range(1, len(sorted_years)):
-                            compute_mobility(scaled_years[sorted_years[i-1]], scaled_years[sorted_years[i]], sorted_years[i-1], sorted_years[i], st, group, inn)
-        if mobility_rows:
-            mob_cols = ['ScoreType','Group','Condition','YearPrev','YearCurr','Players','Up','Down','Same','Moved2Plus','FracUp','FracDown','FracMoved2Plus']
-            mobility_df = pd.DataFrame(mobility_rows, columns=mob_cols)
-            _write_multi(mobility_df, os.path.join(output_dir,'mobility_report'), formats)
-            if progress: print('[pipeline] mobility_report written')
     if caching_enabled:
         manifest['last_runtime_seconds'] = time.time() - start_global
         _save_manifest(manifest_path, manifest)
