@@ -1,0 +1,11 @@
+How to Try New Features
+CLI (PowerShell):
+
+python cli.py --config config/example_full.json full
+python cli.py --config config/example_full.json rank
+
+FastAPI:
+
+uvicorn api:app --reload
+
+Then browse: http://127.0.0.1:8000/docs
