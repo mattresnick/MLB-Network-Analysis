@@ -1,7 +1,0 @@
-pandas
-numpy
-networkx
-scipy
-baseball_scraper
-SpringRank
-birankpy

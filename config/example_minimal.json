@@ -1,9 +1,0 @@
-{
-  "pipeline": {
-    "years": [2019],
-    "allow_2020": false,
-    "dry_run": false,
-    "score_types": ["handmade"],
-    "paths": {"output_dir": "outputs"}
-  }
-}
