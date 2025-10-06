@@ -117,25 +117,9 @@ def load_config(path: str) -> Dict[str,Any]:
     analysis_cfg = pipeline.get('analysis', {}) or {}
     mobility_cfg = analysis_cfg.get('mobility', {}) or {}
     mobility_enabled = _bool(mobility_cfg.get('enabled'), False)
-    rolling_cfg = analysis_cfg.get('rolling', {}) or {}
-    rolling_enabled = _bool(rolling_cfg.get('enabled'), False)
-    rolling_window_sizes = rolling_cfg.get('windows',[3]) if rolling_enabled else []
-    if rolling_enabled:
-        if (not isinstance(rolling_window_sizes,list) or any((not isinstance(x,int) or x<2) for x in rolling_window_sizes)):
-            raise ConfigError('analysis.rolling.windows must be list[int>=2]')
     # Additional analysis toggles (future): anomalies, rolling windows etc.
     anomalies_cfg = analysis_cfg.get('anomalies', {}) or {}
     anomalies_enabled = _bool(anomalies_cfg.get('enabled'), False)
-    anomalies_method = anomalies_cfg.get('method','quantile') or 'quantile'
-    if anomalies_method not in {'quantile','absolute'}:
-        raise ConfigError("analysis.anomalies.method must be 'quantile' or 'absolute'")
-    anomalies_quantile = float(anomalies_cfg.get('quantile',0.95) or 0.95)
-    if not (0 < anomalies_quantile < 1):
-        raise ConfigError('analysis.anomalies.quantile must be between 0 and 1')
-    anomalies_abs_threshold = float(anomalies_cfg.get('abs_threshold',0.2) or 0.2)
-    anomalies_min_players = int(anomalies_cfg.get('min_players',20) or 20)
-    if anomalies_min_players < 5:
-        raise ConfigError('analysis.anomalies.min_players must be >=5')
 
     cfg = {
         'years': years,
@@ -169,17 +153,7 @@ def load_config(path: str) -> Dict[str,Any]:
         'allow_2020': allow_2020,
         'analysis': {
             'mobility': {'enabled': mobility_enabled},
-            'anomalies': {
-                'enabled': anomalies_enabled,
-                'method': anomalies_method,
-                'quantile': anomalies_quantile,
-                'abs_threshold': anomalies_abs_threshold,
-                'min_players': anomalies_min_players
-            },
-            'rolling': {
-                'enabled': rolling_enabled,
-                'windows': rolling_window_sizes
-            }
+            'anomalies': {'enabled': anomalies_enabled}
         }
     }
     return cfg
