@@ -46,7 +46,8 @@ def load_config(path: str) -> Dict[str,Any]:
     allow_2020 = bool(pipeline.get('allow_2020', False))
     if not allow_2020 and 2020 in years:
         years = [y for y in years if y != 2020]
-    score_types = pipeline.get('score_types',["handmade"]) or ["handmade"]
+    # Default to frequency-based scoring as primary workflow
+    score_types = pipeline.get('score_types',["frequency"]) or ["frequency"]
     score_types = list(dict.fromkeys(score_types))  # preserve order unique
     for st in score_types:
         if st not in ALLOWED_SCORE_TYPES:
@@ -77,9 +78,18 @@ def load_config(path: str) -> Dict[str,Any]:
     # Force to only springrank to avoid confusion.
     algorithms = {'springrank': True}
 
-    validation_folds = int(pipeline.get('validation_folds',0) or 0)
+    # Use 5-fold cross validation by default to mirror original scripts
+    validation_folds = int(pipeline.get('validation_folds',5) or 5)
     if validation_folds < 0:
         raise ConfigError("validation_folds must be >=0")
+    # Validation/AUC settings
+    validation_cfg = pipeline.get('validation', {}) or {}
+    auc_mode = str(validation_cfg.get('aucMode', 'legacy') or 'legacy')
+    if auc_mode not in {"legacy","balanced-negatives"}:
+        raise ConfigError("validation.aucMode must be 'legacy' or 'balanced-negatives'")
+    negatives_per_positive = int(validation_cfg.get('negatives_per_positive', 1) or 1)
+    if negatives_per_positive < 0:
+        raise ConfigError('validation.negatives_per_positive must be >= 0')
 
     ranking = pipeline.get('ranking',{}) or {}
     top_n = int(ranking.get('top_n',25) or 25)
@@ -88,6 +98,9 @@ def load_config(path: str) -> Dict[str,Any]:
 
     scrape = pipeline.get('scrape',{}) or {}
     force_scrape = _bool(scrape.get('force'), False)
+    # Edge generation settings
+    edges_cfg = pipeline.get('edges', {}) or {}
+    force_edges = _bool(edges_cfg.get('force'), False)
     dry_run = _bool(pipeline.get('dry_run'), False)
 
     paths = pipeline.get('paths',{}) or {}
@@ -112,6 +125,13 @@ def load_config(path: str) -> Dict[str,Any]:
     logging_cfg = raw.get('logging',{}) or {}
     log_level = logging_cfg.get('level','INFO')
     progress = _bool(logging_cfg.get('progress'), True)
+
+    # Processing settings (performance-oriented, no information loss)
+    processing_cfg = pipeline.get('processing', {}) or {}
+    vectorized = _bool(processing_cfg.get('vectorized'), True)
+    unipartite_metric = processing_cfg.get('unipartite_metric', 'sum') or 'sum'
+    if unipartite_metric not in {'sum','rate'}:
+        raise ConfigError("processing.unipartite_metric must be 'sum' or 'rate'")
 
     # Analysis block (mobility/anomalies placeholders)
     analysis_cfg = pipeline.get('analysis', {}) or {}
@@ -145,8 +165,10 @@ def load_config(path: str) -> Dict[str,Any]:
         'filters': {'stand': stand, 'p_throws': p_throws},
         'algorithms': algorithms,
         'validation_folds': validation_folds,
-        'ranking': {'top_n': top_n, 'scale_ranks': scale_ranks, 'output_levels': output_levels},
+    'ranking': {'top_n': top_n, 'scale_ranks': scale_ranks, 'output_levels': output_levels},
+    'validation': {'aucMode': auc_mode, 'negatives_per_positive': negatives_per_positive},
     'scrape': {'force': force_scrape},
+    'edges': {'force': force_edges},
     'dry_run': dry_run,
         'paths': {
             'raw_data_dir': raw_data_dir,
@@ -166,6 +188,7 @@ def load_config(path: str) -> Dict[str,Any]:
             'manifest': caching_manifest
         },
         'logging': {'level': log_level, 'progress': progress},
+    'processing': {'vectorized': vectorized, 'unipartite_metric': unipartite_metric},
         'allow_2020': allow_2020,
         'analysis': {
             'mobility': {'enabled': mobility_enabled},

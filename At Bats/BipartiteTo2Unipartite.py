@@ -26,7 +26,14 @@ def compute_unipartite_edges(group_df: pd.DataFrame) -> pd.DataFrame:
     group_array = group_df.to_numpy()
 
     player_edgelist = []
+    total_players = len(players)
+    last_pct = -1
     for idx_a, player_a in enumerate(players):
+        # Progress every ~10%
+        pct = int((idx_a + 1) * 100 / max(total_players, 1))
+        if pct // 10 != last_pct // 10:
+            print(f"[unipartite] progress: {pct}% ({idx_a+1}/{total_players})")
+            last_pct = pct
         player_a_edges = group_array[group_array[:, 0] == player_a]
 
         for idx_b, player_b in enumerate(players):
@@ -110,13 +117,16 @@ def convert_and_save(
     apply_parallel_reduction: bool = True,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     df = pd.read_csv(input_path)
+    print(f"[unipartite] loading edges: {input_path}")
     batter_df, pitcher_df = convert_bipartite(df, apply_parallel_reduction=apply_parallel_reduction)
 
     if batter_output:
         batter_output.parent.mkdir(parents=True, exist_ok=True)
+        print(f"[unipartite] saving batter edges -> {batter_output}")
         batter_df.to_csv(batter_output, index=False)
     if pitcher_output:
         pitcher_output.parent.mkdir(parents=True, exist_ok=True)
+        print(f"[unipartite] saving pitcher edges -> {pitcher_output}")
         pitcher_df.to_csv(pitcher_output, index=False)
 
     return batter_df, pitcher_df

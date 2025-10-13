@@ -31,13 +31,19 @@ def _springrank_module():
 
 
 def get_scaled_ranks(A, ranks, a, b, scale=0.75):
-    """Scale raw SpringRank scores into an interpretable range."""
+    """Scale raw SpringRank scores using the estimator's built-in rescaling.
 
-    sr = _springrank_module()
-    inverse_temperature = brentq(sr.eqs39, a, b, args=(ranks, A))
-    scaling_factor = 1 / (np.log(scale / (1 - scale)) / (2 * inverse_temperature))
-    scaled_ranks = sr.scale_ranks(ranks, scaling_factor)
-    return scaled_ranks
+    Falls back to input ranks if rescaling is unavailable.
+    """
+
+    try:
+        import springrank as s
+        model = s.SpringRank(alpha=0)
+        model.A = A
+        model.ranks = np.asarray(ranks)
+        return np.asarray(model.get_rescaled_ranks(target_scale=scale))
+    except Exception:
+        return np.asarray(ranks)
 
 
 def build_graph_from_frame(df: pd.DataFrame, *, weights: bool = True):
@@ -50,7 +56,15 @@ def build_graph_from_frame(df: pd.DataFrame, *, weights: bool = True):
         G.add_edges_from(edge_list[:, :2])
 
     node_list = list(G.nodes())
-    A = nx.to_scipy_sparse_matrix(G, dtype=float, nodelist=node_list)
+    try:
+        A = nx.to_scipy_sparse_matrix(G, dtype=float, nodelist=node_list)
+    except AttributeError:
+        A = nx.to_scipy_sparse_array(G, dtype=float, nodelist=node_list)
+    try:
+        import scipy.sparse as sp
+        A = sp.csr_matrix(A)
+    except Exception:
+        pass
     return G, A, node_list
 
 

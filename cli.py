@@ -34,9 +34,14 @@ def cmd_full(cfg):
 def main():
     ap = argparse.ArgumentParser(description='MLB Network Analysis CLI')
     ap.add_argument('--config','-c', required=True, help='Path to JSON config')
+    ap.add_argument('--force-edges', action='store_true', help='Force regeneration of edges and unipartite outputs (overrides config)')
     ap.add_argument('command', choices=['scrape','edges','rank','full'], help='Subcommand to execute')
     args = ap.parse_args()
     cfg = load_config(args.config)
+    # Allow runtime override to force edge regeneration
+    if args.force_edges:
+        cfg.setdefault('edges', {})
+        cfg['edges']['force'] = True
     if args.command == 'scrape':
         cmd_scrape(cfg)
     elif args.command == 'edges':

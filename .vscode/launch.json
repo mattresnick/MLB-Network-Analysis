@@ -1,0 +1,128 @@
+{
+	// Press F5 and choose one of these configurations.
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Scrape: 2024 only (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${command:python.interpreterPath}",
+			"program": "${workspaceFolder}/cli.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_2024.json",
+				"scrape"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"stopOnEntry": true,
+			"internalConsoleOptions": "neverOpen",
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"justMyCode": false
+		},
+		{
+			"name": "Scrape: 2024 (force) (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${command:python.interpreterPath}",
+			"program": "${workspaceFolder}/cli.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_2024_force.json",
+				"scrape"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"stopOnEntry": true,
+			"internalConsoleOptions": "neverOpen",
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"justMyCode": false
+		},
+		{
+			"name": "Full pipeline: 2024 only (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${command:python.interpreterPath}",
+			"program": "${workspaceFolder}/run_config.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_2024.json"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"stopOnEntry": true,
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"justMyCode": false
+		},
+		{
+			"name": "Full pipeline: example_frequency_cv (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${command:python.interpreterPath}",
+			"program": "${workspaceFolder}/run_config.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_frequency_cv.json"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"preLaunchTask": "setup: venv+deps (MLB)",
+			"justMyCode": false
+		},
+		{
+			"name": "Edges only (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${workspaceFolder}/.venv/python.exe",
+			"program": "${workspaceFolder}/cli.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_frequency_cv.json",
+				"edges"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"justMyCode": false
+		},
+		{
+			"name": "Rank only (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${command:python.interpreterPath}",
+			"program": "${workspaceFolder}/cli.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_frequency_cv.json",
+				"rank"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"justMyCode": false
+		},
+		{
+			"name": "Quick: 2019 frequency (MLB)",
+			"type": "debugpy",
+			"request": "launch",
+			"python": "${command:python.interpreterPath}",
+			"program": "${workspaceFolder}/run_config.py",
+			"args": [
+				"--config",
+				"${workspaceFolder}/config/example_quick.json"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"stopOnEntry": true,
+			"env": {"PYTHONUNBUFFERED": "1"},
+			"justMyCode": false
+		},
+	]
+}
+

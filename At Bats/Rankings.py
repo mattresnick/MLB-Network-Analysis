@@ -2,7 +2,10 @@ import numpy as np
 import networkx as nx
 import os
 import pandas as pd
-from SpringRank import SpringRank as sr
+try:
+    import SpringRank as sr
+except ImportError:  # fallback for lowercase packaging
+    import springrank as sr
 import birankpy as br
 from copy import copy
 from scipy.optimize import brentq
@@ -43,9 +46,20 @@ def makeGraph(filename, weights=True, val_folds=0):
     
     node_list = list(G.nodes())
     
-    A = nx.to_scipy_sparse_matrix(G,
-                                  dtype=float,
-                                  nodelist=node_list)
+    # NetworkX 3.x compatibility: use to_scipy_sparse_array if matrix helper is absent
+    try:
+        A = nx.to_scipy_sparse_matrix(G,
+                                      dtype=float,
+                                      nodelist=node_list)
+    except AttributeError:
+        A = nx.to_scipy_sparse_array(G,
+                                      dtype=float,
+                                      nodelist=node_list)
+    try:
+        import scipy.sparse as sp
+        A = sp.csr_matrix(A)
+    except Exception:
+        pass
     
     if val_folds>0: return G, A, node_list, edge_list, test_edges
     
@@ -55,21 +69,22 @@ def makeGraph(filename, weights=True, val_folds=0):
 
 # Only get ranks via SpringRank
 def getSpringRank(A, node_list):
-    
-    
-    sr_rank=sr.SpringRank(A, alpha=0)
-    sr_sorted_ranks = [[node_list[i], r] for i, r in enumerate(sr_rank)]
+    model = sr.SpringRank(alpha=0)
+    model.fit(A)
+    ranks = getattr(model, 'ranks', getattr(model, 'ranks_', None))
+    sr_sorted_ranks = [[node_list[i], float(ranks[i])] for i in range(len(node_list))]
     sr_sorted_ranks.sort(reverse=True, key=lambda x: x[1])
-    
-    return sr_rank, sr_sorted_ranks
+    return ranks, sr_sorted_ranks
 
 
 # Get ranks using all three methods.
 def getRanks(G, A, node_list, filename, birank_group, weights=True):
     
     # SpringRank
-    sr_rank=sr.SpringRank(A, alpha=0)
-    sr_sorted_ranks = [[node_list[i], r] for i, r in enumerate(sr_rank)]
+    model = sr.SpringRank(alpha=0)
+    model.fit(A)
+    sr_rank = getattr(model, 'ranks', getattr(model, 'ranks_', None))
+    sr_sorted_ranks = [[node_list[i], float(sr_rank[i])] for i in range(len(node_list))]
     sr_sorted_ranks.sort(reverse=True, key=lambda x: x[1])
     
     sr_list = [sr_rank, sr_sorted_ranks]

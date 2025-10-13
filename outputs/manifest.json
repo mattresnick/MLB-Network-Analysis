@@ -1,0 +1,80 @@
+{
+  "runs": {
+    "2015:frequency:batter": {
+      "time": 42.41894888877869,
+      "nodes": 709,
+      "file_sig": "1759714584:9583789",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2016:frequency:batter": {
+      "time": 39.364022970199585,
+      "nodes": 707,
+      "file_sig": "1759714584:9890986",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2017:frequency:batter": {
+      "time": 38.22196316719055,
+      "nodes": 712,
+      "file_sig": "1759714585:9659381",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2018:frequency:batter": {
+      "time": 37.51697278022766,
+      "nodes": 703,
+      "file_sig": "1759714585:9619502",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2019:frequency:batter": {
+      "time": 44.844813108444214,
+      "nodes": 713,
+      "file_sig": "1759714585:10235846",
+      "config_sig": "789d70e72ea07fd5"
+    },
+    "2015:frequency:pitcher": {
+      "time": 52.89448142051697,
+      "nodes": 727,
+      "file_sig": "1759714755:15382813",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2016:frequency:pitcher": {
+      "time": 58.21698069572449,
+      "nodes": 737,
+      "file_sig": "1759714756:15735461",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2017:frequency:pitcher": {
+      "time": 60.60853838920593,
+      "nodes": 744,
+      "file_sig": "1759714756:16395893",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2018:frequency:pitcher": {
+      "time": 65.2015597820282,
+      "nodes": 785,
+      "file_sig": "1759714757:17371552",
+      "config_sig": "239630ec7c5b5928"
+    },
+    "2019:frequency:pitcher": {
+      "time": 75.41609358787537,
+      "nodes": 815,
+      "file_sig": "1759714757:18543829",
+      "config_sig": "789d70e72ea07fd5"
+    },
+    "2024:frequency:batter": {
+      "time": 172.15867042541504,
+      "nodes": 1294,
+      "file_sig": "1760340792:16807251",
+      "config_sig": "d8ae2cc1cf103bc9"
+    },
+    "2024:frequency:pitcher": {
+      "time": 306.2224955558777,
+      "nodes": 1372,
+      "file_sig": "1760340816:35049451",
+      "config_sig": "d8ae2cc1cf103bc9"
+    }
+  },
+  "signatures": {
+    "last_config": "789d70e72ea07fd5"
+  },
+  "last_runtime_seconds": 0.0
+}

@@ -3,5 +3,6 @@ numpy
 networkx
 scipy
 baseball_scraper
-SpringRank
+springrank
 birankpy
+scikit-learn

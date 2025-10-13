@@ -1,0 +1,252 @@
+[2025-10-13 00:42:58] year=2024 role=batter players=1310 opps=1293 :: enter rate-mode: players=1310, opps=1293
+[2025-10-13 00:43:00] year=2024 role=batter players=1310 opps=1293 :: mapped PA rows: 0 / 109341
+[2025-10-13 00:43:00] year=2024 role=batter players=1310 opps=1293 :: rate normalization: W>0 before=50684, PA>0 cells=0, W>0 after=0
+[2025-10-13 00:43:00] year=2024 role=batter players=1310 opps=1293 :: presence rows: any=0/1310, mean=0.000, median=0.000
+[2025-10-13 00:43:00] year=2024 role=batter players=1310 opps=1293 :: presence cols: any=0/1293, mean=0.000, median=0.000
+[2025-10-13 00:43:01] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 9% (128/1310)
+[2025-10-13 00:43:02] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 19% (256/1310)
+[2025-10-13 00:43:03] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 29% (384/1310)
+[2025-10-13 00:43:04] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 39% (512/1310)
+[2025-10-13 00:43:06] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 48% (640/1310)
+[2025-10-13 00:43:07] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 58% (768/1310)
+[2025-10-13 00:43:08] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 68% (896/1310)
+[2025-10-13 00:43:09] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 78% (1024/1310)
+[2025-10-13 00:43:10] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 87% (1152/1310)
+[2025-10-13 00:43:11] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 97% (1280/1310)
+[2025-10-13 00:43:11] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 100% (1310/1310)
+[2025-10-13 00:43:11] year=2024 role=batter players=1310 opps=1293 :: vectorized produced 0 edges (players=1310, opps=1293)
+[2025-10-13 00:43:11] year=2024 role=pitcher players=1379 opps=1582 :: enter rate-mode: players=1379, opps=1582
+[2025-10-13 00:43:13] year=2024 role=pitcher players=1379 opps=1582 :: mapped PA rows: 0 / 109341
+[2025-10-13 00:43:13] year=2024 role=pitcher players=1379 opps=1582 :: rate normalization: W>0 before=86829, PA>0 cells=0, W>0 after=0
+[2025-10-13 00:43:13] year=2024 role=pitcher players=1379 opps=1582 :: presence rows: any=0/1379, mean=0.000, median=0.000
+[2025-10-13 00:43:13] year=2024 role=pitcher players=1379 opps=1582 :: presence cols: any=0/1582, mean=0.000, median=0.000
+[2025-10-13 00:43:14] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 9% (128/1379)
+[2025-10-13 00:43:16] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 18% (256/1379)
+[2025-10-13 00:43:17] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 27% (384/1379)
+[2025-10-13 00:43:19] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 37% (512/1379)
+[2025-10-13 00:43:20] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 46% (640/1379)
+[2025-10-13 00:43:22] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 55% (768/1379)
+[2025-10-13 00:43:23] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 64% (896/1379)
+[2025-10-13 00:43:25] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 74% (1024/1379)
+[2025-10-13 00:43:26] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 83% (1152/1379)
+[2025-10-13 00:43:28] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 92% (1280/1379)
+[2025-10-13 00:43:29] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 100% (1379/1379)
+[2025-10-13 00:43:29] year=2024 role=pitcher players=1379 opps=1582 :: vectorized produced 0 edges (players=1379, opps=1582)
+[2025-10-13 00:50:41] year=2024 role=batter players=1310 opps=1293 :: enter rate-mode: players=1310, opps=1293
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: name coverage: edges_players=1310, edges_opps=1293, pa_bat=1648, pa_pit=1388, inter(players,pa_b)=0, inter(opps,pa_p)=1293, alt inter(players,pa_p)=0, alt inter(opps,pa_b)=0
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: samples players=['a.j. vukovich', 'aaron bracho', 'aaron hicks', 'aaron judge', 'aaron palensky']
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: samples pa_bat=['mlbam_444482', 'mlbam_453568', 'mlbam_455117', 'mlbam_456781', 'mlbam_457705']
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: samples opps=['abbott, andrew', 'abbott, cory', 'abney, alaska', 'abreu, bryan', 'adam, jason']
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: samples pa_pit=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: mapped PA rows: 0 / 109341
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: rate normalization: W>0 before=50684, PA>0 cells=0, W>0 after=0
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: presence rows: any=0/1310, mean=0.000, median=0.000
+[2025-10-13 00:50:43] year=2024 role=batter players=1310 opps=1293 :: presence cols: any=0/1293, mean=0.000, median=0.000
+[2025-10-13 00:50:44] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 9% (128/1310)
+[2025-10-13 00:50:45] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 19% (256/1310)
+[2025-10-13 00:50:46] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 29% (384/1310)
+[2025-10-13 00:50:47] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 39% (512/1310)
+[2025-10-13 00:50:48] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 48% (640/1310)
+[2025-10-13 00:50:50] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 58% (768/1310)
+[2025-10-13 00:50:51] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 68% (896/1310)
+[2025-10-13 00:50:52] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 78% (1024/1310)
+[2025-10-13 00:50:53] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 87% (1152/1310)
+[2025-10-13 00:50:54] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 97% (1280/1310)
+[2025-10-13 00:50:54] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 100% (1310/1310)
+[2025-10-13 00:50:54] year=2024 role=batter players=1310 opps=1293 :: vectorized produced 0 edges (players=1310, opps=1293)
+[2025-10-13 00:50:54] year=2024 role=pitcher players=1379 opps=1582 :: enter rate-mode: players=1379, opps=1582
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: name coverage: edges_players=1379, edges_opps=1581, pa_bat=1648, pa_pit=1388, inter(players,pa_b)=0, inter(opps,pa_p)=0, alt inter(players,pa_p)=1379, alt inter(opps,pa_b)=0
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: samples players=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_bat=['mlbam_444482', 'mlbam_453568', 'mlbam_455117', 'mlbam_456781', 'mlbam_457705']
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: samples opps=['a.j. ewing', 'a.j. vukovich', 'aaron hicks', 'aaron judge', 'aaron palensky']
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_pit=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: mapped PA rows: 0 / 109341
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: rate normalization: W>0 before=86829, PA>0 cells=0, W>0 after=0
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: presence rows: any=0/1379, mean=0.000, median=0.000
+[2025-10-13 00:50:56] year=2024 role=pitcher players=1379 opps=1582 :: presence cols: any=0/1582, mean=0.000, median=0.000
+[2025-10-13 00:50:58] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 9% (128/1379)
+[2025-10-13 00:50:59] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 18% (256/1379)
+[2025-10-13 00:51:01] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 27% (384/1379)
+[2025-10-13 00:51:02] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 37% (512/1379)
+[2025-10-13 00:51:03] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 46% (640/1379)
+[2025-10-13 00:51:05] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 55% (768/1379)
+[2025-10-13 00:51:06] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 64% (896/1379)
+[2025-10-13 00:51:08] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 74% (1024/1379)
+[2025-10-13 00:51:09] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 83% (1152/1379)
+[2025-10-13 00:51:11] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 92% (1280/1379)
+[2025-10-13 00:51:12] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 100% (1379/1379)
+[2025-10-13 00:51:12] year=2024 role=pitcher players=1379 opps=1582 :: vectorized produced 0 edges (players=1379, opps=1582)
+[2025-10-13 00:51:43] year=2024 role=batter players=1310 opps=1293 :: enter rate-mode: players=1310, opps=1293
+[2025-10-13 00:51:49] year=2024 role=batter players=1310 opps=1293 :: name coverage: edges_players=1310, edges_opps=1293, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=1310, inter(opps,pa_p)=1293, alt inter(players,pa_p)=0, alt inter(opps,pa_b)=0
+[2025-10-13 00:51:49] year=2024 role=batter players=1310 opps=1293 :: mapped PA rows: 108433 / 109341
+[2025-10-13 00:51:49] year=2024 role=batter players=1310 opps=1293 :: unique mapped players=1310, unique mapped opps=1293
+[2025-10-13 00:51:49] year=2024 role=batter players=1310 opps=1293 :: rate normalization: W>0 before=50684, PA>0 cells=108429, W>0 after=50684
+[2025-10-13 00:51:49] year=2024 role=batter players=1310 opps=1293 :: presence rows: any=1310/1310, mean=82.770, median=22.000
+[2025-10-13 00:51:49] year=2024 role=batter players=1310 opps=1293 :: presence cols: any=1293/1293, mean=83.858, median=48.000
+[2025-10-13 00:51:50] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 9% (128/1310)
+[2025-10-13 00:51:51] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 19% (256/1310)
+[2025-10-13 00:51:52] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 29% (384/1310)
+[2025-10-13 00:51:54] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 39% (512/1310)
+[2025-10-13 00:51:55] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 48% (640/1310)
+[2025-10-13 00:51:56] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 58% (768/1310)
+[2025-10-13 00:51:57] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 68% (896/1310)
+[2025-10-13 00:51:59] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 78% (1024/1310)
+[2025-10-13 00:52:00] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 87% (1152/1310)
+[2025-10-13 00:52:01] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 97% (1280/1310)
+[2025-10-13 00:52:01] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 100% (1310/1310)
+[2025-10-13 00:52:02] year=2024 role=batter players=1310 opps=1293 :: vectorized produced 604642 edges (players=1310, opps=1293)
+[2025-10-13 00:52:02] year=2024 role=pitcher players=1379 opps=1582 :: enter rate-mode: players=1379, opps=1582
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: name coverage: edges_players=1379, edges_opps=1581, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=0, inter(opps,pa_p)=0, alt inter(players,pa_p)=1379, alt inter(opps,pa_b)=1581
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: samples players=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_bat=['a.j. ewing', 'a.j. vukovich', 'aaron bracho', 'aaron hicks', 'aaron judge']
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: samples opps=['a.j. ewing', 'a.j. vukovich', 'aaron hicks', 'aaron judge', 'aaron palensky']
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_pit=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: mapped PA rows: 109229 / 109341
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: unique mapped players=1379, unique mapped opps=1581
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: rate normalization: W>0 before=86829, PA>0 cells=109225, W>0 after=86826
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: presence rows: any=1379/1379, mean=79.206, median=38.000
+[2025-10-13 00:52:06] year=2024 role=pitcher players=1379 opps=1582 :: presence cols: any=1581/1582, mean=69.042, median=13.000
+[2025-10-13 00:52:08] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 9% (128/1379)
+[2025-10-13 00:52:10] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 18% (256/1379)
+[2025-10-13 00:52:11] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 27% (384/1379)
+[2025-10-13 00:52:13] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 37% (512/1379)
+[2025-10-13 00:52:14] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 46% (640/1379)
+[2025-10-13 00:52:16] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 55% (768/1379)
+[2025-10-13 00:52:18] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 64% (896/1379)
+[2025-10-13 00:52:19] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 74% (1024/1379)
+[2025-10-13 00:52:21] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 83% (1152/1379)
+[2025-10-13 00:52:22] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 92% (1280/1379)
+[2025-10-13 00:52:24] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 100% (1379/1379)
+[2025-10-13 00:52:24] year=2024 role=pitcher players=1379 opps=1582 :: vectorized produced 835150 edges (players=1379, opps=1582)
+[2025-10-13 00:53:27] year=2024 role=batter players=1310 opps=1293 :: enter rate-mode: players=1310, opps=1293
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: applied _resolve_names_in_edges_df to PA names
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: name coverage: edges_players=1310, edges_opps=1293, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=1310, inter(opps,pa_p)=1293, alt inter(players,pa_p)=0, alt inter(opps,pa_b)=0
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: mapped PA rows: 108433 / 109341
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: unique mapped players=1310, unique mapped opps=1293
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: rate normalization: W>0 before=50684, PA>0 cells=108429, W>0 after=50684
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: presence rows: any=1310/1310, mean=82.770, median=22.000
+[2025-10-13 00:53:32] year=2024 role=batter players=1310 opps=1293 :: presence cols: any=1293/1293, mean=83.858, median=48.000
+[2025-10-13 00:53:34] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 9% (128/1310)
+[2025-10-13 00:53:35] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 19% (256/1310)
+[2025-10-13 00:53:36] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 29% (384/1310)
+[2025-10-13 00:53:37] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 39% (512/1310)
+[2025-10-13 00:53:38] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 48% (640/1310)
+[2025-10-13 00:53:40] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 58% (768/1310)
+[2025-10-13 00:53:41] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 68% (896/1310)
+[2025-10-13 00:53:42] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 78% (1024/1310)
+[2025-10-13 00:53:43] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 87% (1152/1310)
+[2025-10-13 00:53:45] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 97% (1280/1310)
+[2025-10-13 00:53:45] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 100% (1310/1310)
+[2025-10-13 00:53:45] year=2024 role=batter players=1310 opps=1293 :: vectorized produced 604642 edges (players=1310, opps=1293)
+[2025-10-13 00:53:45] year=2024 role=pitcher players=1379 opps=1582 :: enter rate-mode: players=1379, opps=1582
+[2025-10-13 00:53:49] year=2024 role=pitcher players=1379 opps=1582 :: applied _resolve_names_in_edges_df to PA names
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: name coverage: edges_players=1379, edges_opps=1581, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=0, inter(opps,pa_p)=0, alt inter(players,pa_p)=1379, alt inter(opps,pa_b)=1581
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: samples players=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_bat=['a.j. ewing', 'a.j. vukovich', 'aaron bracho', 'aaron hicks', 'aaron judge']
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: samples opps=['a.j. ewing', 'a.j. vukovich', 'aaron hicks', 'aaron judge', 'aaron palensky']
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_pit=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: mapped PA rows: 109229 / 109341
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: unique mapped players=1379, unique mapped opps=1581
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: rate normalization: W>0 before=86829, PA>0 cells=109225, W>0 after=86826
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: presence rows: any=1379/1379, mean=79.206, median=38.000
+[2025-10-13 00:53:50] year=2024 role=pitcher players=1379 opps=1582 :: presence cols: any=1581/1582, mean=69.042, median=13.000
+[2025-10-13 00:53:52] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 9% (128/1379)
+[2025-10-13 00:53:53] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 18% (256/1379)
+[2025-10-13 00:53:55] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 27% (384/1379)
+[2025-10-13 00:53:57] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 37% (512/1379)
+[2025-10-13 00:53:58] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 46% (640/1379)
+[2025-10-13 00:54:00] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 55% (768/1379)
+[2025-10-13 00:54:01] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 64% (896/1379)
+[2025-10-13 00:54:03] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 74% (1024/1379)
+[2025-10-13 00:54:05] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 83% (1152/1379)
+[2025-10-13 00:54:06] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 92% (1280/1379)
+[2025-10-13 00:54:07] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 100% (1379/1379)
+[2025-10-13 00:54:08] year=2024 role=pitcher players=1379 opps=1582 :: vectorized produced 835150 edges (players=1379, opps=1582)
+[2025-10-13 00:59:25] year=2024 role=batter players=1310 opps=1293 :: enter rate-mode: players=1310, opps=1293
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: applied _resolve_names_in_edges_df to PA names
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: name coverage: edges_players=1310, edges_opps=1293, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=1310, inter(opps,pa_p)=1293, alt inter(players,pa_p)=0, alt inter(opps,pa_b)=0
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: mapped PA rows: 108433 / 109341
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: unique mapped players=1310, unique mapped opps=1293
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: rate normalization: W>0 before=50684, PA>0 cells=108429, W>0 after=50684
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: presence rows: any=1310/1310, mean=82.770, median=22.000
+[2025-10-13 00:59:30] year=2024 role=batter players=1310 opps=1293 :: presence cols: any=1293/1293, mean=83.858, median=48.000
+[2025-10-13 00:59:32] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 9% (128/1310)
+[2025-10-13 00:59:33] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 19% (256/1310)
+[2025-10-13 00:59:34] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 29% (384/1310)
+[2025-10-13 00:59:35] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 39% (512/1310)
+[2025-10-13 00:59:36] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 48% (640/1310)
+[2025-10-13 00:59:38] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 58% (768/1310)
+[2025-10-13 00:59:39] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 68% (896/1310)
+[2025-10-13 00:59:40] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 78% (1024/1310)
+[2025-10-13 00:59:41] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 87% (1152/1310)
+[2025-10-13 00:59:43] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 97% (1280/1310)
+[2025-10-13 00:59:43] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 100% (1310/1310)
+[2025-10-13 00:59:43] year=2024 role=batter players=1310 opps=1293 :: vectorized produced 604642 edges (players=1310, opps=1293)
+[2025-10-13 00:59:46] year=2024 role=pitcher players=1379 opps=1582 :: enter rate-mode: players=1379, opps=1582
+[2025-10-13 00:59:50] year=2024 role=pitcher players=1379 opps=1582 :: applied _resolve_names_in_edges_df to PA names
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: name coverage: edges_players=1379, edges_opps=1581, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=0, inter(opps,pa_p)=0, alt inter(players,pa_p)=1379, alt inter(opps,pa_b)=1581
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: samples players=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_bat=['a.j. ewing', 'a.j. vukovich', 'aaron bracho', 'aaron hicks', 'aaron judge']
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: samples opps=['a.j. ewing', 'a.j. vukovich', 'aaron hicks', 'aaron judge', 'aaron palensky']
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_pit=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: mapped PA rows: 109229 / 109341
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: unique mapped players=1379, unique mapped opps=1581
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: rate normalization: W>0 before=86829, PA>0 cells=109225, W>0 after=86826
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: presence rows: any=1379/1379, mean=79.206, median=38.000
+[2025-10-13 00:59:51] year=2024 role=pitcher players=1379 opps=1582 :: presence cols: any=1581/1582, mean=69.042, median=13.000
+[2025-10-13 00:59:53] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 9% (128/1379)
+[2025-10-13 00:59:54] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 18% (256/1379)
+[2025-10-13 00:59:56] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 27% (384/1379)
+[2025-10-13 00:59:58] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 37% (512/1379)
+[2025-10-13 01:00:00] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 46% (640/1379)
+[2025-10-13 01:00:01] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 55% (768/1379)
+[2025-10-13 01:00:03] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 64% (896/1379)
+[2025-10-13 01:00:05] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 74% (1024/1379)
+[2025-10-13 01:00:07] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 83% (1152/1379)
+[2025-10-13 01:00:08] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 92% (1280/1379)
+[2025-10-13 01:00:10] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 100% (1379/1379)
+[2025-10-13 01:00:10] year=2024 role=pitcher players=1379 opps=1582 :: vectorized produced 835150 edges (players=1379, opps=1582)
+[2025-10-13 01:00:14] year=2024 role=batter players=1310 opps=1293 :: enter rate-mode: players=1310, opps=1293
+[2025-10-13 01:00:18] year=2024 role=batter players=1310 opps=1293 :: applied _resolve_names_in_edges_df to PA names
+[2025-10-13 01:00:18] year=2024 role=batter players=1310 opps=1293 :: name coverage: edges_players=1310, edges_opps=1293, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=1310, inter(opps,pa_p)=1293, alt inter(players,pa_p)=0, alt inter(opps,pa_b)=0
+[2025-10-13 01:00:18] year=2024 role=batter players=1310 opps=1293 :: mapped PA rows: 108433 / 109341
+[2025-10-13 01:00:19] year=2024 role=batter players=1310 opps=1293 :: unique mapped players=1310, unique mapped opps=1293
+[2025-10-13 01:00:19] year=2024 role=batter players=1310 opps=1293 :: rate normalization: W>0 before=50684, PA>0 cells=108429, W>0 after=50684
+[2025-10-13 01:00:19] year=2024 role=batter players=1310 opps=1293 :: presence rows: any=1310/1310, mean=82.770, median=22.000
+[2025-10-13 01:00:19] year=2024 role=batter players=1310 opps=1293 :: presence cols: any=1293/1293, mean=83.858, median=48.000
+[2025-10-13 01:00:20] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 9% (128/1310)
+[2025-10-13 01:00:21] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 19% (256/1310)
+[2025-10-13 01:00:22] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 29% (384/1310)
+[2025-10-13 01:00:24] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 39% (512/1310)
+[2025-10-13 01:00:25] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 48% (640/1310)
+[2025-10-13 01:00:26] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 58% (768/1310)
+[2025-10-13 01:00:27] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 68% (896/1310)
+[2025-10-13 01:00:29] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 78% (1024/1310)
+[2025-10-13 01:00:30] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 87% (1152/1310)
+[2025-10-13 01:00:31] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 97% (1280/1310)
+[2025-10-13 01:00:31] year=2024 role=batter players=1310 opps=1293 :: vectorized progress: 100% (1310/1310)
+[2025-10-13 01:00:31] year=2024 role=batter players=1310 opps=1293 :: vectorized produced 604642 edges (players=1310, opps=1293)
+[2025-10-13 01:00:34] year=2024 role=pitcher players=1379 opps=1582 :: enter rate-mode: players=1379, opps=1582
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: applied _resolve_names_in_edges_df to PA names
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: name coverage: edges_players=1379, edges_opps=1581, pa_bat=1645, pa_pit=1388, inter(players,pa_b)=0, inter(opps,pa_p)=0, alt inter(players,pa_p)=1379, alt inter(opps,pa_b)=1581
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: samples players=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_bat=['a.j. ewing', 'a.j. vukovich', 'aaron bracho', 'aaron hicks', 'aaron judge']
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: samples opps=['a.j. ewing', 'a.j. vukovich', 'aaron hicks', 'aaron judge', 'aaron palensky']
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: samples pa_pit=['abbott, andrew', 'abbott, cory', 'abel, mick', 'abney, alaska', 'abreu, bryan']
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: mapped PA rows: 109229 / 109341
+[2025-10-13 01:00:39] year=2024 role=pitcher players=1379 opps=1582 :: unique mapped players=1379, unique mapped opps=1581
+[2025-10-13 01:00:40] year=2024 role=pitcher players=1379 opps=1582 :: rate normalization: W>0 before=86829, PA>0 cells=109225, W>0 after=86826
+[2025-10-13 01:00:40] year=2024 role=pitcher players=1379 opps=1582 :: presence rows: any=1379/1379, mean=79.206, median=38.000
+[2025-10-13 01:00:40] year=2024 role=pitcher players=1379 opps=1582 :: presence cols: any=1581/1582, mean=69.042, median=13.000
+[2025-10-13 01:00:41] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 9% (128/1379)
+[2025-10-13 01:00:43] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 18% (256/1379)
+[2025-10-13 01:00:45] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 27% (384/1379)
+[2025-10-13 01:00:46] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 37% (512/1379)
+[2025-10-13 01:00:48] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 46% (640/1379)
+[2025-10-13 01:00:50] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 55% (768/1379)
+[2025-10-13 01:00:51] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 64% (896/1379)
+[2025-10-13 01:00:53] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 74% (1024/1379)
+[2025-10-13 01:00:55] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 83% (1152/1379)
+[2025-10-13 01:00:57] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 92% (1280/1379)
+[2025-10-13 01:00:58] year=2024 role=pitcher players=1379 opps=1582 :: vectorized progress: 100% (1379/1379)
+[2025-10-13 01:00:58] year=2024 role=pitcher players=1379 opps=1582 :: vectorized produced 835150 edges (players=1379, opps=1582)

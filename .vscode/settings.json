@@ -1,0 +1,6 @@
+{
+  // Force the interpreter to the repo-local venv (this env has python.exe at the root, not in Scripts)
+  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "jupyter.pythonInterpreterPath": "${workspaceFolder}\\.venv\\python.exe"
+}

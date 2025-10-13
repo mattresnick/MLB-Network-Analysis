@@ -1,9 +1,11 @@
 {
   "pipeline": {
+    "validation": { "aucMode": "legacy", "negatives_per_positive": 1 },
     "years": [2019],
     "allow_2020": false,
     "dry_run": false,
     "score_types": ["handmade"],
+    "processing": { "unipartite_metric": "rate" },
     "paths": {"output_dir": "outputs"}
   }
 }

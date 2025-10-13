@@ -1,0 +1,18 @@
+{
+  "pipeline": {
+    "validation": { "aucMode": "legacy", "negatives_per_positive": 1 },
+    "processing": { "unipartite_metric": "rate" },
+    "years": [2024],
+    "allow_2020": false,
+    "dry_run": false,
+    "score_types": ["frequency"],
+    "validation_folds": 5,
+    "ranking": {"top_n": 25, "scale_ranks": true, "output_levels": true},
+    "paths": {
+      "raw_data_dir": "At Bats/general_data",
+      "output_dir": "outputs"
+    },
+    "output": {"formats": ["csv"]}
+  },
+  "logging": {"level": "INFO", "progress": true}
+}

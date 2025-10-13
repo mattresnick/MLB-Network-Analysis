@@ -58,6 +58,7 @@ Aggregates:
 - `summary_top_players.*` top N summary across all processed spans
 - `levels_by_year.*` scalar range for scaled ranks (if enabled)
 - `validation_report.*` nodes/edges/density per graph
+- `validation_auc.*` cross-validated Accuracy and AUC per year/condition (if validation_folds > 0)
 - `mobility_report.*` quartile transition mobility (optional)
 - `anomalies_report.*` anomalous rank deltas (optional)
 - `rolling_summary.*` rolling window span metadata (optional)
@@ -129,4 +130,11 @@ pytest -q
 - Automated weekly data update job
 
 Contributions welcome – open an issue or PR.
+
+## Running in VS Code (shortcuts)
+
+- First-time setup: use the launcher "First run: setup env + full (MLB)". This provisions a repo-local .venv and installs dependencies.
+- Day-to-day: use "Full pipeline: example_frequency_cv (MLB)" or the targeted launchers:
+	- "Scrape: 2024 only (MLB)" — fetch just 2024 raw data
+	- "Full pipeline: 2024 only (MLB)" — run edges + ranks just for 2024
 

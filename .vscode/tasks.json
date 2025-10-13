@@ -1,0 +1,427 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "setup: venv+deps (MLB)",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder:MLB-Network-Analysis}\\scripts\\setup-venv.ps1"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "setup: venv+deps (MLB) [recreate]",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder:MLB-Network-Analysis}\\scripts\\setup-venv.ps1",
+				"-Recreate"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "setup: conda env (MLB) [recreate]",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder:MLB-Network-Analysis}\\scripts\\setup-venv.ps1",
+				"-Recreate",
+				"-UseConda"
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "run: scrape 2024 (attach mode) (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"args": [
+				"-m",
+				"debugpy",
+				"--listen",
+				"localhost:5678",
+				"--wait-for-client",
+				"${workspaceFolder}\\cli.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_2024.json",
+				"scrape"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "run: scrape 2024 (attach mode :5680) (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"args": [
+				"-m",
+				"debugpy",
+				"--listen",
+				"localhost:5680",
+				"--wait-for-client",
+				"${workspaceFolder}\\cli.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_2024.json",
+				"scrape"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "run: scrape 2024 (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"args": [
+				"${workspaceFolder}\\cli.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_2024.json",
+				"scrape"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "run: scrape 2024 (force) (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"args": [
+				"${workspaceFolder}\\cli.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_2024_force.json",
+				"scrape"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "run: full 2024 (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"args": [
+				"${workspaceFolder}\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_2024.json"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "run: test vectorized rate (MLB)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: test vectorized rate (MLB) 2",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: test vectorized rate (MLB) 3",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: test vectorized rate (MLB) 4",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2024 (MLB) [force edges]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_regen.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2024 (MLB) [sum]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_sum.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: recompute validation (2024) [sum]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_sum.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2024 (MLB) [sum, rerun]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_sum.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2024 (MLB) [sum, auc-neg-sample]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_sum.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: auc-from-ranks 2024 batter (sum)",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
+				"--year",
+				"2024",
+				"--group",
+				"batter",
+				"--score_type",
+				"frequency",
+				"--kneg",
+				"1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: auc-from-ranks 2024 batter (sum) 2",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
+				"--year",
+				"2024",
+				"--group",
+				"batter",
+				"--score_type",
+				"frequency",
+				"--kneg",
+				"1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2024 (MLB) [sum, final rerun]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_sum.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: auc-from-ranks 2019 batter",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
+				"--year",
+				"2019",
+				"--group",
+				"batter",
+				"--score_type",
+				"frequency",
+				"--kneg",
+				"1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: auc-from-ranks 2019 batter (sum)",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
+				"--year",
+				"2019",
+				"--group",
+				"batter",
+				"--score_type",
+				"frequency",
+				"--kneg",
+				"1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: auc-from-ranks 2019 pitcher (sum)",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
+				"--year",
+				"2019",
+				"--group",
+				"pitcher",
+				"--score_type",
+				"frequency",
+				"--kneg",
+				"1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2019 (MLB) [sum]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2019_sum.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2019 (MLB) [sum, nocache]",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2019_sum_nocache.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: recompute ranks+auc 2019",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\recompute_ranks_and_auc.py",
+				"--year",
+				"2019",
+				"--folds",
+				"5"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: recompute ranks+auc 2019 (retry)",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\recompute_ranks_and_auc.py",
+				"--year",
+				"2019",
+				"--folds",
+				"5"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: recompute ranks+auc 2019 (retry 2)",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"args": [
+				"-u",
+				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\recompute_ranks_and_auc.py",
+				"--year",
+				"2019",
+				"--folds",
+				"5"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

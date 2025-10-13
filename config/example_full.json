@@ -1,6 +1,7 @@
 {
   "pipeline": {
-    "years": {"start": 2015, "end": 2019},
+    "validation": { "aucMode": "legacy", "negatives_per_positive": 1 },
+    "years": {"start": 2024, "end": 2025},
     "allow_2020": false,
     "dry_run": false,
     "score_types": ["handmade", "frequency", "pitch_type", "inning"],
@@ -9,6 +10,8 @@
     "filters": {"stand": ["L","R"], "p_throws": ["L","R"]},
     "ranking": {"top_n": 25, "scale_ranks": true, "output_levels": true},
     "scrape": {"force": false},
+    "processing": { "unipartite_metric": "rate" },
+    "validation_folds": 5,
     "paths": {
       "raw_data_dir": "At Bats/general_data",
       "batter_dir": "At Bats/batter_data",

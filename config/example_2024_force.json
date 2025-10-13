@@ -1,0 +1,17 @@
+{
+  "pipeline": {
+    "years": [2024],
+    "allow_2020": false,
+    "dry_run": false,
+    "score_types": ["frequency"],
+    "validation_folds": 0,
+    "scrape": {"force": true},
+    "processing": { "unipartite_metric": "rate" },
+    "paths": {
+      "raw_data_dir": "At Bats/general_data",
+      "output_dir": "outputs"
+    },
+    "output": {"formats": ["csv"]}
+  },
+  "logging": {"level": "INFO", "progress": true}
+}
