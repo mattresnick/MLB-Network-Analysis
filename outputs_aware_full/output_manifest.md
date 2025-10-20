@@ -1,6 +1,6 @@
 # Output Manifest
-Timestamp: 2025-10-18 05:36:55
-Training Years: 2024
+Timestamp: 2025-10-20 02:30:43
+Training Years: 2024, 2025
 Score types: aware
 Groups: batter, pitcher
 Unipartite accumulation: sum
@@ -26,15 +26,27 @@ Unipartite accumulation: sum
 - summary_top_players: outputs_aware_full\summary_top_players.csv (exists)
 
 ## Orientation checks
-- aware:batter:2024: CV orientation=as-is (p=0.521, Npos=41667)
-- aware:pitcher:2024: CV orientation=as-is (p=0.616, Npos=68311)
-- aware:batter:2024: OppBlock fold orientation=as-is (p=0.504, Npos=42546)
-- aware:batter:2024: OppBlock fold orientation=flipped-at-eval (p=0.475, Npos=43513)
-- aware:batter:2024: OppBlock fold orientation=as-is (p=0.575, Npos=39938)
-- aware:batter:2024: OppBlock fold orientation=as-is (p=0.542, Npos=41028)
-- aware:batter:2024: OppBlock fold orientation=flipped-at-eval (p=0.495, Npos=40665)
-- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.553, Npos=67283)
-- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.577, Npos=71190)
-- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.565, Npos=66727)
-- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.604, Npos=68024)
-- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.541, Npos=67501)
+- aware:batter:2024: CV orientation=as-is (p=0.977, Npos=41667)
+- aware:batter:2025: CV orientation=as-is (p=0.998, Npos=8329)
+- aware:pitcher:2024: CV orientation=as-is (p=0.983, Npos=68311)
+- aware:pitcher:2025: CV orientation=as-is (p=0.988, Npos=180499)
+- aware:batter:2024: OppBlock fold orientation=as-is (p=0.605, Npos=45838)
+- aware:batter:2024: OppBlock fold orientation=as-is (p=0.516, Npos=37688)
+- aware:batter:2024: OppBlock fold orientation=as-is (p=0.527, Npos=42879)
+- aware:batter:2024: OppBlock fold orientation=flipped-at-eval (p=0.468, Npos=41005)
+- aware:batter:2024: OppBlock fold orientation=flipped-at-eval (p=0.463, Npos=40280)
+- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.638, Npos=70679)
+- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.557, Npos=70003)
+- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.557, Npos=64614)
+- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.545, Npos=67343)
+- aware:pitcher:2024: OppBlock fold orientation=as-is (p=0.570, Npos=67261)
+- aware:batter:2025: OppBlock fold orientation=flipped-at-eval (p=0.469, Npos=212615)
+- aware:batter:2025: OppBlock fold orientation=flipped-at-eval (p=0.453, Npos=206528)
+- aware:batter:2025: OppBlock fold orientation=flipped-at-eval (p=0.390, Npos=198291)
+- aware:batter:2025: OppBlock fold orientation=flipped-at-eval (p=0.410, Npos=197842)
+- aware:batter:2025: OppBlock fold orientation=flipped-at-eval (p=0.457, Npos=202146)
+- aware:pitcher:2025: OppBlock fold orientation=as-is (p=0.612, Npos=183699)
+- aware:pitcher:2025: OppBlock fold orientation=as-is (p=0.622, Npos=177882)
+- aware:pitcher:2025: OppBlock fold orientation=as-is (p=0.635, Npos=183257)
+- aware:pitcher:2025: OppBlock fold orientation=as-is (p=0.652, Npos=173537)
+- aware:pitcher:2025: OppBlock fold orientation=as-is (p=0.641, Npos=182775)

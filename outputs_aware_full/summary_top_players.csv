@@ -1,51 +1,101 @@
 Player,Rank,Year,Group,ScoreType
-Korey Lee,-82532.53473106794,2024,batter,aware
-Bo Naylor,-84634.33819219179,2024,batter,aware
-Jeimer Candelario,-84927.60081668,2024,batter,aware
-Tim Anderson,-84970.71366362949,2024,batter,aware
-Nick Gordon,-85185.91369401867,2024,batter,aware
-J. p. Martínez,-85194.04645154958,2024,batter,aware
-Cooper Hummel,-85220.27005960737,2024,batter,aware
-Rob Brantly,-85228.29450725422,2024,batter,aware
-Luis Castillo,-85230.17887271754,2024,batter,aware
-Brian Anderson,-85232.28532363688,2024,batter,aware
-Darren Baker,-85249.7588321122,2024,batter,aware
-David Fletcher,-85250.9571011338,2024,batter,aware
-Conner Capel,-85259.79436454864,2024,batter,aware
-Duke Ellis,-85260.92414360432,2024,batter,aware
-Scott Mcgough,-85261.59700621208,2024,batter,aware
-Samad Taylor,-85266.8826333214,2024,batter,aware
-Kevin Alcántara,-85279.55767605768,2024,batter,aware
-Jorge Barrosa,-85281.63317299892,2024,batter,aware
-Harold Ramírez,-85281.65428960172,2024,batter,aware
-José Devers,-85284.32840429878,2024,batter,aware
-Chris Roller,-85286.2207194887,2024,batter,aware
-Aramis Garcia,-85286.32322484531,2024,batter,aware
-Graham Pauley,-85286.6528343584,2024,batter,aware
-Brewer Hicklen,-85286.8088990652,2024,batter,aware
-Orelvis Martinez,-85287.31948335687,2024,batter,aware
-"Smith, Cade",-248942.4237645637,2024,pitcher,aware
-"Miller, Mason",-249340.92474416358,2024,pitcher,aware
-"Crochet, Garrett",-249358.83078642093,2024,pitcher,aware
-"Hollowell, Gavin",-249453.94187346532,2024,pitcher,aware
-"Curtiss, John",-249465.0100926469,2024,pitcher,aware
-"Martinez, Nick",-249485.74566280324,2024,pitcher,aware
-"Vanasco, Ricky",-249488.35581203844,2024,pitcher,aware
-"Willingham, Amos",-249490.60716325403,2024,pitcher,aware
-"Farmer, Kyle",-249493.12642891766,2024,pitcher,aware
-"Church, Marc",-249508.417378374,2024,pitcher,aware
-"White, Owen",-249512.96124740015,2024,pitcher,aware
-"Pratto, Nick",-249518.31654027937,2024,pitcher,aware
-"Topa, Justin",-249519.8784457373,2024,pitcher,aware
-"Lee, Dylan",-249526.82837005518,2024,pitcher,aware
-"Miller, Owen",-249527.060643756,2024,pitcher,aware
-"Coleman, Dylan",-249527.91353576927,2024,pitcher,aware
-"Busenitz, Alan",-249529.80848683897,2024,pitcher,aware
-"Clemens, Kody",-249533.13209037046,2024,pitcher,aware
-"Bote, David",-249535.39537877802,2024,pitcher,aware
-"Tucker, Cole",-249537.95397868706,2024,pitcher,aware
-"Koch, Matt",-249538.65498537023,2024,pitcher,aware
-"Hampson, Garrett",-249540.8181419933,2024,pitcher,aware
-"McKinstry, Zach",-249542.06032859941,2024,pitcher,aware
-"Smith, Dominic",-249544.4800037746,2024,pitcher,aware
-"Alvarez, Eddy",-249544.92802970842,2024,pitcher,aware
+Juan Soto,0.033725073148185104,2024,batter,aware
+Aaron Judge,0.02415413222775382,2024,batter,aware
+Isaac Paredes,0.022538933393782032,2024,batter,aware
+Jonathan India,0.020564470458125757,2024,batter,aware
+Jurickson Profar,0.01962341634195791,2024,batter,aware
+Mookie Betts,0.01723373487003493,2024,batter,aware
+Steven Kwan,0.016941019024572988,2024,batter,aware
+Nolan Schanuel,0.015447061179316681,2024,batter,aware
+Freddie Freeman,0.015151217640867031,2024,batter,aware
+Justin Turner,0.015031331998469781,2024,batter,aware
+Corbin Carroll,0.0143610338739773,2024,batter,aware
+Nico Hoerner,0.014257404578891792,2024,batter,aware
+Kyle Tucker,0.014060532187843762,2024,batter,aware
+Brendan Donovan,0.01391156345256867,2024,batter,aware
+Vladimir Guerrero,0.013053259711726502,2024,batter,aware
+Randy Arozarena,0.012859050847986202,2024,batter,aware
+Spencer Steer,0.012252825442166226,2024,batter,aware
+Mark Canha,0.012100613403600427,2024,batter,aware
+Marcus Semien,0.012007225594242138,2024,batter,aware
+Ha-seong Kim,0.011943663935228608,2024,batter,aware
+Brandon Nimmo,0.010774164385421385,2024,batter,aware
+Joey Ortiz,0.010678909701509195,2024,batter,aware
+Tyler Freeman,0.01049479372408602,2024,batter,aware
+Yordan Álvarez,0.010455894774895134,2024,batter,aware
+William Contreras,0.010403486411755019,2024,batter,aware
+MLBAM_672695,0.018280167036976522,2025,batter,aware
+MLBAM_665742,0.016943973232321743,2025,batter,aware
+MLBAM_650402,0.0157049520646554,2025,batter,aware
+MLBAM_670770,0.01494355599148475,2025,batter,aware
+MLBAM_665489,0.013742103441479907,2025,batter,aware
+MLBAM_665487,0.012376671279566053,2025,batter,aware
+MLBAM_542303,0.012194588578434407,2025,batter,aware
+MLBAM_592450,0.012175647261029625,2025,batter,aware
+MLBAM_663656,0.012164126954003892,2025,batter,aware
+MLBAM_702332,0.01120437757755476,2025,batter,aware
+MLBAM_669257,0.010906876822822145,2025,batter,aware
+MLBAM_680757,0.010776124736141165,2025,batter,aware
+MLBAM_670623,0.010770474901463963,2025,batter,aware
+MLBAM_545361,0.010651535217489823,2025,batter,aware
+MLBAM_543807,0.010549132807036623,2025,batter,aware
+MLBAM_661388,0.010483809679523002,2025,batter,aware
+MLBAM_608324,0.010460708322540473,2025,batter,aware
+MLBAM_605141,0.010418940047629744,2025,batter,aware
+MLBAM_689414,0.009986442522022215,2025,batter,aware
+MLBAM_630105,0.009939066960964246,2025,batter,aware
+MLBAM_694384,0.009849583939029533,2025,batter,aware
+MLBAM_643446,0.009782796290508464,2025,batter,aware
+MLBAM_663757,0.009594360348542552,2025,batter,aware
+MLBAM_656941,0.00955747486888646,2025,batter,aware
+MLBAM_672580,0.00892811392704007,2025,batter,aware
+"Hudson, Dakota",0.017109334273523267,2024,pitcher,aware
+"Quantrill, Cal",0.01489624234731071,2024,pitcher,aware
+"Nastrini, Nick",0.012553959469298093,2024,pitcher,aware
+"Jarvis, Bryce",0.012440217204697204,2024,pitcher,aware
+"Lawrence, Justin",0.011286840204104838,2024,pitcher,aware
+"Boyle, Joe",0.010608001269540366,2024,pitcher,aware
+"Bird, Jake",0.010484886734468067,2024,pitcher,aware
+"Muñoz, Roddery",0.01036732030487413,2024,pitcher,aware
+"McKenzie, Triston",0.010352377914064346,2024,pitcher,aware
+"Stratton, Chris",0.010300403837293871,2024,pitcher,aware
+"Houser, Adrian",0.00996030847594153,2024,pitcher,aware
+"Lorenzen, Michael",0.009940145163644524,2024,pitcher,aware
+"Stroman, Marcus",0.009812478995681247,2024,pitcher,aware
+"Yarbrough, Ryan",0.00943870924903844,2024,pitcher,aware
+"Weems, Jordan",0.0088164752916269,2024,pitcher,aware
+"McGough, Scott",0.008811432006396936,2024,pitcher,aware
+"Thorpe, Drew",0.008401010914412992,2024,pitcher,aware
+"Canning, Griffin",0.008317670110543586,2024,pitcher,aware
+"Hernández, Jonathan",0.008250475736087604,2024,pitcher,aware
+"Montero, Rafael",0.008209789261550098,2024,pitcher,aware
+"Anderson, Justin",0.008063876755347558,2024,pitcher,aware
+"Walker, Taijuan",0.008036192104618365,2024,pitcher,aware
+"Rainey, Tanner",0.008011222722935462,2024,pitcher,aware
+"Blalock, Bradley",0.008006587208606855,2024,pitcher,aware
+"González, Victor",0.007989651359861422,2024,pitcher,aware
+"Fedde, Erick",0.0053040170334797375,2025,pitcher,aware
+"Díaz, Alexis",0.005058459720380424,2025,pitcher,aware
+"Guerrero, Luis",0.005032910710713752,2025,pitcher,aware
+"Herrin, Tim",0.004824762638676023,2025,pitcher,aware
+"Vásquez, Randy",0.004772086368162916,2025,pitcher,aware
+"Anderson, Ian",0.004187690703670984,2025,pitcher,aware
+"Kochanowicz, Jack",0.004171410923365119,2025,pitcher,aware
+"McCullers Jr., Lance",0.004012130683003403,2025,pitcher,aware
+"Palmquist, Carson",0.00394301278117643,2025,pitcher,aware
+"Ellard, Fraser",0.0038015904078384684,2025,pitcher,aware
+"Henry, Cole",0.0037702148939180655,2025,pitcher,aware
+"Arrighetti, Spencer",0.003682533872139194,2025,pitcher,aware
+"Sims, Lucas",0.003673198832614911,2025,pitcher,aware
+"Murdock, Noah",0.003589710445038136,2025,pitcher,aware
+"Reifert, Evan",0.003445335248000404,2025,pitcher,aware
+"Vasil, Mike",0.0033948686354453852,2025,pitcher,aware
+"Buehler, Walker",0.0033905555309514937,2025,pitcher,aware
+"Núñez, Eduarniel",0.003385418501858581,2025,pitcher,aware
+"Jacob, Alek",0.003347476532852494,2025,pitcher,aware
+"Waldron, Matt",0.0032899849585972156,2025,pitcher,aware
+"Hicks, Jordan",0.0032558163442520703,2025,pitcher,aware
+"Wilson, Bryse",0.0032229471472778872,2025,pitcher,aware
+"Altavilla, Dan",0.0032193132416115412,2025,pitcher,aware
+"Poche, Colin",0.0031320937873003203,2025,pitcher,aware
+"Peralta, Luis",0.00312839594704681,2025,pitcher,aware

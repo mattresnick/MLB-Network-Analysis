@@ -22,6 +22,7 @@ try:
 except ImportError:  # pragma: no cover - fallback for lowercase package name
     import springrank as sr  # type: ignore
 from typing import Optional
+import math
 
 # Debug: identify which module path is being imported at runtime
 try:
@@ -39,6 +40,7 @@ except Exception:
 # (Potential improvement: refactor Rankings.py into functions and import.)
 
 ALLOWED_PITCH_TYPES = ["CH","CU","FC","FF","FS","FT","SI","SL"]
+LOGIT_075 = math.log(3.0)
 
 # ------------------------- Aware scoring (new score_type) ------------------------- #
 def _detect_bool(v: Any) -> bool:
@@ -1868,223 +1870,157 @@ def scale_ranks(A, raw_ranks, a=0.01, b=20, scale=0.75):
 
 def _compute_acc_auc(
     sorted_ranks: List[List[Any]],
-    test_edges: Optional[np.ndarray],
+    test_edges: Optional[List[Tuple[str, str, float]]],
     *,
     auc_mode: str = "balanced-negatives",
     k_neg: int = 1,
     auto_flip: bool = False,
-    acc_mode: str = "positive-only",
-    seed: Optional[int] = 42,
+    acc_mode: str = "positives",
+    seed: Optional[int] = None,
 ) -> Optional[Tuple[float, float, int]]:
     """Compute ACC/AUC against held-out directed edges using rank differences.
 
     Modes:
-    - balanced-negatives (default): For each held-out positive (u->v), score = r[u]-r[v] with label 1,
-      and add k_neg negatives for the same source u by sampling v' not in the positive set, label 0.
-      This tests whether rank differences discriminate winners from random non-winners.
-        - legacy: Match legacy_auc_demo.py behavior on the raw edge CSV. Treat ground-truth label as
-            1 if the held-out edge weight > 0 else 0. Predict label as 1 if dv = r[u]-r[v] > 0 else 0.
-            Report ACC(obs, preds) and AUC(obs, preds) where the AUC is computed on binary predictions
-            (as in the legacy script), not on continuous scores.
-
+      - legacy: binary predictions vs weight-derived labels (w>0)
+      - pairwise-reversal: (u,v) label 1 and (v,u) label 0
+      - balanced-negatives (default): for each (u,v) positive, add k_neg negatives (u,v') not in positives
     Returns (accuracy, auc, used_test_edges) or None if no edges usable.
     """
-    # Initialize safe defaults to avoid UnboundLocalError in any early-return path
-    acc: float = 0.0
-    auc: float = 0.5
-    used: int = 0
-    if test_edges is None or len(test_edges) == 0:
+    if not test_edges:
         return None
-    # Map player -> rank score
-    rank_map = {name: float(score) for name, score in sorted_ranks}
-    # Legacy mode: ACC/AUC on binary predictions vs weight-derived labels (edge weight > 0)
-    if str(auc_mode).lower() == "legacy":
-        acc_preds: List[int] = []
-        acc_obs: List[int] = []
-        used = 0
-        for edge in test_edges:
-            try:
-                u, v, w = str(edge[0]), str(edge[1]), edge[2]
-                si = rank_map.get(u)
-                sj = rank_map.get(v)
-                if si is None or sj is None:
-                    continue
-                dv = float(si - sj)
-                pred = 1 if dv > 0 else 0
-                obs = 1 if (float(w) > 0) else 0
-                acc_preds.append(pred)
-                acc_obs.append(obs)
-                used += 1
-            except Exception:
-                continue
-        if used == 0:
-            return None
-        acc_arr = (np.array(acc_preds) == np.array(acc_obs))
-        acc_l = float(np.mean(acc_arr))
-        if auto_flip and acc_l < 0.5:
-            # Flip orientation and recompute once
-            acc_preds = [1 - p for p in acc_preds]
-            acc_l = float(np.mean(np.array(acc_preds) == np.array(acc_obs)))
-        # If only one class in obs, roc_auc_score is undefined; fall back to 0.5
-        try:
-            from sklearn.metrics import roc_auc_score  # type: ignore
-            if len(set(acc_obs)) < 2:
-                auc_l = 0.5
-            else:
-                auc_l = float(roc_auc_score(acc_obs, acc_preds))
-        except Exception:
-            auc_l = 0.5
-        return acc_l, auc_l, used
+    rank_map = {str(n): float(s) for n, s in (sorted_ranks or [])}
+    mode = str(auc_mode).lower()
 
-    # Pairwise-reversal: for each held-out positive (u->v), create a matched negative (v->u)
-    if str(auc_mode).lower() == "pairwise-reversal":
-        auc_scores: List[float] = []
-        auc_labels: List[int] = []
-        acc_preds: List[int] = []
-        acc_obs: List[int] = []
+    # Legacy mode
+    if mode == "legacy":
+        preds: List[int] = []
+        obs: List[int] = []
         used = 0
-        for edge in test_edges:
-            try:
-                u, v, _w = str(edge[0]), str(edge[1]), edge[2]
-                si = rank_map.get(u)
-                sj = rank_map.get(v)
-                if si is None or sj is None:
-                    continue
-                # Positive dv and its reverse negative
-                dv_pos = float(si - sj)   # label 1
-                dv_neg = float(sj - si)   # label 0
-                auc_scores.extend([dv_pos, dv_neg])
-                auc_labels.extend([1, 0])
-                # Accuracy on positives matches legacy correctness
-                acc_preds.append(1 if dv_pos > 0 else 0)
-                acc_obs.append(1)
-                used += 1
-            except Exception:
-                continue
-        if used == 0:
-            return None
-        acc_arr = (np.array(acc_preds) == np.array(acc_obs))
-        if str(acc_mode).lower() == "balanced":
-            # In pairwise-reversal, we created an equal number of positives and negatives in auc_{scores,labels}
-            # Use threshold at 0 to form predictions across both classes
-            acc_all = float(np.mean((np.array(auc_scores) > 0).astype(int) == np.array(auc_labels)))
-            acc_p = acc_all
-        else:
-            acc_p = float(np.mean(acc_arr))
-        if auto_flip and acc_p < 0.5:
-            # Flip both the positive correctness and swap labels
-            acc_preds = [1 - p for p in acc_preds]
-            # For symmetric pairs, flipping labels is equivalent to flipping signs of dv; just swap labels
-            auc_labels = [1 - l for l in auc_labels]
-            acc_p = float(np.mean(np.array(acc_preds) == np.array(acc_obs)))
-        try:
-            from sklearn.metrics import roc_auc_score  # type: ignore
-            auc_p = float(roc_auc_score(auc_labels, auc_scores))
-        except Exception:
-            # With symmetric pairs, threshold-at-0 approximation is fine
-            scores = np.array(auc_scores)
-            labels = np.array(auc_labels)
-            pos = labels == 1
-            neg = ~pos
-            tpr = (scores[pos] > 0).mean() if pos.any() else 0.5
-            fpr = (scores[neg] > 0).mean() if neg.any() else 0.5
-            auc_p = 0.5 * (tpr + (1 - fpr))
-        return acc_p, auc_p, used
-    # Default (balanced-negatives) mode
-    acc_preds2: List[int] = []
-    acc_obs2: List[int] = []
-    auc_scores2: List[float] = []
-    auc_labels2: List[int] = []
-    used2 = 0
-    # Build quick lookup structures from test set for negative sampling per source
-    test_pos_by_u: Dict[str, set] = {}
-    losers_pool: List[str] = []
-    _hb = 0
-    for edge in test_edges:
-        try:
-            u, v = str(edge[0]), str(edge[1])
-        except Exception:
-            continue
-        test_pos_by_u.setdefault(u, set()).add(v)
-        losers_pool.append(v)
-    unique_nodes = np.array(sorted(rank_map.keys()))
-    unique_nodes_set = set(unique_nodes.tolist())
-    rng = np.random.RandomState(seed if seed is not None else 42)
-    k_neg = int(max(0, k_neg))
-    for edge in test_edges:
-        try:
-            u, v, _w = str(edge[0]), str(edge[1]), edge[2]
-            si = rank_map.get(u)
-            sj = rank_map.get(v)
+        for (u, v, w) in test_edges:
+            si = rank_map.get(str(u)); sj = rank_map.get(str(v))
             if si is None or sj is None:
                 continue
             dv = float(si - sj)
-            acc_preds2.append(1 if dv > 0 else 0)
-            acc_obs2.append(1)
-            auc_scores2.append(dv)
-            auc_labels2.append(1)
-            if k_neg > 0 and unique_nodes.size > 1:
-                base_cand = unique_nodes_set.difference({u})
-                ban = test_pos_by_u.get(u, set())
-                cand_set = base_cand.difference(ban)
-                if v in cand_set:
-                    cand_set.discard(v)
-                if not cand_set:
-                    cand_set = base_cand.difference({v})
-                if cand_set:
-                    cand_list = list(cand_set)
-                    take = min(k_neg, len(cand_list))
-                    if take > 0:
-                        if take == len(cand_list):
-                            sample_idx = np.arange(take)
-                        else:
-                            sample_idx = rng.choice(np.arange(len(cand_list)), size=take, replace=False)
-                        for idx in np.atleast_1d(sample_idx):
-                            v_neg = str(cand_list[int(idx)])
-                            sjn = rank_map.get(v_neg)
-                            if sjn is None:
-                                continue
-                            auc_scores2.append(float(si - sjn))
-                            auc_labels2.append(0)
-            used2 += 1
-            _hb += 1
-            if _hb % 200000 == 0:
-                try:
-                    print(f"[auc] processed {used2} held-out edges (+negs)")
-                except Exception:
-                    pass
-        except Exception:
-            continue
-    if used2 == 0:
-        return None
-    pos_acc_arr = (np.array(acc_preds2) == np.array(acc_obs2))
-    if str(acc_mode).lower() == "balanced" and len(auc_scores2) == len(auc_labels2) and len(auc_labels2) > 0:
-        acc_bn = float(np.mean((np.array(auc_scores2) > 0).astype(int) == np.array(auc_labels2)))
-    else:
-        acc_bn = float(np.mean(pos_acc_arr))
-    if auto_flip and acc_bn < 0.5:
-        acc_preds2 = [1 - p for p in acc_preds2]
-        auc_labels2 = [1 - l for l in auc_labels2]
-        if str(acc_mode).lower() == "balanced" and len(auc_scores2) == len(auc_labels2) and len(auc_labels2) > 0:
-            acc_bn = float(np.mean((np.array(auc_scores2) > 0).astype(int) == np.array(auc_labels2)))
-        else:
-            acc_bn = float(np.mean(pos_acc_arr))
-    obs_arr = np.array(auc_labels2)
-    if len(np.unique(obs_arr)) < 2:
-        auc_bn = 0.5
-    else:
+            preds.append(1 if dv > 0 else 0)
+            obs.append(1 if float(w) > 0 else 0)
+            used += 1
+        if used == 0:
+            return None
+        acc = float(np.mean(np.array(preds) == np.array(obs)))
+        if auto_flip and acc < 0.5:
+            preds = [1 - p for p in preds]
+            acc = float(np.mean(np.array(preds) == np.array(obs)))
         try:
             from sklearn.metrics import roc_auc_score  # type: ignore
-            auc_bn = float(roc_auc_score(auc_labels2, auc_scores2))
+            auc = 0.5 if len(set(obs)) < 2 else float(roc_auc_score(obs, preds))
         except Exception:
-            # Fallback to a rough approximation using zero threshold on dv
-            scores = np.array(auc_scores2)
-            pos = obs_arr == 1
-            neg = ~pos
-            tpr = (scores[pos] > 0).mean() if pos.any() else 0.5
-            fpr = (scores[neg] > 0).mean() if neg.any() else 0.5
-            auc_bn = 0.5 * (tpr + (1 - fpr))
-    return acc_bn, auc_bn, used2
+            auc = 0.5
+        return acc, auc, used
+
+    # Pairwise reversal mode
+    if mode == "pairwise-reversal":
+        scores: List[float] = []
+        labels: List[int] = []
+        preds_pos: List[int] = []
+        used = 0
+        for (u, v, _w) in test_edges:
+            si = rank_map.get(str(u)); sj = rank_map.get(str(v))
+            if si is None or sj is None:
+                continue
+            dv = float(si - sj)
+            scores.extend([dv, -dv])
+            labels.extend([1, 0])
+            preds_pos.append(1 if dv > 0 else 0)
+            used += 1
+        if used == 0:
+            return None
+        acc = float(np.mean(np.array(preds_pos) == 1))
+        if auto_flip and acc < 0.5:
+            preds_pos = [1 - p for p in preds_pos]
+            labels = [1 - l for l in labels]
+            acc = float(np.mean(np.array(preds_pos) == 1))
+        try:
+            from sklearn.metrics import roc_auc_score  # type: ignore
+            auc = float(roc_auc_score(labels, scores))
+        except Exception:
+            # Fallback: threshold-at-0 approximation
+            sc = np.array(scores); lb = np.array(labels)
+            pos = lb == 1; neg = ~pos
+            tpr = (sc[pos] > 0).mean() if pos.any() else 0.5
+            fpr = (sc[neg] > 0).mean() if neg.any() else 0.5
+            auc = 0.5 * (tpr + (1 - fpr))
+        return acc, auc, used
+
+    # Default balanced-negatives
+    rng = np.random.RandomState(seed if seed is not None else 42)
+    used = 0
+    acc_preds: List[int] = []
+    acc_obs: List[int] = []
+    auc_scores: List[float] = []
+    auc_labels: List[int] = []
+    test_pos_by_u: Dict[str, set] = {}
+    for (u, v, _w) in test_edges:
+        u = str(u); v = str(v)
+        test_pos_by_u.setdefault(u, set()).add(v)
+    all_nodes = set(rank_map.keys())
+    k_neg = max(0, int(k_neg))
+    for (u, v, _w) in test_edges:
+        u = str(u); v = str(v)
+        si = rank_map.get(u); sj = rank_map.get(v)
+        if si is None or sj is None:
+            continue
+        dv = float(si - sj)
+        acc_preds.append(1 if dv > 0 else 0)
+        acc_obs.append(1)
+        auc_scores.append(dv); auc_labels.append(1)
+        if k_neg > 0 and len(all_nodes) > 1:
+            base_cand = all_nodes.difference({u})
+            ban = test_pos_by_u.get(u, set())
+            cand_set = base_cand.difference(ban)
+            if v in cand_set:
+                cand_set.discard(v)
+            if not cand_set:
+                cand_set = base_cand.difference({v})
+            if cand_set:
+                cand_list = list(cand_set)
+                take = min(k_neg, len(cand_list))
+                if take > 0:
+                    if take == len(cand_list):
+                        sample_idx = np.arange(take)
+                    else:
+                        sample_idx = rng.choice(np.arange(len(cand_list)), size=take, replace=False)
+                    for idx in np.atleast_1d(sample_idx):
+                        v_neg = str(cand_list[int(idx)])
+                        sjn = rank_map.get(v_neg)
+                        if sjn is None:
+                            continue
+                        auc_scores.append(float(si - sjn))
+                        auc_labels.append(0)
+        used += 1
+    if used == 0:
+        return None
+    pos_acc = float(np.mean(np.array(acc_preds) == np.array(acc_obs)))
+    if str(acc_mode).lower() == "balanced" and len(auc_scores) == len(auc_labels) and len(auc_labels) > 0:
+        acc = float(np.mean((np.array(auc_scores) > 0).astype(int) == np.array(auc_labels)))
+    else:
+        acc = pos_acc
+    if auto_flip and acc < 0.5:
+        acc_preds = [1 - p for p in acc_preds]
+        auc_labels = [1 - l for l in auc_labels]
+        if str(acc_mode).lower() == "balanced" and len(auc_scores) == len(auc_labels) and len(auc_labels) > 0:
+            acc = float(np.mean((np.array(auc_scores) > 0).astype(int) == np.array(auc_labels)))
+        else:
+            acc = float(np.mean(np.array(acc_preds) == np.array(acc_obs)))
+    try:
+        from sklearn.metrics import roc_auc_score  # type: ignore
+        auc = 0.5 if len(set(auc_labels)) < 2 else float(roc_auc_score(auc_labels, auc_scores))
+    except Exception:
+        sc = np.array(auc_scores); lb = np.array(auc_labels)
+        pos = lb == 1; neg = ~pos
+        tpr = (sc[pos] > 0).mean() if pos.any() else 0.5
+        fpr = (sc[neg] > 0).mean() if neg.any() else 0.5
+        auc = 0.5 * (tpr + (1 - fpr))
+    return acc, auc, used
 
 # --- Extra validation helpers ---
 def _fit_temperature_beta(diffs: np.ndarray, labels: np.ndarray) -> float:
@@ -2108,6 +2044,32 @@ def _logloss_brier_from_diffs(diffs: np.ndarray, labels: np.ndarray, beta: float
     logloss = float(-(labels*np.log(p+eps) + (1-labels)*np.log(1-p+eps)).mean())
     brier = float(((labels - p)**2).mean())
     return logloss, brier
+
+def _roc_auc_fast(labels: np.ndarray, scores: np.ndarray) -> float:
+    labels = np.asarray(labels, dtype=int)
+    scores = np.asarray(scores, dtype=float)
+    if labels.size == 0 or len(np.unique(labels)) < 2:
+        return 0.5
+    order = np.argsort(scores)
+    ranks = np.empty_like(order, dtype=float)
+    i = 0
+    while i < order.size:
+        j = i
+        s = scores[order[i]]
+        while j + 1 < order.size and scores[order[j+1]] == s:
+            j += 1
+        avg_rank = 0.5 * (i + j) + 1.0
+        ranks[order[i:j+1]] = avg_rank
+        i = j + 1
+    pos = labels == 1
+    n_pos = int(pos.sum())
+    n_neg = int(labels.size - n_pos)
+    if n_pos == 0 or n_neg == 0:
+        return 0.5
+    sum_pos_ranks = float(ranks[pos].sum())
+    U = sum_pos_ranks - n_pos * (n_pos + 1) / 2.0
+    auc = U / float(n_pos * n_neg)
+    return float(auc)
 
 # ------------------------- High-level run ---------------------------------- #
 
@@ -2156,6 +2118,138 @@ def _write_multi(df: pd.DataFrame, base_path: str, formats: List[str]):
                 df.to_json(base_path + '.json', orient='records')
         except Exception as e:
             print(f"[warn] json write failed: {e}")
+
+def _write_multi_upsert_by_keys(df_new: pd.DataFrame, base_path: str, formats: List[str], key_cols: List[str]):
+    """Append or upsert rows into base_path.* while de-duplicating on key_cols.
+
+    Behavior:
+      - If an existing file is present (prefer CSV over JSON), load it and concat with df_new.
+      - Drop duplicates based on key_cols, keeping the last occurrence (df_new wins).
+      - Write back using _write_multi (handles Windows file locks with a timestamped fallback).
+    """
+    try:
+        # Determine read path preference: CSV first, then JSON
+        csv_path = base_path + '.csv'
+        json_path = base_path + '.json'
+        df_old = None
+        if os.path.isfile(csv_path):
+            try:
+                df_old = pd.read_csv(csv_path)
+            except Exception:
+                df_old = None
+        elif os.path.isfile(json_path):
+            try:
+                df_old = pd.read_json(json_path)
+            except Exception:
+                df_old = None
+        if df_old is not None and not df_old.empty:
+            # Ensure common columns; keep all columns from both, fill missing
+            cols = list({*df_old.columns.tolist(), *df_new.columns.tolist()})
+            df_old2 = df_old.reindex(columns=cols)
+            df_new2 = df_new.reindex(columns=cols)
+            merged = pd.concat([df_old2, df_new2], ignore_index=True)
+            # Drop duplicate rows by key; keep the last (new rows take precedence)
+            # Missing keys are treated as unique combinations
+            try:
+                merged = merged.drop_duplicates(subset=[c for c in key_cols if c in merged.columns], keep='last')
+            except Exception:
+                pass
+            _write_multi(merged, base_path, formats)
+        else:
+            # No existing file; just write new
+            _write_multi(df_new, base_path, formats)
+    except Exception as e:
+        try:
+            print(f"[warn] upsert write failed for {base_path}: {e}; writing new only")
+        except Exception:
+            pass
+        _write_multi(df_new, base_path, formats)
+
+def _compute_year_to_year_rank_validation(base_ranks: Dict[str, Dict[str, Dict[int, List[List[Any]]]]], years: List[int], output_dir: str, *, score_type: str = 'aware'):
+    try:
+        import numpy as _np
+        try:
+            from scipy.stats import pearsonr as _pearsonr  # type: ignore
+            from scipy.stats import kendalltau as _kendalltau  # type: ignore
+            have_scipy = True
+        except Exception:
+            have_scipy = False
+        years_sorted = sorted(set(int(y) for y in years))
+        rows: List[List[Any]] = []
+        for i in range(len(years_sorted) - 1):
+            y0 = years_sorted[i]
+            y1 = years_sorted[i+1]
+            for group in ('batter','pitcher'):
+                sr0 = (((base_ranks or {}).get(score_type, {}) or {}).get(group, {}) or {}).get(y0)
+                sr1 = (((base_ranks or {}).get(score_type, {}) or {}).get(group, {}) or {}).get(y1)
+                if not sr0 or not sr1:
+                    continue
+                # Build ordinal position maps (1 = best)
+                ord0 = {p: (idx+1) for idx, (p, _s) in enumerate(sr0)}
+                ord1 = {p: (idx+1) for idx, (p, _s) in enumerate(sr1)}
+                common = sorted(set(ord0.keys()) & set(ord1.keys()))
+                if not common:
+                    continue
+                x = _np.array([ord0[p] for p in common], dtype=float)
+                y = _np.array([ord1[p] for p in common], dtype=float)
+                if x.size < 2:
+                    continue
+                # Pearson correlation of ordinal ranks
+                if have_scipy:
+                    pr, pp = _pearsonr(x, y)
+                else:
+                    # Fallback pearson
+                    mx, my = float(_np.mean(x)), float(_np.mean(y))
+                    vx = x - mx; vy = y - my
+                    denom = float(_np.sqrt(_np.sum(vx*vx)) * _np.sqrt(_np.sum(vy*vy))) or 1.0
+                    pr = float(_np.sum(vx*vy) / denom)
+                    pp = None
+                # Kendall tau as concordance; translate to pairwise accuracy
+                if have_scipy:
+                    tau, _tp = _kendalltau(x, y)
+                else:
+                    # Rough, O(n^2) fallback avoided for large n; skip tau
+                    tau = None
+                acc_pairs = (float(tau) + 1.0)/2.0 if (tau is not None) else None
+                rows.append([score_type, group, y0, y1, len(common), pr, pp, tau, acc_pairs])
+        if rows:
+            # Additionally compute mean/std of ordinal rank differences (YearTo - YearFrom) over common players
+            # Extend rows with placeholders first; we'll recompute below for clarity.
+            df = pd.DataFrame(rows, columns=['ScoreType','Group','YearFrom','YearTo','N_overlap','PearsonR','PearsonP','KendallTau','PairwiseAccuracy'])
+            diffs_mean = []
+            diffs_std = []
+            for _st, _g, y0, y1, _n, _pr, _pp, _tau, _accp in df.itertuples(index=False, name=None):
+                try:
+                    sr0 = (((base_ranks or {}).get(score_type, {}) or {}).get(_g, {}) or {}).get(int(y0))
+                    sr1 = (((base_ranks or {}).get(score_type, {}) or {}).get(_g, {}) or {}).get(int(y1))
+                    if not sr0 or not sr1:
+                        diffs_mean.append(None); diffs_std.append(None); continue
+                    ord0 = {p: (idx+1) for idx, (p, _s) in enumerate(sr0)}
+                    ord1 = {p: (idx+1) for idx, (p, _s) in enumerate(sr1)}
+                    common = sorted(set(ord0.keys()) & set(ord1.keys()))
+                    if not common:
+                        diffs_mean.append(None); diffs_std.append(None); continue
+                    arr = np.array([float(ord1[p] - ord0[p]) for p in common], dtype=float)
+                    diffs_mean.append(float(np.mean(arr)))
+                    diffs_std.append(float(np.std(arr)))
+                except Exception:
+                    diffs_mean.append(None); diffs_std.append(None)
+            df['RankDiffMean'] = diffs_mean
+            df['RankDiffStd'] = diffs_std
+            out_dir = os.path.join(output_dir)
+            os.makedirs(out_dir, exist_ok=True)
+            # CSV-only as requested
+            _write_multi_upsert_by_keys(
+                df,
+                os.path.join(out_dir, 'next_year_rank_validation'),
+                ['csv'],
+                key_cols=['ScoreType','Group','YearFrom','YearTo']
+            )
+    except Exception as e:
+        try:
+            print(f"[warn] next-year rank validation failed: {e}")
+        except Exception:
+            pass
 
 # MLB-only leaderboard helpers
 _MLB_PLAYER_CACHE: dict[int, tuple[set[str], set[str]]] = {}
@@ -2246,9 +2340,8 @@ def _collect_baseline_rows(stats_df: pd.DataFrame, metrics: List[Tuple[str, int]
                     scores.append(float(diff))
                     labels2.append(1 if (w > 0) else 0)
             if scores:
-                from sklearn.metrics import roc_auc_score  # type: ignore
                 try:
-                    auc_b = 0.5 if len(set(labels2)) < 2 else float(roc_auc_score(labels2, scores))
+                    auc_b = _roc_auc_fast(np.array(labels2, dtype=int), np.array(scores, dtype=float))
                 except Exception:
                     auc_b = 0.5
                 acc_b = float(np.mean((np.array(scores) > 0).astype(int) == np.array(labels2)))
@@ -2946,6 +3039,9 @@ def run_pipeline(cfg: Dict[str,Any]):
     baseline_metrics_used: Dict[str, set] = {'batter': set(), 'pitcher': set()}
     # Track orientation notes to emit into manifest
     orientation_notes: List[str] = []
+    # Collectors for calibrated scaling (ELO-like tiers) per season/role
+    calib_betas: Dict[Tuple[str,int], List[float]] = {}
+    full_raw_map: Dict[Tuple[str,int], Dict[str, Any]] = {}
 
     if progress: print(f"[pipeline] Years: {years} (dry_run={dry_run})")
     # If the user requests to run only the k-sweep, do it now and return early
@@ -2981,6 +3077,29 @@ def run_pipeline(cfg: Dict[str,Any]):
                     p_edge_out = os.path.join('At Bats','pitcher_data','aware_scores', f"{y}_pitcher_edges.csv")
                     if skip_scrape and (not force_edges) and os.path.isfile(b_edge_out) and os.path.isfile(p_edge_out):
                         if progress: print(f"[aware] reuse existing aware edges for {y} (skip_scrape=true, force_edges=false)")
+                        # But ensure structured artifacts exist (structured D/W and R files)
+                        b_struct = os.path.join('At Bats','batter_data','aware_scores', f"{y}_batter_edges_struct.csv")
+                        p_struct = os.path.join('At Bats','pitcher_data','aware_scores', f"{y}_pitcher_edges_struct.csv")
+                        b_R = os.path.join('At Bats','batter_data','aware_scores', f"{y}_R.csv")
+                        p_R = os.path.join('At Bats','pitcher_data','aware_scores', f"{y}_R.csv")
+                        need_struct = (not os.path.isfile(b_struct)) or (not os.path.isfile(p_struct)) or (not os.path.isfile(b_R)) or (not os.path.isfile(p_R))
+                        if need_struct:
+                            if progress: print(f"[aware] structured files missing for {y}; generating structured D/W and R")
+                            ensure_aware_edges(
+                                y,
+                                raw_data_dir,
+                                alpha_ridge=1.0,
+                                progress=progress,
+                                force=True,
+                                use_shrink=bool(cfg.get('ranking',{}).get('aware_shrink', True)),
+                                shrink_mode=str(cfg.get('ranking',{}).get('aware_shrink_mode','se_based')),
+                                shrink_k=int(cfg.get('ranking',{}).get('aware_shrink_k',150)),
+                                use_covariates=bool(cfg.get('ranking',{}).get('aware_use_covariates', True)),
+                                shrink_k_batter=cfg.get('ranking',{}).get('aware_shrink_k_batter'),
+                                shrink_k_pitcher=cfg.get('ranking',{}).get('aware_shrink_k_pitcher'),
+                                basic_covariates=bool(cfg.get('ranking',{}).get('aware_covariates_basic', False)),
+                                include_milb=bool(cfg.get('scenarios',{}).get('A_include_milb', True))
+                            )
                     else:
                         # Scenario A/B: include_milb=True means don't filter out MiLB in aware edge building
                         ensure_aware_edges(
@@ -3422,11 +3541,26 @@ def run_pipeline(cfg: Dict[str,Any]):
                         # Flush pre-oppblock rows immediately in cached path to ensure they appear even if later steps are long
                         try:
                             if auc_rows:
-                                _write_multi(pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges']), os.path.join(output_dir,'validation_auc'), formats)
+                                _write_multi_upsert_by_keys(
+                                    pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges']),
+                                    os.path.join(output_dir,'validation_auc'),
+                                    formats,
+                                    key_cols=['ScoreType','Group','Condition','Year','Folds']
+                                )
                             if logloss_rows:
-                                _write_multi(pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source']), os.path.join(output_dir,'validation_logloss'), formats)
+                                _write_multi_upsert_by_keys(
+                                    pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source']),
+                                    os.path.join(output_dir,'validation_logloss'),
+                                    formats,
+                                    key_cols=['ScoreType','Group','Condition','Year','Source']
+                                )
                             if baseline_auc_rows:
-                                _write_multi(pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges']), os.path.join(output_dir,'validation_baseline_auc'), formats)
+                                _write_multi_upsert_by_keys(
+                                    pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges']),
+                                    os.path.join(output_dir,'validation_baseline_auc'),
+                                    formats,
+                                    key_cols=['ScoreType','Group','Year','Metric']
+                                )
                         except Exception:
                             pass
                             # Baseline AUC/logloss if enabled (v_extra defined above)
@@ -3608,23 +3742,15 @@ def run_pipeline(cfg: Dict[str,Any]):
                 except Exception:
                     pass
                 if scale_req:
-                    scaled = scale_ranks(A, raw_r)
-                    scaled_sorted = [[node_list[i], r] for i,r in enumerate(scaled)]
-                    scaled_sorted.sort(reverse=True, key=lambda x: x[1])
-                    try:
-                        sdf = pd.DataFrame(scaled_sorted, columns=['Player','ScaledRank'])
-                        tmp = sdf.rename(columns={'Player':'winner'}).copy(); tmp['loser'] = tmp['winner']
-                        mapped = _resolve_names_in_edges_df(tmp)
-                        sdf2 = mapped[['winner']].rename(columns={'winner':'Player'}).copy(); sdf2['ScaledRank'] = sdf['ScaledRank'].values
-                    except Exception:
-                        sdf2 = pd.DataFrame(scaled_sorted, columns=['Player','ScaledRank'])
-                    sdf_out = _filter_leaderboard(sdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
-                    _write_multi(sdf_out, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
-                    try:
-                        pd.DataFrame(sdf2).to_csv(os.path.join(rank_dir, f"{y}_springrank_scaled.csv"), index=False)
-                    except Exception:
-                        pass
-                    levels_records.append([st, group, None, y, max(scaled)-min(scaled)])
+                    # Defer ELO-like scaled computation until after opponent-blockout calibration
+                    full_raw_map[(group, y)] = {
+                        'rank_dir': rank_dir,
+                        'year': y,
+                        'group': group,
+                        'sorted_r': sorted_r,
+                        'raw_r': raw_r,
+                        'node_list': node_list,
+                    }
                 validation_rows.append([st, group, None, y, len(node_list), A.count_nonzero(), float(A.count_nonzero())/(len(node_list)**2 if len(node_list)>0 else 1)])
                 # Keep base ranks for next-year validation
                 base_ranks.setdefault(st, {}).setdefault(group, {})[y] = sorted_r
@@ -3883,15 +4009,16 @@ def run_pipeline(cfg: Dict[str,Any]):
         only_baseline = bool(extra_tmp.get('only_baseline', False))
         if (not only_baseline) and auc_rows:
             auc_df = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
-            _write_multi(auc_df, os.path.join(output_dir,'validation_auc'), formats)
+            # CSV-only
+            _write_multi(auc_df, os.path.join(output_dir,'validation_auc'), ['csv'])
             if progress: print('[pipeline] validation_auc (pre-oppblock) written')
         if (not only_baseline) and logloss_rows:
             ll_df = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
-            _write_multi(ll_df, os.path.join(output_dir,'validation_logloss'), formats)
+            _write_multi(ll_df, os.path.join(output_dir,'validation_logloss'), ['csv'])
             if progress: print('[pipeline] validation_logloss (pre-oppblock) written')
         if baseline_auc_rows:
             ba_df = pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges'])
-            _write_multi(ba_df, os.path.join(output_dir,'validation_baseline_auc'), formats)
+            _write_multi(ba_df, os.path.join(output_dir,'validation_baseline_auc'), ['csv'])
             if progress: print('[pipeline] validation_baseline_auc (pre-oppblock) written')
     except Exception:
         pass
@@ -3903,6 +4030,11 @@ def run_pipeline(cfg: Dict[str,Any]):
         extra_val = val_cfg_top.get('extra', {}) if isinstance(val_cfg_top, dict) else {}
         if extra_val.get('only_baseline', False):
             raise Exception('skip_oppblock_due_to_only_baseline')
+        # Year-to-year rank validation (separate output): compute once after base_ranks filled
+        try:
+            _compute_year_to_year_rank_validation(base_ranks, years, output_dir, score_type='aware')
+        except Exception:
+            pass
         if extra_val and bool(extra_val.get('opponent_blockout', False)):
             cv = cfg.get('validation_folds', 0)
             if cv and cv > 0:
@@ -4049,6 +4181,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                                         if tr_diffs and te_diffs:
                                             import numpy as _np
                                             beta_cv = _fit_temperature_beta(_np.array(tr_diffs, dtype=float), _np.array(tr_labels, dtype=int))
+                                            # Collect for calibrated scaling per (group,year)
+                                            if st == 'aware':
+                                                calib_betas.setdefault((group, y), []).append(float(beta_cv))
                                             ll_cv, br_cv = _logloss_brier_from_diffs(_np.array(te_diffs, dtype=float), _np.array(te_labels, dtype=int), beta_cv)
                                             logloss_rows.append([st, group, 'oppblock', y, beta_cv, ll_cv, br_cv, len(te_diffs), 'rank'])
                                     except Exception:
@@ -4060,6 +4195,7 @@ def run_pipeline(cfg: Dict[str,Any]):
     try:
         if oppblock_accums:
             cv = cfg.get('validation_folds', 0)
+            baseline_strong_rows: List[List[Any]] = []  # ScoreType, Group, Year, Metric, AUC_strong, Accuracy_strong
             for (st, group, y), vals in oppblock_accums.items():
                 try:
                     acc_mean = float(np.mean([a for (a, _b, _u) in vals]))
@@ -4073,7 +4209,169 @@ def run_pipeline(cfg: Dict[str,Any]):
                     acc_mean = sum(accs)/len(accs) if accs else 0.0
                     auc_mean = sum(aucs)/len(aucs) if aucs else 0.5
                     used_sum = sum(useds)
+                # Record strong metrics separately; we'll merge into wide format later
                 auc_rows.append([st, group, 'oppblock', y, cv, acc_mean, auc_mean, used_sum])
+                # Also compute baseline strong for statcast metrics under opponent-blockout for aware only
+                try:
+                    if st == 'aware':
+                        # Load per-group stats and build metric list (reuse logic from earlier)
+                        metrics: List[Tuple[str,int]] = []
+                        stats_df = None
+                        try:
+                            import importlib as _il
+                            _pb = _il.import_module('pybaseball')
+                        except Exception:
+                            _pb = None
+                        if _pb is not None:
+                            if group=='batter':
+                                try:
+                                    stats_df = _pb.batting_stats(y, qual=0)
+                                except TypeError:
+                                    stats_df = _pb.batting_stats(y)
+                                for m, d in [('OPS', +1), ('xwOBA', +1), ('WAR', +1), ('xWAR', +1)]:
+                                    if stats_df is not None and m in stats_df.columns:
+                                        metrics.append((m, d))
+                            else:
+                                try:
+                                    stats_df = _pb.pitching_stats(y, qual=0)
+                                except TypeError:
+                                    stats_df = _pb.pitching_stats(y)
+                                if stats_df is not None:
+                                    if 'WHIP' in stats_df.columns:
+                                        metrics.append(('WHIP', -1))
+                                    else:
+                                        if all(c in stats_df.columns for c in ['BB','H','IP']):
+                                            try:
+                                                tmp = stats_df.copy()
+                                                tmp['WHIP'] = (tmp['BB'].astype(float) + tmp['H'].astype(float)) / tmp['IP'].replace({0: np.nan}).astype(float)
+                                                if not tmp['WHIP'].isna().all():
+                                                    stats_df = tmp
+                                                    metrics.append(('WHIP', -1))
+                                            except Exception:
+                                                pass
+                                    if 'xFIP' in stats_df.columns:
+                                        metrics.append(('xFIP', -1))
+                                    if 'ERA+' in stats_df.columns:
+                                        try:
+                                            stats_df['ERA+'] = pd.to_numeric(stats_df['ERA+'], errors='coerce').replace([np.inf, -np.inf], np.nan)
+                                        except Exception:
+                                            pass
+                                        metrics.append(('ERA+', +1))
+                                    if 'FIP' in stats_df.columns:
+                                        metrics.append(('FIP', -1))
+                                    if 'xERA' in stats_df.columns:
+                                        metrics.append(('xERA', -1))
+                                    elif 'ERA' in stats_df.columns:
+                                        metrics.append(('ERA', -1))
+                                    # K/9 family
+                                    k9_aliases = ['K/9','SO9','SO/9','K9']
+                                    k9_found = False
+                                    for alias in k9_aliases:
+                                        if alias in stats_df.columns:
+                                            if alias != 'K/9':
+                                                try:
+                                                    stats_df = stats_df.rename(columns={alias: 'K/9'})
+                                                except Exception:
+                                                    pass
+                                            metrics.append(('K/9', +1)); k9_found = True; break
+                                    if (not k9_found) and all(c in stats_df.columns for c in ['SO','IP']):
+                                        try:
+                                            tmp2 = stats_df.copy()
+                                            tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
+                                            if not tmp2['K/9'].isna().all():
+                                                stats_df = tmp2
+                                                metrics.append(('K/9', +1))
+                                        except Exception:
+                                            pass
+                        if stats_df is not None and metrics:
+                            # Recreate the same folds deterministically and aggregate baseline metrics on test edges
+                            try:
+                                # Build edges df
+                                edge_path = os.path.join('At Bats', f'{group}_data','aware_scores', f"{y}_{group}_edges.csv")
+                                if not os.path.isfile(edge_path):
+                                    raise FileNotFoundError(edge_path)
+                                sub_all = pd.read_csv(edge_path)[['winner','loser','score']]
+                                opps = sorted(sub_all['loser'].dropna().unique().tolist())
+                                if len(opps) < cv or cv <= 0:
+                                    raise RuntimeError('insufficient opponents or cv<=0')
+                                val_cfg_top = cfg.get('validation', {})
+                                rng = np.random.RandomState(val_cfg_top.get('seed')) if val_cfg_top.get('seed') is not None else np.random
+                                rng.shuffle(opps)
+                                fold_sizes = [len(opps)//cv + (1 if i < (len(opps) % cv) else 0) for i in range(cv)]
+                                idx = 0
+                                folds = []
+                                for fs in fold_sizes:
+                                    folds.append(opps[idx:idx+fs]); idx += fs
+                                # Build union of per-fold test edges and compute metric AUC/ACC per fold
+                                aucs_by_metric: Dict[str, List[float]] = {}
+                                acc_by_metric: Dict[str, List[float]] = {}
+                                # Name normalizer
+                                def _norm_name2(s: Any) -> str:
+                                    import unicodedata as _ud
+                                    t = str(s) if not pd.isna(s) else ''
+                                    t = t.strip(); t = _ud.normalize('NFKD', t)
+                                    t = ''.join(c for c in t if not _ud.combining(c))
+                                    if ',' in t:
+                                        try:
+                                            last, first = t.split(',', 1)
+                                            t = f"{first.strip()} {last.strip()}"
+                                        except Exception:
+                                            t = t.replace(',', ' ')
+                                    toks = [x for x in t.replace('.', ' ').split() if x]
+                                    suffixes = {'jr','sr','ii','iii','iv','v'}
+                                    toks = [x for x in toks if x.lower() not in suffixes and len(x) > 1]
+                                    return ' '.join(toks).lower()
+                                for k in range(cv):
+                                    held = set(folds[k])
+                                    test_sub = sub_all[sub_all['loser'].isin(held)][['winner','loser','score']]
+                                    test_edges = list(test_sub.itertuples(index=False, name=None))
+                                    # For each metric compute score diffs and AUC/ACC
+                                    s = stats_df.copy(); s['k'] = s[next(c for c in ('Name','name','player_name','Player','player') if c in s.columns)].apply(_norm_name2)
+                                    for (mcol, direction) in metrics:
+                                        try:
+                                            smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                        except Exception:
+                                            continue
+                                        scores: List[float] = []
+                                        labels2: List[int] = []
+                                        for (u,v,w) in test_edges:
+                                            ku = _norm_name2(u); kv = _norm_name2(v)
+                                            if ku in smap and kv in smap:
+                                                diff = (smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0)
+                                                scores.append(float(diff))
+                                                labels2.append(1 if (w>0) else 0)
+                                        if scores:
+                                            try:
+                                                auc_b = _roc_auc_fast(np.array(labels2, dtype=int), np.array(scores, dtype=float))
+                                            except Exception:
+                                                auc_b = 0.5
+                                            acc_b = float(np.mean((np.array(scores) > 0).astype(int) == np.array(labels2)))
+                                            aucs_by_metric.setdefault(mcol, []).append(float(auc_b))
+                                            acc_by_metric.setdefault(mcol, []).append(float(acc_b))
+                                # Aggregate means and add rows
+                                for mcol in metrics:
+                                    name = mcol[0]
+                                    if name in aucs_by_metric:
+                                        aucs = aucs_by_metric[name]; accs = acc_by_metric.get(name, [])
+                                        if aucs:
+                                            baseline_strong_rows.append(['aware', group, y, name, float(np.mean(aucs)), float(np.mean(accs) if accs else 0.0)])
+                            except Exception:
+                                pass
+                except Exception:
+                    pass
+            # Promote strong metrics into Accuracy_strong/AUC_strong columns for each (st,group,year)
+            try:
+                if auc_rows:
+                    df_auc = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
+                    wide = df_auc[df_auc['Condition']=='oppblock'][['ScoreType','Group','Year','Accuracy','AUC']].copy()
+                    wide = wide.rename(columns={'Accuracy':'Accuracy_strong','AUC':'AUC_strong'})
+                    # Merge back onto non-oppblock rows; fill NAs later on write
+                    df_auc_non = df_auc[df_auc['Condition']!='oppblock']
+                    df_auc_merged = df_auc_non.merge(wide, on=['ScoreType','Group','Year'], how='left')
+                    # Replace auc_rows content for final write
+                    auc_rows[:] = df_auc_merged[['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges','Accuracy_strong','AUC_strong']].values.tolist()
+            except Exception:
+                pass
             try:
                 if progress:
                     tot_folds = sum(len(v) for v in oppblock_accums.values())
@@ -4100,17 +4398,91 @@ def run_pipeline(cfg: Dict[str,Any]):
     _extra = _valcfg.get('extra', {}) if isinstance(_valcfg, dict) else {}
     _only_baseline = bool(_extra.get('only_baseline', False))
     if (not _only_baseline) and auc_rows:
-        auc_df = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
-        _write_multi(auc_df, os.path.join(output_dir,'validation_auc'), formats)
+        # Dynamic columns: include strong metrics if present
+        try:
+            cols9 = ['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges','Accuracy_strong','AUC_strong']
+            auc_df = pd.DataFrame(auc_rows)
+            if auc_df.shape[1] == 10:
+                auc_df.columns = cols9
+            else:
+                auc_df.columns = ['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges']
+        except Exception:
+            auc_df = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
+        _write_multi_upsert_by_keys(auc_df, os.path.join(output_dir,'validation_auc'), ['csv'], key_cols=['ScoreType','Group','Condition','Year','Folds'])
         if progress: print('[pipeline] validation_auc written')
     if (not _only_baseline) and logloss_rows:
         ll_df = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
-        _write_multi(ll_df, os.path.join(output_dir,'validation_logloss'), formats)
+        _write_multi_upsert_by_keys(ll_df, os.path.join(output_dir,'validation_logloss'), ['csv'], key_cols=['ScoreType','Group','Condition','Year','Source'])
         if progress: print('[pipeline] validation_logloss written')
     if baseline_auc_rows:
         ba_df = pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges'])
-        _write_multi(ba_df, os.path.join(output_dir,'validation_baseline_auc'), formats)
+        # Merge strong baseline metrics if available
+        try:
+            if 'baseline_strong_rows' in locals() and baseline_strong_rows:
+                strong_df = pd.DataFrame(baseline_strong_rows, columns=['ScoreType','Group','Year','Metric','AUC_strong','Accuracy_strong'])
+                ba_df = ba_df.merge(strong_df, on=['ScoreType','Group','Year','Metric'], how='left')
+        except Exception:
+            pass
+        _write_multi_upsert_by_keys(ba_df, os.path.join(output_dir,'validation_baseline_auc'), ['csv'], key_cols=['ScoreType','Group','Year','Metric'])
         if progress: print('[pipeline] validation_baseline_auc written')
+
+    # Emit calibrated scaled ELO-like tiers for aware using opponent-blockout betas
+    try:
+        if full_raw_map:
+            for (group, y), ctx in full_raw_map.items():
+                try:
+                    betas = calib_betas.get((group, y), [])
+                    if not betas:
+                        try:
+                            print(f"[scaled] no calibrated beta from opp-block folds for {group}:{y}; skipping scaled output")
+                        except Exception:
+                            pass
+                        continue
+                    beta = float(np.mean(betas))
+                    if not np.isfinite(beta) or beta <= 1e-6:
+                        beta = max(beta, 1e-3)
+                    raw_r = np.asarray(ctx['raw_r'], dtype=float)
+                    node_list = list(ctx['node_list'])
+                    rank_dir = ctx['rank_dir']
+                    sorted_r = ctx['sorted_r']
+                    center = float(np.mean(raw_r)) if raw_r.size else 0.0
+                    delta_step = LOGIT_075 / max(beta, 1e-3)
+                    # Map name -> raw rank
+                    rmap = {n: s for n, s in sorted_r}
+                    rows = []
+                    for name, base in sorted_r:
+                        scaled = (float(base) - center) / float(delta_step)
+                        tier = math.floor(scaled)
+                        within = scaled - tier
+                        rows.append([name, scaled, tier, within])
+                    sdf2 = pd.DataFrame(rows, columns=['Player','ScaledElo','Tier','WithinTier'])
+                    # MLB-only filter for display
+                    sdf_out = _filter_leaderboard(sdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                    out_base = os.path.join(rank_dir, f"{y}_springrank_scaled")
+                    _write_multi(sdf_out, out_base, ['csv'])
+                    # Meta and tier prob table
+                    meta = pd.DataFrame([[beta, delta_step, center]], columns=['Beta','DeltaStep','Center'])
+                    _write_multi(meta, os.path.join(rank_dir, f"{y}_springrank_scaled_meta"), ['csv'])
+                    tier_probs = pd.DataFrame({
+                        'K': [1,2,3],
+                        'WinProb': [1.0/(1.0+math.exp(-beta*(k*delta_step))) for k in [1,2,3]],
+                    })
+                    _write_multi(tier_probs, os.path.join(rank_dir, f"{y}_tier_probs"), ['csv'])
+                    # Track levels range from scaled for levels_by_year (difference between 95th and 5th percentiles for stability)
+                    try:
+                        arr = sdf2['ScaledElo'].to_numpy(dtype=float)
+                        lo = float(np.percentile(arr, 5)) if arr.size else 0.0
+                        hi = float(np.percentile(arr, 95)) if arr.size else 0.0
+                        levels_records.append(['aware', group, None, y, hi - lo])
+                    except Exception:
+                        pass
+                except Exception as _se:
+                    try:
+                        print(f"[scaled] failed to produce scaled tiers for {group}:{y} -> {_se}")
+                    except Exception:
+                        pass
+    except Exception:
+        pass
     # Historical accuracy tracker: append a one-line summary per (st,group,year,condition)
     try:
         # Build a compact summary from auc_rows
