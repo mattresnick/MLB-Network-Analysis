@@ -68,7 +68,7 @@ def get_default_date_range(year: int) -> Tuple[str, str]:
         return f"{year}-03-01", f"{year}-11-30"
 
 
-def _prepare_at_bat_frame(raw_df: pd.DataFrame, pyb) -> pd.DataFrame:
+def _prepare_at_bat_frame(raw_df: pd.DataFrame, pyb, season_year: Optional[int] = None) -> pd.DataFrame:
     if raw_df.empty:
         raise ValueError("The Statcast download returned an empty dataframe.")
     print(f"[scrape] Preparing at-bat frame: raw rows={len(raw_df)}; columns={len(raw_df.columns)}")
@@ -99,6 +99,45 @@ def _prepare_at_bat_frame(raw_df: pd.DataFrame, pyb) -> pd.DataFrame:
     trimmed = raw_df.dropna(subset=["events"]).copy()
     print(f"[scrape] After dropna(events): rows={len(trimmed)}")
 
+    # If present, filter to Major League Baseball games only (regular season/postseason)
+    # Statcast frames commonly include 'game_type' (preferred) or 'type' with codes like R (regular), S (spring), P (postseason).
+    allowed_types = {"R", "P"}
+    gt_col = None
+    for cand in ("game_type", "type"):
+        if cand in trimmed.columns:
+            gt_col = cand
+            break
+    if gt_col is not None:
+        before = len(trimmed)
+        trimmed = trimmed[trimmed[gt_col].isin(list(allowed_types))].copy()
+        print(f"[scrape] Filtering MLB games by {gt_col} in {allowed_types}: {before} -> {len(trimmed)} rows")
+    else:
+        # Try to enrich using MLB Stats API via game_pk mapping
+        added = False
+        try:
+            if ("game_pk" in trimmed.columns) and (season_year is not None):
+                import json as _json
+                from urllib.request import urlopen as _urlopen
+                print(f"[scrape] Attempting game_type enrichment from schedule API for season {season_year}...")
+                url = f"https://statsapi.mlb.com/api/v1/schedule?sportId=1&season={season_year}"
+                with _urlopen(url, timeout=20) as resp:
+                    sched = _json.loads(resp.read().decode('utf-8'))
+                games = []
+                for d in sched.get('dates', []):
+                    games.extend(d.get('games', []))
+                mapping = { int(g.get('gamePk')): g.get('gameType') for g in games if g.get('gamePk') is not None }
+                if mapping:
+                    trimmed['game_type'] = trimmed['game_pk'].map(mapping)
+                    gt_col = 'game_type'
+                    before = len(trimmed)
+                    trimmed = trimmed[trimmed['game_type'].isin(list(allowed_types))].copy()
+                    print(f"[scrape] Enriched and filtered MLB games by game_type in {allowed_types}: {before} -> {len(trimmed)} rows")
+                    added = True
+        except Exception as ex:
+            print(f"[scrape] WARNING: Could not enrich game_type via schedule API: {ex}")
+        if not added:
+            print("[scrape] WARNING: No game_type/type column found; cannot filter spring/exhibition. Keeping all rows.")
+
     categories = [
         "pitch_type",
         "player_name",
@@ -113,6 +152,13 @@ def _prepare_at_bat_frame(raw_df: pd.DataFrame, pyb) -> pd.DataFrame:
         "home_score",
         "away_score",
     ]
+    # Optionally include date/game identifiers if present
+    for extra in ("game_date", "game_pk"):
+        if extra in trimmed.columns and extra not in categories:
+            categories.append(extra)
+    # Optionally include game_type in final CSV if present for debugging
+    if gt_col is not None:
+        categories.append(gt_col)
 
     # Some sources may label pitcher as 'pitcher' instead of 'player_name'
     if "player_name" not in trimmed.columns and "pitcher" in trimmed.columns:
@@ -380,7 +426,11 @@ def scrape_date_range(
     print(f"[scrape] Combining {total_parts} parts ({total_rows} rows) into raw frame...")
     raw_df = pd.concat(all_raw_parts, ignore_index=True, sort=False)
     try:
-        merged = _prepare_at_bat_frame(raw_df, pyb)
+        try:
+            season_year = int(start_date[:4])
+        except Exception:
+            season_year = None
+        merged = _prepare_at_bat_frame(raw_df, pyb, season_year=season_year)
     except Exception as ex:
         # Persist the raw combined dataframe for debugging/recovery if possible
         try:

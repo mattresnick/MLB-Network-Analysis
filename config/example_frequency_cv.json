@@ -1,18 +1,21 @@
 {
   "pipeline": {
-    "validation": { "aucMode": "legacy", "negatives_per_positive": 1 },
-    "years": {"start": 2024, "end": 2025},
+    "validation": { "aucMode": "balanced-negatives" },
+    "years": {"start": 2025, "end": 2025},
     "allow_2020": false,
     "dry_run": false,
     "score_types": ["frequency"],
     "validation_folds": 5,
     "ranking": {"top_n": 25, "scale_ranks": true, "output_levels": true},
-    "processing": { "unipartite_metric": "rate" },
+    "processing": { "unipartite_metric": "sum" },
     "paths": {
       "raw_data_dir": "At Bats/general_data",
       "output_dir": "outputs"
     },
-    "output": {"formats": ["csv"]}
+    "output": {"formats": ["csv"]},
+    "analysis": {
+      "rank_correlation": {"enabled": true, "pairs": "adjacent"}
+    }
   },
   "logging": {"level": "INFO", "progress": true}
 }

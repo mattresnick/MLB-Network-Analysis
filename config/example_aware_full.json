@@ -1,0 +1,53 @@
+{
+  "pipeline": {
+    "years": [2024],
+    "score_types": ["aware"],
+    "validation_folds": 5,
+    "validation": {
+      "aucMode": "balanced-negatives",
+      "negatives_per_positive": 1,
+      "auto_flip": true,
+      "extra": {
+        "temperature_logloss": false,
+        "statcast_logloss": false,
+        "baseline_auc": true,
+        "opponent_blockout": false,
+        "only_baseline": true
+      }
+    },
+    "ranking": {
+      "top_n": 50,
+      "scale_ranks": true,
+      "output_levels": true,
+      "aware_lambda": 0.0
+    },
+    "paths": {
+      "raw_data_dir": "At Bats/general_data",
+      "output_dir": "outputs_aware_full"
+    },
+    "processing": {
+      "vectorized": true,
+      "unipartite_metric": "sum"
+    },
+    "caching": {
+      "enabled": false,
+      "manifest": "outputs_aware_full/manifest.json"
+    },
+    "edges": {
+      "force": true
+    },
+    "logging": {
+      "level": "INFO",
+      "progress": true
+    },
+    "scrape": {
+      "force": true
+    },
+    "analysis": {
+      "rank_correlation": {"enabled": false, "pairs": "adjacent"},
+      "ops_correlation": {"enabled": false},
+      "iterative_rank_weighted": {"enabled": false, "passes": 0, "metric": "sum", "evaluate_auc": false},
+      "next_year_validation": {"enabled": false}
+    }
+  }
+}

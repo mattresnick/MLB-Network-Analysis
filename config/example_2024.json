@@ -1,6 +1,16 @@
 {
   "pipeline": {
-    "validation": { "aucMode": "legacy", "negatives_per_positive": 1 },
+    "validation": {
+      "aucMode": "balanced-negatives",
+      "negatives_per_positive": 1,
+      "auto_flip": true,
+      "extra": {
+        "opponent_blockout": true,
+        "temperature_logloss": true,
+        "statcast_logloss": true,
+        "baseline_auc": true
+      }
+    },
     "processing": { "unipartite_metric": "rate" },
     "years": [2024],
     "allow_2020": false,
@@ -11,6 +21,12 @@
     "paths": {
       "raw_data_dir": "At Bats/general_data",
       "output_dir": "outputs"
+    },
+    "analysis": {
+      "rank_correlation": {"enabled": true, "pairs": "adjacent"},
+      "ops_correlation": {"enabled": true},
+  "iterative_rank_weighted": {"enabled": true, "passes": 2, "metric": "sum", "evaluate_auc": true},
+  "next_year_validation": {"enabled": true}
     },
     "output": {"formats": ["csv"]}
   },

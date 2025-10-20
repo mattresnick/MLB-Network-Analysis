@@ -1,0 +1,3 @@
+ScoreType,Group,TrainYear,TestYear,Folds,Accuracy,AUC,TestEdges
+frequency,batter,2024,2025,5,0.4966368029844841,0.4673032283307686,70766
+frequency,pitcher,2024,2025,5,0.4967571737412025,0.4556842402588537,105001

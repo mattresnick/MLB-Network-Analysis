@@ -1,0 +1,3 @@
+ScoreType,Group,Condition,Year0,Year1,Players,Spearman,Pearson
+frequency,batter,,2024,2025,839,0.12733751438056198,0.04527814492078488
+frequency,pitcher,,2024,2025,918,0.22874940593874263,0.2302836279745955

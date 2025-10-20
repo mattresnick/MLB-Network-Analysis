@@ -1,0 +1,48 @@
+{
+  "pipeline": {
+    "years": [2024],
+    "score_types": ["aware"],
+    "validation_folds": 2,
+    "validation": {
+      "aucMode": "balanced-negatives",
+      "negatives_per_positive": 1,
+      "auto_flip": true,
+      "extra": {
+        "temperature_logloss": false,
+        "statcast_logloss": false,
+        "baseline_auc": false,
+        "opponent_blockout": false
+      }
+    },
+    "ranking": {
+      "top_n": 10,
+      "scale_ranks": true,
+      "output_levels": false
+    },
+    "paths": {
+      "raw_data_dir": "At Bats/general_data",
+      "output_dir": "outputs_aware_smoke"
+    },
+    "processing": {
+      "vectorized": true,
+      "unipartite_metric": "sum"
+    },
+    "caching": {
+      "enabled": true,
+      "manifest": "outputs_aware_smoke/manifest.json"
+    },
+    "edges": {
+      "force": false
+    },
+    "logging": {
+      "level": "INFO",
+      "progress": true
+    },
+    "analysis": {
+      "next_year_validation": {"enabled": false},
+      "iterative_rank_weighted": {"enabled": false},
+      "rank_correlation": {"enabled": false},
+      "ops_correlation": {"enabled": false}
+    }
+  }
+}

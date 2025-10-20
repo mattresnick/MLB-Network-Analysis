@@ -43,7 +43,7 @@
 		{
 			"label": "run: scrape 2024 (attach mode) (MLB)",
 			"type": "shell",
-			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-m",
 				"debugpy",
@@ -63,7 +63,7 @@
 		{
 			"label": "run: scrape 2024 (attach mode :5680) (MLB)",
 			"type": "shell",
-			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-m",
 				"debugpy",
@@ -83,7 +83,7 @@
 		{
 			"label": "run: scrape 2024 (MLB)",
 			"type": "shell",
-			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
 			"args": [
 				"${workspaceFolder}\\cli.py",
 				"--config",
@@ -98,7 +98,7 @@
 		{
 			"label": "run: scrape 2024 (force) (MLB)",
 			"type": "shell",
-			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
 			"args": [
 				"${workspaceFolder}\\cli.py",
 				"--config",
@@ -111,9 +111,33 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "run: full 2024 (aware)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+			"args": [
+				"${workspaceFolder}\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_aware_2024.json"
+			],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": []
+		},
+		{
+			"label": "run: full 2024 (aware + k-sweep)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+			"args": [
+				"${workspaceFolder}\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_aware_2024.json"
+			],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": []
+		},
+		{
 			"label": "run: full 2024 (MLB)",
 			"type": "shell",
-			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
 			"args": [
 				"${workspaceFolder}\\run_config.py",
 				"--config",
@@ -127,7 +151,7 @@
 		{
 			"label": "run: test vectorized rate (MLB)",
 			"type": "shell",
-			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
@@ -139,7 +163,7 @@
 		{
 			"label": "run: test vectorized rate (MLB) 2",
 			"type": "shell",
-			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
@@ -151,7 +175,7 @@
 		{
 			"label": "run: test vectorized rate (MLB) 3",
 			"type": "shell",
-			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
@@ -163,7 +187,7 @@
 		{
 			"label": "run: test vectorized rate (MLB) 4",
 			"type": "shell",
-			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"g:\\GitHub\\MLB-Network-Analysis\\scripts\\test_vectorized_rate.py"
@@ -175,7 +199,7 @@
 		{
 			"label": "run: full 2024 (MLB) [force edges]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -188,7 +212,7 @@
 		{
 			"label": "run: full 2024 (MLB) [sum]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -201,7 +225,7 @@
 		{
 			"label": "run: recompute validation (2024) [sum]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -214,7 +238,7 @@
 		{
 			"label": "run: full 2024 (MLB) [sum, rerun]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -227,7 +251,7 @@
 		{
 			"label": "run: full 2024 (MLB) [sum, auc-neg-sample]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -240,7 +264,7 @@
 		{
 			"label": "run: auc-from-ranks 2024 batter (sum)",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
 				"--year",
@@ -259,7 +283,7 @@
 		{
 			"label": "run: auc-from-ranks 2024 batter (sum) 2",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
@@ -279,7 +303,7 @@
 		{
 			"label": "run: full 2024 (MLB) [sum, final rerun]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -292,7 +316,7 @@
 		{
 			"label": "run: auc-from-ranks 2019 batter",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
@@ -312,7 +336,7 @@
 		{
 			"label": "run: auc-from-ranks 2019 batter (sum)",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
@@ -332,7 +356,7 @@
 		{
 			"label": "run: auc-from-ranks 2019 pitcher (sum)",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\validate_auc_from_ranks.py",
@@ -352,7 +376,7 @@
 		{
 			"label": "run: full 2019 (MLB) [sum]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -365,7 +389,7 @@
 		{
 			"label": "run: full 2019 (MLB) [sum, nocache]",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
 				"--config",
@@ -378,7 +402,7 @@
 		{
 			"label": "run: recompute ranks+auc 2019",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\recompute_ranks_and_auc.py",
@@ -410,7 +434,7 @@
 		{
 			"label": "run: recompute ranks+auc 2019 (retry 2)",
 			"type": "shell",
-			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\python.exe",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
 			"args": [
 				"-u",
 				"G:\\GitHub\\MLB-Network-Analysis\\scripts\\recompute_ranks_and_auc.py",
@@ -421,6 +445,249 @@
 			],
 			"isBackground": false,
 			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: full 2024-2025 (MLB)",
+			"type": "shell",
+			"command": "G:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"G:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"G:\\GitHub\\MLB-Network-Analysis\\config\\example_2024_2025.json"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "run: smoke baseline (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_smoke_baseline.json"
+			],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run: aware smoke (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+			"args": [
+				"${workspaceFolder}\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_aware_smoke.json"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "run: aware full (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+			"args": [
+				"${workspaceFolder}\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_aware_full.json"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "lint: pipeline syntax (MLB)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-m",
+				"pyflakes",
+				"g:\\GitHub\\MLB-Network-Analysis\\pipeline.py"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "compile: pipeline (MLB)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"- << 'PY'",
+				"import py_compile, sys",
+				"try:",
+				"    py_compile.compile(r'g:\\GitHub\\MLB-Network-Analysis\\pipeline.py', doraise=True)",
+				"    print('OK')",
+				"except py_compile.PyCompileError as e:",
+				"    print('ERR')",
+				"    print(e.msg)",
+				"    print(str(e))",
+				"PY"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "run: aware smoke (MLB)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"g:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"g:\\GitHub\\MLB-Network-Analysis\\config\\example_aware_smoke.json"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "compile: pipeline (OK?)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"import py_compile as p; p.compile(r'g:\\GitHub\\MLB-Network-Analysis\\pipeline.py', doraise=True); print('OK')"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "compile: pipeline (OK?)",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-Command",
+				"& 'g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe' -c \"import py_compile; py_compile.compile(r'g:\\GitHub\\MLB-Network-Analysis\\pipeline.py', doraise=True); print('OK')\""
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "run: aware smoke (MLB)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"g:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"g:\\GitHub\\MLB-Network-Analysis\\config\\example_aware_smoke.json"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "clean: pycache pipeline (MLB)",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-Command",
+				"if (Test-Path 'g:\\GitHub\\MLB-Network-Analysis\\__pycache__\\pipeline.cpython-311.pyc') { Remove-Item -Force 'g:\\GitHub\\MLB-Network-Analysis\\__pycache__\\pipeline.cpython-311.pyc' }"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "run: aware full (MLB)",
+			"type": "shell",
+			"command": "g:\\GitHub\\MLB-Network-Analysis\\.venv\\Scripts\\python.exe",
+			"args": [
+				"g:\\GitHub\\MLB-Network-Analysis\\run_config.py",
+				"--config",
+				"g:\\GitHub\\MLB-Network-Analysis\\config\\example_aware_full.json"
+			],
+			"isBackground": true,
+			"group": "build"
+		},
+		{
+			"label": "lint: syntax check pipeline.py (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\python.exe",
+			"args": [
+				"-m",
+				"py_compile",
+				"${workspaceFolder}\\pipeline.py"
+			]
+		},
+		{
+			"label": "lint: syntax check pipeline.py (MLB)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"-m",
+				"py_compile",
+				"${workspaceFolder}\\\\pipeline.py"
+			]
+		},
+		{
+			"label": "run: aware 2024 (full)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_aware_2024.json"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run: aware 2024 (full) [pythonw]",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_aware_2024.json"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run: aware 2024 (full) [pythonw]",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_aware_2024.json"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run: aware 2024 (full) [pythonw]",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_aware_2024.json"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run: aware 2024 (full) [pythonw]",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_aware_2024.json"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run: aware 2024 (full) [pythonw]",
+			"type": "shell",
+			"command": "${workspaceFolder}\\\\.venv\\\\Scripts\\\\python.exe",
+			"args": [
+				"${workspaceFolder}\\\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\\\config\\\\example_aware_2024.json"
+			],
 			"group": "build"
 		}
 	]

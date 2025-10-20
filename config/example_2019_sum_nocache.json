@@ -1,6 +1,6 @@
 {
   "pipeline": {
-    "validation": { "aucMode": "legacy", "negatives_per_positive": 1 },
+    "validation": { "aucMode": "legacy" },
     "processing": { "unipartite_metric": "sum" },
     "years": [2019],
     "allow_2020": false,

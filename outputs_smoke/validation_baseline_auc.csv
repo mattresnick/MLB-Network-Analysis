@@ -1,0 +1,4 @@
+ScoreType,Group,Year,Metric,AUC,Accuracy,TestEdges
+frequency,batter,2024,OPS,0.5,0.49386225610544,7739
+frequency,batter,2024,xwOBA,0.5,0.49011500193823493,7739
+frequency,batter,2024,WAR,0.5,0.4924408838351208,7739

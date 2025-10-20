@@ -6,3 +6,4 @@ baseball_scraper
 springrank
 birankpy
 scikit-learn
+pybaseball

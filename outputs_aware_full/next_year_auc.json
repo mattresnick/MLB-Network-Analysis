@@ -1,0 +1,1 @@
+[{"ScoreType":"aware","Group":"batter","TrainYear":2024,"TestYear":2025,"Folds":5,"Accuracy":0.5096314185,"AUC":0.5021648677,"TestEdges":34782},{"ScoreType":"aware","Group":"pitcher","TrainYear":2024,"TestYear":2025,"Folds":5,"Accuracy":0.524588017,"AUC":0.5103637947,"TestEdges":45815}]

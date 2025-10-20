@@ -1,0 +1,20 @@
+{
+  "runs": {
+    "2024:aware:batter": {
+      "time": 465.99496698379517,
+      "nodes": 1430,
+      "file_sig": "1760596034:46506120",
+      "config_sig": "b502e942f1126047"
+    },
+    "2024:aware:pitcher": {
+      "time": 371.0485224723816,
+      "nodes": 1304,
+      "file_sig": "1760585193:42864953",
+      "config_sig": "b502e942f1126047"
+    }
+  },
+  "signatures": {
+    "last_config": "b502e942f1126047"
+  },
+  "last_runtime_seconds": 868.6612734794617
+}

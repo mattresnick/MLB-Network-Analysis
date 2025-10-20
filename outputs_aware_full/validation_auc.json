@@ -1,0 +1,1 @@
+[{"ScoreType":"aware","Group":"batter","Condition":null,"Year":2024,"Folds":5,"Accuracy":0.5355797154,"AUC":0.5169096474,"TestEdges":41667},{"ScoreType":"aware","Group":"pitcher","Condition":null,"Year":2024,"Folds":5,"Accuracy":0.5544787809,"AUC":0.5221375233,"TestEdges":68311}]

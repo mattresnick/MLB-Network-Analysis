@@ -61,20 +61,44 @@
       "config_sig": "789d70e72ea07fd5"
     },
     "2024:frequency:batter": {
-      "time": 172.15867042541504,
+      "time": 30.92084836959839,
       "nodes": 1294,
-      "file_sig": "1760340792:16807251",
-      "config_sig": "d8ae2cc1cf103bc9"
+      "file_sig": "1760509241:16766700",
+      "config_sig": "3b6baeed35f84f6b"
     },
     "2024:frequency:pitcher": {
-      "time": 306.2224955558777,
-      "nodes": 1372,
-      "file_sig": "1760340816:35049451",
-      "config_sig": "d8ae2cc1cf103bc9"
+      "time": 41.513970375061035,
+      "nodes": 1374,
+      "file_sig": "1760509262:35049234",
+      "config_sig": "3b6baeed35f84f6b"
+    },
+    "2025:frequency:batter": {
+      "time": 209.45596957206726,
+      "nodes": 1335,
+      "file_sig": "1760416307:27590458",
+      "config_sig": "4a936a2aff42a469"
+    },
+    "2025:frequency:pitcher": {
+      "time": 316.88573718070984,
+      "nodes": 1423,
+      "file_sig": "1760416351:44601985",
+      "config_sig": "4a936a2aff42a469"
+    },
+    "2024:aware:batter": {
+      "time": 26.97424817085266,
+      "nodes": 646,
+      "file_sig": "1760775769:9818900",
+      "config_sig": "bd7d891378216f13"
+    },
+    "2024:aware:pitcher": {
+      "time": 33.46083378791809,
+      "nodes": 827,
+      "file_sig": "1760775773:18078146",
+      "config_sig": "bd7d891378216f13"
     }
   },
   "signatures": {
-    "last_config": "789d70e72ea07fd5"
+    "last_config": "bd7d891378216f13"
   },
-  "last_runtime_seconds": 0.0
+  "last_runtime_seconds": 39.11946439743042
 }
