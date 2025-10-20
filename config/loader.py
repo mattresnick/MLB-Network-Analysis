@@ -113,8 +113,11 @@ def load_config(path: str) -> Dict[str,Any]:
     val_opponent_blockout = _bool(extra_val.get('opponent_blockout'), False)
     val_temperature_logloss = _bool(extra_val.get('temperature_logloss'), False)
     val_statcast_logloss = _bool(extra_val.get('statcast_logloss'), False)
+    # Explicitly gate legacy/baseline metrics; default off
     val_baseline_auc = _bool(extra_val.get('baseline_auc'), False)
     val_only_baseline = _bool(extra_val.get('only_baseline'), False)
+    # Optional switch to disable all legacy AUC except specified modes
+    val_allow_legacy_auc = _bool(extra_val.get('allow_legacy_auc'), False)
 
     ranking = pipeline.get('ranking',{}) or {}
     top_n = int(ranking.get('top_n',25) or 25)
@@ -190,6 +193,11 @@ def load_config(path: str) -> Dict[str,Any]:
     include_edge_lists = _bool(output.get('include_edge_lists'), True)
     include_rank_tables = _bool(output.get('include_rank_tables'), True)
     include_scaled_rank_tables = _bool(output.get('include_scaled_rank_tables'), True)
+    # Scenario A/B controls and MLB-only leaderboard display
+    scenarios_cfg = pipeline.get('scenarios', {}) or {}
+    scenarioA_include_milb = _bool(scenarios_cfg.get('A_include_milb'), True)
+    scenarioB_exclude_milb = _bool(scenarios_cfg.get('B_exclude_milb'), True)
+    mlb_only_leaderboard = _bool(scenarios_cfg.get('mlb_only_leaderboard'), True)
 
     # Caching settings
     caching_cfg = pipeline.get('caching', {}) or {}
@@ -307,7 +315,8 @@ def load_config(path: str) -> Dict[str,Any]:
                 'temperature_logloss': val_temperature_logloss,
                 'statcast_logloss': val_statcast_logloss,
                 'baseline_auc': val_baseline_auc,
-                'only_baseline': val_only_baseline
+                'only_baseline': val_only_baseline,
+                'allow_legacy_auc': val_allow_legacy_auc
             }
         },
     'scrape': {'force': force_scrape, 'skip': skip_scrape},
@@ -325,6 +334,11 @@ def load_config(path: str) -> Dict[str,Any]:
             'include_edge_lists': include_edge_lists,
             'include_rank_tables': include_rank_tables,
             'include_scaled_rank_tables': include_scaled_rank_tables
+        },
+        'scenarios': {
+            'A_include_milb': scenarioA_include_milb,
+            'B_exclude_milb': scenarioB_exclude_milb,
+            'mlb_only_leaderboard': mlb_only_leaderboard
         },
         'caching': {
             'enabled': caching_enabled,

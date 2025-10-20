@@ -123,6 +123,19 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "run: full 2024 (aware attach)",
+			"type": "shell",
+			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-m","debugpy","--listen","localhost:5690","--wait-for-client",
+				"${workspaceFolder}\\run_config.py",
+				"--config",
+				"${workspaceFolder}\\config\\example_aware_2024.json"
+			],
+			"options": { "cwd": "${workspaceFolder}" },
+			"problemMatcher": []
+		},
+		{
 			"label": "run: full 2024 (aware + k-sweep)",
 			"type": "shell",
 			"command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",

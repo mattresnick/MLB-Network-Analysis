@@ -84,25 +84,100 @@ def _aware_pa_score(row: Dict[str, Any], weights: Dict[str, float]) -> Optional[
 
 def _aware_covariates(df: pd.DataFrame, *, basic: bool = False) -> pd.DataFrame:
     out = pd.DataFrame(index=df.index)
-    # Batter handedness
+    if basic:
+        # Platoon advantage: 1 if batter and pitcher sides differ (switch treated as shown side)
+        if {'stand','p_throws'}.issubset(df.columns):
+            bs = df['stand'].astype(str).str.upper().str.slice(0,1)
+            ps = df['p_throws'].astype(str).str.upper().str.slice(0,1)
+            out['PlatoonAdv'] = (bs != ps).astype(int)
+        # Count dummies if balls/strikes present
+        ball_cols = [c for c in df.columns if c.lower() in ('balls','ball')]
+        strike_cols = [c for c in df.columns if c.lower() in ('strikes','strike')]
+        if ball_cols and strike_cols:
+            b = pd.to_numeric(df[ball_cols[0]], errors='coerce').fillna(-1).astype(int).clip(lower=0, upper=3)
+            s = pd.to_numeric(df[strike_cols[0]], errors='coerce').fillna(-1).astype(int).clip(lower=0, upper=2)
+            counts = b.astype(str) + '-' + s.astype(str)
+            d = pd.get_dummies(counts, prefix='Count')
+            if 'Count_0-0' in d.columns:
+                d = d.drop(columns=['Count_0-0'])
+            out = out.join(d)
+        # Home indicator if reasonably derivable
+        if 'is_home_batter' in df.columns:
+            out['Home'] = df['is_home_batter'].astype(int)
+        else:
+            itb_col = [c for c in df.columns if c.lower() in ('inning_topbot','topbot')]
+            if itb_col:
+                out['Home'] = df[itb_col[0]].astype(str).str[0].str.upper().map({'B':1,'T':0}).fillna(0).astype(int)
+        return out.fillna(0.0)
+    # Non-basic path keeps legacy dummies for backward compatibility
     if 'stand' in df.columns:
         out = out.join(pd.get_dummies(df['stand'].astype(str).str.upper(), prefix='stand', drop_first=True))
-    # Pitcher throws
     if 'p_throws' in df.columns:
         out = out.join(pd.get_dummies(df['p_throws'].astype(str).str.upper(), prefix='pthr', drop_first=True))
-    if basic:
-        return out.fillna(0.0)
-    # Home/park
     if 'home_team' in df.columns:
         out = out.join(pd.get_dummies(df['home_team'].astype(str), prefix='home_team', drop_first=True))
     elif 'home' in df.columns:
         out['home'] = df['home'].apply(_detect_bool).astype(int)
-    # Pitch count
     if 'pitch_number' in df.columns:
         out['pitch_count'] = pd.to_numeric(df['pitch_number'], errors='coerce').fillna(0.0)
     elif 'n_pitches' in df.columns:
         out['pitch_count'] = pd.to_numeric(df['n_pitches'], errors='coerce').fillna(0.0)
     return out.fillna(0.0)
+
+def _woba_scale_for_season(year: int) -> float:
+    """Approximate wOBA scale to convert wOBA points to runs/PA for a given season."""
+    table = {
+        2009: 1.25, 2010: 1.25, 2011: 1.25, 2012: 1.25, 2013: 1.24, 2014: 1.25,
+        2015: 1.25, 2016: 1.25, 2017: 1.26, 2018: 1.26, 2019: 1.27, 2020: 1.27,
+        2021: 1.25, 2022: 1.25, 2023: 1.25, 2024: 1.24, 2025: 1.24,
+    }
+    return float(table.get(int(year), 1.25))
+
+def _season_linear_run_weights(year: int) -> Dict[str, float]:
+    """Linear weights (runs/PA) for unintentional BB, HBP, and K. Conservative defaults per season."""
+    base = {"wBB": 0.33, "wHBP": 0.34, "wK": -0.27}
+    tweaks = {2019: {"wBB": 0.34, "wHBP": 0.35, "wK": -0.28}}
+    d = dict(base)
+    d.update(tweaks.get(int(year), {}))
+    return d
+
+def _aware_pa_runs(df: pd.DataFrame, year: int, *, override_weights: Optional[Dict[str,float]] = None) -> pd.Series:
+    """Compute y per PA in runs/PA (xwOBA scaled to runs; fallback to linear run weights; IBB contribute 0)."""
+    y = pd.Series(np.nan, index=df.index, dtype='float64')
+    # Prefer expected wOBA-style columns
+    for c in ("xwOBA","estimated_woba_using_speedangle","woba_expectation"):
+        if c in df.columns:
+            v = pd.to_numeric(df[c], errors='coerce')
+            y = y.where(~y.isna(), v)
+    # Convert to runs
+    scale = _woba_scale_for_season(year)
+    if not y.isna().all():
+        y = y * scale
+    # Fallback events
+    if y.isna().any():
+        weights = _season_linear_run_weights(year)
+        if isinstance(override_weights, dict):
+            for k in ("wBB","wHBP","wK"):
+                if k in override_weights:
+                    try:
+                        weights[k] = float(override_weights[k])
+                    except Exception:
+                        pass
+        ev = df.get('event', df.get('events', pd.Series('', index=df.index))).astype(str).str.strip().str.lower()
+        is_k = ev.isin(["strikeout","strikeout_double_play","strikeout_triple_play","strikeout - dp","strikeout - tp","k"]) ; k_val = float(weights.get('wK', -0.27))
+        is_bb = ev.isin(["walk","bb","base on balls"]) ; bb_val = float(weights.get('wBB', 0.33))
+        is_hbp = ev.isin(["hit_by_pitch","hbp"]) ; hbp_val = float(weights.get('wHBP', 0.34))
+        # IBB -> 0
+        ibb_cols = [c for c in df.columns if c.lower() in ("ibb","is_intentional_walk","intentional_walk","intent_walk")]
+        if ibb_cols:
+            is_ibb = df[ibb_cols[0]].astype(str).str.strip().str.lower().isin(["1","true","t","yes","y"]) | ev.isin(["intent_walk","intentional_walk","intentional base on balls"]) 
+        else:
+            is_ibb = ev.isin(["intent_walk","intentional_walk","intentional base on balls"]) 
+        y = y.where(~(y.isna() & is_k), k_val)
+        y = y.where(~(y.isna() & is_bb), bb_val)
+        y = y.where(~(y.isna() & is_hbp), hbp_val)
+        y = y.where(~(y.isna() & is_ibb), 0.0)
+    return y
 
 def _aware_pa_score_series(df: pd.DataFrame) -> pd.Series:
     """Vectorized per-PA score: prefer xwOBA/wOBA columns; fallback to events K/BB/HBP."""
@@ -313,7 +388,7 @@ def _aware_edges_from_scores(df: pd.DataFrame, score_col: str, row_b_col: str, r
     losers = [players[j] for j in li]
     return pd.DataFrame({'winner': winners, 'loser': losers, 'score': scores})
 
-def ensure_aware_edges(year: int, raw_data_dir: str, alpha_ridge: float = 1.0, progress: bool = False, force: bool = False, *, use_shrink: bool = True, shrink_mode: str = 'se_based', shrink_k: int = 150, use_covariates: bool = True, shrink_k_batter: Optional[int] = None, shrink_k_pitcher: Optional[int] = None, basic_covariates: bool = False):
+def ensure_aware_edges(year: int, raw_data_dir: str, alpha_ridge: float = 1.0, progress: bool = False, force: bool = False, *, use_shrink: bool = True, shrink_mode: str = 'se_based', shrink_k: int = 150, use_covariates: bool = True, shrink_k_batter: Optional[int] = None, shrink_k_pitcher: Optional[int] = None, basic_covariates: bool = False, include_milb: bool = False):
     # Reuse existing aware edges when not forcing regeneration
     b_out_dir = os.path.join('At Bats','batter_data','aware_scores')
     p_out_dir = os.path.join('At Bats','pitcher_data','aware_scores')
@@ -330,27 +405,28 @@ def ensure_aware_edges(year: int, raw_data_dir: str, alpha_ridge: float = 1.0, p
         if progress: print(f"[aware] missing input: {in_path}")
         return
     df = pd.read_csv(in_path)
-    # Defensive MLB-only filter if available
-    try:
-        for gt_col in ("game_type","type"):
-            if gt_col in df.columns:
-                before = len(df)
-                df = df[df[gt_col].isin(["R","P"])].copy()
-                if progress:
-                    print(f"[aware] filtered MLB games by {gt_col} in {{'R','P'}}: {before} -> {len(df)} rows")
-                break
-        else:
-            # Fallback: restrict to rows where both teams are MLB franchises
-            MLB_TEAMS = {
-                'ARI','ATL','BAL','BOS','CHC','CIN','CLE','COL','CWS','DET','HOU','KC','LAA','LAD','MIA','MIL','MIN','NYM','NYY','OAK','PHI','PIT','SD','SEA','SF','STL','TB','TEX','TOR','WSH'
-            }
-            if {'home_team','away_team'}.issubset(df.columns):
-                before2 = len(df)
-                df = df[df['home_team'].isin(MLB_TEAMS) & df['away_team'].isin(MLB_TEAMS)].copy()
-                if progress:
-                    print(f"[aware] fallback MLB team filter applied: {before2} -> {len(df)} rows")
-    except Exception:
-        pass
+    # League filtering: by default keep MLB-only; when include_milb=True, skip this filter
+    if not include_milb:
+        try:
+            for gt_col in ("game_type","type"):
+                if gt_col in df.columns:
+                    before = len(df)
+                    df = df[df[gt_col].isin(["R","P"])].copy()
+                    if progress:
+                        print(f"[aware] filtered MLB games by {gt_col} in {'R','P'}: {before} -> {len(df)} rows")
+                    break
+            else:
+                # Fallback: restrict to rows where both teams are MLB franchises
+                MLB_TEAMS = {
+                    'ARI','ATL','BAL','BOS','CHC','CIN','CLE','COL','CWS','DET','HOU','KC','LAA','LAD','MIA','MIL','MIN','NYM','NYY','OAK','PHI','PIT','SD','SEA','SF','STL','TB','TEX','TOR','WSH'
+                }
+                if {'home_team','away_team'}.issubset(df.columns):
+                    before2 = len(df)
+                    df = df[df['home_team'].isin(MLB_TEAMS) & df['away_team'].isin(MLB_TEAMS)].copy()
+                    if progress:
+                        print(f"[aware] fallback MLB team filter applied: {before2} -> {len(df)} rows")
+        except Exception:
+            pass
     # Normalize batter/pitcher columns
     if 'batter_name' in df.columns:
         df['batter'] = df['batter_name']
@@ -384,6 +460,15 @@ def ensure_aware_edges(year: int, raw_data_dir: str, alpha_ridge: float = 1.0, p
     if df is None or df.empty or ('YB' not in df.columns) or ('YP' not in df.columns):
         if progress: print(f"[aware] no scored PAs for {year}")
         return
+    # Persist residuals for downstream analysis
+    try:
+        inter_dir = os.path.join('At Bats','intermediate_results','aware')
+        os.makedirs(inter_dir, exist_ok=True)
+        cols_keep = [c for c in ['batter','pitcher','y_bp','YB','YP','alpha_b','sigma_p','chi_beta'] if c in df.columns]
+        if cols_keep:
+            pd.DataFrame(df[cols_keep]).to_parquet(os.path.join(inter_dir, f"{year}_resids.parquet"), index=False)
+    except Exception:
+        pass
     # Output aware unipartite edges
     if force or (not os.path.isfile(b_edge_out)) or (not os.path.isfile(p_edge_out)):
         bedges = _aware_edges_from_scores(df[['batter','pitcher','YB']].rename(columns={'YB':'score'}), 'score', 'batter', 'pitcher', 'batter', year)
@@ -441,6 +526,57 @@ def ensure_aware_edges(year: int, raw_data_dir: str, alpha_ridge: float = 1.0, p
         except Exception:
             pass
         pedges.to_csv(p_edge_out, index=False)
+        # Also write structured edges (weighted-mean target D and precision W) for the alternative solver
+        try:
+            def _struct_edges(df_pa: pd.DataFrame, group: str) -> pd.DataFrame:
+                if group=='batter':
+                    ply_col, opp_col, resid_col = 'batter','pitcher','YB'
+                else:
+                    ply_col, opp_col, resid_col = 'pitcher','batter','YP'
+                g = df_pa.groupby([ply_col, opp_col])[resid_col]
+                m = g.mean().rename('m').reset_index()
+                n = g.size().rename('n').reset_index()
+                stats = m.merge(n, on=[ply_col, opp_col], how='left')
+                try:
+                    sigma2 = float(np.nanvar(df_pa[resid_col].astype(float).values))
+                    sigma2 = max(sigma2, 1e-6)
+                except Exception:
+                    sigma2 = 1.0
+                players = sorted(stats[ply_col].unique().tolist())
+                opps = sorted(stats[opp_col].unique().tolist())
+                if not players or not opps:
+                    return pd.DataFrame(columns=['i','j','D','W'])
+                M = pd.pivot_table(stats, index=ply_col, columns=opp_col, values='m').reindex(index=players, columns=opps).astype(float).fillna(0.0).values.astype(np.float32)
+                N = pd.pivot_table(stats, index=ply_col, columns=opp_col, values='n').reindex(index=players, columns=opps).astype(float).fillna(0.0).values.astype(np.float32)
+                with np.errstate(divide='ignore', invalid='ignore'):
+                    V = np.where(N>0, sigma2/np.maximum(N, 1.0), sigma2).astype(np.float32)
+                B = len(players)
+                sum_num = np.zeros((B,B), dtype=np.float64)
+                sum_w = np.zeros((B,B), dtype=np.float64)
+                chunk = 64
+                for c0 in range(0, len(opps), chunk):
+                    c1 = min(c0+chunk, len(opps))
+                    Mi = M[:, c0:c1].astype(np.float64)
+                    Vi = V[:, c0:c1].astype(np.float64)
+                    Ai = Mi[:, None, :]; Aj = Mi[None, :, :]
+                    Si = Vi[:, None, :]; Sj = Vi[None, :, :]
+                    denom = Si + Sj
+                    w = np.where(denom>0, 1.0/denom, 0.0)
+                    sum_num += np.sum(w * (Ai - Aj), axis=2)
+                    sum_w += np.sum(w, axis=2)
+                iu, ju = np.triu_indices(B, k=1)
+                w_ij = sum_w[iu, ju]
+                mask = w_ij > 0
+                iu = iu[mask]; ju = ju[mask]; w_ij = w_ij[mask]
+                d_ij = sum_num[iu, ju][mask] / w_ij
+                rows = [[players[i], players[j], float(d), float(w)] for i,j,d,w in zip(iu, ju, d_ij, w_ij)]
+                return pd.DataFrame(rows, columns=['i','j','D','W'])
+            sb = _struct_edges(df, 'batter')
+            sp = _struct_edges(df, 'pitcher')
+            sb.to_csv(os.path.join(b_out_dir, f"{year}_batter_edges_struct.csv"), index=False)
+            sp.to_csv(os.path.join(p_out_dir, f"{year}_pitcher_edges_struct.csv"), index=False)
+        except Exception:
+            pass
         # Persist R shrink factors for later aware ranking
         try:
             rb = pd.DataFrame({'Player': list(a_shrunk.keys())})
@@ -476,9 +612,33 @@ def _aware_compute_y(df_in: pd.DataFrame, alpha_ridge: float = 1.0, progress: bo
             df['pitcher'] = df['pitcher_name']
         if 'batter' not in df.columns or 'pitcher' not in df.columns:
             return pd.DataFrame(), {}, {}, {}, {}
-        # Compute per-PA score
-        # Vectorized per-PA score
-        df['y_bp'] = _aware_pa_score_series(df)
+        # Compute per-PA score in runs/PA using xwOBA scaled + linear weights fallback
+        # Derive season from date if possible, else from a present game_date column, else infer from file context upstream
+        year_guess = None
+        for c in ('game_date','gameDate','game_date_time'):
+            if c in df.columns:
+                try:
+                    year_guess = int(str(df[c].iloc[0])[:4])
+                    break
+                except Exception:
+                    year_guess = None
+        if year_guess is None:
+            # Fallback: try to parse season from a 'season' column
+            if 'season' in df.columns:
+                try:
+                    year_guess = int(pd.to_numeric(df['season'], errors='coerce').dropna().iloc[0])
+                except Exception:
+                    year_guess = None
+        if year_guess is None:
+            # Last resort: use today's year; season-centering still stabilizes
+            year_guess = date.today().year
+        df['y_bp'] = _aware_pa_runs(df, year_guess)
+        # Season-center runs/PA
+        try:
+            c_mean = float(pd.to_numeric(df['y_bp'], errors='coerce').dropna().mean())
+        except Exception:
+            c_mean = 0.0
+        df['y_bp'] = pd.to_numeric(df['y_bp'], errors='coerce') - c_mean
         df = df[~df['y_bp'].isna()].copy()
         if df.empty:
             return df, {}, {}, {}, {}
@@ -1997,6 +2157,65 @@ def _write_multi(df: pd.DataFrame, base_path: str, formats: List[str]):
         except Exception as e:
             print(f"[warn] json write failed: {e}")
 
+# MLB-only leaderboard helpers
+_MLB_PLAYER_CACHE: dict[int, tuple[set[str], set[str]]] = {}
+def _mlb_player_sets(year: int, raw_data_dir: str) -> tuple[set[str], set[str]]:
+    """Return sets of MLB batter and pitcher names for the given year using raw data.
+
+    Attempts to filter to MLB games using game_type/type in {R,P}. Falls back to
+    returning empty sets on failure, which results in no filtering.
+    """
+    try:
+        y = int(year)
+    except Exception:
+        y = year
+    if y in _MLB_PLAYER_CACHE:
+        return _MLB_PLAYER_CACHE[y]
+    try:
+        path = os.path.join(raw_data_dir, f"at_bat_data_{y}.csv")
+        if not os.path.isfile(path):
+            return set(), set()
+        df = pd.read_csv(path, usecols=lambda c: c in {'game_type','type','batter_name','pitcher_name','batter','pitcher'})
+        gt_col = 'game_type' if 'game_type' in df.columns else ('type' if 'type' in df.columns else None)
+        if gt_col is not None:
+            df = df[df[gt_col].isin(['R','P'])].copy()
+        if 'batter_name' in df.columns:
+            bat_series = df['batter_name'].astype(str)
+        elif 'batter' in df.columns:
+            bat_series = df['batter'].astype(str)
+        else:
+            bat_series = pd.Series([], dtype=str)
+        if 'pitcher_name' in df.columns:
+            pit_series = df['pitcher_name'].astype(str)
+        elif 'pitcher' in df.columns:
+            pit_series = df['pitcher'].astype(str)
+        else:
+            pit_series = pd.Series([], dtype=str)
+        bat_set = set(bat_series.dropna().astype(str).tolist())
+        pit_set = set(pit_series.dropna().astype(str).tolist())
+        _MLB_PLAYER_CACHE[y] = (bat_set, pit_set)
+        return bat_set, pit_set
+    except Exception:
+        return set(), set()
+
+def _filter_leaderboard(df: pd.DataFrame, *, group: str, year: int, raw_data_dir: str, enabled: bool) -> pd.DataFrame:
+    """Filter leaderboard to MLB players only when enabled.
+
+    Safe no-op if disabled or if player sets cannot be determined.
+    """
+    try:
+        if not enabled:
+            return df
+        bat_set, pit_set = _mlb_player_sets(int(year), raw_data_dir)
+        allowed = bat_set if group == 'batter' else pit_set
+        if not allowed:
+            return df
+        if 'Player' in df.columns:
+            return df[df['Player'].astype(str).isin(allowed)].reset_index(drop=True)
+        return df
+    except Exception:
+        return df
+
 # Helper to compute baseline AUC/logloss rows from a stats table
 def _collect_baseline_rows(stats_df: pd.DataFrame, metrics: List[Tuple[str, int]], test_edges: List[Tuple[str,str,float]], _norm_name2, st: str, group: str, y: int, v_extra: Dict[str, Any]):
     rows_auc: List[List[Any]] = []
@@ -2425,6 +2644,230 @@ def aware_rank_with_tether(A, node_list: List[str], R_map: Dict[str, float], lam
     sorted_pairs.sort(reverse=True, key=lambda t: t[1])
     return ranks, sorted_pairs
 
+def _aware_rank_from_struct_edges(
+    group: str,
+    year: int,
+    R_map: Dict[str, float],
+    *,
+    lambda_reg: float = 1.0,
+    use_harmonic: bool = True,
+    base_dir: str | None = None,
+):
+    """Solve ranks using structured D/W edges produced by ensure_aware_edges.
+
+    The structured CSV contains rows (i, j, D, W) representing the weighted-mean
+    target difference D_ij between i and j with total precision weight W_ij.
+
+    We assemble:
+      - W'_{ij} = W_ij * h(R_i, R_j) if use_harmonic else W_ij
+      - Laplacian L = sum_{i<j} w' * (e_i - e_j)(e_i - e_j)^T
+      - RHS b = sum_{i<j} w' * D_ij * (e_i - e_j)
+      - Tether: lambda * diag(1 - R_i)
+
+    Returns (ranks_vector, sorted_pairs). If the struct file is missing or
+    invalid, returns (None, None) so callers can fallback gracefully.
+    """
+    try:
+        import pandas as _pd
+        import numpy as _np
+        try:
+            import scipy.sparse as _sp  # type: ignore
+            from scipy.sparse.linalg import spsolve as _spsolve  # type: ignore
+            use_sparse = True
+        except Exception:
+            use_sparse = False
+        # Locate structured edges file
+        if base_dir is None:
+            base_dir = os.path.join('At Bats', f'{group}_data', 'aware_scores')
+        path = os.path.join(base_dir, f"{year}_{group}_edges_struct.csv")
+        if (not os.path.isfile(path)):
+            raise FileNotFoundError(f"structured edges file missing: {path}")
+        df = _pd.read_csv(path)
+        needed = {'i','j','D','W'}
+        if df is None or df.empty or not needed.issubset(df.columns):
+            raise RuntimeError(f"structured edges invalid/empty: {path}")
+        # Clean and coerce
+        I = df['i'].astype(str)
+        J = df['j'].astype(str)
+        D = _pd.to_numeric(df['D'], errors='coerce').astype(float)
+        W = _pd.to_numeric(df['W'], errors='coerce').astype(float)
+        mask = _np.isfinite(D) & _np.isfinite(W) & (W > 0)
+        I = I[mask]; J = J[mask]; D = D[mask]; W = W[mask]
+        if len(I) == 0:
+            raise RuntimeError("no valid (i,j) rows after filtering in structured edges")
+        # Build node list
+        nodes = sorted(_pd.unique(_pd.concat([I, J], ignore_index=True)).tolist())
+        n = len(nodes)
+        name_to_idx = {name: idx for idx, name in enumerate(nodes)}
+        # Prepare weights with harmonic scaling and RHS contributions
+        if use_harmonic:
+            def _hm(a: float, b: float) -> float:
+                s = a + b
+                return (2.0 * a * b / s) if s > 0 else 0.0
+            Ri = _np.array([float(R_map.get(str(u), 1.0)) for u in I], dtype=float)
+            Rj = _np.array([float(R_map.get(str(v), 1.0)) for v in J], dtype=float)
+            Wp = W.values * _np.array([_hm(Ri[k], Rj[k]) for k in range(len(W))], dtype=float)
+        else:
+            Wp = W.values.astype(float)
+        # Drop near-zero weights after scaling
+        m2 = _np.isfinite(Wp) & (Wp > 0)
+        I = I[m2]; J = J[m2]; D = D[m2]; Wp = Wp[m2]
+        if len(I) == 0:
+            raise RuntimeError("all weights dropped after harmonic scaling (W' <= 0)")
+        # Logging stats for diagnostics
+        try:
+            print(f"[aware][struct] {group}:{year} nodes={n}, pairs={len(I)}; W': min={float(_np.min(Wp)):.3e} median={float(_np.median(Wp)):.3e} max={float(_np.max(Wp)):.3e}; |D| median={float(_np.median(_np.abs(D))):.3e}")
+        except Exception:
+            pass
+        # Assemble sparse Laplacian and RHS
+        if use_sparse:
+            rows = []
+            cols = []
+            data = []
+            b = _np.zeros((n,), dtype=float)
+            for ii, jj, dij, wij in zip(I, J, D, Wp):
+                i = name_to_idx[str(ii)]; j = name_to_idx[str(jj)]
+                if i == j:
+                    continue
+                # L += wij * (e_i - e_j)(e_i - e_j)^T
+                rows.extend([i, i, j, j])
+                cols.extend([i, j, i, j])
+                data.extend([wij, -wij, -wij, wij])
+                # b += wij * dij * (e_i - e_j)
+                b[i] += float(wij * dij)
+                b[j] -= float(wij * dij)
+            L = _sp.csr_matrix((data, (rows, cols)), shape=(n, n), dtype=float)
+            # Regularization/tether
+            R_vec = _np.array([float(R_map.get(name, 1.0)) for name in nodes], dtype=float)
+            # Small numeric ridge
+            deg = _np.asarray(L.sum(axis=1)).ravel()
+            eps = max(1e-8, 1e-6 * (float(_np.mean(deg)) if deg.size else 1.0))
+            if lambda_reg > 0:
+                Dreg = _sp.diags(lambda_reg * (1.0 - R_vec), offsets=0, shape=(n, n), dtype=float)
+                M = L + Dreg + _sp.eye(n, format='csr', dtype=float) * eps
+            else:
+                M = L + _sp.eye(n, format='csr', dtype=float) * eps
+            try:
+                x = _spsolve(M, b)
+            except Exception:
+                x = _np.linalg.lstsq(M.toarray(), b, rcond=None)[0]
+        else:
+            # Dense assembly as fallback
+            import numpy as _np_local
+            L = _np_local.zeros((n, n), dtype=float)
+            b = _np_local.zeros((n,), dtype=float)
+            for ii, jj, dij, wij in zip(I, J, D, Wp):
+                i = name_to_idx[str(ii)]; j = name_to_idx[str(jj)]
+                if i == j:
+                    continue
+                L[i, i] += wij; L[j, j] += wij
+                L[i, j] -= wij; L[j, i] -= wij
+                b[i] += wij * dij; b[j] -= wij * dij
+            R_vec = _np_local.array([float(R_map.get(name, 1.0)) for name in nodes], dtype=float)
+            if lambda_reg > 0:
+                M = L + _np_local.diag(lambda_reg * (1.0 - R_vec))
+            else:
+                deg = _np_local.mean(_np_local.diag(L)) if n else 1.0
+                eps = max(1e-8, 1e-6 * float(deg))
+                M = L + _np_local.eye(n) * eps
+            x = _np_local.linalg.lstsq(M, b, rcond=None)[0]
+        # Guardrails: check antisymmetry -> b sums to ~0 and mean rank → 0
+        try:
+            bs = float(_np.sum(b)) if 'b' in locals() else 0.0
+            if abs(bs) > 1e-6:
+                raise RuntimeError(f"RHS antisymmetry violated: sum(b)={bs}")
+        except Exception:
+            pass
+        # Center ranks to mean-zero for identifiability
+        x = _np.asarray(x, dtype=float)
+        if x.size:
+            x = x - float(_np.mean(x))
+        sorted_pairs = [[nodes[i], float(x[i])] for i in range(len(nodes))]
+        sorted_pairs.sort(reverse=True, key=lambda t: t[1])
+        return x, sorted_pairs
+    except Exception:
+        return None, None
+
+def _aware_rank_from_struct_df(I, J, D, W, R_map: Dict[str,float], *, lambda_reg: float = 1.0, use_harmonic: bool = True):
+    """Structured solver over in-memory arrays/Series for (i,j,D,W). Returns (ranks, sorted_pairs)."""
+    import numpy as _np
+    try:
+        import scipy.sparse as _sp  # type: ignore
+        from scipy.sparse.linalg import spsolve as _spsolve  # type: ignore
+        use_sparse = True
+    except Exception:
+        use_sparse = False
+    I = _np.asarray(I).astype(str)
+    J = _np.asarray(J).astype(str)
+    D = _np.asarray(D, dtype=float)
+    W = _np.asarray(W, dtype=float)
+    m = _np.isfinite(D) & _np.isfinite(W) & (W > 0)
+    I = I[m]; J = J[m]; D = D[m]; W = W[m]
+    if I.size == 0:
+        raise RuntimeError("no valid structured rows for in-memory solve")
+    nodes = sorted(set(I.tolist()) | set(J.tolist()))
+    n = len(nodes)
+    name_to_idx = {name: idx for idx, name in enumerate(nodes)}
+    if use_harmonic:
+        def _hm(a: float, b: float) -> float:
+            s = a + b
+            return (2.0 * a * b / s) if s > 0 else 0.0
+        Ri = _np.array([float(R_map.get(str(u), 1.0)) for u in I], dtype=float)
+        Rj = _np.array([float(R_map.get(str(v), 1.0)) for v in J], dtype=float)
+        Wp = W * _np.array([_hm(Ri[k], Rj[k]) for k in range(W.size)], dtype=float)
+    else:
+        Wp = W
+    m2 = _np.isfinite(Wp) & (Wp > 0)
+    I = I[m2]; J = J[m2]; D = D[m2]; Wp = Wp[m2]
+    if I.size == 0:
+        raise RuntimeError("all weights dropped after harmonic scaling (in-memory)")
+    if use_sparse:
+        rows = []
+        cols = []
+        data = []
+        b = _np.zeros((n,), dtype=float)
+        for ii, jj, dij, wij in zip(I, J, D, Wp):
+            i = name_to_idx[str(ii)]; j = name_to_idx[str(jj)]
+            if i == j: continue
+            rows.extend([i, i, j, j])
+            cols.extend([i, j, i, j])
+            data.extend([wij, -wij, -wij, wij])
+            b[i] += float(wij * dij)
+            b[j] -= float(wij * dij)
+        L = _sp.csr_matrix((data, (rows, cols)), shape=(n, n), dtype=float)
+        R_vec = _np.array([float(R_map.get(name, 1.0)) for name in nodes], dtype=float)
+        deg = _np.asarray(L.sum(axis=1)).ravel()
+        eps = max(1e-8, 1e-6 * (float(_np.mean(deg)) if deg.size else 1.0))
+        if lambda_reg > 0:
+            Dreg = _sp.diags(lambda_reg * (1.0 - R_vec), offsets=0, shape=(n, n), dtype=float)
+            M = L + Dreg + _sp.eye(n, format='csr', dtype=float) * eps
+        else:
+            M = L + _sp.eye(n, format='csr', dtype=float) * eps
+        try:
+            x = _spsolve(M, b)
+        except Exception:
+            x = _np.linalg.lstsq(M.toarray(), b, rcond=None)[0]
+    else:
+        L = _np.zeros((n, n), dtype=float)
+        b = _np.zeros((n,), dtype=float)
+        for ii, jj, dij, wij in zip(I, J, D, Wp):
+            i = name_to_idx[str(ii)]; j = name_to_idx[str(jj)]
+            if i == j: continue
+            L[i, i] += wij; L[j, j] += wij
+            L[i, j] -= wij; L[j, i] -= wij
+            b[i] += wij * dij; b[j] -= wij * dij
+        R_vec = _np.array([float(R_map.get(name, 1.0)) for name in nodes], dtype=float)
+        if lambda_reg > 0:
+            M = L + _np.diag(lambda_reg * (1.0 - R_vec))
+        else:
+            eps = 1e-6
+            M = L + _np.eye(n) * eps
+        x = _np.linalg.lstsq(M, b, rcond=None)[0]
+    x = x - float(_np.mean(x)) if x.size else x
+    sorted_pairs = [[nodes[i], float(x[i])] for i in range(len(nodes))]
+    sorted_pairs.sort(reverse=True, key=lambda t: t[1])
+    return x, sorted_pairs
+
 def _load_manifest(path: str) -> Dict[str, Any]:
     """Load a caching manifest from JSON if present; otherwise return an empty structure."""
     try:
@@ -2539,7 +2982,22 @@ def run_pipeline(cfg: Dict[str,Any]):
                     if skip_scrape and (not force_edges) and os.path.isfile(b_edge_out) and os.path.isfile(p_edge_out):
                         if progress: print(f"[aware] reuse existing aware edges for {y} (skip_scrape=true, force_edges=false)")
                     else:
-                        ensure_aware_edges(y, raw_data_dir, alpha_ridge=1.0, progress=progress, force=force_edges, use_shrink=bool(cfg.get('ranking',{}).get('aware_shrink', True)), shrink_mode=str(cfg.get('ranking',{}).get('aware_shrink_mode','se_based')), shrink_k=int(cfg.get('ranking',{}).get('aware_shrink_k',150)), use_covariates=bool(cfg.get('ranking',{}).get('aware_use_covariates', True)), shrink_k_batter=cfg.get('ranking',{}).get('aware_shrink_k_batter'), shrink_k_pitcher=cfg.get('ranking',{}).get('aware_shrink_k_pitcher'), basic_covariates=bool(cfg.get('ranking',{}).get('aware_covariates_basic', False)))
+                        # Scenario A/B: include_milb=True means don't filter out MiLB in aware edge building
+                        ensure_aware_edges(
+                            y,
+                            raw_data_dir,
+                            alpha_ridge=1.0,
+                            progress=progress,
+                            force=force_edges,
+                            use_shrink=bool(cfg.get('ranking',{}).get('aware_shrink', True)),
+                            shrink_mode=str(cfg.get('ranking',{}).get('aware_shrink_mode','se_based')),
+                            shrink_k=int(cfg.get('ranking',{}).get('aware_shrink_k',150)),
+                            use_covariates=bool(cfg.get('ranking',{}).get('aware_use_covariates', True)),
+                            shrink_k_batter=cfg.get('ranking',{}).get('aware_shrink_k_batter'),
+                            shrink_k_pitcher=cfg.get('ranking',{}).get('aware_shrink_k_pitcher'),
+                            basic_covariates=bool(cfg.get('ranking',{}).get('aware_covariates_basic', False)),
+                            include_milb=bool(cfg.get('scenarios',{}).get('A_include_milb', True))
+                        )
                 else:
                     ensure_edge_only(y, st, raw_data_dir, progress, pitch_types=pitch_types, innings=innings, stand_filter=stand_filter, pthrows_filter=pthrows_filter, force=force_edges)
     if dry_run:
@@ -2552,6 +3010,11 @@ def run_pipeline(cfg: Dict[str,Any]):
     results_summary = []
     levels_records = []
     metric = cfg.get('processing',{}).get('unipartite_metric','sum')
+    # Scenario toggles
+    scen = cfg.get('scenarios', {}) if isinstance(cfg.get('scenarios'), dict) else {}
+    scenarioA_include_milb = bool(scen.get('A_include_milb', True))
+    scenarioB_exclude_milb = bool(scen.get('B_exclude_milb', True))
+    mlb_only_leaderboard = bool(scen.get('mlb_only_leaderboard', True))
     for y in years:
         for st in score_types:
             if st == 'handmade':
@@ -2590,7 +3053,21 @@ def run_pipeline(cfg: Dict[str,Any]):
                 b_edge_out = os.path.join('At Bats','batter_data','aware_scores', f"{y}_batter_edges.csv")
                 p_edge_out = os.path.join('At Bats','pitcher_data','aware_scores', f"{y}_pitcher_edges.csv")
                 if force_edges or not (os.path.isfile(b_edge_out) and os.path.isfile(p_edge_out)):
-                    ensure_aware_edges(y, raw_data_dir, alpha_ridge=1.0, progress=progress, force=force_edges, use_shrink=bool(cfg.get('ranking',{}).get('aware_shrink', True)), shrink_mode=str(cfg.get('ranking',{}).get('aware_shrink_mode','se_based')), shrink_k=int(cfg.get('ranking',{}).get('aware_shrink_k',150)), use_covariates=bool(cfg.get('ranking',{}).get('aware_use_covariates', True)), shrink_k_batter=cfg.get('ranking',{}).get('aware_shrink_k_batter'), shrink_k_pitcher=cfg.get('ranking',{}).get('aware_shrink_k_pitcher'), basic_covariates=bool(cfg.get('ranking',{}).get('aware_covariates_basic', False)))
+                    ensure_aware_edges(
+                        y,
+                        raw_data_dir,
+                        alpha_ridge=1.0,
+                        progress=progress,
+                        force=force_edges,
+                        use_shrink=bool(cfg.get('ranking',{}).get('aware_shrink', True)),
+                        shrink_mode=str(cfg.get('ranking',{}).get('aware_shrink_mode','se_based')),
+                        shrink_k=int(cfg.get('ranking',{}).get('aware_shrink_k',150)),
+                        use_covariates=bool(cfg.get('ranking',{}).get('aware_use_covariates', True)),
+                        shrink_k_batter=cfg.get('ranking',{}).get('aware_shrink_k_batter'),
+                        shrink_k_pitcher=cfg.get('ranking',{}).get('aware_shrink_k_pitcher'),
+                        basic_covariates=bool(cfg.get('ranking',{}).get('aware_covariates_basic', False)),
+                        include_milb=bool(cfg.get('scenarios',{}).get('A_include_milb', True))
+                    )
                 # Optionally emit R_nk snapshot files for configured ks to aid inspection
                 try:
                     rk_b = int(cfg.get('ranking',{}).get('aware_shrink_k_batter', cfg.get('ranking',{}).get('aware_shrink_k',150)))
@@ -2670,7 +3147,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                             rdf2['Rank'] = rdf['Rank'].values
                         except Exception:
                             rdf2 = pd.DataFrame(sorted_r, columns=['Player','Rank'])
-                        _write_multi(rdf2, os.path.join(rank_dir, f"{y}_springrank"), formats)
+                        # Apply MLB-only filter for pitch_type leaderboards if requested
+                        rdf_out = _filter_leaderboard(rdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                        _write_multi(rdf_out, os.path.join(rank_dir, f"{y}_springrank"), formats)
                         if scale_req:
                             scaled = scale_ranks(A, raw_r)
                             scaled_sorted = [[node_list[i], r] for i,r in enumerate(scaled)]
@@ -2682,23 +3161,36 @@ def run_pipeline(cfg: Dict[str,Any]):
                                 sdf2 = mapped[['winner']].rename(columns={'winner':'Player'}).copy(); sdf2['ScaledRank'] = sdf['ScaledRank'].values
                             except Exception:
                                 sdf2 = pd.DataFrame(scaled_sorted, columns=['Player','ScaledRank'])
-                            _write_multi(sdf2, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
+                            sdf_out = _filter_leaderboard(sdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                            _write_multi(sdf_out, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
                             levels_records.append([st, group, pt, y, max(scaled)-min(scaled)])
                         validation_rows.append([st, group, pt, y, len(node_list), A.count_nonzero(), float(A.count_nonzero())/(len(node_list)**2 if len(node_list)>0 else 1)])
                         # ACC/AUC on held-out edges (if any)
                         cv = cfg.get('validation_folds', 0)
                         if cv and test_edges is not None:
                             val_cfg = cfg.get('validation', {})
-                            res = _compute_acc_auc(
-                                sorted_r,
-                                test_edges,
-                                auc_mode=str(val_cfg.get('aucMode','balanced-negatives')),
-                                k_neg=int(val_cfg.get('negatives_per_positive', 1)),
-                                auto_flip=bool(val_cfg.get('auto_flip', False)),
-                            )
-                            if res:
-                                acc, auc, used = res
-                                auc_rows.append([st, group, pt, y, cv, acc, auc, used])
+                            # Only compute AUC if allowed mode; otherwise skip legacy
+                            allowed = True
+                            try:
+                                extra = val_cfg.get('extra', {}) if isinstance(val_cfg, dict) else {}
+                                allow_legacy = bool(extra.get('allow_legacy_auc', False))
+                                mode = str(val_cfg.get('aucMode','balanced-negatives'))
+                                # Allow our specified modes; if legacy mode requested but not allowed, skip
+                                if mode == 'legacy' and not allow_legacy:
+                                    allowed = False
+                            except Exception:
+                                allowed = True
+                            if allowed:
+                                res = _compute_acc_auc(
+                                    sorted_r,
+                                    test_edges,
+                                    auc_mode=str(val_cfg.get('aucMode','balanced-negatives')),
+                                    k_neg=int(val_cfg.get('negatives_per_positive', 1)),
+                                    auto_flip=bool(val_cfg.get('auto_flip', False)),
+                                )
+                                if res:
+                                    acc, auc, used = res
+                                    auc_rows.append([st, group, pt, y, cv, acc, auc, used])
                         if caching_enabled:
                             manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list), 'file_sig': file_sig, 'config_sig': cfg_sig}
                         results_summary.append(pd.DataFrame(sorted_r, columns=['Player','Rank']).head(top_n).assign(Year=y, Group=group, ScoreType=st, PitchType=pt))
@@ -2761,7 +3253,8 @@ def run_pipeline(cfg: Dict[str,Any]):
                             rdf2['Rank'] = rdf['Rank'].values
                         except Exception:
                             rdf2 = pd.DataFrame(sorted_r, columns=['Player','Rank'])
-                        _write_multi(rdf2, os.path.join(rank_dir, f"{y}_springrank"), formats)
+                        rdf_out = _filter_leaderboard(rdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                        _write_multi(rdf_out, os.path.join(rank_dir, f"{y}_springrank"), formats)
                         if scale_req:
                             scaled = scale_ranks(A, raw_r)
                             scaled_sorted = [[node_list[i], r] for i,r in enumerate(scaled)]
@@ -2773,22 +3266,33 @@ def run_pipeline(cfg: Dict[str,Any]):
                                 sdf2 = mapped[['winner']].rename(columns={'winner':'Player'}).copy(); sdf2['ScaledRank'] = sdf['ScaledRank'].values
                             except Exception:
                                 sdf2 = pd.DataFrame(scaled_sorted, columns=['Player','ScaledRank'])
-                            _write_multi(sdf2, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
+                            sdf_out = _filter_leaderboard(sdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                            _write_multi(sdf_out, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
                             levels_records.append([st, group, inn, y, max(scaled)-min(scaled)])
                         validation_rows.append([st, group, f"inning_{inn}", y, len(node_list), A.count_nonzero(), float(A.count_nonzero())/(len(node_list)**2 if len(node_list)>0 else 1)])
                         cv = cfg.get('validation_folds', 0)
                         if cv and test_edges is not None:
                             val_cfg = cfg.get('validation', {})
-                            res = _compute_acc_auc(
-                                sorted_r,
-                                test_edges,
-                                auc_mode=str(val_cfg.get('aucMode','balanced-negatives')),
-                                k_neg=int(val_cfg.get('negatives_per_positive', 1)),
-                                auto_flip=bool(val_cfg.get('auto_flip', False)),
-                            )
-                            if res:
-                                acc, auc, used = res
-                                auc_rows.append([st, group, f"inning_{inn}", y, cv, acc, auc, used])
+                            allowed = True
+                            try:
+                                extra = val_cfg.get('extra', {}) if isinstance(val_cfg, dict) else {}
+                                allow_legacy = bool(extra.get('allow_legacy_auc', False))
+                                mode = str(val_cfg.get('aucMode','balanced-negatives'))
+                                if mode == 'legacy' and not allow_legacy:
+                                    allowed = False
+                            except Exception:
+                                allowed = True
+                            if allowed:
+                                res = _compute_acc_auc(
+                                    sorted_r,
+                                    test_edges,
+                                    auc_mode=str(val_cfg.get('aucMode','balanced-negatives')),
+                                    k_neg=int(val_cfg.get('negatives_per_positive', 1)),
+                                    auto_flip=bool(val_cfg.get('auto_flip', False)),
+                                )
+                                if res:
+                                    acc, auc, used = res
+                                    auc_rows.append([st, group, f"inning_{inn}", y, cv, acc, auc, used])
                         if caching_enabled:
                             manifest['runs'][cache_key] = {"time": time.time()-t0, "nodes": len(node_list), 'file_sig': file_sig, 'config_sig': cfg_sig}
                         results_summary.append(pd.DataFrame(sorted_r, columns=['Player','Rank']).head(top_n).assign(Year=y, Group=group, ScoreType=st, Inning=inn))
@@ -3061,7 +3565,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                 if not node_list:
                     if progress: print(f"[ranking] skip empty graph for {st}:{group}:{y}")
                     continue
-                # Use custom aware solver with tether and harmonic weights
+                # Use custom aware solver with tether and harmonic weights; structured solver required
                 aware_lambda = float(cfg.get('ranking', {}).get('aware_lambda', 1.0))
                 aware_harm = bool(cfg.get('ranking', {}).get('aware_harmonic', True))
                 # Load shrink factors R for this group/year (default 1.0)
@@ -3080,7 +3584,10 @@ def run_pipeline(cfg: Dict[str,Any]):
                                 R_map = {str(n): 1.0 for n, _r in R_df[['Player','R']].dropna().itertuples(index=False, name=None)}
                 except Exception:
                     R_map = {}
-                raw_r, sorted_r = aware_rank_with_tether(A, node_list, R_map, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                # Require D/W-structured solver for aware
+                raw_r, sorted_r = _aware_rank_from_struct_edges(group, y, R_map, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                if raw_r is None or sorted_r is None:
+                    raise RuntimeError("structured aware solver returned None; no fallback allowed")
                 rank_dir = os.path.join(output_dir, st, group)
                 os.makedirs(rank_dir, exist_ok=True)
                 try:
@@ -3092,7 +3599,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                     rdf2['Rank'] = rdf['Rank'].values
                 except Exception:
                     rdf2 = pd.DataFrame(sorted_r, columns=['Player','Rank'])
-                _write_multi(rdf2, os.path.join(rank_dir, f"{y}_springrank"), formats)
+                # MLB-only leaderboard display when requested
+                rdf_out = _filter_leaderboard(rdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                _write_multi(rdf_out, os.path.join(rank_dir, f"{y}_springrank"), formats)
                 # If an old file existed with MLBAM codes, ensure we overwrite the CSV variant
                 try:
                     pd.DataFrame(rdf2).to_csv(os.path.join(rank_dir, f"{y}_springrank.csv"), index=False)
@@ -3109,7 +3618,8 @@ def run_pipeline(cfg: Dict[str,Any]):
                         sdf2 = mapped[['winner']].rename(columns={'winner':'Player'}).copy(); sdf2['ScaledRank'] = sdf['ScaledRank'].values
                     except Exception:
                         sdf2 = pd.DataFrame(scaled_sorted, columns=['Player','ScaledRank'])
-                    _write_multi(sdf2, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
+                    sdf_out = _filter_leaderboard(sdf2, group=group, year=y, raw_data_dir=raw_data_dir, enabled=mlb_only_leaderboard)
+                    _write_multi(sdf_out, os.path.join(rank_dir,f"{y}_springrank_scaled"), formats)
                     try:
                         pd.DataFrame(sdf2).to_csv(os.path.join(rank_dir, f"{y}_springrank_scaled.csv"), index=False)
                     except Exception:
@@ -3154,24 +3664,37 @@ def run_pipeline(cfg: Dict[str,Any]):
                                             R_map_cv = {str(n): float(r) for n, r in R_df[['Player','R']].dropna().itertuples(index=False, name=None)}
                                 except Exception:
                                     R_map_cv = {}
-                                _, sorted_r_cv = aware_rank_with_tether(At, nodes_t, R_map_cv, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                                # Require structured solver for CV as well
+                                raw_cv, sorted_r_cv = _aware_rank_from_struct_edges(group, y, R_map_cv, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                                if raw_cv is None or sorted_r_cv is None:
+                                    raise RuntimeError("structured aware solver (CV) returned None; no fallback allowed")
                             else:
                                 _, sorted_r_cv = spring_rank(At, nodes_t)
                         else:
                             sorted_r_cv = sorted_r
                     except Exception:
                         sorted_r_cv = sorted_r
-                    res = _compute_acc_auc(
-                        sorted_r_cv,
-                        test_edges,
-                        auc_mode=str(val_cfg.get('aucMode','balanced-negatives')),
-                        k_neg=int(val_cfg.get('negatives_per_positive', 1)),
-                        auto_flip=bool(val_cfg.get('auto_flip', False)),
-                        seed=val_cfg.get('seed'),
-                    )
-                    if res:
-                        acc, auc, used = res
-                        auc_rows.append([st, group, None, y, cv, acc, auc, used])
+                    allowed = True
+                    try:
+                        extra = val_cfg.get('extra', {}) if isinstance(val_cfg, dict) else {}
+                        allow_legacy = bool(extra.get('allow_legacy_auc', False))
+                        mode = str(val_cfg.get('aucMode','balanced-negatives'))
+                        if mode == 'legacy' and not allow_legacy:
+                            allowed = False
+                    except Exception:
+                        allowed = True
+                    if allowed:
+                        res = _compute_acc_auc(
+                            sorted_r_cv,
+                            test_edges,
+                            auc_mode=str(val_cfg.get('aucMode','balanced-negatives')),
+                            k_neg=int(val_cfg.get('negatives_per_positive', 1)),
+                            auto_flip=bool(val_cfg.get('auto_flip', False)),
+                            seed=val_cfg.get('seed'),
+                        )
+                        if res:
+                            acc, auc, used = res
+                            auc_rows.append([st, group, None, y, cv, acc, auc, used])
                         # Extra: temperature log-loss and Brier score on the same held-out pairs
                         v_extra = val_cfg.get('extra', {}) if isinstance(val_cfg, dict) else {}
                         # Orientation check on the same held-out edges
@@ -3496,6 +4019,38 @@ def run_pipeline(cfg: Dict[str,Any]):
                                         frac, tot = _rank_orientation_fraction(sorted_rt, list(test_edges))
                                         ori = 'as-is' if frac >= 0.5 else 'flipped-at-eval'
                                         orientation_notes.append(f"{st}:{group}:{y}: OppBlock fold orientation={ori} (p={frac:.3f}, Npos={tot})")
+                                    except Exception:
+                                        pass
+                                    # Temperature-calibrated log-loss/Brier on symmetric pairs
+                                    try:
+                                        # Build train diffs/labels using symmetric pairs
+                                        rmap = {n: s for n, s in sorted_rt}
+                                        tr_diffs: list[float] = []
+                                        tr_labels: list[int] = []
+                                        for (u, v, _w) in train_sub[['winner','loser','score']].itertuples(index=False, name=None):
+                                            try:
+                                                if (u in rmap) and (v in rmap):
+                                                    duv = float(rmap[str(u)] - rmap[str(v)])
+                                                    tr_diffs.extend([duv, -duv])
+                                                    tr_labels.extend([1, 0])
+                                            except Exception:
+                                                continue
+                                        # Build test diffs/labels similarly
+                                        te_diffs: list[float] = []
+                                        te_labels: list[int] = []
+                                        for (u, v, _w) in test_sub[['winner','loser','score']].itertuples(index=False, name=None):
+                                            try:
+                                                if (u in rmap) and (v in rmap):
+                                                    duv = float(rmap[str(u)] - rmap[str(v)])
+                                                    te_diffs.extend([duv, -duv])
+                                                    te_labels.extend([1, 0])
+                                            except Exception:
+                                                continue
+                                        if tr_diffs and te_diffs:
+                                            import numpy as _np
+                                            beta_cv = _fit_temperature_beta(_np.array(tr_diffs, dtype=float), _np.array(tr_labels, dtype=int))
+                                            ll_cv, br_cv = _logloss_brier_from_diffs(_np.array(te_diffs, dtype=float), _np.array(te_labels, dtype=int), beta_cv)
+                                            logloss_rows.append([st, group, 'oppblock', y, beta_cv, ll_cv, br_cv, len(te_diffs), 'rank'])
                                     except Exception:
                                         pass
     except Exception:
@@ -4678,7 +5233,9 @@ def compute_rankings(cfg: Dict[str,Any]) -> bool:
                                 R_map = {str(n): float(r) for n, r in R_df[['Player','R']].dropna().itertuples(index=False, name=None)}
                     except Exception:
                         R_map = {}
-                    raw_r, sorted_r = aware_rank_with_tether(A, node_list, R_map, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                    raw_r, sorted_r = _aware_rank_from_struct_edges(group, y, R_map, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                    if raw_r is None or sorted_r is None:
+                        raise RuntimeError("structured aware solver returned None; no fallback allowed")
                 else:
                     raw_r, sorted_r = spring_rank(A, node_list)
                 rank_dir = os.path.join(output_dir, st, group); os.makedirs(rank_dir, exist_ok=True)
