@@ -1,1 +1,0 @@
-[{"ScoreType":"aware","Group":"batter","Year":2024,"Metric":"OPS","AUC":0.5,"Accuracy":0.5462724936,"TestEdges":1556},{"ScoreType":"aware","Group":"batter","Year":2024,"Metric":"xwOBA","AUC":0.5,"Accuracy":0.5629820051,"TestEdges":1556},{"ScoreType":"aware","Group":"batter","Year":2024,"Metric":"WAR","AUC":0.5,"Accuracy":0.5571979434,"TestEdges":1556}]

@@ -1,6 +1,6 @@
 {
   "pipeline": {
-    "validation": { "aucMode": "legacy" },
+    "validation": { "aucMode": "legacy", "modes": {"edge_block": true, "pa_block": false, "loeo": true} },
     "processing": { "unipartite_metric": "rate" },
     "years": [2025],
     "allow_2020": false,
@@ -14,7 +14,8 @@
     },
     "edges": { "force": true },
     "scrape": { "force": false },
-    "output": {"formats": ["csv"]}
+    "output": {"formats": ["csv"]},
+    "analysis": { "k_sweep": {"enabled": false} }
   },
   "logging": {"level": "INFO", "progress": true}
 }

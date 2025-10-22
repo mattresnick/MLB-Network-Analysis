@@ -46,12 +46,16 @@ def load_config(path: str) -> Dict[str,Any]:
     allow_2020 = bool(pipeline.get('allow_2020', False))
     if not allow_2020 and 2020 in years:
         years = [y for y in years if y != 2020]
-    # Default to frequency-based scoring as primary workflow
-    score_types = pipeline.get('score_types',["frequency"]) or ["frequency"]
+    # Default to aware-based scoring as primary workflow (strict aware-only unless user opts out)
+    score_types = pipeline.get('score_types',["aware"]) or ["aware"]
     score_types = list(dict.fromkeys(score_types))  # preserve order unique
     for st in score_types:
         if st not in ALLOWED_SCORE_TYPES:
             raise ConfigError(f"invalid score_type '{st}'")
+    # Optional strict flag: when true and 'aware' requested, ignore other score types
+    strict_aware_only = bool(pipeline.get('enforce_aware_only', True))
+    if strict_aware_only and ('aware' in score_types):
+        score_types = ['aware']
 
     pitch_types = pipeline.get('pitch_types',[]) if 'pitch_type' in score_types else []
     for pt in pitch_types:
@@ -113,6 +117,16 @@ def load_config(path: str) -> Dict[str,Any]:
     val_opponent_blockout = _bool(extra_val.get('opponent_blockout'), False)
     val_temperature_logloss = _bool(extra_val.get('temperature_logloss'), False)
     val_statcast_logloss = _bool(extra_val.get('statcast_logloss'), False)
+    # Leak-free validation modes (edge_block, pa_block, loeo)
+    modes_raw = validation_cfg.get('modes', {}) or {}
+    if modes_raw and not isinstance(modes_raw, dict):
+        raise ConfigError('validation.modes must be an object when provided')
+    allowed_modes = {'edge_block','pa_block','loeo'}
+    val_modes: Dict[str,bool] = {}
+    for k, v in modes_raw.items():
+        if k not in allowed_modes:
+            raise ConfigError(f"validation.modes contains unknown key '{k}'")
+        val_modes[k] = _bool(v, False)
     # Explicitly gate legacy/baseline metrics; default off
     val_baseline_auc = _bool(extra_val.get('baseline_auc'), False)
     val_only_baseline = _bool(extra_val.get('only_baseline'), False)
@@ -310,6 +324,7 @@ def load_config(path: str) -> Dict[str,Any]:
             'seed': seed,
             'sample_as_train': sample_as_train,
             'index_base': index_base,
+            'modes': val_modes,
             'extra': {
                 'opponent_blockout': val_opponent_blockout,
                 'temperature_logloss': val_temperature_logloss,
@@ -347,6 +362,7 @@ def load_config(path: str) -> Dict[str,Any]:
         'logging': {'level': log_level, 'progress': progress},
     'processing': {'vectorized': vectorized, 'unipartite_metric': unipartite_metric},
         'allow_2020': allow_2020,
+    'enforce_aware_only': strict_aware_only,
         'analysis': {
             'mobility': {'enabled': mobility_enabled},
             'anomalies': {

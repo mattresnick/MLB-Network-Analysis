@@ -1,5 +1,5 @@
 # Output Manifest
-Timestamp: 2025-10-19 03:08:42
+Timestamp: 2025-10-21 21:48:20
 Training Years: 2024
 Score types: frequency
 Groups: batter, pitcher
@@ -30,7 +30,7 @@ Unipartite accumulation: rate
 - summary_top_players: outputs\summary_top_players.csv (exists)
 
 ## Orientation checks
-- frequency:batter:2024: CV orientation=flipped-at-eval (p=0.490, Npos=70262)
-- frequency:pitcher:2024: CV orientation=flipped-at-eval (p=0.488, Npos=132589)
-- frequency:batter:2024->2025: NextYear orientation=flipped-at-eval (p=0.497, Npos=70766)
-- frequency:pitcher:2024->2025: NextYear orientation=flipped-at-eval (p=0.497, Npos=105001)
+- frequency:batter:2024: CV orientation=as-is (p=0.501, Npos=58677)
+- frequency:pitcher:2024: CV orientation=flipped-at-eval (p=0.485, Npos=107161)
+- frequency:batter:2024->2025: NextYear orientation=flipped-at-eval (p=0.500, Npos=44278)
+- frequency:pitcher:2024->2025: NextYear orientation=flipped-at-eval (p=0.495, Npos=74896)

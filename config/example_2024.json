@@ -4,6 +4,8 @@
       "aucMode": "balanced-negatives",
       "negatives_per_positive": 1,
       "auto_flip": true,
+  "modes": {"edge_block": true, "pa_block": true, "loeo": true},
+  "folds": {"edge_block": 5, "pa_block": 10, "oppblock": 10},
       "extra": {
         "opponent_blockout": true,
         "temperature_logloss": true,
@@ -15,18 +17,31 @@
     "years": [2024],
     "allow_2020": false,
     "dry_run": false,
-    "score_types": ["frequency"],
+    "score_types": ["aware"],
     "validation_folds": 5,
-    "ranking": {"top_n": 25, "scale_ranks": true, "output_levels": true},
+    "ranking": {
+      "top_n": 25,
+      "scale_ranks": true,
+      "output_levels": true,
+      "aware_lambda": 1.0,
+      "aware_harmonic": true,
+      "aware_shrink": true,
+      "aware_shrink_mode": "se_based",
+      "aware_shrink_k": 150,
+      "aware_shrink_k_batter": 150,
+      "aware_shrink_k_pitcher": 350,
+      "aware_use_covariates": true,
+      "aware_covariates_basic": false
+    },
     "paths": {
       "raw_data_dir": "At Bats/general_data",
-      "output_dir": "outputs"
+  "output_dir": "outputs_aware_full"
     },
     "analysis": {
       "rank_correlation": {"enabled": true, "pairs": "adjacent"},
       "ops_correlation": {"enabled": true},
-  "iterative_rank_weighted": {"enabled": true, "passes": 2, "metric": "sum", "evaluate_auc": true},
-  "next_year_validation": {"enabled": true}
+      "next_year_validation": {"enabled": true},
+      "k_sweep": {"enabled": false}
     },
     "output": {"formats": ["csv"]}
   },

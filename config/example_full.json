@@ -1,6 +1,6 @@
 {
   "pipeline": {
-  "validation": { "aucMode": "legacy" },
+  "validation": { "aucMode": "legacy", "modes": {"edge_block": true, "pa_block": false, "loeo": true} },
     "years": {"start": 2024, "end": 2025},
     "allow_2020": false,
     "dry_run": false,
@@ -25,7 +25,8 @@
       "include_rank_tables": true,
       "include_scaled_rank_tables": true
       },
-      "caching": {"enabled": true, "manifest": "outputs/manifest.json"}
+      "caching": {"enabled": true, "manifest": "outputs/manifest.json"},
+      "analysis": {"k_sweep": {"enabled": false}}
   },
   "logging": {"level": "INFO", "progress": true}
 }

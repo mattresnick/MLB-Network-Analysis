@@ -1,3 +1,0 @@
-ScoreType,Group,Condition,Year,Folds,Accuracy,AUC,TestEdges
-aware,batter,,2024,2,0.6978618929030795,0.5990551057904967,511574
-aware,pitcher,,2024,2,0.6953789870920507,0.5905405424100938,424777

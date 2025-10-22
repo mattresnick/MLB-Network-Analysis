@@ -40,7 +40,9 @@ except Exception:
 # (Potential improvement: refactor Rankings.py into functions and import.)
 
 ALLOWED_PITCH_TYPES = ["CH","CU","FC","FF","FS","FT","SI","SL"]
-LOGIT_075 = math.log(3.0)
+# ELO-like tiers: target win probability for a one-tier difference
+P_TARGET = 0.68
+LOGIT_P = math.log(P_TARGET / (1.0 - P_TARGET))  # ≈ 0.754
 
 # ------------------------- Aware scoring (new score_type) ------------------------- #
 def _detect_bool(v: Any) -> bool:
@@ -1877,6 +1879,7 @@ def _compute_acc_auc(
     auto_flip: bool = False,
     acc_mode: str = "positives",
     seed: Optional[int] = None,
+    neg_candidates_by_u: Optional[Dict[str, set]] = None,
 ) -> Optional[Tuple[float, float, int]]:
     """Compute ACC/AUC against held-out directed edges using rank differences.
 
@@ -1974,7 +1977,13 @@ def _compute_acc_auc(
         acc_obs.append(1)
         auc_scores.append(dv); auc_labels.append(1)
         if k_neg > 0 and len(all_nodes) > 1:
-            base_cand = all_nodes.difference({u})
+            # Candidate negatives: optionally restrict to provided test-node set per u
+            if neg_candidates_by_u is not None and u in neg_candidates_by_u:
+                base_cand = set(neg_candidates_by_u.get(u, set()))
+                # ensure u and the positive v aren't included
+                base_cand.discard(u)
+            else:
+                base_cand = all_nodes.difference({u})
             ban = test_pos_by_u.get(u, set())
             cand_set = base_cand.difference(ban)
             if v in cand_set:
@@ -2143,8 +2152,10 @@ def _write_multi_upsert_by_keys(df_new: pd.DataFrame, base_path: str, formats: L
             except Exception:
                 df_old = None
         if df_old is not None and not df_old.empty:
-            # Ensure common columns; keep all columns from both, fill missing
-            cols = list({*df_old.columns.tolist(), *df_new.columns.tolist()})
+            # Ensure common columns; preserve df_new column order first, then append any extra columns from df_old
+            new_cols = df_new.columns.tolist()
+            extra_old = [c for c in df_old.columns.tolist() if c not in new_cols]
+            cols = new_cols + extra_old
             df_old2 = df_old.reindex(columns=cols)
             df_new2 = df_new.reindex(columns=cols)
             merged = pd.concat([df_old2, df_new2], ignore_index=True)
@@ -2184,9 +2195,25 @@ def _compute_year_to_year_rank_validation(base_ranks: Dict[str, Dict[str, Dict[i
                 sr1 = (((base_ranks or {}).get(score_type, {}) or {}).get(group, {}) or {}).get(y1)
                 if not sr0 or not sr1:
                     continue
-                # Build ordinal position maps (1 = best)
-                ord0 = {p: (idx+1) for idx, (p, _s) in enumerate(sr0)}
-                ord1 = {p: (idx+1) for idx, (p, _s) in enumerate(sr1)}
+                # Build tie-aware dense ordinal ranks (1,2,2,3...) based on score equality
+                def _dense_ord_map(pairs: List[List[Any]]) -> Dict[str, int]:
+                    # pairs: [(player, score), ...] sorted best->worst
+                    # Rank is assigned per distinct score value; equal scores share rank; no skips.
+                    ranks = {}
+                    last_val = None
+                    current_rank = 0
+                    for name, val in pairs:
+                        try:
+                            v = float(val)
+                        except Exception:
+                            v = val
+                        if (last_val is None) or (v != last_val):
+                            current_rank += 1
+                            last_val = v
+                        ranks[str(name)] = current_rank
+                    return ranks
+                ord0 = _dense_ord_map(sr0)
+                ord1 = _dense_ord_map(sr1)
                 common = sorted(set(ord0.keys()) & set(ord1.keys()))
                 if not common:
                     continue
@@ -2224,11 +2251,12 @@ def _compute_year_to_year_rank_validation(base_ranks: Dict[str, Dict[str, Dict[i
                     sr1 = (((base_ranks or {}).get(score_type, {}) or {}).get(_g, {}) or {}).get(int(y1))
                     if not sr0 or not sr1:
                         diffs_mean.append(None); diffs_std.append(None); continue
-                    ord0 = {p: (idx+1) for idx, (p, _s) in enumerate(sr0)}
-                    ord1 = {p: (idx+1) for idx, (p, _s) in enumerate(sr1)}
+                    ord0 = _dense_ord_map(sr0)
+                    ord1 = _dense_ord_map(sr1)
                     common = sorted(set(ord0.keys()) & set(ord1.keys()))
                     if not common:
                         diffs_mean.append(None); diffs_std.append(None); continue
+                    # Ordinal rank differences only
                     arr = np.array([float(ord1[p] - ord0[p]) for p in common], dtype=float)
                     diffs_mean.append(float(np.mean(arr)))
                     diffs_std.append(float(np.std(arr)))
@@ -2629,6 +2657,47 @@ def _run_k_sweep_section(cfg: Dict[str, Any], output_dir: str, formats: List[str
                                             se_done.add(key)
                                 except Exception:
                                     pass
+                                # Per-fold statcast metric logloss/Brier (edge_block) for aware baseline metrics
+                                if do_baseline and (stats_df is not None) and metrics:
+                                    try:
+                                        def _norm_name2(s: Any) -> str:
+                                            import unicodedata as _ud
+                                            t = str(s) if not pd.isna(s) else ''
+                                            t = t.strip(); t = _ud.normalize('NFKD', t)
+                                            t = ''.join(c for c in t if not _ud.combining(c))
+                                            return ' '.join(t.split()).lower()
+                                        s = stats_df.copy(); name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                        if name_col is not None:
+                                            s['k'] = s[name_col].apply(_norm_name2)
+                                            for (mcol, direction) in metrics:
+                                                try:
+                                                    smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                                except Exception:
+                                                    continue
+                                                # Train scores
+                                                tr_scores: List[float] = []; tr_labels2: List[int] = []
+                                                for (u0, v0, w0) in train_sub.itertuples(index=False, name=None):
+                                                    ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                    if ku in smap and kv in smap:
+                                                        tr_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                        tr_labels2.append(1 if (w0>0) else 0)
+                                                # Test scores
+                                                te_scores: List[float] = []; te_labels2: List[int] = []
+                                                for (u1, v1, w1) in test_sub.itertuples(index=False, name=None):
+                                                    ku = _norm_name2(u1); kv = _norm_name2(v1)
+                                                    if ku in smap and kv in smap:
+                                                        te_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                        te_labels2.append(1 if (w1>0) else 0)
+                                                if tr_scores and te_scores:
+                                                    d_tr = np.array(tr_scores, dtype=float)
+                                                    l_tr = np.array(tr_labels2, dtype=int)
+                                                    beta_m = _fit_temperature_beta(d_tr, l_tr)
+                                                    d_te = np.array(te_scores, dtype=float)
+                                                    l_te = np.array(te_labels2, dtype=int)
+                                                    ll_m, br_m = _logloss_brier_from_diffs(d_te, l_te, beta_m)
+                                                    metric_logloss_accum.setdefault(('aware', group, 'edge_block', y, mcol), []).append((float(beta_m), float(ll_m), float(br_m), int(len(te_scores))))
+                                    except Exception:
+                                        pass
                         except Exception as _ks_e:
                             try:
                                 if progress:
@@ -3041,6 +3110,7 @@ def run_pipeline(cfg: Dict[str,Any]):
     orientation_notes: List[str] = []
     # Collectors for calibrated scaling (ELO-like tiers) per season/role
     calib_betas: Dict[Tuple[str,int], List[float]] = {}
+    calib_uses_train_only: Dict[Tuple[str,int], bool] = {}
     full_raw_map: Dict[Tuple[str,int], Dict[str, Any]] = {}
 
     if progress: print(f"[pipeline] Years: {years} (dry_run={dry_run})")
@@ -3058,6 +3128,12 @@ def run_pipeline(cfg: Dict[str,Any]):
         if progress: print("[scrape] skip requested in config -> will reuse existing raw at-bat data if present")
 
     score_types = cfg['score_types']
+    # Enforce aware-only if requested (belt-and-suspenders alongside loader)
+    try:
+        if bool(cfg.get('enforce_aware_only', False)) and ('aware' in score_types):
+            score_types = ['aware']
+    except Exception:
+        pass
     pitch_types = cfg.get('pitch_types') or []
     innings = cfg.get('innings') or []
     stand_filter = cfg['filters'].get('stand') if 'filters' in cfg else None
@@ -3231,6 +3307,8 @@ def run_pipeline(cfg: Dict[str,Any]):
     auc_rows = []  # ScoreType, Group, Condition, Year, Folds, ACC, AUC, TestEdges
     logloss_rows: List[List[Any]] = []  # ScoreType, Group, Condition, Year, Beta, LogLoss, Brier, TestEdges, Source
     baseline_auc_rows: List[List[Any]] = []  # ScoreType, Group, Year, Metric, AUC, Accuracy, TestEdges
+    # New: per-mode baseline AUC/ACC rows with Condition (edge_block, pa_block, loeo, oppblock)
+    baseline_auc_mode_rows: List[List[Any]] = []  # ScoreType, Group, Condition, Year, Metric, AUC, Accuracy, TestEdges
     base_ranks: Dict[str, Dict[str, Dict[int, List[List[Any]]]]] = {}
     for st in score_types:
         for group in ['batter','pitcher']:
@@ -3541,24 +3619,30 @@ def run_pipeline(cfg: Dict[str,Any]):
                         # Flush pre-oppblock rows immediately in cached path to ensure they appear even if later steps are long
                         try:
                             if auc_rows:
-                                _write_multi_upsert_by_keys(
-                                    pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges']),
-                                    os.path.join(output_dir,'validation_auc'),
-                                    formats,
-                                    key_cols=['ScoreType','Group','Condition','Year','Folds']
-                                )
+                                _df_pre = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
+                                _df_pre = _df_pre[_df_pre['Condition'].isin(['edge_block','pa_block','loeo','oppblock'])]
+                                if not _df_pre.empty:
+                                    _write_multi_upsert_by_keys(
+                                        _df_pre,
+                                        os.path.join(output_dir,'validation_auc'),
+                                        ['csv'],
+                                        key_cols=['ScoreType','Group','Condition','Year','Folds']
+                                    )
                             if logloss_rows:
-                                _write_multi_upsert_by_keys(
-                                    pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source']),
-                                    os.path.join(output_dir,'validation_logloss'),
-                                    formats,
-                                    key_cols=['ScoreType','Group','Condition','Year','Source']
-                                )
+                                _ll_pre = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
+                                _ll_pre = _ll_pre[_ll_pre['Condition'].isin(['edge_block','pa_block','loeo','oppblock'])]
+                                if not _ll_pre.empty:
+                                    _write_multi_upsert_by_keys(
+                                        _ll_pre,
+                                        os.path.join(output_dir,'validation_logloss'),
+                                        ['csv'],
+                                        key_cols=['ScoreType','Group','Condition','Year','Source']
+                                    )
                             if baseline_auc_rows:
                                 _write_multi_upsert_by_keys(
                                     pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges']),
                                     os.path.join(output_dir,'validation_baseline_auc'),
-                                    formats,
+                                    ['csv'],
                                     key_cols=['ScoreType','Group','Year','Metric']
                                 )
                         except Exception:
@@ -3662,11 +3746,11 @@ def run_pipeline(cfg: Dict[str,Any]):
                                                         if alias != 'K/9':
                                                             try: stats_df = stats_df.rename(columns={alias: 'K/9'})
                                                             except Exception: pass
-                                                        metrics.append(('K/9', +1)); k9_found = True; break
+                                                        metrics.append(('K/9', -1)); k9_found = True; break
                                                 if not k9_found and all(c in stats_df.columns for c in ['SO','IP']):
                                                     try:
                                                         tmp2 = stats_df.copy(); tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
-                                                        if not tmp2['K/9'].isna().all(): stats_df = tmp2; metrics.append(('K/9', +1))
+                                                        if not tmp2['K/9'].isna().all(): stats_df = tmp2; metrics.append(('K/9', -1))
                                                     except Exception: pass
                                     except Exception:
                                         stats_df = None
@@ -3972,7 +4056,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                                                             stats_df = stats_df.rename(columns={alias: 'K/9'})
                                                         except Exception:
                                                             pass
-                                                    metrics.append(('K/9', +1))
+                                                    metrics.append(('K/9', -1))
                                                     k9_found = True
                                                     break
                                             # If K/9 still not present but we have SO and IP, compute it
@@ -3982,7 +4066,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                                                     tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
                                                     if not tmp2['K/9'].isna().all():
                                                         stats_df = tmp2
-                                                        metrics.append(('K/9', +1))
+                                                        metrics.append(('K/9', -1))
                                                 except Exception:
                                                     pass
                                 except Exception:
@@ -4007,24 +4091,28 @@ def run_pipeline(cfg: Dict[str,Any]):
         val_cfg_tmp = cfg.get('validation', {})
         extra_tmp = val_cfg_tmp.get('extra', {}) if isinstance(val_cfg_tmp, dict) else {}
         only_baseline = bool(extra_tmp.get('only_baseline', False))
+        allowed_conditions = {'edge_block','pa_block','loeo','oppblock'}
         if (not only_baseline) and auc_rows:
-            auc_df = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
-            # CSV-only
-            _write_multi(auc_df, os.path.join(output_dir,'validation_auc'), ['csv'])
-            if progress: print('[pipeline] validation_auc (pre-oppblock) written')
+            _df_pre = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
+            _df_pre = _df_pre[_df_pre['Condition'].isin(list(allowed_conditions))]
+            if not _df_pre.empty:
+                _write_multi(_df_pre, os.path.join(output_dir,'validation_auc'), ['csv'])
+                if progress: print('[pipeline] validation_auc (pre-oppblock) written')
         if (not only_baseline) and logloss_rows:
-            ll_df = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
-            _write_multi(ll_df, os.path.join(output_dir,'validation_logloss'), ['csv'])
-            if progress: print('[pipeline] validation_logloss (pre-oppblock) written')
-        if baseline_auc_rows:
-            ba_df = pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges'])
-            _write_multi(ba_df, os.path.join(output_dir,'validation_baseline_auc'), ['csv'])
-            if progress: print('[pipeline] validation_baseline_auc (pre-oppblock) written')
+            _ll_pre = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
+            _ll_pre = _ll_pre[_ll_pre['Condition'].isin(list(allowed_conditions))]
+            if not _ll_pre.empty:
+                _write_multi(_ll_pre, os.path.join(output_dir,'validation_logloss'), ['csv'])
+                if progress: print('[pipeline] validation_logloss (pre-oppblock) written')
+        # Skip writing legacy baseline_auc without Condition; we'll write per-mode baseline later
     except Exception:
         pass
 
     # Opponent-blockout cross-validation: split by opponents during unipartite creation
     oppblock_accums: Dict[Tuple[str,str,int], List[Tuple[float,float,int]]] = {}
+    # Accumulators for logloss/Brier to aggregate per (ScoreType, Group, Condition, Year)
+    rank_logloss_accum: Dict[Tuple[str,str,str,int], List[Tuple[float,float,float,int]]] = {}
+    metric_logloss_accum: Dict[Tuple[str,str,str,int,str], List[Tuple[float,float,float,int]]] = {}
     try:
         val_cfg_top = cfg.get('validation', {})
         extra_val = val_cfg_top.get('extra', {}) if isinstance(val_cfg_top, dict) else {}
@@ -4036,7 +4124,12 @@ def run_pipeline(cfg: Dict[str,Any]):
         except Exception:
             pass
         if extra_val and bool(extra_val.get('opponent_blockout', False)):
-            cv = cfg.get('validation_folds', 0)
+            # Allow per-mode fold override
+            try:
+                folds_map = (cfg.get('validation', {}) or {}).get('folds', {}) or {}
+            except Exception:
+                folds_map = {}
+            cv = int(folds_map.get('oppblock', cfg.get('validation_folds', 0) or 0))
             if cv and cv > 0:
                 rng = np.random.RandomState(val_cfg_top.get('seed')) if val_cfg_top.get('seed') is not None else np.random
                 metric = cfg.get('processing',{}).get('unipartite_metric','sum')
@@ -4184,18 +4277,866 @@ def run_pipeline(cfg: Dict[str,Any]):
                                             # Collect for calibrated scaling per (group,year)
                                             if st == 'aware':
                                                 calib_betas.setdefault((group, y), []).append(float(beta_cv))
+                                                calib_uses_train_only[(group, y)] = True
                                             ll_cv, br_cv = _logloss_brier_from_diffs(_np.array(te_diffs, dtype=float), _np.array(te_labels, dtype=int), beta_cv)
-                                            logloss_rows.append([st, group, 'oppblock', y, beta_cv, ll_cv, br_cv, len(te_diffs), 'rank'])
+                                            rank_logloss_accum.setdefault((st, group, 'oppblock', y), []).append((float(beta_cv), float(ll_cv), float(br_cv), int(len(te_diffs))))
                                     except Exception:
                                         pass
     except Exception:
         pass
 
+    # Leak-free validation schemes: EDGE-BLOCK, PA-BLOCK, and LOEO
+    try:
+        val_cfg_modes = (cfg.get('validation', {}) or {}).get('modes', {}) or {}
+        cv = int(cfg.get('validation_folds', 0) or 0)
+        # Allow per-mode fold overrides via validation.folds in config
+        try:
+            folds_map = (cfg.get('validation', {}) or {}).get('folds', {}) or {}
+        except Exception:
+            folds_map = {}
+        if val_cfg_modes and cv > 0:
+            # Helper: compute results with negatives restricted to test nodes
+            def _acc_auc_on_test_nodes(sorted_rt: List[List[Any]], test_edges: List[Tuple[str,str,float]], *, seed: Optional[int] = None) -> Optional[Tuple[float,float,int]]:
+                # Build per-u candidate set = all nodes seen in test set for u
+                nodes_by_u: Dict[str, set] = {}
+                nodes_all: set = set()
+                for (u, v, _w) in test_edges:
+                    u = str(u); v = str(v)
+                    nodes_all.add(u); nodes_all.add(v)
+                    nodes_by_u.setdefault(u, set()).add(v)
+                # Allow any node in the test batch as a negative candidate (excluding positives)
+                neg_cands = {u: set(nodes_all) for u in nodes_by_u.keys()}
+                # Remove self from candidates
+                for u in list(neg_cands.keys()):
+                    neg_cands[u].discard(u)
+                return _compute_acc_auc(
+                    sorted_rt,
+                    test_edges,
+                    auc_mode=str(cfg.get('validation', {}).get('aucMode','balanced-negatives')),
+                    k_neg=int(cfg.get('validation', {}).get('negatives_per_positive', 1)),
+                    auto_flip=bool(cfg.get('validation', {}).get('auto_flip', False)),
+                    seed=seed,
+                    neg_candidates_by_u=neg_cands,
+                )
+            # Common: ensure structured aware solver is used where applicable
+            aware_lambda = float(cfg.get('ranking', {}).get('aware_lambda', 1.0))
+            aware_harm = bool(cfg.get('ranking', {}).get('aware_harmonic', True))
+            # EDGE-BLOCK: K-fold over unipartite edges, build TRAIN-only artifacts, eval on TEST edges
+            if bool(val_cfg_modes.get('edge_block', False)):
+                for st in [s for s in score_types if s in ('aware','handmade','frequency')]:
+                    for group in ['batter','pitcher']:
+                        for y in years:
+                            # Load unipartite edges for this st/group/year
+                            if st == 'aware':
+                                edge_path = os.path.join('At Bats', f'{group}_data','aware_scores', f"{y}_{group}_edges.csv")
+                            elif st == 'handmade':
+                                edge_path = os.path.join('At Bats', f'{group}_data','handmade_scores', f"{y}_{group}_edges.csv")
+                            elif st == 'frequency':
+                                edge_path = os.path.join('At Bats', f'{group}_data','frequency_scores', f"{y}_{group}_edges.csv")
+                            else:
+                                continue
+                            if not os.path.isfile(edge_path):
+                                continue
+                            df_edges = pd.read_csv(edge_path)
+                            if df_edges is None or df_edges.empty or not {'winner','loser','score'}.issubset(df_edges.columns):
+                                continue
+                            # Build K folds over uniform random partitioning of rows
+                            nrows = len(df_edges)
+                            cv_edge = int(folds_map.get('edge_block', cv) or 0)
+                            if nrows < cv_edge or cv_edge <= 0:
+                                continue
+                            idx = np.arange(nrows)
+                            rng_local = np.random.RandomState(cfg.get('validation', {}).get('seed')) if cfg.get('validation', {}).get('seed') is not None else np.random
+                            rng_local.shuffle(idx)
+                            fold_sizes = [nrows//cv_edge + (1 if i < (nrows % cv_edge) else 0) for i in range(cv_edge)]
+                            pos = 0
+                            folds = []
+                            for fs in fold_sizes:
+                                folds.append(idx[pos:pos+fs])
+                                pos += fs
+                            accs: List[float] = []; aucs: List[float] = []; used_tot = 0
+                            # Optional baseline metrics per batch for aware only
+                            do_baseline = False; stats_df = None; metrics: List[Tuple[str,int]] = []
+                            try:
+                                v_extra0 = (cfg.get('validation', {}) or {}).get('extra', {}) or {}
+                                do_baseline = (st == 'aware') and bool(v_extra0.get('baseline_auc', False))
+                                if do_baseline:
+                                    import importlib as _il
+                                    _pb = _il.import_module('pybaseball')
+                                    if group=='batter':
+                                        try:
+                                            stats_df = _pb.batting_stats(y, qual=0)
+                                        except TypeError:
+                                            stats_df = _pb.batting_stats(y)
+                                        for m, d in [('OPS', +1), ('xwOBA', +1), ('WAR', +1), ('xWAR', +1)]:
+                                            if stats_df is not None and m in stats_df.columns:
+                                                metrics.append((m, d))
+                                    else:
+                                        try:
+                                            stats_df = _pb.pitching_stats(y, qual=0)
+                                        except TypeError:
+                                            stats_df = _pb.pitching_stats(y)
+                                        if stats_df is not None:
+                                            if 'WHIP' in stats_df.columns:
+                                                metrics.append(('WHIP', -1))
+                                            else:
+                                                if all(c in stats_df.columns for c in ['BB','H','IP']):
+                                                    try:
+                                                        tmp = stats_df.copy(); tmp['WHIP'] = (tmp['BB'].astype(float)+tmp['H'].astype(float))/tmp['IP'].replace({0: np.nan}).astype(float)
+                                                        if not tmp['WHIP'].isna().all(): stats_df = tmp; metrics.append(('WHIP', -1))
+                                                    except Exception: pass
+                                            if 'xFIP' in stats_df.columns: metrics.append(('xFIP', -1))
+                                            if 'ERA+' in stats_df.columns:
+                                                try: stats_df['ERA+'] = pd.to_numeric(stats_df['ERA+'], errors='coerce').replace([np.inf, -np.inf], np.nan)
+                                                except Exception: pass
+                                                metrics.append(('ERA+', +1))
+                                            if 'FIP' in stats_df.columns: metrics.append(('FIP', -1))
+                                            if 'xERA' in stats_df.columns: metrics.append(('xERA', -1))
+                                            elif 'ERA' in stats_df.columns: metrics.append(('ERA', -1))
+                                            k9_aliases = ['K/9','SO9','SO/9','K9']
+                                            k9_found = False
+                                            for alias in k9_aliases:
+                                                if alias in stats_df.columns:
+                                                    if alias != 'K/9':
+                                                        try: stats_df = stats_df.rename(columns={alias: 'K/9'})
+                                                        except Exception: pass
+                                                    metrics.append(('K/9', -1)); k9_found = True; break
+                                            if (not k9_found) and all(c in stats_df.columns for c in ['SO','IP']):
+                                                try:
+                                                    tmp2 = stats_df.copy(); tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
+                                                    if not tmp2['K/9'].isna().all(): stats_df = tmp2; metrics.append(('K/9', -1))
+                                                except Exception: pass
+                            except Exception:
+                                do_baseline = False; stats_df = None; metrics = []
+                            aucs_by_metric: Dict[str, List[float]] = {}; acc_by_metric: Dict[str, List[float]] = {}
+                            # Optional: baseline metrics per fold for aware only
+                            do_baseline = False; stats_df = None; metrics: List[Tuple[str,int]] = []
+                            try:
+                                v_extra0 = (cfg.get('validation', {}) or {}).get('extra', {}) or {}
+                                do_baseline = (st == 'aware') and bool(v_extra0.get('baseline_auc', False))
+                                if do_baseline:
+                                    import importlib as _il
+                                    _pb = _il.import_module('pybaseball')
+                                    if group=='batter':
+                                        try:
+                                            stats_df = _pb.batting_stats(y, qual=0)
+                                        except TypeError:
+                                            stats_df = _pb.batting_stats(y)
+                                        for m, d in [('OPS', +1), ('xwOBA', +1), ('WAR', +1), ('xWAR', +1)]:
+                                            if stats_df is not None and m in stats_df.columns:
+                                                metrics.append((m, d))
+                                    else:
+                                        try:
+                                            stats_df = _pb.pitching_stats(y, qual=0)
+                                        except TypeError:
+                                            stats_df = _pb.pitching_stats(y)
+                                        if stats_df is not None:
+                                            if 'WHIP' in stats_df.columns:
+                                                metrics.append(('WHIP', -1))
+                                            else:
+                                                if all(c in stats_df.columns for c in ['BB','H','IP']):
+                                                    try:
+                                                        tmp = stats_df.copy(); tmp['WHIP'] = (tmp['BB'].astype(float)+tmp['H'].astype(float))/tmp['IP'].replace({0: np.nan}).astype(float)
+                                                        if not tmp['WHIP'].isna().all(): stats_df = tmp; metrics.append(('WHIP', -1))
+                                                    except Exception: pass
+                                            if 'xFIP' in stats_df.columns: metrics.append(('xFIP', -1))
+                                            if 'ERA+' in stats_df.columns:
+                                                try: stats_df['ERA+'] = pd.to_numeric(stats_df['ERA+'], errors='coerce').replace([np.inf, -np.inf], np.nan)
+                                                except Exception: pass
+                                                metrics.append(('ERA+', +1))
+                                            if 'FIP' in stats_df.columns: metrics.append(('FIP', -1))
+                                            if 'xERA' in stats_df.columns: metrics.append(('xERA', -1))
+                                            elif 'ERA' in stats_df.columns: metrics.append(('ERA', -1))
+                                            # K/9
+                                            k9_aliases = ['K/9','SO9','SO/9','K9']
+                                            k9_found = False
+                                            for alias in k9_aliases:
+                                                if alias in stats_df.columns:
+                                                    if alias != 'K/9':
+                                                        try: stats_df = stats_df.rename(columns={alias: 'K/9'})
+                                                        except Exception: pass
+                                                    metrics.append(('K/9', -1)); k9_found = True; break
+                                            if (not k9_found) and all(c in stats_df.columns for c in ['SO','IP']):
+                                                try:
+                                                    tmp2 = stats_df.copy(); tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
+                                                    if not tmp2['K/9'].isna().all(): stats_df = tmp2; metrics.append(('K/9', -1))
+                                                except Exception: pass
+                            except Exception:
+                                do_baseline = False; stats_df = None; metrics = []
+                            aucs_by_metric: Dict[str, List[float]] = {}; acc_by_metric: Dict[str, List[float]] = {}
+                            for k in range(cv_edge):
+                                test_idx = set(folds[k].tolist())
+                                train_sub = df_edges.loc[~df_edges.index.isin(test_idx), ['winner','loser','score']]
+                                test_sub = df_edges.loc[df_edges.index.isin(test_idx), ['winner','loser','score']]
+                                if train_sub.empty or test_sub.empty:
+                                    continue
+                                # TRAIN artifacts: build graph and ranks
+                                Gt = nx.DiGraph()
+                                Gt.add_weighted_edges_from(train_sub.itertuples(index=False, name=None))
+                                node_list_t = list(Gt.nodes())
+                                if not node_list_t:
+                                    continue
+                                try:
+                                    import scipy.sparse as sp
+                                    At = nx.to_scipy_sparse_array(Gt, dtype=float, nodelist=node_list_t)
+                                    At = sp.csr_matrix(At)
+                                except Exception:
+                                    At = nx.to_numpy_array(Gt, dtype=float, nodelist=node_list_t)
+                                if st == 'aware':
+                                    # Load R for TRAIN only: we use the precomputed per-year R map (train/test split only impacts edges)
+                                    R_map_cv: Dict[str, float] = {}
+                                    try:
+                                        R_path = os.path.join('At Bats', f'{group}_data','aware_scores', f"{y}_R.csv")
+                                        if os.path.isfile(R_path):
+                                            R_df = pd.read_csv(R_path)
+                                            if 'Player' not in R_df.columns and 'winner' in R_df.columns:
+                                                R_df = R_df.rename(columns={'winner':'Player'})
+                                            if {'Player','R'}.issubset(R_df.columns):
+                                                R_map_cv = {str(n): float(r) for n, r in R_df[['Player','R']].dropna().itertuples(index=False, name=None)}
+                                    except Exception:
+                                        R_map_cv = {}
+                                    _, sorted_rt = aware_rank_with_tether(At, node_list_t, R_map_cv, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                                else:
+                                    _, sorted_rt = spring_rank(At, node_list_t)
+                                # TEST edges
+                                test_edges = list(test_sub.itertuples(index=False, name=None))
+                                # Negatives restricted to test node set
+                                res = _acc_auc_on_test_nodes(sorted_rt, test_edges, seed=cfg.get('validation', {}).get('seed'))
+                                if res:
+                                    a, u, used = res
+                                    accs.append(float(a)); aucs.append(float(u)); used_tot += int(used)
+                                # Baseline per batch on test edges
+                                if do_baseline and (stats_df is not None) and metrics:
+                                    try:
+                                        def _norm_name2(s: Any) -> str:
+                                            import unicodedata as _ud
+                                            t = str(s) if not pd.isna(s) else ''
+                                            t = t.strip(); t = _ud.normalize('NFKD', t)
+                                            t = ''.join(c for c in t if not _ud.combining(c))
+                                            return ' '.join(t.split()).lower()
+                                        s = stats_df.copy(); name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                        if name_col is not None:
+                                            s['k'] = s[name_col].apply(_norm_name2)
+                                            for (mcol, direction) in metrics:
+                                                try:
+                                                    smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                                except Exception:
+                                                    continue
+                                                scores: List[float] = []; labels2: List[int] = []
+                                                for (u0,v0,w0) in test_edges:
+                                                    ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                    if ku in smap and kv in smap:
+                                                        diff = (smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0)
+                                                        scores.append(float(diff)); labels2.append(1 if (w0>0) else 0)
+                                                if scores:
+                                                    try:
+                                                        auc_b = _roc_auc_fast(np.array(labels2, dtype=int), np.array(scores, dtype=float))
+                                                    except Exception:
+                                                        auc_b = 0.5
+                                                    acc_b = float(np.mean((np.array(scores) > 0).astype(int) == np.array(labels2)))
+                                                    aucs_by_metric.setdefault(mcol, []).append(float(auc_b))
+                                                    acc_by_metric.setdefault(mcol, []).append(float(acc_b))
+                                    except Exception:
+                                        pass
+                                # Baseline per fold on test edges
+                                if do_baseline and (stats_df is not None) and metrics:
+                                    try:
+                                        def _norm_name2(s: Any) -> str:
+                                            import unicodedata as _ud
+                                            t = str(s) if not pd.isna(s) else ''
+                                            t = t.strip(); t = _ud.normalize('NFKD', t)
+                                            t = ''.join(c for c in t if not _ud.combining(c))
+                                            return ' '.join(t.split()).lower()
+                                        s = stats_df.copy(); name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                        if name_col is None:
+                                            raise Exception('no name col')
+                                        s['k'] = s[name_col].apply(_norm_name2)
+                                        test_edges_stats = test_edges
+                                        for (mcol, direction) in metrics:
+                                            try:
+                                                smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                            except Exception:
+                                                continue
+                                            scores: List[float] = []; labels2: List[int] = []
+                                            for (u0,v0,w0) in test_edges_stats:
+                                                ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                if ku in smap and kv in smap:
+                                                    diff = (smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0)
+                                                    scores.append(float(diff)); labels2.append(1 if (w0>0) else 0)
+                                            if scores:
+                                                try:
+                                                    auc_b = _roc_auc_fast(np.array(labels2, dtype=int), np.array(scores, dtype=float))
+                                                except Exception:
+                                                    auc_b = 0.5
+                                                acc_b = float(np.mean((np.array(scores) > 0).astype(int) == np.array(labels2)))
+                                                aucs_by_metric.setdefault(mcol, []).append(float(auc_b))
+                                                acc_by_metric.setdefault(mcol, []).append(float(acc_b))
+                                    except Exception:
+                                        pass
+                                # Train-calibrated logloss/Brier on symmetric pairs (rank)
+                                try:
+                                    rmap = {n: s for n, s in sorted_rt}
+                                    tr_diffs: list[float] = []
+                                    tr_labels: list[int] = []
+                                    for (u0, v0, _w0) in train_sub.itertuples(index=False, name=None):
+                                        if (u0 in rmap) and (v0 in rmap):
+                                            duv = float(rmap[str(u0)] - rmap[str(v0)])
+                                            tr_diffs.extend([duv, -duv])
+                                            tr_labels.extend([1, 0])
+                                    te_diffs: list[float] = []
+                                    te_labels: list[int] = []
+                                    for (u1, v1, _w1) in test_sub.itertuples(index=False, name=None):
+                                        if (u1 in rmap) and (v1 in rmap):
+                                            duv = float(rmap[str(u1)] - rmap[str(v1)])
+                                            te_diffs.extend([duv, -duv])
+                                            te_labels.extend([1, 0])
+                                    if tr_diffs and te_diffs:
+                                        d_tr = np.array(tr_diffs, dtype=float)
+                                        l_tr = np.array(tr_labels, dtype=int)
+                                        beta_cv = _fit_temperature_beta(d_tr, l_tr)
+                                        d_te = np.array(te_diffs, dtype=float)
+                                        l_te = np.array(te_labels, dtype=int)
+                                        ll_cv, br_cv = _logloss_brier_from_diffs(d_te, l_te, beta_cv)
+                                        if st == 'aware':
+                                            rank_logloss_accum.setdefault(('aware', group, 'edge_block', y), []).append((float(beta_cv), float(ll_cv), float(br_cv), int(len(te_diffs))))
+                                except Exception:
+                                    pass
+                                # Train-calibrated logloss/Brier for baseline stat metrics (edge_block)
+                                try:
+                                    if st == 'aware' and do_baseline and (stats_df is not None) and metrics:
+                                        # Name normalizer shared with baseline AUC above
+                                        def _norm_name2(s: Any) -> str:
+                                            import unicodedata as _ud
+                                            t = str(s) if not pd.isna(s) else ''
+                                            t = t.strip(); t = _ud.normalize('NFKD', t)
+                                            t = ''.join(c for c in t if not _ud.combining(c))
+                                            return ' '.join(t.split()).lower()
+                                        s = stats_df.copy()
+                                        name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                        if name_col is not None:
+                                            s['k'] = s[name_col].apply(_norm_name2)
+                                            for (mcol, direction) in metrics:
+                                                try:
+                                                    smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                                except Exception:
+                                                    continue
+                                                # Train scores from TRAIN edges
+                                                tr_scores: List[float] = []; tr_labels2: List[int] = []
+                                                for (u0, v0, w0) in train_sub.itertuples(index=False, name=None):
+                                                    ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                    if ku in smap and kv in smap:
+                                                        tr_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                        tr_labels2.append(1 if (w0>0) else 0)
+                                                # Test scores from TEST edges
+                                                te_scores: List[float] = []; te_labels2: List[int] = []
+                                                for (u1, v1, w1) in test_sub.itertuples(index=False, name=None):
+                                                    ku = _norm_name2(u1); kv = _norm_name2(v1)
+                                                    if ku in smap and kv in smap:
+                                                        te_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                        te_labels2.append(1 if (w1>0) else 0)
+                                                if tr_scores and te_scores:
+                                                    d_tr = np.array(tr_scores, dtype=float)
+                                                    l_tr = np.array(tr_labels2, dtype=int)
+                                                    beta_m = _fit_temperature_beta(d_tr, l_tr)
+                                                    d_te = np.array(te_scores, dtype=float)
+                                                    l_te = np.array(te_labels2, dtype=int)
+                                                    ll_m, br_m = _logloss_brier_from_diffs(d_te, l_te, beta_m)
+                                                    metric_logloss_accum.setdefault(('aware', group, 'edge_block', y, mcol), []).append((float(beta_m), float(ll_m), float(br_m), int(len(te_scores))))
+                                except Exception:
+                                    pass
+                            if accs and aucs:
+                                auc_rows.append([st, group, 'edge_block', y, cv_edge, float(np.mean(accs)), float(np.mean(aucs)), int(used_tot)])
+                            # Aggregate baseline per-mode rows
+                            if do_baseline and aucs_by_metric:
+                                try:
+                                    for (mcol, _d) in metrics:
+                                        if mcol in aucs_by_metric:
+                                            aucm = float(np.mean(aucs_by_metric[mcol]))
+                                            accm = float(np.mean(acc_by_metric.get(mcol, []))) if acc_by_metric.get(mcol, []) else 0.0
+                                            baseline_auc_mode_rows.append(['aware', group, 'edge_block', y, mcol, aucm, accm, None])
+                                except Exception:
+                                    pass
+            # PA-BLOCK: block by unique PA pairs (batter,pitcher) in bipartite, derive unipartite for TRAIN only
+            if bool(val_cfg_modes.get('pa_block', False)):
+                for y in years:
+                    # Load raw PA data
+                    raw_path = os.path.join(raw_data_dir, f"at_bat_data_{y}.csv")
+                    if not os.path.isfile(raw_path):
+                        continue
+                    raw = pd.read_csv(raw_path)
+                    # Normalize columns
+                    if 'batter_name' in raw.columns: raw['batter'] = raw['batter_name']
+                    if 'pitcher_name' in raw.columns: raw['pitcher'] = raw['pitcher_name']
+                    if not {'batter','pitcher'}.issubset(raw.columns):
+                        continue
+                    # Form unique PA ids by (batter,pitcher, game_date optional)
+                    raw = raw[['batter','pitcher']].dropna().reset_index(drop=True)
+                    cv_pa = int(folds_map.get('pa_block', cv) or 0)
+                    nrows = len(raw)
+                    if nrows < cv_pa or cv_pa <= 0:
+                        continue
+                    idx = np.arange(nrows)
+                    rng_local = np.random.RandomState(cfg.get('validation', {}).get('seed')) if cfg.get('validation', {}).get('seed') is not None else np.random
+                    rng_local.shuffle(idx)
+                    fold_sizes = [nrows//cv_pa + (1 if i < (nrows % cv_pa) else 0) for i in range(cv_pa)]
+                    pos = 0
+                    folds = []
+                    for fs in fold_sizes:
+                        folds.append(idx[pos:pos+fs]); pos += fs
+                    for group in ['batter','pitcher']:
+                        accs: List[float] = []; aucs: List[float] = []; used_tot = 0
+                        # Optional: baseline metrics per fold for aware only
+                        do_baseline = False; stats_df = None; metrics: List[Tuple[str,int]] = []
+                        try:
+                            v_extra0 = (cfg.get('validation', {}) or {}).get('extra', {}) or {}
+                            do_baseline = bool(v_extra0.get('baseline_auc', False))
+                            if do_baseline:
+                                import importlib as _il
+                                _pb = _il.import_module('pybaseball')
+                                if group=='batter':
+                                    try:
+                                        stats_df = _pb.batting_stats(y, qual=0)
+                                    except TypeError:
+                                        stats_df = _pb.batting_stats(y)
+                                    for m, d in [('OPS', +1), ('xwOBA', +1), ('WAR', +1), ('xWAR', +1)]:
+                                        if stats_df is not None and m in stats_df.columns:
+                                            metrics.append((m, d))
+                                else:
+                                    try:
+                                        stats_df = _pb.pitching_stats(y, qual=0)
+                                    except TypeError:
+                                        stats_df = _pb.pitching_stats(y)
+                                    if stats_df is not None:
+                                        if 'WHIP' in stats_df.columns:
+                                            metrics.append(('WHIP', -1))
+                                        else:
+                                            if all(c in stats_df.columns for c in ['BB','H','IP']):
+                                                try:
+                                                    tmp = stats_df.copy(); tmp['WHIP'] = (tmp['BB'].astype(float)+tmp['H'].astype(float))/tmp['IP'].replace({0: np.nan}).astype(float)
+                                                    if not tmp['WHIP'].isna().all(): stats_df = tmp; metrics.append(('WHIP', -1))
+                                                except Exception: pass
+                                        if 'xFIP' in stats_df.columns: metrics.append(('xFIP', -1))
+                                        if 'ERA+' in stats_df.columns:
+                                            try: stats_df['ERA+'] = pd.to_numeric(stats_df['ERA+'], errors='coerce').replace([np.inf, -np.inf], np.nan)
+                                            except Exception: pass
+                                            metrics.append(('ERA+', +1))
+                                        if 'FIP' in stats_df.columns: metrics.append(('FIP', -1))
+                                        if 'xERA' in stats_df.columns: metrics.append(('xERA', -1))
+                                        elif 'ERA' in stats_df.columns: metrics.append(('ERA', -1))
+                                        k9_aliases = ['K/9','SO9','SO/9','K9']
+                                        k9_found = False
+                                        for alias in k9_aliases:
+                                            if alias in stats_df.columns:
+                                                if alias != 'K/9':
+                                                    try: stats_df = stats_df.rename(columns={alias: 'K/9'})
+                                                    except Exception: pass
+                                                metrics.append(('K/9', -1)); k9_found = True; break
+                                        if (not k9_found) and all(c in stats_df.columns for c in ['SO','IP']):
+                                            try:
+                                                tmp2 = stats_df.copy(); tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
+                                                if not tmp2['K/9'].isna().all(): stats_df = tmp2; metrics.append(('K/9', -1))
+                                            except Exception: pass
+                        except Exception:
+                            do_baseline = False; stats_df = None; metrics = []
+                        aucs_by_metric: Dict[str, List[float]] = {}; acc_by_metric: Dict[str, List[float]] = {}
+                        for k in range(cv_pa):
+                            test_idx = set(folds[k].tolist())
+                            train_idx = set(np.setdiff1d(idx, list(test_idx)).tolist())
+                            # Build TRAIN-only unipartite edges from raw using aware scores if requested
+                            # For performance, re-use precomputed aware unipartite as a superset and filter to TRAIN PA joins
+                            if 'aware' in score_types:
+                                edge_path = os.path.join('At Bats', f'{group}_data','aware_scores', f"{y}_{group}_edges.csv")
+                                if not os.path.isfile(edge_path):
+                                    continue
+                                e = pd.read_csv(edge_path)[['winner','loser','score']]
+                            else:
+                                # Fallback: skip if aware not available (pipeline primarily runs aware)
+                                continue
+                            # Build TRAIN graph using edges where both endpoints appear in TRAIN PAs (approximation)
+                            train_players = set(raw.loc[list(train_idx), 'batter' if group=='batter' else 'pitcher'].astype(str).tolist())
+                            test_players = set(raw.loc[list(test_idx), 'batter' if group=='batter' else 'pitcher'].astype(str).tolist())
+                            Gt = nx.DiGraph()
+                            # Strict: include only edges with both endpoints in TRAIN players
+                            Gt.add_weighted_edges_from([tuple(x) for x in e.itertuples(index=False, name=None) if (str(x[0]) in train_players and str(x[1]) in train_players)])
+                            node_list_t = list(Gt.nodes())
+                            if not node_list_t:
+                                continue
+                            try:
+                                import scipy.sparse as sp
+                                At = nx.to_scipy_sparse_array(Gt, dtype=float, nodelist=node_list_t)
+                                At = sp.csr_matrix(At)
+                            except Exception:
+                                At = nx.to_numpy_array(Gt, dtype=float, nodelist=node_list_t)
+                            # Train ranks
+                            if 'aware' in score_types:
+                                # Build TRAIN-only shrink map R from raw TRAIN PAs to avoid leakage
+                                R_map_cv: Dict[str, float] = {}
+                                try:
+                                    use_shrink = bool(cfg.get('ranking',{}).get('aware_shrink', True))
+                                    if use_shrink:
+                                        # Determine k for this group
+                                        k_default = float(cfg.get('ranking',{}).get('aware_shrink_k', 150))
+                                        if group == 'batter':
+                                            k_val = float(cfg.get('ranking',{}).get('aware_shrink_k_batter', k_default))
+                                        else:
+                                            k_val = float(cfg.get('ranking',{}).get('aware_shrink_k_pitcher', k_default))
+                                        col = 'batter' if group=='batter' else 'pitcher'
+                                        # Count TRAIN appearances per player
+                                        train_names = raw.loc[list(train_idx), col].astype(str)
+                                        cnt = train_names.value_counts()
+                                        for name, n in cnt.items():
+                                            try:
+                                                n_f = float(n)
+                                                R_map_cv[str(name)] = n_f / (n_f + float(k_val))
+                                            except Exception:
+                                                continue
+                                    else:
+                                        # No shrink: everyone gets R=1 within TRAIN set
+                                        col = 'batter' if group=='batter' else 'pitcher'
+                                        for name in set(raw.loc[list(train_idx), col].astype(str).tolist()):
+                                            R_map_cv[str(name)] = 1.0
+                                except Exception:
+                                    R_map_cv = {}
+                                _, sorted_rt = aware_rank_with_tether(At, node_list_t, R_map_cv, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                            else:
+                                _, sorted_rt = spring_rank(At, node_list_t)
+                            # TEST edges: restrict to edges where both endpoints are TEST players
+                            test_edges_all = [tuple(x) for x in e.itertuples(index=False, name=None) if (str(x[0]) in test_players and str(x[1]) in test_players)]
+                            if not test_edges_all:
+                                continue
+                            res = _acc_auc_on_test_nodes(sorted_rt, test_edges_all, seed=cfg.get('validation', {}).get('seed'))
+                            if res:
+                                a, u, used = res
+                                accs.append(float(a)); aucs.append(float(u)); used_tot += int(used)
+                            # Baseline per fold on test edges
+                            if do_baseline and (stats_df is not None) and metrics:
+                                try:
+                                    def _norm_name2(s: Any) -> str:
+                                        import unicodedata as _ud
+                                        t = str(s) if not pd.isna(s) else ''
+                                        t = t.strip(); t = _ud.normalize('NFKD', t)
+                                        t = ''.join(c for c in t if not _ud.combining(c))
+                                        return ' '.join(t.split()).lower()
+                                    s = stats_df.copy(); name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                    if name_col is not None:
+                                        s['k'] = s[name_col].apply(_norm_name2)
+                                        for (mcol, direction) in metrics:
+                                            try:
+                                                smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                            except Exception:
+                                                continue
+                                            scores: List[float] = []; labels2: List[int] = []
+                                            for (u0,v0,w0) in test_edges_all:
+                                                ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                if ku in smap and kv in smap:
+                                                    diff = (smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0)
+                                                    scores.append(float(diff)); labels2.append(1 if (w0>0) else 0)
+                                            if scores:
+                                                try:
+                                                    auc_b = _roc_auc_fast(np.array(labels2, dtype=int), np.array(scores, dtype=float))
+                                                except Exception:
+                                                    auc_b = 0.5
+                                                acc_b = float(np.mean((np.array(scores) > 0).astype(int) == np.array(labels2)))
+                                                aucs_by_metric.setdefault(mcol, []).append(float(auc_b))
+                                                acc_by_metric.setdefault(mcol, []).append(float(acc_b))
+                                except Exception:
+                                    pass
+                            # Train-calibrated logloss/Brier for PA-BLOCK (rank)
+                            try:
+                                rmap = {n: s for n, s in sorted_rt}
+                                # For PA-BLOCK, train_sub was implicit in the train graph (Gt); reconstruct edges list by filtering e to train_players
+                                tr_list = [tuple(x) for x in e.itertuples(index=False, name=None) if str(x[0]) in train_players or str(x[1]) in train_players]
+                                tr_diffs: list[float] = []
+                                tr_labels: list[int] = []
+                                for (u0, v0, _w0) in tr_list:
+                                    if (u0 in rmap) and (v0 in rmap):
+                                        duv = float(rmap[str(u0)] - rmap[str(v0)])
+                                        tr_diffs.extend([duv, -duv])
+                                        tr_labels.extend([1, 0])
+                                te_diffs: list[float] = []
+                                te_labels: list[int] = []
+                                for (u1, v1, _w1) in test_edges_all:
+                                    if (u1 in rmap) and (v1 in rmap):
+                                        duv = float(rmap[str(u1)] - rmap[str(v1)])
+                                        te_diffs.extend([duv, -duv])
+                                        te_labels.extend([1, 0])
+                                if tr_diffs and te_diffs:
+                                    d_tr = np.array(tr_diffs, dtype=float)
+                                    l_tr = np.array(tr_labels, dtype=int)
+                                    beta_cv = _fit_temperature_beta(d_tr, l_tr)
+                                    d_te = np.array(te_diffs, dtype=float)
+                                    l_te = np.array(te_labels, dtype=int)
+                                    ll_cv, br_cv = _logloss_brier_from_diffs(d_te, l_te, beta_cv)
+                                    rank_logloss_accum.setdefault(('aware', group, 'pa_block', y), []).append((float(beta_cv), float(ll_cv), float(br_cv), int(len(te_diffs))))
+                            except Exception:
+                                pass
+                            # Train-calibrated logloss/Brier for PA-BLOCK baseline metrics
+                            try:
+                                if do_baseline and (stats_df is not None) and metrics:
+                                    def _norm_name2(s: Any) -> str:
+                                        import unicodedata as _ud
+                                        t = str(s) if not pd.isna(s) else ''
+                                        t = t.strip(); t = _ud.normalize('NFKD', t)
+                                        t = ''.join(c for c in t if not _ud.combining(c))
+                                        return ' '.join(t.split()).lower()
+                                    s = stats_df.copy(); name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                    if name_col is not None:
+                                        s['k'] = s[name_col].apply(_norm_name2)
+                                        for (mcol, direction) in metrics:
+                                            try:
+                                                smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                            except Exception:
+                                                continue
+                                            # Train: edges among TRAIN players
+                                            tr_scores: List[float] = []; tr_labels2: List[int] = []
+                                            for (u0, v0, w0) in tr_list:
+                                                ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                if ku in smap and kv in smap:
+                                                    tr_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                    tr_labels2.append(1 if (w0>0) else 0)
+                                            # Test: edges among TEST players
+                                            te_scores: List[float] = []; te_labels2: List[int] = []
+                                            for (u1, v1, w1) in test_edges_all:
+                                                ku = _norm_name2(u1); kv = _norm_name2(v1)
+                                                if ku in smap and kv in smap:
+                                                    te_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                    te_labels2.append(1 if (w1>0) else 0)
+                                            if tr_scores and te_scores:
+                                                d_tr = np.array(tr_scores, dtype=float)
+                                                l_tr = np.array(tr_labels2, dtype=int)
+                                                beta_m = _fit_temperature_beta(d_tr, l_tr)
+                                                d_te = np.array(te_scores, dtype=float)
+                                                l_te = np.array(te_labels2, dtype=int)
+                                                ll_m, br_m = _logloss_brier_from_diffs(d_te, l_te, beta_m)
+                                                metric_logloss_accum.setdefault(('aware', group, 'pa_block', y, mcol), []).append((float(beta_m), float(ll_m), float(br_m), int(len(te_scores))))
+                            except Exception:
+                                pass
+                        if accs and aucs:
+                            auc_rows.append(['aware', group, 'pa_block', y, cv_pa, float(np.mean(accs)), float(np.mean(aucs)), int(used_tot)])
+                        # Aggregate baseline per-mode rows
+                        if do_baseline and aucs_by_metric:
+                            try:
+                                for (mcol, _d) in metrics:
+                                    if mcol in aucs_by_metric:
+                                        aucm = float(np.mean(aucs_by_metric[mcol]))
+                                        accm = float(np.mean(acc_by_metric.get(mcol, []))) if acc_by_metric.get(mcol, []) else 0.0
+                                        baseline_auc_mode_rows.append(['aware', group, 'pa_block', y, mcol, aucm, accm, None])
+                            except Exception:
+                                pass
+            # LOEO: leave-one-edge-out (mini-batches) with isolated train graphs and negative sampling within batch
+            if bool(val_cfg_modes.get('loeo', False)):
+                for st in [s for s in score_types if s in ('aware','handmade','frequency')]:
+                    for group in ['batter','pitcher']:
+                        for y in years:
+                            # Load edges
+                            if st == 'aware':
+                                edge_path = os.path.join('At Bats', f'{group}_data','aware_scores', f"{y}_{group}_edges.csv")
+                            elif st == 'handmade':
+                                edge_path = os.path.join('At Bats', f'{group}_data','handmade_scores', f"{y}_{group}_edges.csv")
+                            elif st == 'frequency':
+                                edge_path = os.path.join('At Bats', f'{group}_data','frequency_scores', f"{y}_{group}_edges.csv")
+                            else:
+                                continue
+                            if not os.path.isfile(edge_path):
+                                continue
+                            df_edges = pd.read_csv(edge_path)
+                            if df_edges is None or df_edges.empty or not {'winner','loser','score'}.issubset(df_edges.columns):
+                                continue
+                            # Form small batches (size ~ max(1, N/cv))
+                            nrows = len(df_edges)
+                            cv_loeo = int(folds_map.get('loeo', cv) or cv)
+                            batch_size = max(1, nrows // cv_loeo) if cv_loeo and cv_loeo > 0 else max(1, nrows // max(1, cv))
+                            idx = np.arange(nrows)
+                            rng_local = np.random.RandomState(cfg.get('validation', {}).get('seed')) if cfg.get('validation', {}).get('seed') is not None else np.random
+                            rng_local.shuffle(idx)
+                            batches = [idx[i:i+batch_size] for i in range(0, nrows, batch_size)]
+                            accs: List[float] = []; aucs: List[float] = []; used_tot = 0
+                            # Optional: baseline metrics per batch for aware only
+                            do_baseline = False; stats_df = None; metrics: List[Tuple[str,int]] = []
+                            aucs_by_metric: Dict[str, List[float]] = {}; acc_by_metric: Dict[str, List[float]] = {}
+                            try:
+                                v_extra0 = (cfg.get('validation', {}) or {}).get('extra', {}) or {}
+                                do_baseline = (st == 'aware') and bool(v_extra0.get('baseline_auc', False))
+                                if do_baseline:
+                                    import importlib as _il
+                                    _pb = _il.import_module('pybaseball')
+                                    if group=='batter':
+                                        try:
+                                            stats_df = _pb.batting_stats(y, qual=0)
+                                        except TypeError:
+                                            stats_df = _pb.batting_stats(y)
+                                        for m, d in [('OPS', +1), ('xwOBA', +1), ('WAR', +1), ('xWAR', +1)]:
+                                            if stats_df is not None and m in stats_df.columns:
+                                                metrics.append((m, d))
+                                    else:
+                                        try:
+                                            stats_df = _pb.pitching_stats(y, qual=0)
+                                        except TypeError:
+                                            stats_df = _pb.pitching_stats(y)
+                                        if stats_df is not None:
+                                            if 'WHIP' in stats_df.columns:
+                                                metrics.append(('WHIP', -1))
+                                            else:
+                                                if all(c in stats_df.columns for c in ['BB','H','IP']):
+                                                    try:
+                                                        tmp = stats_df.copy(); tmp['WHIP'] = (tmp['BB'].astype(float)+tmp['H'].astype(float))/tmp['IP'].replace({0: np.nan}).astype(float)
+                                                        if not tmp['WHIP'].isna().all(): stats_df = tmp; metrics.append(('WHIP', -1))
+                                                    except Exception: pass
+                                            if 'xFIP' in stats_df.columns: metrics.append(('xFIP', -1))
+                                            if 'ERA+' in stats_df.columns:
+                                                try: stats_df['ERA+'] = pd.to_numeric(stats_df['ERA+'], errors='coerce').replace([np.inf, -np.inf], np.nan)
+                                                except Exception: pass
+                                                metrics.append(('ERA+', +1))
+                                            if 'FIP' in stats_df.columns: metrics.append(('FIP', -1))
+                                            if 'xERA' in stats_df.columns: metrics.append(('xERA', -1))
+                                            elif 'ERA' in stats_df.columns: metrics.append(('ERA', -1))
+                                            k9_aliases = ['K/9','SO9','SO/9','K9']
+                                            k9_found = False
+                                            for alias in k9_aliases:
+                                                if alias in stats_df.columns:
+                                                    if alias != 'K/9':
+                                                        try: stats_df = stats_df.rename(columns={alias: 'K/9'})
+                                                        except Exception: pass
+                                                    metrics.append(('K/9', -1)); k9_found = True; break
+                                            if (not k9_found) and all(c in stats_df.columns for c in ['SO','IP']):
+                                                try:
+                                                    tmp2 = stats_df.copy(); tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
+                                                    if not tmp2['K/9'].isna().all(): stats_df = tmp2; metrics.append(('K/9', -1))
+                                                except Exception: pass
+                            except Exception:
+                                do_baseline = False; stats_df = None; metrics = []
+                            for bid in batches:
+                                test_sub = df_edges.loc[bid, ['winner','loser','score']]
+                                train_sub = df_edges.loc[~df_edges.index.isin(bid), ['winner','loser','score']]
+                                if train_sub.empty or test_sub.empty:
+                                    continue
+                                Gt = nx.DiGraph(); Gt.add_weighted_edges_from(train_sub.itertuples(index=False, name=None))
+                                node_list_t = list(Gt.nodes())
+                                if not node_list_t:
+                                    continue
+                                try:
+                                    import scipy.sparse as sp
+                                    At = nx.to_scipy_sparse_array(Gt, dtype=float, nodelist=node_list_t)
+                                    At = sp.csr_matrix(At)
+                                except Exception:
+                                    At = nx.to_numpy_array(Gt, dtype=float, nodelist=node_list_t)
+                                if st == 'aware':
+                                    R_map_cv: Dict[str, float] = {}
+                                    try:
+                                        R_path = os.path.join('At Bats', f'{group}_data','aware_scores', f"{y}_R.csv")
+                                        if os.path.isfile(R_path):
+                                            R_df = pd.read_csv(R_path)
+                                            if 'Player' not in R_df.columns and 'winner' in R_df.columns:
+                                                R_df = R_df.rename(columns={'winner':'Player'})
+                                            if {'Player','R'}.issubset(R_df.columns):
+                                                R_map_cv = {str(n): float(r) for n, r in R_df[['Player','R']].dropna().itertuples(index=False, name=None)}
+                                    except Exception:
+                                        R_map_cv = {}
+                                    _, sorted_rt = aware_rank_with_tether(At, node_list_t, R_map_cv, lambda_reg=aware_lambda, use_harmonic=aware_harm)
+                                else:
+                                    _, sorted_rt = spring_rank(At, node_list_t)
+                                test_edges = list(test_sub.itertuples(index=False, name=None))
+                                res = _acc_auc_on_test_nodes(sorted_rt, test_edges, seed=cfg.get('validation', {}).get('seed'))
+                                if res:
+                                    a, u, used = res
+                                    accs.append(float(a)); aucs.append(float(u)); used_tot += int(used)
+                                # Train-calibrated logloss/Brier for LOEO (rank)
+                                try:
+                                    rmap = {n: s for n, s in sorted_rt}
+                                    tr_diffs: list[float] = []
+                                    tr_labels: list[int] = []
+                                    for (u0, v0, _w0) in train_sub.itertuples(index=False, name=None):
+                                        if (u0 in rmap) and (v0 in rmap):
+                                            duv = float(rmap[str(u0)] - rmap[str(v0)])
+                                            tr_diffs.extend([duv, -duv])
+                                            tr_labels.extend([1, 0])
+                                    te_diffs: list[float] = []
+                                    te_labels: list[int] = []
+                                    for (u1, v1, _w1) in test_sub.itertuples(index=False, name=None):
+                                        if (u1 in rmap) and (v1 in rmap):
+                                            duv = float(rmap[str(u1)] - rmap[str(v1)])
+                                            te_diffs.extend([duv, -duv])
+                                            te_labels.extend([1, 0])
+                                    if tr_diffs and te_diffs:
+                                        d_tr = np.array(tr_diffs, dtype=float)
+                                        l_tr = np.array(tr_labels, dtype=int)
+                                        beta_cv = _fit_temperature_beta(d_tr, l_tr)
+                                        d_te = np.array(te_diffs, dtype=float)
+                                        l_te = np.array(te_labels, dtype=int)
+                                        ll_cv, br_cv = _logloss_brier_from_diffs(d_te, l_te, beta_cv)
+                                        if st == 'aware':
+                                            rank_logloss_accum.setdefault(('aware', group, 'loeo', y), []).append((float(beta_cv), float(ll_cv), float(br_cv), int(len(te_diffs))))
+                                except Exception:
+                                    pass
+                                    # Train-calibrated logloss/Brier for LOEO baseline metrics
+                                    try:
+                                        if st == 'aware' and do_baseline and (stats_df is not None) and metrics:
+                                            def _norm_name2(s: Any) -> str:
+                                                import unicodedata as _ud
+                                                t = str(s) if not pd.isna(s) else ''
+                                                t = t.strip(); t = _ud.normalize('NFKD', t)
+                                                t = ''.join(c for c in t if not _ud.combining(c))
+                                                return ' '.join(t.split()).lower()
+                                            s = stats_df.copy(); name_col = next((c for c in ('Name','name','player_name','Player','player') if c in s.columns), None)
+                                            if name_col is not None:
+                                                s['k'] = s[name_col].apply(_norm_name2)
+                                                for (mcol, direction) in metrics:
+                                                    try:
+                                                        smap = {kname: float(val) for kname, val in s[['k', mcol]].dropna().itertuples(index=False, name=None)}
+                                                    except Exception:
+                                                        continue
+                                                    # Train
+                                                    tr_scores: List[float] = []; tr_labels2: List[int] = []
+                                                    for (u0, v0, w0) in train_sub.itertuples(index=False, name=None):
+                                                        ku = _norm_name2(u0); kv = _norm_name2(v0)
+                                                        if ku in smap and kv in smap:
+                                                            tr_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                            tr_labels2.append(1 if (w0>0) else 0)
+                                                    # Test
+                                                    te_scores: List[float] = []; te_labels2: List[int] = []
+                                                    for (u1, v1, w1) in test_sub.itertuples(index=False, name=None):
+                                                        ku = _norm_name2(u1); kv = _norm_name2(v1)
+                                                        if ku in smap and kv in smap:
+                                                            te_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                            te_labels2.append(1 if (w1>0) else 0)
+                                                    if tr_scores and te_scores:
+                                                        d_tr = np.array(tr_scores, dtype=float)
+                                                        l_tr = np.array(tr_labels2, dtype=int)
+                                                        beta_m = _fit_temperature_beta(d_tr, l_tr)
+                                                        d_te = np.array(te_scores, dtype=float)
+                                                        l_te = np.array(te_labels2, dtype=int)
+                                                        ll_m, br_m = _logloss_brier_from_diffs(d_te, l_te, beta_m)
+                                                        metric_logloss_accum.setdefault(('aware', group, 'loeo', y, mcol), []).append((float(beta_m), float(ll_m), float(br_m), int(len(te_scores))))
+                                    except Exception:
+                                        pass
+                            if accs and aucs:
+                                try:
+                                    auc_rows.append([st, group, 'loeo', y, cv_loeo if ('cv_loeo' in locals()) else cv, float(np.mean(accs)), float(np.mean(aucs)), int(used_tot)])
+                                except Exception:
+                                    auc_rows.append([st, group, 'loeo', y, cv, float(np.mean(accs)), float(np.mean(aucs)), int(used_tot)])
+                            # Aggregate baseline per-mode rows
+                            if do_baseline and aucs_by_metric:
+                                try:
+                                    for (mcol, _d) in metrics:
+                                        if mcol in aucs_by_metric:
+                                            aucm = float(np.mean(aucs_by_metric[mcol]))
+                                            accm = float(np.mean(acc_by_metric.get(mcol, []))) if acc_by_metric.get(mcol, []) else 0.0
+                                            baseline_auc_mode_rows.append(['aware', group, 'loeo', y, mcol, aucm, accm, None])
+                                except Exception:
+                                    pass
+    except Exception as _e_modes:
+        try:
+            print(f"[warn] leak-free validation modes failed or skipped: {_e_modes}")
+        except Exception:
+            pass
+
     # After collecting per-fold results, aggregate to a single row per (scoreType, group, year)
     try:
         if oppblock_accums:
-            cv = cfg.get('validation_folds', 0)
-            baseline_strong_rows: List[List[Any]] = []  # ScoreType, Group, Year, Metric, AUC_strong, Accuracy_strong
+            try:
+                cv = int(((cfg.get('validation', {}) or {}).get('folds', {}) or {}).get('oppblock', cfg.get('validation_folds', 0) or 0))
+            except Exception:
+                cv = cfg.get('validation_folds', 0)
             for (st, group, y), vals in oppblock_accums.items():
                 try:
                     acc_mean = float(np.mean([a for (a, _b, _u) in vals]))
@@ -4209,9 +5150,9 @@ def run_pipeline(cfg: Dict[str,Any]):
                     acc_mean = sum(accs)/len(accs) if accs else 0.0
                     auc_mean = sum(aucs)/len(aucs) if aucs else 0.5
                     used_sum = sum(useds)
-                # Record strong metrics separately; we'll merge into wide format later
+                # Record opponent-block as its own row
                 auc_rows.append([st, group, 'oppblock', y, cv, acc_mean, auc_mean, used_sum])
-                # Also compute baseline strong for statcast metrics under opponent-blockout for aware only
+                # Also compute baseline per-mode (oppblock) for statcast metrics under aware only
                 try:
                     if st == 'aware':
                         # Load per-group stats and build metric list (reuse logic from earlier)
@@ -4273,14 +5214,14 @@ def run_pipeline(cfg: Dict[str,Any]):
                                                     stats_df = stats_df.rename(columns={alias: 'K/9'})
                                                 except Exception:
                                                     pass
-                                            metrics.append(('K/9', +1)); k9_found = True; break
+                                            metrics.append(('K/9', -1)); k9_found = True; break
                                     if (not k9_found) and all(c in stats_df.columns for c in ['SO','IP']):
                                         try:
                                             tmp2 = stats_df.copy()
                                             tmp2['K/9'] = (9.0 * tmp2['SO'].astype(float)) / tmp2['IP'].replace({0: np.nan}).astype(float)
                                             if not tmp2['K/9'].isna().all():
                                                 stats_df = tmp2
-                                                metrics.append(('K/9', +1))
+                                                metrics.append(('K/9', -1))
                                         except Exception:
                                             pass
                         if stats_df is not None and metrics:
@@ -4302,9 +5243,12 @@ def run_pipeline(cfg: Dict[str,Any]):
                                 folds = []
                                 for fs in fold_sizes:
                                     folds.append(opps[idx:idx+fs]); idx += fs
-                                # Build union of per-fold test edges and compute metric AUC/ACC per fold
+                                # Build per-fold metrics and compute baseline AUC/ACC per fold; also compute oppblock logloss for statcast
                                 aucs_by_metric: Dict[str, List[float]] = {}
                                 acc_by_metric: Dict[str, List[float]] = {}
+                                ll_by_metric: Dict[str, List[float]] = {}
+                                br_by_metric: Dict[str, List[float]] = {}
+                                beta_by_metric: Dict[str, List[float]] = {}
                                 # Name normalizer
                                 def _norm_name2(s: Any) -> str:
                                     import unicodedata as _ud
@@ -4324,6 +5268,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                                 for k in range(cv):
                                     held = set(folds[k])
                                     test_sub = sub_all[sub_all['loser'].isin(held)][['winner','loser','score']]
+                                    train_sub = sub_all[~sub_all['loser'].isin(held)][['winner','loser','score']]
                                     test_edges = list(test_sub.itertuples(index=False, name=None))
                                     # For each metric compute score diffs and AUC/ACC
                                     s = stats_df.copy(); s['k'] = s[next(c for c in ('Name','name','player_name','Player','player') if c in s.columns)].apply(_norm_name2)
@@ -4348,30 +5293,50 @@ def run_pipeline(cfg: Dict[str,Any]):
                                             acc_b = float(np.mean((np.array(scores) > 0).astype(int) == np.array(labels2)))
                                             aucs_by_metric.setdefault(mcol, []).append(float(auc_b))
                                             acc_by_metric.setdefault(mcol, []).append(float(acc_b))
-                                # Aggregate means and add rows
+                                            # Opp-block logloss: calibrate beta on train_sub for this metric, evaluate on test_sub
+                                            try:
+                                                # Train diffs for metric
+                                                tr_scores: List[float] = []
+                                                tr_labels: List[int] = []
+                                                for (u,v,w) in train_sub.itertuples(index=False, name=None):
+                                                    ku = _norm_name2(u); kv = _norm_name2(v)
+                                                    if ku in smap and kv in smap:
+                                                        tr_scores.append((smap[ku] - smap[kv]) * (1.0 if direction > 0 else -1.0))
+                                                        tr_labels.append(1 if (w>0) else 0)
+                                                if tr_scores:
+                                                    d_tr = np.array(tr_scores, dtype=float)
+                                                    l_tr = np.array(tr_labels, dtype=int)
+                                                    beta_m = _fit_temperature_beta(d_tr, l_tr)
+                                                    d_te = np.array(scores, dtype=float)
+                                                    l_te = np.array(labels2, dtype=int)
+                                                    ll_m, br_m = _logloss_brier_from_diffs(d_te, l_te, beta_m)
+                                                    ll_by_metric.setdefault(mcol, []).append(float(ll_m))
+                                                    br_by_metric.setdefault(mcol, []).append(float(br_m))
+                                                    beta_by_metric.setdefault(mcol, []).append(float(beta_m))
+                                            except Exception:
+                                                pass
+                                # Aggregate means and add per-mode baseline rows for oppblock
                                 for mcol in metrics:
                                     name = mcol[0]
                                     if name in aucs_by_metric:
                                         aucs = aucs_by_metric[name]; accs = acc_by_metric.get(name, [])
                                         if aucs:
-                                            baseline_strong_rows.append(['aware', group, y, name, float(np.mean(aucs)), float(np.mean(accs) if accs else 0.0)])
+                                            baseline_auc_mode_rows.append(['aware', group, 'oppblock', y, name, float(np.mean(aucs)), float(np.mean(accs) if accs else 0.0), None])
+                                    # Emit aggregated oppblock logloss rows for statcast metrics
+                                    if name in ll_by_metric:
+                                        try:
+                                            ll_mean = float(np.mean(ll_by_metric[name]))
+                                            br_mean = float(np.mean(br_by_metric.get(name, []))) if br_by_metric.get(name, []) else None
+                                            beta_mean = float(np.mean(beta_by_metric.get(name, []))) if beta_by_metric.get(name, []) else None
+                                            # Accumulate metric logloss for aggregation
+                                            metric_logloss_accum.setdefault(('aware', group, 'oppblock', y, name), []).append((beta_mean if beta_mean is not None else 0.0, ll_mean, br_mean if br_mean is not None else 0.0, 0))
+                                        except Exception:
+                                            pass
                             except Exception:
                                 pass
                 except Exception:
                     pass
-            # Promote strong metrics into Accuracy_strong/AUC_strong columns for each (st,group,year)
-            try:
-                if auc_rows:
-                    df_auc = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
-                    wide = df_auc[df_auc['Condition']=='oppblock'][['ScoreType','Group','Year','Accuracy','AUC']].copy()
-                    wide = wide.rename(columns={'Accuracy':'Accuracy_strong','AUC':'AUC_strong'})
-                    # Merge back onto non-oppblock rows; fill NAs later on write
-                    df_auc_non = df_auc[df_auc['Condition']!='oppblock']
-                    df_auc_merged = df_auc_non.merge(wide, on=['ScoreType','Group','Year'], how='left')
-                    # Replace auc_rows content for final write
-                    auc_rows[:] = df_auc_merged[['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges','Accuracy_strong','AUC_strong']].values.tolist()
-            except Exception:
-                pass
+            # No merging of opponent-block metrics into wide columns; keep as separate rows
             try:
                 if progress:
                     tot_folds = sum(len(v) for v in oppblock_accums.values())
@@ -4383,12 +5348,9 @@ def run_pipeline(cfg: Dict[str,Any]):
 
     if results_summary:
         summary_df = pd.concat(results_summary, ignore_index=True)
-        _write_multi(summary_df, os.path.join(output_dir, 'summary_top_players'), formats)
+        _write_multi(summary_df, os.path.join(output_dir, 'summary_top_players'), ['csv'])
         if progress: print("[pipeline] summary_top_players written")
-    if cfg['ranking']['output_levels'] and levels_records:
-        levels_df = pd.DataFrame(levels_records, columns=['ScoreType','Group','Condition','Year','LevelsRange'])
-        _write_multi(levels_df, os.path.join(output_dir,'levels_by_year'), formats)
-        if progress: print("[pipeline] levels_by_year written")
+    # Defer levels_by_year write until after scaled tiers are computed
     if 'validation_rows' in locals() and validation_rows:
         val_df = pd.DataFrame(validation_rows, columns=['ScoreType','Group','Condition','Year','Nodes','Edges','Density'])
         _write_multi(val_df, os.path.join(output_dir,'validation_report'), formats)
@@ -4398,35 +5360,167 @@ def run_pipeline(cfg: Dict[str,Any]):
     _extra = _valcfg.get('extra', {}) if isinstance(_valcfg, dict) else {}
     _only_baseline = bool(_extra.get('only_baseline', False))
     if (not _only_baseline) and auc_rows:
-        # Dynamic columns: include strong metrics if present
+        # Only explicit modes; no wide strong columns
         try:
-            cols9 = ['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges','Accuracy_strong','AUC_strong']
-            auc_df = pd.DataFrame(auc_rows)
-            if auc_df.shape[1] == 10:
-                auc_df.columns = cols9
-            else:
-                auc_df.columns = ['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges']
-        except Exception:
             auc_df = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
-        _write_multi_upsert_by_keys(auc_df, os.path.join(output_dir,'validation_auc'), ['csv'], key_cols=['ScoreType','Group','Condition','Year','Folds'])
-        if progress: print('[pipeline] validation_auc written')
+        except Exception:
+            auc_df = pd.DataFrame(auc_rows)
+            try:
+                auc_df.columns = ['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges']
+            except Exception:
+                pass
+        try:
+            auc_df = auc_df[auc_df['Condition'].isin(['edge_block','pa_block','loeo','oppblock'])]
+        except Exception:
+            pass
+        if not auc_df.empty:
+            _write_multi_upsert_by_keys(auc_df, os.path.join(output_dir,'validation_auc'), ['csv'], key_cols=['ScoreType','Group','Condition','Year','Folds'])
+            if progress: print('[pipeline] validation_auc written')
+    # Aggregate accumulated per-fold logloss for ranks and metrics into single rows per (ScoreType,Group,Condition,Year,Source)
+    try:
+        # Rank sources
+        if 'rank_logloss_accum' in locals() and rank_logloss_accum:
+            for (st, grp, cond, yr), vals in list(rank_logloss_accum.items()):
+                try:
+                    betas = [b for (b, _l, _br, _n) in vals]
+                    lls = [l for (_b, l, _br, _n) in vals]
+                    brs = [br for (_b, _l, br, _n) in vals]
+                    ns = [n for (_b, _l, _br, n) in vals]
+                    beta_m = float(np.mean(betas)) if betas else None
+                    ll_m = float(np.mean(lls)) if lls else None
+                    br_m = float(np.mean(brs)) if brs else None
+                    n_sum = int(np.sum(ns)) if ns else 0
+                    if (beta_m is not None) and (ll_m is not None):
+                        logloss_rows.append([st, grp, cond, yr, beta_m, ll_m, br_m, n_sum, 'rank'])
+                except Exception:
+                    continue
+        # Metric sources
+        if 'metric_logloss_accum' in locals() and metric_logloss_accum:
+            for (st, grp, cond, yr, mcol), vals in list(metric_logloss_accum.items()):
+                try:
+                    betas = [b for (b, _l, _br, _n) in vals if b is not None]
+                    lls = [l for (_b, l, _br, _n) in vals]
+                    brs = [br for (_b, _l, br, _n) in vals]
+                    ns = [n for (_b, _l, _br, n) in vals]
+                    beta_m = float(np.mean(betas)) if betas else None
+                    ll_m = float(np.mean(lls)) if lls else None
+                    br_m = float(np.mean(brs)) if brs else None
+                    n_sum = int(np.sum(ns)) if ns else 0
+                    if (ll_m is not None):
+                        logloss_rows.append([st, grp, cond, yr, (beta_m if beta_m is not None else 0.0), ll_m, (br_m if br_m is not None else 0.0), n_sum, mcol])
+                except Exception:
+                    continue
+    except Exception:
+        pass
     if (not _only_baseline) and logloss_rows:
         ll_df = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
         _write_multi_upsert_by_keys(ll_df, os.path.join(output_dir,'validation_logloss'), ['csv'], key_cols=['ScoreType','Group','Condition','Year','Source'])
         if progress: print('[pipeline] validation_logloss written')
-    if baseline_auc_rows:
-        ba_df = pd.DataFrame(baseline_auc_rows, columns=['ScoreType','Group','Year','Metric','AUC','Accuracy','TestEdges'])
-        # Merge strong baseline metrics if available
+    # Skip legacy baseline_auc without Condition; consolidated per-mode file is written below
+    # Write consolidated per-mode baseline AUC/ACC as validation_baseline_auc (includes Condition)
+    if 'baseline_auc_mode_rows' in locals() and baseline_auc_mode_rows:
         try:
-            if 'baseline_strong_rows' in locals() and baseline_strong_rows:
-                strong_df = pd.DataFrame(baseline_strong_rows, columns=['ScoreType','Group','Year','Metric','AUC_strong','Accuracy_strong'])
-                ba_df = ba_df.merge(strong_df, on=['ScoreType','Group','Year','Metric'], how='left')
+            bam_df = pd.DataFrame(baseline_auc_mode_rows, columns=['ScoreType','Group','Condition','Year','Metric','AUC','Accuracy','TestEdges'])
+            bam_df = bam_df[bam_df['Condition'].isin(['edge_block','pa_block','loeo','oppblock'])]
+            _write_multi_upsert_by_keys(bam_df, os.path.join(output_dir,'validation_baseline_auc'), ['csv'], key_cols=['ScoreType','Group','Condition','Year','Metric'])
+            if progress: print('[pipeline] validation_baseline_auc written')
         except Exception:
             pass
-        _write_multi_upsert_by_keys(ba_df, os.path.join(output_dir,'validation_baseline_auc'), ['csv'], key_cols=['ScoreType','Group','Year','Metric'])
-        if progress: print('[pipeline] validation_baseline_auc written')
 
-    # Emit calibrated scaled ELO-like tiers for aware using opponent-blockout betas
+    # Baseline correlation: ordinal correlation between statcast metric ranking and SpringRank ordinal ranks
+    try:
+        # Only for aware score type and for metrics that appeared in logloss rows (Source column holds metric name for baseline entries we added)
+        if logloss_rows:
+            ll_df = pd.DataFrame(logloss_rows, columns=['ScoreType','Group','Condition','Year','Beta','LogLoss','Brier','TestEdges','Source'])
+            # Take unique (ScoreType, Group, Year, Metric) where Source != 'rank' and with any rows
+            metrics_used = ll_df[(ll_df['Source'].notna()) & (ll_df['Source']!='rank')][['ScoreType','Group','Year','Source']].drop_duplicates()
+            corr_rows = []
+            for st, grp, yr, mcol in metrics_used.itertuples(index=False, name=None):
+                try:
+                    # Load ranks for this year/group
+                    ranks_path = os.path.join(output_dir, st, grp, f"{int(yr)}_springrank.csv")
+                    if not os.path.isfile(ranks_path):
+                        continue
+                    rdf = pd.read_csv(ranks_path)
+                    if 'Player' not in rdf.columns or 'Rank' not in rdf.columns:
+                        continue
+                    # Load stat table via pybaseball as done earlier
+                    import importlib as _il
+                    _pb = _il.import_module('pybaseball')
+                    if grp=='batter':
+                        try:
+                            stats_df = _pb.batting_stats(int(yr), qual=0)
+                        except TypeError:
+                            stats_df = _pb.batting_stats(int(yr))
+                    else:
+                        try:
+                            stats_df = _pb.pitching_stats(int(yr), qual=0)
+                        except TypeError:
+                            stats_df = _pb.pitching_stats(int(yr))
+                    if stats_df is None or mcol not in stats_df.columns:
+                        continue
+                    # Normalize names and build maps
+                    def _norm_name2(s: Any) -> str:
+                        import unicodedata as _ud
+                        t = str(s) if not pd.isna(s) else ''
+                        t = t.strip(); t = _ud.normalize('NFKD', t)
+                        t = ''.join(c for c in t if not _ud.combining(c))
+                        return ' '.join(t.split()).lower()
+                    name_col = next((c for c in ('Name','name','player_name','Player','player') if c in stats_df.columns), None)
+                    if not name_col:
+                        continue
+                    s = stats_df[[name_col, mcol]].copy()
+                    s['k'] = s[name_col].apply(_norm_name2)
+                    s = s.dropna(subset=[mcol])
+                    # Direction: inherit the direction used in baseline metrics (lower is better for rate-against metrics)
+                    direction = 1
+                    if grp=='pitcher' and mcol in ('WHIP','xFIP','FIP','xERA','ERA'):
+                        direction = -1
+                    # Build tie-aware dense ordinals from SpringRank CSV Rank column (ascending better)
+                    rdf_local = rdf[['Player','Rank']].copy()
+                    rdf_local['Player'] = rdf_local['Player'].astype(str)
+                    rdf_local = rdf_local.sort_values('Rank', ascending=True, kind='mergesort').reset_index(drop=True)
+                    rmap_ord = {}
+                    last_val = None
+                    current_rank = 0
+                    for _, row in rdf_local.iterrows():
+                        v = float(row['Rank']) if pd.notna(row['Rank']) else None
+                        if (last_val is None) or (v != last_val):
+                            current_rank += 1
+                            last_val = v
+                        rmap_ord[row['Player']] = current_rank
+                    # Stat metric ordinals: higher-is-better if direction>0 else lower-is-better (dense, tie-aware)
+                    s = s.assign(val = pd.to_numeric(s[mcol], errors='coerce'))
+                    s = s.dropna(subset=['val'])
+                    s = s.sort_values('val', ascending=(direction<0), kind='mergesort').reset_index(drop=True)
+                    smap_ord = {}
+                    last_sv = None
+                    current_sr = 0
+                    for k, v in s[['k','val']].itertuples(index=False, name=None):
+                        if (last_sv is None) or (v != last_sv):
+                            current_sr += 1
+                            last_sv = v
+                        smap_ord[k] = current_sr
+                    # Join by normalized name
+                    dfj = pd.DataFrame({'Player': rdf['Player'].astype(str)})
+                    dfj['k'] = dfj['Player'].apply(_norm_name2)
+                    dfj['Rank_ord'] = dfj['Player'].map(rmap_ord)
+                    dfj['Stat_ord'] = dfj['k'].map(smap_ord)
+                    dfj = dfj.dropna(subset=['Stat_ord'])
+                    if dfj.empty:
+                        continue
+                    pear = dfj['Rank_ord'].corr(dfj['Stat_ord'])
+                    corr_rows.append([st, grp, int(yr), mcol, len(dfj), float(pear) if pear is not None else None])
+                except Exception:
+                    continue
+            if corr_rows:
+                corr_df = pd.DataFrame(corr_rows, columns=['ScoreType','Group','Year','Metric','N','PearsonOrdinalCorr'])
+                _write_multi_upsert_by_keys(corr_df, os.path.join(output_dir, 'baseline_correlation'), ['csv'], key_cols=['ScoreType','Group','Year','Metric'])
+                if progress: print('[pipeline] baseline_correlation written')
+    except Exception:
+        pass
+
+    # Emit calibrated scaled ELO-like tiers for aware using opponent-blockout betas (one-tier ≈ 68% win prob)
     try:
         if full_raw_map:
             for (group, y), ctx in full_raw_map.items():
@@ -4446,7 +5540,10 @@ def run_pipeline(cfg: Dict[str,Any]):
                     rank_dir = ctx['rank_dir']
                     sorted_r = ctx['sorted_r']
                     center = float(np.mean(raw_r)) if raw_r.size else 0.0
-                    delta_step = LOGIT_075 / max(beta, 1e-3)
+                    delta_step = LOGIT_P / max(beta, 1e-3)
+                    # --- SANITY CHECKS ---
+                    assert abs(1.0/(1.0 + math.exp(-beta * delta_step)) - P_TARGET) < 1e-3, "Tier step mismatch for p_target=0.68"
+                    assert abs(float(np.mean(raw_r))) < 1e-6, "Ranks not centered before tiering"
                     # Map name -> raw rank
                     rmap = {n: s for n, s in sorted_r}
                     rows = []
@@ -4461,7 +5558,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                     out_base = os.path.join(rank_dir, f"{y}_springrank_scaled")
                     _write_multi(sdf_out, out_base, ['csv'])
                     # Meta and tier prob table
-                    meta = pd.DataFrame([[beta, delta_step, center]], columns=['Beta','DeltaStep','Center'])
+                    meta = pd.DataFrame([[beta, delta_step, center, P_TARGET]], columns=['Beta','DeltaStep','Center','P_Target'])
                     _write_multi(meta, os.path.join(rank_dir, f"{y}_springrank_scaled_meta"), ['csv'])
                     tier_probs = pd.DataFrame({
                         'K': [1,2,3],
@@ -4491,6 +5588,10 @@ def run_pipeline(cfg: Dict[str,Any]):
             # Aggregate by last entry for each key
             try:
                 auc_df2 = pd.DataFrame(auc_rows, columns=['ScoreType','Group','Condition','Year','Folds','Accuracy','AUC','TestEdges'])
+                try:
+                    auc_df2 = auc_df2[auc_df2['Condition'].isin(['edge_block','pa_block','loeo','oppblock'])]
+                except Exception:
+                    pass
                 auc_df2['Timestamp'] = time.strftime('%Y-%m-%d %H:%M:%S')
                 auc_df2['ConfigSig'] = cfg_sig
                 # Reorder columns
@@ -4521,6 +5622,14 @@ def run_pipeline(cfg: Dict[str,Any]):
                 if progress: print('[pipeline] historical_accuracy appended')
             except Exception:
                 pass
+    except Exception:
+        pass
+    # Now that scaled tiers were computed (which append to levels_records), write levels_by_year if requested
+    try:
+        if cfg['ranking']['output_levels'] and levels_records:
+            levels_df = pd.DataFrame(levels_records, columns=['ScoreType','Group','Condition','Year','LevelsRange'])
+            _write_multi(levels_df, os.path.join(output_dir,'levels_by_year'), ['csv'])
+            if progress: print('[pipeline] levels_by_year written')
     except Exception:
         pass
     # Year-over-year rank correlation analysis (optional)
@@ -4750,7 +5859,7 @@ def run_pipeline(cfg: Dict[str,Any]):
                                         except Exception:
                                             pass
                                     if k9_col is not None:
-                                        metrics.append(('K/9', +1))
+                                        metrics.append(('K/9', -1))
                                     stats = tmp_stats
                                 if not metrics:
                                     continue

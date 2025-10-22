@@ -1,3 +1,0 @@
-ScoreType,Group,Condition,Year,Folds,Accuracy,AUC,TestEdges
-frequency,batter,,2024,2,0.5501457626346596,0.4347252437110436,175628
-frequency,pitcher,,2024,2,0.5630241959814155,0.4179716470646057,331460
