@@ -1,6 +1,6 @@
 {
   "pipeline": {
-  "validation": { "aucMode": "legacy", "modes": {"edge_block": true, "pa_block": false, "loeo": true} },
+  "validation": { "aucMode": "legacy", "modes": {"edge_block": true, "pa_block": false, "temporal_block": true} },
     "years": {"start": 2024, "end": 2025},
     "allow_2020": false,
     "dry_run": false,

@@ -7,7 +7,7 @@
       "aucMode": "balanced-negatives",
       "negatives_per_positive": 1,
       "auto_flip": true,
-      "modes": {"edge_block": true, "pa_block": false, "loeo": true},
+  "modes": {"edge_block": true, "pa_block": false, "temporal_block": true},
       "extra": {
         "temperature_logloss": false,
         "statcast_logloss": false,

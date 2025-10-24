@@ -4,8 +4,8 @@
       "aucMode": "balanced-negatives",
       "negatives_per_positive": 1,
       "auto_flip": true,
-  "modes": {"edge_block": true, "pa_block": true, "loeo": true},
-  "folds": {"edge_block": 5, "pa_block": 10, "oppblock": 10},
+  "modes": {"edge_block": true, "pa_block": true, "temporal_block": true},
+  "folds": {"edge_block": 5, "pa_block": 10, "temporal_block": 10, "oppblock": 10},
       "extra": {
         "opponent_blockout": true,
         "temperature_logloss": true,

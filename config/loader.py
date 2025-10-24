@@ -117,16 +117,31 @@ def load_config(path: str) -> Dict[str,Any]:
     val_opponent_blockout = _bool(extra_val.get('opponent_blockout'), False)
     val_temperature_logloss = _bool(extra_val.get('temperature_logloss'), False)
     val_statcast_logloss = _bool(extra_val.get('statcast_logloss'), False)
-    # Leak-free validation modes (edge_block, pa_block, loeo)
+    # Leak-free validation modes (edge_block, pa_block, temporal_block)
     modes_raw = validation_cfg.get('modes', {}) or {}
     if modes_raw and not isinstance(modes_raw, dict):
         raise ConfigError('validation.modes must be an object when provided')
-    allowed_modes = {'edge_block','pa_block','loeo'}
+    allowed_modes = {'edge_block','pa_block','temporal_block'}
     val_modes: Dict[str,bool] = {}
     for k, v in modes_raw.items():
         if k not in allowed_modes:
             raise ConfigError(f"validation.modes contains unknown key '{k}'")
         val_modes[k] = _bool(v, False)
+    # Optional per-mode fold overrides including opponent-block
+    folds_cfg = validation_cfg.get('folds', {}) or {}
+    if folds_cfg and not isinstance(folds_cfg, dict):
+        raise ConfigError('validation.folds must be an object when provided')
+    folds_map: Dict[str,int] = {}
+    for k, v in folds_cfg.items():
+        if k not in {'edge_block','pa_block','temporal_block','oppblock'}:
+            raise ConfigError(f"validation.folds contains unknown key '{k}'")
+        try:
+            iv = int(v)
+        except Exception:
+            raise ConfigError(f"validation.folds.{k} must be an integer")
+        if iv <= 0:
+            raise ConfigError(f"validation.folds.{k} must be > 0")
+        folds_map[k] = iv
     # Explicitly gate legacy/baseline metrics; default off
     val_baseline_auc = _bool(extra_val.get('baseline_auc'), False)
     val_only_baseline = _bool(extra_val.get('only_baseline'), False)
@@ -325,6 +340,7 @@ def load_config(path: str) -> Dict[str,Any]:
             'sample_as_train': sample_as_train,
             'index_base': index_base,
             'modes': val_modes,
+            'folds': folds_map,
             'extra': {
                 'opponent_blockout': val_opponent_blockout,
                 'temperature_logloss': val_temperature_logloss,
